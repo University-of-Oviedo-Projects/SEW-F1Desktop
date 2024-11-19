@@ -10,7 +10,7 @@ class Api {
             {
                 question: "¿Quién ganó el campeonato de F1 en 2021?",
                 options: ["Lewis Hamilton", "Max Verstappen", "Sebastian Vettel", "Charles Leclerc"],
-                answer: "Lewis Hamilton"
+                answer: "Max Verstappen"
             },
             {
                 question: "¿Quién ha sido el único piloto español en ganar 2 mundiales?",
@@ -105,8 +105,8 @@ class Api {
             },
             {
                 question: "¿Cuál es el récord de mayor número de victorias en una sola temporada?",
-                options: ["15", "13", "11", "14"],
-                answer: "15"
+                options: ["15", "13", "19", "14"],
+                answer: "19"
             },
             {
                 question: "¿Quién fue el primer piloto en ganar un Gran Premio de F1 con motor Ferrari?",
