@@ -83,6 +83,20 @@ main > h2 {
 }
 
 /* Especificidad 002 */
+main > button {
+    display: block;
+    margin: 1em auto;
+    padding: 0.5em 1em;
+    font-size: 1em;
+    background-color: #1F3B4D;
+    color: #fff;
+    border: none;
+    border-radius: 0.5em;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Especificidad 002 */
 h3,h4 {
     text-decoration: underline;
     font-size: large;

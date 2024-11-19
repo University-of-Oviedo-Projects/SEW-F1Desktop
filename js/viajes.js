@@ -4,17 +4,33 @@ class Viajes {
         this.longitude = null;
         this.error = null;
 
+        // Crear un botón para iniciar la geolocalización
+        this.createGeolocationButton();
+    }
+
+    createGeolocationButton() {
+        const button = document.createElement("button");
+        button.textContent = "Mostrar mi ubicación";
+        button.addEventListener("click", this.requestLocation.bind(this));
+        const h2 = document.querySelector("main > h2");
+        h2.insertAdjacentElement("afterend", button);
+    }
+
+    requestLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 this.setPosition.bind(this),
                 this.handleError.bind(this)
             );
         } else {
-            this.error = "Geolocation is not supported by this browser.";
+            this.error = "La geolocalización no es compatible con este navegador.";
+            alert(this.error);
         }
     }
 
     setPosition(position) {
+        document.querySelector('main > button').setAttribute('data-state', 'hidden');
+        
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
         this.showStaticMap();
@@ -24,25 +40,24 @@ class Viajes {
     handleError(error) {
         switch (error.code) {
             case error.PERMISSION_DENIED:
-                this.error = "User denied the request for Geolocation.";
+                this.error = "El usuario denegó la solicitud de geolocalización.";
                 break;
             case error.POSITION_UNAVAILABLE:
-                this.error = "Location information is unavailable.";
+                this.error = "La información de ubicación no está disponible.";
                 break;
             case error.TIMEOUT:
-                this.error = "The request to get user location timed out.";
+                this.error = "La solicitud de geolocalización ha caducado.";
                 break;
-            case error.UNKNOWN_ERROR:
-                this.error = "An unknown error occurred.";
+            default:
+                this.error = "Ocurrió un error desconocido.";
                 break;
         }
+        alert(this.error);
     }
 
     showStaticMap() {
-        // Get the static map image
         const mapUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${this.latitude},${this.longitude}&zoom=14&size=400x400&key=AIzaSyC6j4mF6blrc4kZ54S6vYZ2_FpMY9VzyRU`;
-        
-        // Create a new image element and set its attributes
+
         const img = document.createElement('img');
         img.src = mapUrl;
         img.alt = "Ubicación actual";
@@ -50,19 +65,15 @@ class Viajes {
 
         const div = document.querySelector('main > div');
         const main = document.querySelector('main');
-
-        // Append the image to the main element
         main.insertBefore(img, div);
     }
 
     showDynamicMap() {
-        // Get the dynamic map div and create a new map
         const map = new google.maps.Map(document.querySelector('main > div'), {
             center: { lat: this.latitude, lng: this.longitude },
             zoom: 14
         });
 
-        // Create a new marker and set its position
         new google.maps.Marker({
             position: { lat: this.latitude, lng: this.longitude },
             map: map,
