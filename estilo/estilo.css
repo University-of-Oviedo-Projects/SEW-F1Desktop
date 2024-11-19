@@ -1,0 +1,761 @@
+/* Author: Adrian Martinez Fuentes - UO295454 */
+
+/* Paleta de colores:
+    - Fondo de la web: F4E1C1 (Crema oscuro)
+    - Texto de la web: 1F3B4D (Azul Marino Oscuro, 9.1 contraste con F4E1C1)
+    - Fondo de Header: 1F3B4D (Azul Marino)
+    - Texto de nav y h1: FFFFFF (Blanco, 11.73 contraste con 1F3B4D)
+*/ 
+
+/* ###################### Estilos generales ###################### */
+/* Especificidad 001 */
+html {
+    font-family: "helvetica neue", helvetica, arial, sans-serif;
+}
+
+/* Especificidad 001 */
+body { 
+    background-color: #F4E1C1;
+    color: #1F3B4D;
+}
+
+/* Especificidad 002 */
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Especificidad 001 */
+header, footer {
+    background-color: #0A1A2E;
+    color: #FFFFFF;
+}
+
+/* Especificidad 001 */
+body > p {
+    margin-left: 0.4em;;
+    font-size: small;
+}
+
+/* ###################### Header del body ###################### */
+/* Especificidad 002 */
+h1 a {
+    color: #FFFFFF;
+    /*background-color heredado de header*/
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    font-size: 1.5rem;     
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    /*background-color heredado de header*/
+}
+
+/* Especificidad 002 */
+nav a {
+    text-decoration: none;
+    color: #FFFFFF;
+    /*background-color heredado de header*/
+    padding: 1rem 1.5rem;
+    margin-bottom: 0.5rem; /* Aumentar el espacio entre los enlaces */
+}
+
+/* Especificidad 011 */
+a:hover {
+    border: 0.25em solid #A9C4D4; /* Color de borde */
+    border-radius: 0.75em;
+}
+
+/* ###################### Main del body ###################### */
+/* Especificidad 001 */
+main {
+    margin-left: 0.4em;;
+    flex: 1; /* Ocupar todo el espacio disponible */
+}
+
+/* Especificidad 002 */
+main > h2 {
+    text-align: center;
+}
+
+/* Especificidad 002 */
+h3,h4 {
+    text-decoration: underline;
+    font-size: large;
+}
+
+/* ###################### Listas del body ###################### */
+/* Especificidad 004 */
+ul, ol, dl, p {
+    font-size: 1.05rem;
+}
+
+/* Especificidad 002 */
+ul, ol {
+    background-color: #EDD9B0; 
+    /*color heredado de body*/
+    list-style-position: inside;
+    margin: 0.313rem 0.625rem 0.625rem 0.625rem;
+}
+
+/* Especificidad 001 */
+ul {
+    list-style-type: circle;
+}
+
+/* Especificidad 001 */
+ol {
+    list-style-type: square;
+}
+
+/* Especificidad 001 */
+li {
+    margin-bottom: 0.625rem;
+    line-height: 1.5;
+}
+
+/* Especificidad 002 */
+dt, dd {
+    line-height: 1.5;
+}
+
+/* Especificidad 001 */
+dt {
+    text-decoration: underline;
+    list-style: circle;
+}
+
+/* Especificidad 001 */
+dd {
+    margin-bottom: 1.5rem;
+}
+
+/* ###################### Estilizacion de tablas ###################### */
+/* Especificidad 001 */
+table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    border: 0.2em solid #333;
+    font-family: Arial, sans-serif;
+    margin-bottom: 2rem;
+    background-color: #fff;
+    /* color heredado de body */
+    box-shadow: 0 0.22em 0.5em #0000001a; 
+}
+
+/* Especificidad 002 */
+table caption {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    margin-right: 0.4em;
+    font-size: 1.5rem;
+    text-decoration: underline;
+    color: #333;
+    /* background-color heredado de table */
+}
+
+/* Especificidad 002 */
+th, td {
+    padding: 1em 2em; 
+    text-align: left;
+    border: 0.5em solid #ddd; 
+}
+
+/* Especificidad 001 */
+th {
+    background-color: #f4f4f4;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Especificidad 011 */
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+    /* color heredado de body */
+}
+
+/* Especificidad 011 */
+tr:hover {
+    background-color: #f1f1f1;
+    /* color heredado de body */
+}
+
+/* Especificidad 011 */
+th:nth-child(1) {
+    width: 30%;
+}
+
+/* ###################### Elementos multimedia ###################### */
+/* Especificidad 001 */
+video {
+    width: 60%;
+    height: auto;
+}
+
+/* Especificidad 001 */
+img {
+    width: 40%;
+    height: auto;
+}
+
+/* ###################### Ayuda ###################### */
+/* Especificidad 011 */
+dialog[open] {
+    width: 80%;
+    max-width: 100%;
+    max-height: 60%;
+    margin: auto;
+    padding: 1.5em;
+    border: 0.1em solid #ccc;
+    border-radius: 1em;
+    box-shadow: 0 0.25em 0.4em #0000001a;
+    background-color: #fff;
+    /* color heredado de body */
+    z-index: 1000;
+    resize: both;
+    overflow: auto;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Especificidad 012 */
+dialog[open] h2 {
+    font-size: 1.8em;
+    margin-bottom: 1em;
+    text-align: center;
+    color: #333;
+    /* background-color heredado de dialog */
+}
+
+/* Especificidad 012 */
+dialog[open] h3 {
+    font-size: 1.5em;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    color: #555;
+    /* background-color heredado de dialog */
+}
+
+/* Especificidad 012 */
+dialog[open] p {
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+    color: #666;
+    /* background-color heredado de dialog */
+}
+
+/* Especificidad 012 */
+dialog[open] ul {
+    list-style-type: disc;
+    padding-left: 1.5em;
+}
+
+/* Especificidad 013 */
+dialog[open] ul li {
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+    color: #777;
+    /* background-color heredado de ul */
+}
+
+/* Especificidad 022 */
+dialog[open] button[id="close-help"] {
+    display: block;
+    margin: 1em auto 0;
+    padding: 0.5em 1em;
+    font-size: 1em;
+    background-color: #1F3B4D;
+    color: #fff;
+    border: none;
+    border-radius: 0.5em;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Especificidad 032 */
+dialog[open] button[id="close-help"]:hover {
+    background-color: #163240;
+    /* color heredado de button[id="close-help"] */
+}
+
+/* Media Queries para adaptabilidad del dialogo de ayuda */
+@media (max-width: 768px) {
+    /* Especificidad 011 */
+    dialog[open] {
+        /* Redefinir width es necesario para que el dialogo se ajuste al ancho de la pantalla */
+        width: 90%;
+        /* Redefinir el padding es necesario para que el contenido no se desborde del dialogo */
+        padding: 1em;
+    }
+
+    /* Especificidad 012 */
+    dialog[open] h2 {
+        /* Redefinir el tamaño de la fuente es necesario para que el texto no se desborde del dialogo */
+        font-size: 1.5em;
+    }
+
+    /* Especificidad 012 */
+    dialog[open] h3 {
+        /* Redefinir el tamaño de la fuente es necesario para que el texto no se desborde del dialogo */
+        font-size: 1.3em;
+    }
+
+    /* Especificidad 025 */
+    dialog[open] p, dialog[open] ul li {
+        /* Redefinir el tamaño de la fuente es necesario para que el texto no se desborde del dialogo */
+        font-size: 1em;
+    }
+}
+
+
+/* ###################### Estilo del API.HTML ###################### */
+/* Especificidad 023 */
+body[data-page="api"] main > section:nth-of-type(1),
+body[data-page="api"] main > section:nth-of-type(2) {
+    display: grid;
+    grid-template-rows: auto auto; 
+    justify-items: center; 
+    align-items: center; 
+    text-align: center;
+    gap: 1rem;
+    margin: 2em;
+}
+
+/* Especificidad 024 */
+body[data-page="api"] main > section:nth-of-type(1) > h2,
+body[data-page="api"] main > section:nth-of-type(2) > h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    grid-row: 1; 
+}
+
+/* Especificidad 024 */
+body[data-page="api"] main > section:nth-of-type(1) > button,
+body[data-page="api"] main > section:nth-of-type(2) button {
+    padding: 1rem 2rem;
+    font-size: 1.5rem; 
+    background-color: #1F3B4D;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    grid-row: 2; 
+}
+
+/* Especificidad 023 */
+body[data-page="api"] main > section:nth-of-type(3) {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1.5rem;
+}
+
+/* Especificidad 023 */
+body[data-page="api"] main > section:nth-of-type(4) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%; 
+    margin: 2rem auto; 
+    text-align: center; 
+    font-size: 1.5rem;
+}
+
+/* Especificidad 023 */
+body[data-page="api"] main > section:nth-of-type(5) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%; 
+    margin: 2rem auto; 
+    text-align: center;
+    /* Redefinimos el margen para que no se desborde del contenedor */
+    margin: 2em auto;
+}
+
+/* Especificidad 024 */
+body[data-page="api"] main > section:nth-of-type(5) > button {
+    width: 80%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    background-color: #1F3B4D;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 0.5em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Espcificidad 013 */
+body[data-page="api"] main > section {
+    display: none; /* Ocultar todos los elementos por defecto */
+}
+
+/* Espcificidad 023 */
+body[data-page="api"] main > section[data-state="visible"] {
+    display: block; /* Mostrar elementos específicos */
+}
+
+/* Espcificidad 023 */
+body[data-page="api"] main > section[data-state="hidden"] {
+    display: none; /* Ocultar elementos específicos */ 
+}
+
+/* Especificidad 034 */
+body[data-page="api"] main > section:nth-of-type(5) > button:hover {
+    background-color: #163240;
+    /* color heredado de body[data-page="api"] main > section:nth-of-type(4) > button */
+}
+
+/* Especificidad 034 */
+body[data-page="api"] main > section:nth-of-type(5) button[data-state="correct"] {
+    background-color: #4CAF50;
+    /* color heredado de body[data-page="api"] main > section:nth-of-type(4) > button */
+}
+
+/* Especificidad 034 */
+body[data-page="api"] main > section:nth-of-type(5) button[data-state="incorrect"] {
+    background-color: #F44336; 
+    /* color heredado de body[data-page="api"] main > section:nth-of-type(4) > button */
+}
+
+/* Especificidad 023 */
+body[data-page="api"] main > section:nth-of-type(5) {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1.5rem;
+}
+
+/* Especificidad 023 */
+body[data-page="api"] main > dialog:nth-of-type(1) {
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #1F3B4D;
+    border: none;
+    border-radius: 1em;
+    padding: 2em;
+    box-shadow: 0 0.25em 0.4em #00000033;
+    width: 80%;
+    max-width: 50%;
+    margin: auto;
+}
+
+/* Especificidad 033 */
+body[data-page="api"] main > dialog:nth-of-type(1).show {
+    display: flex; 
+    flex-direction: column; /* Alinea los elementos en columna */
+}
+
+/* Especificidad 024 */
+body[data-page="api"] main > dialog:nth-of-type(1) > h2 {
+    margin-bottom: 1em;
+}
+
+/* Especificidad 024 */
+body[data-page="api"] main > dialog:nth-of-type(1) > p {
+    margin: 0.5em 0;
+}
+
+/* Especificidad 066 */
+body[data-page="api"] main > dialog:nth-of-type(1) > .final-score, 
+body[data-page="api"] main > dialog:nth-of-type(1) > .high-score {
+    font-weight: bold;
+}
+
+/* Media Queries para adaptabilidad del juego */
+@media (max-width: 768px) {
+    /* Especificidad 022 */
+    body[data-page="api"] >main > section:nth-of-type(2) button {
+        /* Redefinir el tamaño de la fuente es necesario para que el texto no se desborde del botón */
+        font-size: 1.2em;
+        /* Redefinir el margin es necesario para que los botones esten bien separados */
+        margin: 1.5em auto;
+        
+    }
+
+    /* Especificidad 024 */
+    body[data-page="api"] main > section:nth-of-type(4) > button {
+        /* Redefinir el tamaño de la fuente es necesario para que el texto no se desborde del botón */
+        font-size: 1em;
+        /* Redefinir el padding es necesario para que el texto no se desborde del botón */
+        padding: 0.8em;
+    }
+}
+
+/* ###################### Estilo para formularios ###################### */
+/* Especificidad: 001 */
+form {
+    display: flex;
+    flex-direction: column;
+    background-color: #f9f9f9;
+    /* color heredado de body */
+    border: 0.5em solid #ddd;
+    border-radius: 0.5em;
+    padding: 2em;
+    margin-top: 1.5em;
+    margin-bottom: 3em;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+/* Especificidad: 002 */
+form label {
+    display: block;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+}
+
+/* Especificidad: 012 */
+form input[type="text"], form textarea {
+    width: 60%;
+    padding: 1em;
+    margin: 0.5em 0;
+    border: 0.25em solid #ddd;
+    border-radius: 0.5em;
+}
+
+/* Especificidad: 012 */
+form input[type="file"] {
+    margin: 0.5em auto;
+    padding: 0.5em;
+    border: 0.25em solid #ccc;
+    border-radius: 0.5em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Especificidad: 022 */
+form input[type="file"]:hover {
+    background-color: #e9e9e9;
+    /* color heredado de body */
+}
+
+/* Especificidad: 002 */
+form button {
+    background-color: #1F3B4D;
+    color: #fff;
+    border: none;
+    padding: 1em 2em;
+    border-radius: 0.5em;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+/* Especificidad: 012 */
+form button:hover {
+    background-color: #163240;
+    /* color heredado de form button */
+}
+
+
+/* ###################### Estilo para los mapas ###################### */
+/* Especificidad 011 */
+main[data-pages="mapa"] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+}
+
+/* Especificidad 002 */
+main > h2 {
+    font-size: 2em;
+    margin-bottom: 1em;
+    text-decoration: underline;
+}
+
+/* Especificidad 012 */
+main[data-pages="mapa"] > div {
+    height: 50%;
+    width: 90%;
+}
+
+/* Especiicidad 011 */
+img[data-map="static-map"] {
+    width: 40%; 
+    height: 30%; 
+    margin-bottom: 2.5em; 
+}
+
+
+/* ######################### Mapa del KML de Circuitos.html ######################*/
+/* Especificidad 013 */
+main > section:nth-of-type(2) > div  {
+    height: 60%;
+    width: 80%;
+}
+
+/* ######################### Mapa del SG de Circuitos.html ######################*/
+/* Especificidad 013 */
+main > section:nth-of-type(3) > svg  {
+    justify-content: center;
+    height: 10%;
+    width: 70%
+}
+
+/* ###################### Mostrar/Ocultar elementos ###################### */
+/* Especificidad 010 */
+[data-state="hidden"] {
+    display: none;
+}
+
+/* Especificidad 010 */
+[data-state="visible"] {
+    display: block;
+}
+
+/* ###################### Estilo para el el archivo XML cargado en circuitos.html ###################### */
+/* Especificidad 022 */
+main section:nth-of-type(1)[data-value="xml"] {
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    width: 80%;
+    background-color: #fff;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    margin: 1.5rem auto; /* Centrar la caja */
+}
+
+/* Especificidad 023 */
+main section:nth-of-type(1)[data-value="xml"] h3 {
+    font-size: 1.5rem;
+    color: #1F3B4D;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.5rem;
+    text-align: center;
+}
+
+/* Especificidad 023 */
+main section:nth-of-type(1)[data-value="xml"] p {
+    font-size: 1.2rem;
+    color: #333;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    text-align: justify;
+}
+
+/* Especificidad 046 */
+main section:nth-of-type(1)[data-value="xml"] ul, 
+main section:nth-of-type(1)[data-value="xml"] ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Especificidad 048 */
+main section:nth-of-type(1)[data-value="xml"] ul li, 
+main section:nth-of-type(1)[data-value="xml"] ol li {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+/* Especificidad 023 */
+main section:nth-of-type(1)[data-value="xml"] table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+}
+
+/* Especificidad 048 */
+main section:nth-of-type(1)[data-value="xml"] table th, 
+main section:nth-of-type(1)[data-value="xml"] table td {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+/* Especificidad 024 */
+main section:nth-of-type(1)[data-value="xml"] table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+/* Especificidad 034 */
+main section:nth-of-type(1)[data-value="xml"] table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Especificidad 034 */
+main section:nth-of-type(1)[data-value="xml"] table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Especificidad 023 */
+main section:nth-of-type(1)[data-value="xml"] img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+/* Especificidad 013 */
+main section:nth-of-type(1) video {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+/* Especificidad 023 */
+main section:nth-of-type(1)[data-value="xml"] a {
+    display: block;
+    margin-bottom: 1rem;
+    color: #1F3B4D;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Especificidad 033 */
+main section:nth-of-type(1)[data-value="xml"] a:hover {
+    text-decoration: underline;
+}
+
+/* Especificidad 023 */
+main section:nth-of-type(1)[data-value="xml"] blockquote {
+    margin: 1rem 0;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-left: 5px solid #ddd;
+    font-style: italic;
+    color: #555;
+}
+
+/* Especificidad 023 */
+main section:nth-of-type(1)[data-value="xml"] header {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #1F3B4D;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.5rem;
+}
+
+/* Especificidad 023 */
+main section:nth-of-type(1)[data-value="xml"] footer {
+    font-size: 1rem;
+    color: #777;
+    margin-top: 1rem;
+    border-top: 1px solid #ddd;
+    padding-top: 0.5rem;
+    text-align: right;
+}

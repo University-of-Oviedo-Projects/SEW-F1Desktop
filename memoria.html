@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="author" content="Adrián Martínez" />
+        <meta name="description" content="Una página web que emula a la pagina web de la Formula 1, 
+            incluyendo informacion sobre un piloto asignado, los circuitos, la meteorologia, 
+            las noticias, los viajes y juegos." />
+        <meta name="keywords" content="Formula 1, Ocon, Carreras, Coches">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>F1 Desktop</title>
+        <link rel="icon" type="image/x-icon" href="multimedia/imagenes/favicon-16x16.png">
+        
+        <link rel="stylesheet" type="text/css" href="estilo/estilo.css" />
+        <link rel="stylesheet" type="text/css" href="estilo/layout.css" />
+        <link rel="stylesheet" type="text/css" href="estilo/footer.css" />
+        <link rel="stylesheet" type="text/css" href="estilo/memoria.css" />
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Rock+Salt" />
+
+        <!-- Añadir referencia al archivo memoria.js -->
+        <script src="js/memoria.js"></script>
+
+        <!-- Añadir referencia al archivo ayuda.js -->
+        <script src="js/ayuda.js"></script>
+    </head>
+
+    <body>
+        <header>
+            <h1><a href="index.html">F1 Desktop</a></h1>
+
+            <nav>
+                <a href="index.html">Home </a>
+                <a href="piloto.html">Piloto </a>
+                <a href="noticias.html">Noticias </a>
+                <a href="meteorologia.html">Meteorologia </a>
+                <a href="viajes.html">Viajes </a>
+                <a href="calendario.html">Calendario </a>
+                <a href="circuitos.html">Circuitos </a>
+                <a class="active" href="juegos.html">Juegos </a>
+            </nav>
+        </header>
+
+        <p>Estas en Inicio >> Juegos >> Memoria</p>
+
+        <nav>
+            <a class="active" href="memoria.html">Juego de memoria</a>  
+            <a href="semaforo.html">Juego de reacción</a>              
+            <a href="api.html">Trivial F1</a>    
+        </nav>
+        
+        <main>
+            <!-- Contenedor del juego -->
+            <section>
+                <h2>Juego de memoria</h2>
+                    <!-- Botón para abrir el tutorial -->
+                <button>Tutorial</button>
+
+                <!-- Popup de tutorial -->
+                <dialog>
+                    <h2>¿Cómo jugar?</h2>
+                    <p>El objetivo del juego es encontrar todas las parejas de cartas en el menor tiempo posible. 
+                        Haz clic en dos cartas para ver sus imágenes; si coinciden, se quedarán reveladas, 
+                        de lo contrario se voltearán de nuevo. ¡Buena suerte!</p>
+                    <button id="close-tutorial">Cerrar</button>
+                </dialog>
+
+                <!-- Popup de victoria -->
+                <dialog>
+                    <h2>¡Felicidades!</h2>
+                    <p>Has encontrado todas las parejas.</p>
+                </dialog>
+
+                <!-- Tablero de juego -->
+            </section>
+        </main>        
+
+        <!-- Pie de página -->
+        <footer>
+            <!-- Botón para abrir el popup de ayuda -->
+            <button>Ayuda</button>
+            <!-- Texto de derechos de autor -->
+            <p>&copy; Adrián Martínez, F1 Desktop</p>
+        </footer>
+
+        <!-- Popup de ayuda -->
+        <dialog>
+            <!-- Contenido de la ayuda -->
+            <section>
+                <h2>Bienvenido a la ayuda web de F1Destkop</h2>
+            </section>
+        </dialog> 
+
+        <!-- Script para cargar el juego y la ayuda -->
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const juegoMemoria = new Memoria();
+
+                function loadHelp() {
+                    const help = new HelpHandler();
+                    document.querySelector("dialog section").innerHTML = help.getHelp();
+                }
+
+                loadHelp();
+            });
+        </script>
+    </body>
+</html>

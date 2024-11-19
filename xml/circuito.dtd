@@ -1,0 +1,42 @@
+<!ELEMENT circuito (nombre, longitud_circuito, anchura_media, fecha_carrera_2024, hora_comienzo_Esp, 
+    vueltas, ciudad, pais, referencias+,fotos+,videos+,centro-pista,puntos+)>
+
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT longitud_circuito (#PCDATA)>
+ <!ELEMENT anchura_media (#PCDATA)>
+<!ELEMENT fecha_carrera_2024 (#PCDATA)>
+<!ELEMENT hora_comienzo_Esp (#PCDATA)>
+<!ELEMENT vueltas (#PCDATA)>
+<!ELEMENT ciudad (#PCDATA)>
+<!ELEMENT pais (#PCDATA)>
+
+<!ELEMENT referencias EMPTY>
+<!ELEMENT fotos EMPTY>
+<!ELEMENT videos EMPTY>
+
+<!ELEMENT centro-pista (coordenada)>
+<!ELEMENT puntos (tramo+)>
+<!ELEMENT tramo (coordenada+)>
+<!ELEMENT coordenada (longitud, latitud, altitud)>
+<!ELEMENT longitud (#PCDATA)>
+<!ELEMENT latitud (#PCDATA)>
+<!ELEMENT altitud (#PCDATA)>
+
+<!ATTLIST referencias 
+    enlace1 CDATA #REQUIRED
+    enlace2 CDATA #REQUIRED 
+    enlace3 CDATA #REQUIRED>
+
+<!ATTLIST fotos 
+    enlace1 CDATA #REQUIRED
+    enlace2 CDATA #REQUIRED 
+    enlace3 CDATA #REQUIRED>
+
+<!ATTLIST videos 
+    enlace1 CDATA #REQUIRED
+    enlace2 CDATA #REQUIRED 
+    enlace3 CDATA #REQUIRED>
+
+<!ATTLIST tramo 
+    distancia CDATA #REQUIRED
+    sector CDATA #REQUIRED>

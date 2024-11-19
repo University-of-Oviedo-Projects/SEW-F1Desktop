@@ -1,0 +1,171 @@
+/* Author: Adrian Martinez Fuentes - UO295454 */
+
+/* Especificidad 001 */
+main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2em;
+    justify-items: center;
+    padding: 1em;
+}
+
+/* Especificidad 004 */
+main h2, main button {
+    grid-column: 1 / -1;
+    width: 40%;
+    height: auto;
+}
+
+/* Especificidad: 003 */
+main h2, h3 {
+    text-decoration: underline;
+    text-align: center;
+    margin-top: 2.5em;
+}
+
+/* Especificidad 002 */
+main h3 {
+    grid-column: 1 / -1;
+    font-size: 1.5em;
+}
+
+/* Especificidad 001 */
+button {
+    font-size: 1em;
+    margin-bottom: 3em;
+    cursor: pointer;
+    background-color: #1F3B4D;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+/* Especificidad 002 */
+main article {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2em 2.5em #0000001a;
+    margin: 2em 2em;
+    padding: 1em;
+    transition: transform 0.2s;
+    background-color: #FFFFFF;
+    border-radius: 2em;
+}
+
+/* Especificidad 012 */
+main article:hover {
+    transform: scale(1.02);
+}
+
+/* Especificidad 003 */
+main article header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f4;
+    color: #333;
+    border-bottom: 0.05em solid #ddd;
+    margin-bottom: 0.5em;
+    padding: 0.5em;
+    border-top-left-radius: 2em;
+    border-top-right-radius: 2em;
+}
+
+/* Especificidad 003 */
+main article h3 {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+/* Especificidad 003 */
+main article p {
+    font-size: 1em;
+    line-height: 1.5;
+    margin: 0.5em 0;
+    padding: 0 1em;
+}
+
+/* Especificidad 003 */
+main article footer {
+    text-align: right;
+    margin-top: auto;
+    padding: 0.5em;
+    background-color: #f4f4f4;
+    color: #333;
+    border-top: 0.05em solid #ddd;
+    border-bottom-left-radius: 2em;
+    border-bottom-right-radius: 2em;
+}
+
+/* Especificidad 004 */
+main article footer p {
+    font-size: 0.9em;
+}
+
+/* Especificidad 003 */
+main article img {
+    max-width: 50px;
+    height: auto;
+    margin: 0.5em auto;
+}
+
+@media (max-width: 1200px) {
+    /* Especificidad 001 */
+    main {
+        /* Redefinir el grid-template-columns es necesario para que el grid se ajuste a la pantalla */
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 992px) {
+    /* Especificidad 001 */
+    main {
+        /* Redefinir el grid-template-columns es necesario para que el grid se ajuste a la pantalla */
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    /* Especificidad 001 */
+    main {
+        grid-template-columns: 1fr;
+    }
+
+    /* Especificidad 001 */
+    article {
+        padding: 0.8em;
+    }
+
+    /* Especificidad 002 */
+    article h3 {
+        font-size: 1.3em;
+    }
+
+    /* Especificidad 002 */
+    article p {
+        font-size: 0.9em;
+    }
+
+    /* Especificidad 003 */
+    article footer p {
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 480px) {
+    article {
+        padding: 0.5em;
+    }
+
+    article h3 {
+        font-size: 1.2em;
+    }
+
+    article p {
+        font-size: 0.8em;
+    }
+
+    article footer p {
+        font-size: 0.7em;
+    }
+}

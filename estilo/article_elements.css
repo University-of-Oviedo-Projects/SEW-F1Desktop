@@ -1,0 +1,130 @@
+/* Author: Adrian Martinez Fuentes - UO295454 */
+
+/* Especificidad: 002 */
+main h2 {
+    text-decoration: underline;
+    text-align: center;
+    margin-top: 2.5em;
+}
+
+/* Especificidad: 001 */
+article {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2em 2.5em #0000001a;
+    margin: 2em 2em;
+    padding: 1em;
+    transition: transform 0.2s;
+    background-color: #FFFFFF;
+    /* color heredado de body */
+    border-radius: 2em;
+}
+
+/* Especificidad: 002 */
+article:hover {
+    transform: scale(1.02);
+}
+
+/* Especificidad: 002 */
+article header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f4;
+    color: #333;
+    border-bottom: 0.05em solid #ddd;
+    margin-bottom: 0.5em;
+    padding: 0.5em;
+    border-top-left-radius: 2em;
+    border-top-right-radius: 2em;
+}
+
+/* Especificidad: 002 */
+article h2 {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+/* Especificidad: 002 */
+article p {
+    font-size: 1em;
+    line-height: 1.5;
+    margin: 0.5em 0;
+    padding: 0 1em;
+}
+
+/* Especificidad: 002 */
+article footer {
+    text-align: right;
+    margin-top: auto;
+    padding: 0.5em;
+    background-color: #f4f4f4;
+    color: #333;
+    border-top: 0.05em solid #ddd;
+    border-bottom-left-radius: 2em;
+    border-bottom-right-radius: 2em;
+}
+
+/* Especificidad: 003 */
+article footer p {
+    font-size: 0.9em;
+}
+
+/* Especificidad: 002 */
+article img {
+    max-width: 50px;
+    height: auto;
+    margin: 0.5em auto;
+}
+
+@media (max-width: 768px) {
+    /* Especificidad: 0,0,1 */
+    article {
+        /* Redefinimos el padding para que se ajuste a la pantalla y no se desborde */
+        padding: 0.8em;
+    }
+
+    /* Especificidad: 0,0,2 */
+    article h2 {
+        /* Redefinimos el tamaño de la fuente para que se ajuste a la pantalla */
+        font-size: 1.3em;
+    }
+
+    /* Especificidad: 0,0,2 */
+    article p {
+        /* Redefinimos el tamaño de la fuente para que se ajuste a la pantalla */
+        font-size: 0.9em;
+    }
+
+    /* Especificidad: 0,0,3 */
+    article footer p {
+        /* Redefinimos el tamaño de la fuente para que se ajuste a la pantalla */
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Especificidad: 0,0,1 */
+    article {
+        /* Redefinimos el padding para que se ajuste a la pantalla y no se desborde */
+        padding: 0.5em;
+    }
+
+    /* Especificidad: 0,0,2 */
+    article h2 {
+        /* Redefinimos el tamaño de la fuente para que se ajuste a la pantalla */
+        font-size: 1.2em;
+    }
+
+    /* Especificidad: 0,0,2 */
+    article p {
+        /* Redefinimos el tamaño de la fuente para que se ajuste a la pantalla */
+        font-size: 0.8em;
+    }
+
+    /* Especificidad: 0,0,3 */
+    article footer p {
+        /* Redefinimos el tamaño de la fuente para que se ajuste a la pantalla */
+        font-size: 0.7em;
+    }
+}

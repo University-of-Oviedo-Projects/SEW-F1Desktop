@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+targetNamespace="http://www.uniovi.es"
+xmlns="http://www.uniovi.es" 
+elementFormDefault="qualified" 
+>
+	<xs:element name="circuito">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="nombre" />
+				<xs:element ref="longitud_circuito" />
+				<xs:element ref="anchura_media" />
+				<xs:element ref="fecha_carrera_2024" />
+				<xs:element ref="hora_comienzo_Esp" />
+				<xs:element ref="vueltas" />
+				<xs:element ref="ciudad" />
+				<xs:element ref="pais" />
+				<xs:element ref="referencias" />
+				<xs:element ref="fotos" />
+				<xs:element ref="videos" />
+				<xs:element ref="centro-pista" />
+				<xs:element ref="puntos" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="nombre" type="xs:string" />
+	<xs:element name="longitud_circuito" type="xs:string" />
+	<xs:element name="anchura_media" type="xs:string" />
+	<xs:element name="fecha_carrera_2024" type="xs:date" />
+	<xs:element name="hora_comienzo_Esp" type="xs:time" />
+	<xs:element name="vueltas" type="xs:integer" />
+	<xs:element name="ciudad" type="xs:string" />
+	<xs:element name="pais" type="xs:string" />
+	
+	<xs:element name="referencias">
+		<xs:complexType>
+			<xs:attribute name="enlace1" type="xs:string" use="required" />
+			<xs:attribute name="enlace2" type="xs:string" use="required" />
+			<xs:attribute name="enlace3" type="xs:string" use="required" />
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="fotos">
+		<xs:complexType>
+			<xs:attribute name="enlace1" type="xs:string" use="required" />
+			<xs:attribute name="enlace2" type="xs:string" use="required" />
+			<xs:attribute name="enlace3" type="xs:string" use="required" />
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="videos">
+		<xs:complexType>
+			<xs:attribute name="enlace1" type="xs:string" use="required" />
+			<xs:attribute name="enlace2" type="xs:string" use="required" />
+			<xs:attribute name="enlace3" type="xs:string" use="required" />
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="centro-pista">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="coordenada" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="puntos">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="10" maxOccurs="250" ref="tramo" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="tramo">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="coordenada" />
+			</xs:sequence>
+			<xs:attribute name="distancia" type="xs:decimal" use="required" />
+			<xs:attribute name="sector" type="xs:integer" use="required" />
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="coordenada">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="longitud" />
+				<xs:element ref="latitud" />
+				<xs:element ref="altitud" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="longitud">
+		<xs:simpleType>
+			<xs:restriction base="xs:decimal">
+				<xs:minInclusive value="-180" />
+				<xs:maxInclusive value="180" />
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+
+	<xs:element name="latitud">
+		<xs:simpleType>
+			<xs:restriction base="xs:decimal">
+				<xs:minInclusive value="-90" />
+				<xs:maxInclusive value="90" />
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+
+	<xs:element name="altitud">
+		<xs:simpleType>
+			<xs:restriction base="xs:decimal">
+				<xs:minInclusive value="10" />
+				<xs:maxInclusive value="5000" />
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+</xs:schema>
