@@ -13,7 +13,7 @@ class HelpHandler {
             }
         });
 
-        // Detectar el clic en el botón de ayuda 
+        // Detectar el clic en el botón de ayuda
         const openHelpButton = document.querySelector("footer button");
         if (openHelpButton) {
             openHelpButton.addEventListener("click", () => {
@@ -22,24 +22,20 @@ class HelpHandler {
         }
     }
 
-    // Función para mostrar el popup de ayuda sin ID
+    // Función para mostrar el popup de ayuda sin usar div
     showHelpPopup() {
         const helpPopup = document.querySelector("dialog");
-        helpPopup.innerHTML = this.getHelp(); // Inserta el contenido de ayuda
+        helpPopup.innerHTML = ""; // Limpia cualquier contenido previo
+        this.createHelpContent(helpPopup); // Agrega contenido directamente al <dialog>
         helpPopup.scrollTop = 0; // Asegura el desplazamiento en la parte superior
 
-        // Re-agregar el listener al botón de cerrar tras insertar contenido
-        const closeHelpButton = helpPopup.querySelector("button");
+        // Agrega el evento para cerrar
+        const closeHelpButton = helpPopup.querySelector("#close-help");
         if (closeHelpButton) {
             closeHelpButton.addEventListener("click", () => {
                 this.closeHelpPopup();
             });
         }
-
-        // Usa un retraso mínimo para asegurar que scrollTop se aplique
-        setTimeout(() => {
-            helpPopup.scrollTop = 0;
-        }, 0);
 
         helpPopup.showModal();
     }
@@ -50,36 +46,66 @@ class HelpHandler {
         helpPopup.close();
     }
 
-    getHelp() {
-        return `
-            <section>
-                <h3>¿Cómo funciona?</h3>
-                <p>Para obtener ayuda en cualquier momento, presiona la tecla F1 o 
-                    haz clic en el botón de ayuda en el pie de pagina.</p>
-            </section>
+    // Función para crear el contenido de ayuda directamente en el dialog
+    createHelpContent(helpPopup) {
+        // Crear secciones de ayuda
+        const sections = [
+            {
+                title: "¿Cómo funciona?",
+                content: `Para obtener ayuda en cualquier momento, presiona la tecla F1 o 
+                          haz clic en el botón de ayuda en el pie de página.`,
+            },
+            {
+                title: "¿Qué puedo hacer en esta web?",
+                content: `En esta web puedes encontrar información sobre los pilotos, 
+                          las carreras, las noticias y la meteorología de la Fórmula 1.
+                          Además, puedes consultar el calendario de carreras de la temporada y jugar  
+                          a mini juegos relacionados con la Fórmula 1.`,
+            },
+            {
+                title: "Secciones disponibles:",
+                list: [
+                    "Home: Página principal con información general.",
+                    "Piloto: Información sobre el piloto de F1 Esteban Ocon.",
+                    "Noticias: Crear y ver las ultimas noticias sobre la F!.",
+                    "Meteorología: Información meteorológica sobre el circuito de Zandvoort.",
+                    "Viajes: Mapa estatico  dinamico de tu ubicación.",
+                    "Circuitos: Información el circuito de Zandvoort.",
+                    "Calendario: Calendario de carreras de la temporada.",
+                    "Juegos: Mini juegos relacionados con la Fórmula 1.",
+                ],
+            },
+        ];
 
-            <section>
-                <h3>¿Qué puedo hacer en esta web?</h3>
-                <p>En esta web puedes encontrar información sobre los pilotos, 
-                    las carreras, las noticias y la meteorología de la Fórmula 1.</p>
-                <p>Además, puedes consultar el calendario de carreras de la temporada y jugar  
-                    a mini juegos relacionados con la Fórmula 1.</p>
-            </section>
+        // Añadir contenido al <dialog>
+        sections.forEach((section) => {
+            // Título de la sección
+            const title = document.createElement("h3");
+            title.textContent = section.title;
+            helpPopup.appendChild(title);
 
-            <section>
-                <h3>Secciones disponibles:</h3>
-                <ul>
-                    <li><strong>Home:</strong> Página principal con información general.</li>
-                    <li><strong>Piloto:</strong> Información sobre los pilotos.</li>
-                    <li><strong>Noticias:</strong> Últimas noticias y actualizaciones.</li>
-                    <li><strong>Meteorología:</strong> Información meteorológica relevante.</li>
-                    <li><strong>Viajes:</strong> Información sobre viajes y alojamiento.</li>
-                    <li><strong>Circuitos:</strong> Información sobre los circuitos de la temporada.</li>
-                    <li><strong>Calendario:</strong> Calendario de carreras de la temporada.</li>
-                    <li><strong>Juegos:</strong> Mini juegos relacionados con la Fórmula 1.</li>                    
-                </ul>
-            </section>
-            <button id="close-help">Cerrar</button>
-        `;
+            // Contenido o lista de la sección
+            if (section.content) {
+                const paragraph = document.createElement("p");
+                paragraph.innerHTML = section.content;
+                helpPopup.appendChild(paragraph);
+            }
+
+            if (section.list) {
+                const ul = document.createElement("ul");
+                section.list.forEach((item) => {
+                    const li = document.createElement("li");
+                    li.innerHTML = `<strong>${item.split(":")[0]}:</strong> ${item.split(":")[1]}`;
+                    ul.appendChild(li);
+                });
+                helpPopup.appendChild(ul);
+            }
+        });
+
+        // Botón de cierre
+        const closeButton = document.createElement("button");
+        closeButton.id = "close-help";
+        closeButton.textContent = "Cerrar";
+        helpPopup.appendChild(closeButton);
     }
 }

@@ -149,7 +149,8 @@ class Api {
         document.querySelector("body > main > section").setAttribute("data-state", "visible");
          
         // Añadir evento al botón de inicio para mostrar la pantalla de selección de modo
-        document.querySelector("body > main > section button").addEventListener("click", () => this.showModeSelectionScreen());
+        document.querySelector("body > main > section button")
+            .addEventListener("click", () => this.showModeSelectionScreen());
 
         // Registrar el Service Worker
         if('serviceWorker' in navigator) {
@@ -227,22 +228,24 @@ class Api {
     }
 
     startGame(gameMode) {
-        // Guardar el modo seleccionado
         this.gameMode = gameMode;
-
-        // Ocultar la pantalla de selección de modo
         document.querySelector('main > section:nth-of-type(2)').setAttribute('data-state', 'hidden');
 
         // Mostrar las secciones de puntuación, pregunta y opciones
         document.querySelector("body > main > section:nth-of-type(3)").setAttribute("data-state", "visible");
         document.querySelector("body > main > section:nth-of-type(4)").setAttribute("data-state", "visible");
         document.querySelector("body > main > section:nth-of-type(5)").setAttribute("data-state", "visible");
-
-
         this.showQuestion(); // Mostrar la primera pregunta
 
         const highScore = this.getHighScore();  // Web Storage
-        alert("La puntuación más alta es: " + highScore);
+        const messageContainer = document.querySelector('body > main > section:nth-of-type(3)'); 
+        const paragraph = document.createElement('p');
+        paragraph.textContent = `Puntuación más alta: ${highScore}`;
+        messageContainer.appendChild(paragraph);
+            
+        setTimeout(() => {
+            paragraph.remove();
+        }, 4000);        
     }
 
     showQuestion() {
@@ -293,7 +296,11 @@ class Api {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
         if (!SpeechRecognition) {
-            alert("El reconocimiento de voz no es compatible con este navegador.");
+            const messageContainer = document.querySelector('body > main > section:nth-of-type(2)'); 
+            const paragraph = document.createElement('p');
+            paragraph.textContent = `El reconocimiento de voz no es compatible con este navegador`;
+            messageContainer.appendChild(paragraph);
+            setTimeout(() => { paragraph.remove(); }, 4000);     
             return;
         }
 
@@ -305,7 +312,11 @@ class Api {
 
         this.recognition.onresult = (event) => {
             const speechResult = event.results[0][0].transcript;
-            alert("Has dicho: " + speechResult);
+            const messageContainer = document.querySelector('body > main'); 
+            const paragraph = document.createElement('p');
+            paragraph.textContent = `Has dicho: ${speechResult}`;
+            messageContainer.appendChild(paragraph);
+            setTimeout(() => { paragraph.remove(); }, 4000);
             this.checkAnswer(speechResult);
 
             // Si el usuario responde antes de los 10 segundos, limpiar el temporizador

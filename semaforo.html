@@ -16,9 +16,7 @@
         <link rel="stylesheet" type="text/css" href="estilo/estilo.css" />
         <link rel="stylesheet" type="text/css" href="estilo/layout.css" />
         <link rel="stylesheet" type="text/css" href="estilo/semaforo.css" />
-        <link rel="stylesheet" type="text/css" href="estilo/footer.css" />
-        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Rock+Salt" />
-
+        
         <!-- Añadir referencia al archivo semaforo.js -->
         <script src="js/semaforo.js"></script>
 
@@ -42,7 +40,9 @@
             </nav>
         </header>
 
-        <p>Estas en Inicio >> Juegos >> Reacción</p>
+        <p>Estas en <a href="index.html" title="Home">Inicio</a> 
+            >> <a href="juegos.html" title="Juegos">Juegos</a>
+            >> <a href="semaforo.html" title="Reacción">Reacción</a><p>
 
         <nav>
             <a href="memoria.html">Juego de memoria</a>                
@@ -73,14 +73,8 @@
         <!-- Script para cargar el juego y la ayuda -->
         <script>
             document.addEventListener("DOMContentLoaded", () => {
-                const juegoReaccion = new Semaforo();  
-
-                function loadHelp() {
-                    const help = new HelpHandler();
-                    document.querySelector("dialog section").innerHTML = help.getHelp();
-                }
-
-                loadHelp();
+                new Semaforo();  
+                new HelpHandler(); 
             });
         </script>
     </body>

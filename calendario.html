@@ -13,10 +13,9 @@
         
         <title>F1 Desktop</title>
         <link rel="icon" type="image/x-icon" href="multimedia/imagenes/favicon-16x16.png">
+        
         <link rel="stylesheet" type="text/css" href="estilo/estilo.css" />
         <link rel="stylesheet" type="text/css" href="estilo/layout.css" />
-        <link rel="stylesheet" type="text/css" href="estilo/footer.css" />
-        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Rock+Salt" />
         <link rel="stylesheet" type="text/css" href="estilo/calendario_grid.css">
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -42,7 +41,8 @@
             </nav>
         </header>
 
-        <p>Estas en en Inicio >> Calendario </p>
+        <p>Estas en <a href="index.html" title="Home">Inicio</a> 
+            >> <a href="calendario.html" title="Calendario">Calendario</a><p>
 
         <main>
             <h2>Calendario</h2>
@@ -84,12 +84,7 @@
                     }
                 });
 
-                function loadHelp() {
-                    const help = new HelpHandler();
-                    document.querySelector("dialog section").innerHTML = help.getHelp();
-                }
-    
-                loadHelp();
+                new HelpHandler();    
             });
         </script>
     </body>

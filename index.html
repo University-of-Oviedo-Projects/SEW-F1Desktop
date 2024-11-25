@@ -16,7 +16,6 @@
         <link rel="stylesheet" type="text/css" href="estilo/estilo.css" />
         <link rel="stylesheet" type="text/css" href="estilo/layout.css" />
         <link rel="stylesheet" type="text/css" href="estilo/footer.css" />
-        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Rock+Salt" />
     
         <!-- Añadir referencia a jQuery Core 3.x minificada -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -73,12 +72,7 @@
         <!-- Script para cargar la ayuda -->
         <script>
             document.addEventListener("DOMContentLoaded", () => {
-               function loadHelp() {
-                    const help = new HelpHandler();
-                    document.querySelector("dialog section")
-                        .innerHTML = help.getHelp();
-                }
-                loadHelp();
+                new HelpHandler();                 
             });
         </script>
     </body>

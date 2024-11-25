@@ -53,7 +53,7 @@ nav a {
 nav a:hover, nav a:focus {
     background-color: #1C3D5A;
     color: #F0F0F0;
-    outline: none;
+    border: 0.075em solid #00d9ff;
 }
 
 /* ###################### Media queries ###################### */
@@ -114,5 +114,58 @@ nav a:hover, nav a:focus {
     body > p {
         /* Redeclarar display: none; para que las migas de navegación no se muestren */
         display: none; /* Ocultar las migas de navegación */
+    }
+}
+
+
+/* Author: Adrian Martinez Fuentes - UO295454 */
+
+/* Especificidad 001 */
+footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    margin: 0.4em;
+    color: #FFFFFF;
+    /* background-color heredado de body */
+    text-align: center;
+}
+
+/* Especificidad 011 */
+footer button {
+    padding: 0.5em 1em;
+    background-color: #0000ff; 
+    color: #FFFFFF;
+    border: none;
+    border-radius: 0.5em;
+    cursor: pointer;
+    margin: 0.5em;
+}
+
+/* Esºpecificidad 012 */
+footer p {
+    margin: 0.5em;
+}
+
+/* Media query para dispositivos pequeños */
+@media (max-width: 600px) {
+    /* Especificidad 001 */
+    footer {
+        /* Redefinimos la dirección del flexbox para que se adapte al tamaño de la pantalla en forma de columna */
+        flex-direction: column;
+        /* Redefinimos el padding para que no adapte el padding del footer general al tamaño de la pantalla */
+        padding: 0.5em;
+        /* Redefinimos el tamaño de la fuente para que no se aplique el margen del footer general */
+        font-size: 0.9em;
+    }
+
+    /* Especificidad 011 */
+    footer button {
+        /* Redefinimos el padding para que no adapte el padding del footer general al tamaño de la pantalla */
+        padding: 0.3em 0.6em;
+        /* Redefinimos el tamaño de la fuente para que no se aplique el margen del footer general */
+        font-size: 0.8em;
     }
 }

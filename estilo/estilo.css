@@ -480,12 +480,6 @@ body[data-page="api"] main > dialog:nth-of-type(1) > p {
     margin: 0.5em 0;
 }
 
-/* Especificidad 066 */
-body[data-page="api"] main > dialog:nth-of-type(1) > .final-score, 
-body[data-page="api"] main > dialog:nth-of-type(1) > .high-score {
-    font-weight: bold;
-}
-
 /* Media Queries para adaptabilidad del juego */
 @media (max-width: 768px) {
     /* Especificidad 022 */
@@ -600,7 +594,7 @@ main[data-pages="mapa"] > div {
 /* Especiicidad 011 */
 img[data-map="static-map"] {
     width: 40%; 
-    height: 30%; 
+    height: 45%; 
     margin-bottom: 2.5em; 
 }
 
@@ -612,12 +606,11 @@ main > section:nth-of-type(2) > div  {
     width: 80%;
 }
 
-/* ######################### Mapa del SG de Circuitos.html ######################*/
+/* ######################### Mapa del SVG de Circuitos.html ######################*/
 /* Especificidad 013 */
 main > section:nth-of-type(3) > svg  {
     justify-content: center;
-    height: 10%;
-    width: 70%
+    width: 90%
 }
 
 /* ###################### Mostrar/Ocultar elementos ###################### */

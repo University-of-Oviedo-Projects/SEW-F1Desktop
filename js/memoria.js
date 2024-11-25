@@ -70,7 +70,7 @@ class Memoria {
             this.secondCard.querySelector("img").setAttribute('data-state', 'card-hidden');
 
             this.resetBoard();
-        }, 1000);
+        }, 700);
     }
 
     resetBoard() {

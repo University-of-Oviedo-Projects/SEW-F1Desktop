@@ -3,7 +3,14 @@ class Noticias {
         if (window.File && window.FileReader && window.FileList && window.Blob) {
             console.log("Todas las APIs de File están soportadas.");
         } else {
-            alert("La API de File no es soportada en este navegador.");
+            const messageContainer = document.querySelector('body > main > section'); 
+            const paragraph = document.createElement('p');
+            paragraph.textContent = `La API de File no es soportada en este navegador.`;
+            messageContainer.appendChild(paragraph);
+            
+            setTimeout(() => {
+                paragraph.remove();
+            }, 4000);     
         }
 
         // Oculta el h2 de "Últimas noticias"

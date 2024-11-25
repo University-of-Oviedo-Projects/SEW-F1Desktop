@@ -15,13 +15,7 @@
         
         <link rel="stylesheet" type="text/css" href="estilo/estilo.css" />
         <link rel="stylesheet" type="text/css" href="estilo/layout.css" />
-        <link rel="stylesheet" type="text/css" href="estilo/footer.css" />
-        
-        <!-- Añadir referencia al archivo de estilos de la página de noticias -->
         <link rel="stylesheet" type="text/css" href="estilo/article_elements.css" />
-
-        <!-- Añadir referencia a la fuente Rock Salt -->
-        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Rock+Salt" />
 
         <!-- Añadir referencia al archivo ayuda.js -->
         <script src="js/ayuda.js"></script>
@@ -49,8 +43,9 @@
             </nav>
         </header>
 
-        <p>Estas en Inicio >> Noticias<p>
-
+        <p>Estas en <a href="index.html" title="Home">Inicio</a> 
+            >> <a href="noticias.html" title="Noticias">Noticias</a><p>
+                
         <main>
             <!-- Sección para mostrar las noticias -->
             <form>
@@ -104,14 +99,8 @@
         <!-- Script para cargar la información de la ayuda -->
         <script>
             document.addEventListener("DOMContentLoaded", () => {
-                function loadHelp() {
-                    const help = new HelpHandler();
-                    document.querySelector("dialog section")
-                        .innerHTML = help.getHelp();
-                }
-    
+                new HelpHandler();     
                 new Noticias();
-                loadHelp();
             });
         </script>
     </body>

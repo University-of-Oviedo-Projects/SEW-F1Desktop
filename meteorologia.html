@@ -15,8 +15,6 @@
                 
         <link rel="stylesheet" type="text/css" href="estilo/estilo.css" />
         <link rel="stylesheet" type="text/css" href="estilo/layout.css" />
-        <link rel="stylesheet" type="text/css" href="estilo/footer.css" />
-        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Rock+Salt" />
         <link rel="stylesheet" href="estilo/article_elements.css">
 
         <!-- Añadir referencia a jQuery Core 3.x minificada -->
@@ -46,7 +44,8 @@
             </nav>
         </header>
 
-        <p>Estas en Inicio >> Meteorologia</p>
+        <p>Estas en <a href="index.html" title="Home">Inicio</a> 
+            >> <a href="meteorologia.html" title="Meteorologia">Meteorologia</a><p>
 
         <main>
             <h2>Meteorología</h2>
@@ -75,16 +74,9 @@
         <!-- Script para cargar la ayuda -->
         <script>
             document.addEventListener("DOMContentLoaded", () => {
-                const pais = new Pais();
-                document.querySelector("aside").innerHTML += pais.getAllInformation();
-                
-                function loadHelp() {
-                    const help = new HelpHandler();
-                    document.querySelector("dialog section")
-                        .innerHTML = help.getHelp();
-                }
-    
-                loadHelp();
+                new Pais("Países Bajos", "Amsterdam", 17879000);
+                //document.querySelector("aside").innerHTML += pais.getAllInformation();
+                new HelpHandler(); 
             });
         </script>
     </body>

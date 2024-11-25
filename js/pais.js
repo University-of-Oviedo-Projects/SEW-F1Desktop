@@ -5,6 +5,8 @@ class Pais {
         this.poblacion = poblacion;
         this.rellenarInformacion();
         this.obtenerPrevisionTiempo();
+
+        document.querySelector("aside").innerHTML += this.getAllInformation();
     }
 
     get nombrePais() {

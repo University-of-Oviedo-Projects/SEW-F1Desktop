@@ -24,7 +24,10 @@ class Viajes {
             );
         } else {
             this.error = "La geolocalización no es compatible con este navegador.";
-            alert(this.error);
+            const p = document.createElement('p');
+            p.textContent = this.error;
+            document.querySelector('main').insertBefore(p, document.querySelector('main > div'));
+            setTimeout(() => { p.remove(); }, 4000);
         }
     }
 
@@ -52,7 +55,11 @@ class Viajes {
                 this.error = "Ocurrió un error desconocido.";
                 break;
         }
-        alert(this.error);
+
+        const p = document.createElement('p');
+        p.textContent = this.error;
+        document.querySelector('main').insertBefore(p, document.querySelector('main > div'));
+        setTimeout(() => { p.remove(); }, 4000);
     }
 
     showStaticMap() {
