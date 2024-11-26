@@ -28,40 +28,9 @@ body, html {
 }
 
 /* Especificidad 001 */
-header, footer {
-    background-color: #0A1A2E;
-    color: #FFFFFF;
-}
-
-/* Especificidad 001 */
 body > p {
     margin-left: 0.4em;;
     font-size: small;
-}
-
-/* ###################### Header del body ###################### */
-/* Especificidad 002 */
-h1 a {
-    color: #FFFFFF;
-    /*background-color heredado de header*/
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    font-size: 1.5rem;     
-}
-
-nav {
-    display: flex;
-    align-items: center;
-    /*background-color heredado de header*/
-}
-
-/* Especificidad 002 */
-nav a {
-    text-decoration: none;
-    color: #FFFFFF;
-    /*background-color heredado de header*/
-    padding: 1rem 1.5rem;
-    margin-bottom: 0.5rem; /* Aumentar el espacio entre los enlaces */
 }
 
 /* Especificidad 011 */
@@ -102,7 +71,7 @@ h3,h4 {
     font-size: large;
 }
 
-/* ###################### Listas del body ###################### */
+/* ###################### Estilizacion de listas  ###################### */
 /* Especificidad 004 */
 ul, ol, dl, p {
     font-size: 1.05rem;
@@ -217,7 +186,7 @@ img {
     height: auto;
 }
 
-/* ###################### Ayuda ###################### */
+/* ###################### Ayuda global de la web ###################### */
 /* Especificidad 011 */
 dialog[open] {
     width: 80%;
@@ -296,7 +265,7 @@ dialog[open] button[id="close-help"]:hover {
     /* color heredado de button[id="close-help"] */
 }
 
-/* Media Queries para adaptabilidad del dialogo de ayuda */
+/* Media Queries para el dialogo de ayuda */
 @media (max-width: 768px) {
     /* Especificidad 011 */
     dialog[open] {
@@ -327,7 +296,7 @@ dialog[open] button[id="close-help"]:hover {
 
 
 /* ###################### Estilo del API.HTML ###################### */
-/* Especificidad 023 */
+/* Especificidad 023 && 023, 046 */
 body[data-page="api"] main > section:nth-of-type(1),
 body[data-page="api"] main > section:nth-of-type(2) {
     display: grid;
@@ -339,7 +308,7 @@ body[data-page="api"] main > section:nth-of-type(2) {
     margin: 2em;
 }
 
-/* Especificidad 024 */
+/* Especificidad 024 && 024, 048 */
 body[data-page="api"] main > section:nth-of-type(1) > h2,
 body[data-page="api"] main > section:nth-of-type(2) > h2 {
     text-align: center;
@@ -348,7 +317,7 @@ body[data-page="api"] main > section:nth-of-type(2) > h2 {
     grid-row: 1; 
 }
 
-/* Especificidad 024 */
+/* Especificidad 024 && 024, 048 */
 body[data-page="api"] main > section:nth-of-type(1) > button,
 body[data-page="api"] main > section:nth-of-type(2) button {
     padding: 1rem 2rem;
@@ -480,7 +449,7 @@ body[data-page="api"] main > dialog:nth-of-type(1) > p {
     margin: 0.5em 0;
 }
 
-/* Media Queries para adaptabilidad del juego */
+/* Media Queries para adaptabilidad del Api.html */
 @media (max-width: 768px) {
     /* Especificidad 022 */
     body[data-page="api"] >main > section:nth-of-type(2) button {
@@ -599,14 +568,14 @@ img[data-map="static-map"] {
 }
 
 
-/* ######################### Mapa del KML de Circuitos.html ######################*/
+/* ######################### Mapa KML ######################*/
 /* Especificidad 013 */
 main > section:nth-of-type(2) > div  {
     height: 60%;
     width: 80%;
 }
 
-/* ######################### Mapa del SVG de Circuitos.html ######################*/
+/* ######################### SVG ######################*/
 /* Especificidad 013 */
 main > section:nth-of-type(3) > svg  {
     justify-content: center;
@@ -624,7 +593,7 @@ main > section:nth-of-type(3) > svg  {
     display: block;
 }
 
-/* ###################### Estilo para el el archivo XML cargado en circuitos.html ###################### */
+/* ###################### Estilo para XML ###################### */
 /* Especificidad 022 */
 main section:nth-of-type(1)[data-value="xml"] {
     align-items: center;
@@ -656,14 +625,14 @@ main section:nth-of-type(1)[data-value="xml"] p {
     text-align: justify;
 }
 
-/* Especificidad 046 */
+/* Especificidad 023 && 023, 046 */
 main section:nth-of-type(1)[data-value="xml"] ul, 
 main section:nth-of-type(1)[data-value="xml"] ol {
     padding-left: 1.5rem;
     margin-bottom: 1rem;
 }
 
-/* Especificidad 048 */
+/* Especificidad 024 && 024, 048 */
 main section:nth-of-type(1)[data-value="xml"] ul li, 
 main section:nth-of-type(1)[data-value="xml"] ol li {
     font-size: 1.2rem;
@@ -678,7 +647,7 @@ main section:nth-of-type(1)[data-value="xml"] table {
     margin-bottom: 1.5rem;
 }
 
-/* Especificidad 048 */
+/* Especificidad 024 && 024, 048 */
 main section:nth-of-type(1)[data-value="xml"] table th, 
 main section:nth-of-type(1)[data-value="xml"] table td {
     padding: 0.5rem;

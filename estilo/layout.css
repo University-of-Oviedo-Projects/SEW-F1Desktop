@@ -11,7 +11,18 @@ header {
 
 /* Especificidad 002 */
 header, footer {
+    background-color: #0A1A2E;
+    color: #FFFFFF;
     margin: 0.4em;
+}
+
+/* Especificidad 002 */
+h1 a {
+    color: #FFFFFF;
+    /*background-color heredado de header*/
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    font-size: 1.5rem;     
 }
 
 /* Especificidad 001 */
@@ -56,70 +67,8 @@ nav a:hover, nav a:focus {
     border: 0.075em solid #00d9ff;
 }
 
-/* ###################### Media queries ###################### */
-/* Media query para pantallas pequeñas (móviles) */
-@media (max-width: 480px) {
-     /* Ajustamos el header para que se acomode mejor en pantallas pequeñas */
-     header {
-        flex-direction: column; /* Colocamos los elementos en una columna */
-        padding: 1em; /* Reducir padding en el header */
-    }
 
-    /* Ajustamos el nav para que no ocupe demasiado espacio */
-    nav {
-        display: flex; /* Mantener el menú en fila */
-        flex-direction: row; /* Asegurar que el menú esté en fila */
-        justify-content: center;
-        gap: 0.5em; /* Reducir el espacio entre los elementos */
-        width: 100%; /* Hacer que el nav ocupe todo el ancho disponible */
-    }
-
-    /* Ajustamos los enlaces para que sean más pequeños */
-    nav a {
-        margin: 0.25em;
-        padding: 0.5em 1rem; /* Reducir el tamaño del padding */
-        font-size: 1em; /* Reducir el tamaño de la fuente */
-        text-align: center;
-    }
-
-    /* Especificidad 002 */
-    body > p {
-        display: none; /* Ocultar las migas de navegación */
-    }
-}
-
-/* Media query para tablets */
-@media (min-width: 481px) and (max-width: 1200px) {
-    /* Especificidad 002 */
-    nav a {
-        /* Redefinir el margin-bottom es necesario para que el espaciado se adapte a la pantalla */
-        margin-bottom: 0.5rem; 
-        flex: 1 1 auto; 
-    }
-
-    /* Especificidad 002 */
-    main > nav {
-        max-width: 80%; 
-        margin: 1.5rem auto; 
-    }
-
-    /* Especificidad 002 */
-    main > nav a {
-        font-size: 1.1rem; 
-        /* Redefinir padding es necesario para que el espaciado se adapte a la pantalla */
-        padding: 1rem 1.75rem; 
-    }
-
-    /* Especificidad 002 */
-    body > p {
-        /* Redeclarar display: none; para que las migas de navegación no se muestren */
-        display: none; /* Ocultar las migas de navegación */
-    }
-}
-
-
-/* Author: Adrian Martinez Fuentes - UO295454 */
-
+/* ###################### Estilo del pie de página ###################### */
 /* Especificidad 001 */
 footer {
     display: flex;
@@ -149,8 +98,90 @@ footer p {
     margin: 0.5em;
 }
 
-/* Media query para dispositivos pequeños */
-@media (max-width: 600px) {
+/* ###################### Media queries ###################### */
+/* Media query para pantallas pequeñas (móviles) */
+@media (max-width: 480px) {
+     /* Ajustamos el header para que se acomode mejor en pantallas pequeñas */
+     header {
+        flex-direction: column; /* Colocamos los elementos en una columna */
+        padding: 1em; /* Reducir padding en el header */
+    }
+
+    nav {
+        display: flex; /* Mantener el menú en fila */
+        flex-direction: row; /* Asegurar que el menú esté en fila */
+        justify-content: center;
+        gap: 0.5em; /* Reducir el espacio entre los elementos */
+        width: 100%; /* Hacer que el nav ocupe todo el ancho disponible */
+    }
+
+    /* Ajustamos los enlaces para que sean más pequeños */
+    nav a {
+        margin: 0.25em;
+        padding: 0.5em 1rem; /* Reducir el tamaño del padding */
+        font-size: 1em; /* Reducir el tamaño de la fuente */
+        text-align: center;
+    }
+
+    /* Especificidad 002 */
+    body > p {
+        display: none; /* Ocultar las migas de navegación */
+    }
+
+    /* Especificidad 001 */
+    footer {
+        /* Redefinimos la dirección del flexbox para que se adapte al tamaño de la pantalla en forma de columna */
+        flex-direction: column;
+        /* Redefinimos el padding para que no adapte el padding del footer general al tamaño de la pantalla */
+        padding: 0.5em;
+        /* Redefinimos el tamaño de la fuente para que no se aplique el margen del footer general */
+        font-size: 0.9em;
+    }
+
+    /* Especificidad 011 */
+    footer button {
+        /* Redefinimos el padding para que no adapte el padding del footer general al tamaño de la pantalla */
+        padding: 0.3em 0.6em;
+        /* Redefinimos el tamaño de la fuente para que no se aplique el margen del footer general */
+        font-size: 0.8em;
+    }
+}
+
+/* Media query para tablets */
+@media (min-width: 481px) and (max-width: 1200px) {
+    header {
+        flex-direction: column; /* Colocamos los elementos en una columna */
+        padding: 1em; /* Reducir padding en el header */
+    }
+
+    nav {
+        display: flex; /* Mantener el menú en fila */
+        flex-direction: row; /* Asegurar que el menú esté en fila */
+        justify-content: center;
+        gap: 0.5em; /* Reducir el espacio entre los elementos */
+        width: 100%; /* Hacer que el nav ocupe todo el ancho disponible */
+    }
+
+    /* Ajustamos los enlaces para que sean más pequeños */
+    nav a {
+        margin: 0.25em;
+        padding: 0.5em 1rem; /* Reducir el tamaño del padding */
+        font-size: 1em; /* Reducir el tamaño de la fuente */
+        text-align: center;
+    }
+
+    /* Especificidad 002 */
+    main > nav {
+        max-width: 80%; 
+        margin: 1.5rem auto; 
+    }
+
+    /* Especificidad 002 */
+    body > p {
+        /* Redeclarar display: none; para que las migas de navegación no se muestren */
+        display: none; /* Ocultar las migas de navegación */
+    }
+
     /* Especificidad 001 */
     footer {
         /* Redefinimos la dirección del flexbox para que se adapte al tamaño de la pantalla en forma de columna */

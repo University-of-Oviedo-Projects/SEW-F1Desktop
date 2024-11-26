@@ -1,4 +1,4 @@
-/* Estilo para el contenedor del juego */
+/* Especificidad 001 */
 main {
     width: 80%;
     height: auto;
@@ -10,7 +10,7 @@ main {
     justify-content: center;
 }
 
-/* Estilo para el tablero de cartas */
+/* Especificidad 002 */
 main > section {
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* Por defecto 4 columnas */
@@ -20,7 +20,7 @@ main > section {
     width: 100%;
 }
 
-/* Estilo para el título del juego */
+/* Especificidad 003 */
 main > section > h2 {
     grid-column: -1 / 1;
     text-align: center;
@@ -28,6 +28,7 @@ main > section > h2 {
     text-decoration: underline;
 }
 
+/* Especificidad 003 */
 main > section > button {
     grid-column: -1 / 1;
     margin: 1em auto;
@@ -40,11 +41,10 @@ main > section > button {
     font-size: 1.2em;
 }
 
-/* Estilo para cada carta */
+/* Especificidad 003 */
 main > section article {
     width: 100%;
     height: 25vh;
-    aspect-ratio: 3 / 5;
     border: 0.25em solid #000;
     background-color: #FFFFFF;
     box-sizing: border-box;
@@ -53,40 +53,44 @@ main > section article {
     transition: transform 0.5s;
     cursor: pointer;
     display: grid; /* Usar grid para centrar contenido */
-    place-items: center; /* Centra todo el contenido dentro de la carta */
+    justify-items: center;  /* Alinea los elementos horizontalmente */
+    align-items: center;    /* Alinea los elementos verticalmente */
 }
 
-/* Estilo para el encabezado de cada carta */
+/* Especificidad 004 */
 main > section article header {
     background-color: transparent;
 }
 
-/* Estilo para el texto del encabezado */
+/* Especificidad 005 */
 main > section article header h2 {
     color: #000;
     text-align: center;
     text-decoration: none;
 }
 
-/* Estilo para las imágenes dentro de las cartas */
+/* Especificidad 004 */
 main > section article img {
     position: absolute;
     transform: rotateY(180deg); /* Ajuste de efecto */
 }
 
-/* Estado revelado de las cartas */
+/* Especificidad 013 */
 main > section article[data-state="card-revealed"] {
     transform: rotateY(180deg);
 }
 
+/* Especificidad 014 */
 main > section article[data-state="card-hidden"] img {
     display: none;
 }
 
+/* Especificidad 014 */
 main > section article[data-state="card-revealed"] img {
     display: block;
 }
 
+/* Especificidad 015 */
 main > section article[data-state="card-revealed"] header h2 {
     display: none;
 }
@@ -119,54 +123,60 @@ main > button {
     font-size: 1.2em;
 }
 
-/* Media queries para adaptabilidad */
-
 /* Pantallas pequeñas (teléfonos) */
 @media (max-width: 600px) {
-
+    /* Especificidad 001 */
     main {
         flex-direction: column;
         width: 100%;
         margin: 0 auto;
     }
 
+    /* Especificidad 002 */
     main > section {
-        grid-template-columns: repeat(3, 1fr); /* Reducir a 2 columnas */
+        grid-template-columns: repeat(3, 1fr);
         gap: 0.5rem;
         width: 90%;
     }
 
+    /* Especificidad 003 */
     main > section > h2 {
-        font-size: 1.2rem; /* Reducir tamaño del título */
+        font-size: 1.2rem;
         margin: 0.5em 0;
     }
 
+    /* Especificidad 003 */
     main > section article {
         width: 100%;
-        height: 10vh; /* Reducir la altura de las cartas */
+        height: 10vh; 
     }
 
+    /* Especificidad 004 */
     main > section > article header {
         position: absolute;
     }
 
+    /* Especificidad 005 */
     main > section > article header h2 {
-        text-align: center; /* Centrar texto */
-        font-size: 0.8rem; /* Reducir tamaño del texto */
+        text-align: center; 
+        font-size: 0.8rem; 
     }
 
+    /* Especificidad 004 */
     main > section article img {
         position: relative;
     }
 
+    /* Especificidad 002 */
     main > button {
-        margin-left: 0; /* Centrar botón */
+        margin-left: 0;
         margin-bottom: 1em;
     }
 
+    /* Especificidad 001 */
     dialog {
         padding: 0.5em;
-        font-size: 0.9em; /* Ajustar tamaño de texto del diálogo */
+        font-size: 0.9em; 
     }
     
 }
@@ -174,50 +184,57 @@ main > button {
 /* Pantallas medianas (tabletas) */
 @media (min-width: 601px) and (max-width: 1024px) {
 
+    /* Especificidad 001 */
     main {
         flex-direction: column;
         width: 100%;
         margin: 0 auto;
     }
 
+    /* Especificidad 002 */
     main > section {
-        grid-template-columns: repeat(4, 1fr); /* Reducir a 2 columnas */
+        grid-template-columns: repeat(4, 1fr); 
         gap: 0.5rem;
         width: 80%;
     }
 
+    /* Especificidad 003 */
     main > section > h2 {
-        font-size: 1.2rem; /* Reducir tamaño del título */
+        font-size: 1.2rem; 
         margin: 0.5em 0;
     }
 
+    /* Especificidad 003 */
     main > section article {
         width: 100%;
-        height: 10vh; /* Reducir la altura de las cartas */
+        height: 10vh; 
     }
 
+    /* Especificidad 004 */
     main > section > article header {
         position: absolute;
     }
 
+    /* Especificidad 005 */
     main > section > article header h2 {
-        text-align: center; /* Centrar texto */
-        font-size: 0.8rem; /* Reducir tamaño del texto */
+        text-align: center; 
+        font-size: 0.8rem;
     }
 
+    /* Especificidad 004 */
     main > section article img {
         position: relative;
     }
 
+    /* Especificidad 002 */
     main > button {
-        margin-left: 0; /* Centrar botón */
+        margin-left: 0;
         margin-bottom: 1em;
     }
 
+    /* Especificidad 001 */
     dialog {
         padding: 0.5em;
-        font-size: 0.9em; /* Ajustar tamaño de texto del diálogo */
+        font-size: 0.9em; 
     }
-    
 }
-
