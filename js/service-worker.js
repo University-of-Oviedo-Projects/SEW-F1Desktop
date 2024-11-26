@@ -2,8 +2,8 @@ const CACHE_NAME = 'quiz-cache-v1';
 const urlsToCache = [
     '/',
     '/index.html',
-    '/styles.css',
-    '/api.js'
+    '/estilo/estilo.css',
+    '/js/api.js'
 ];
 
 self.addEventListener('install', event => {

@@ -154,7 +154,7 @@ class Api {
 
         // Registrar el Service Worker
         if('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('service-worker.js')
+            navigator.serviceWorker.register('/js/service-worker.js')
                 .then(reg => console.log('Registro de Service Worker exitoso', reg))
                 .catch(err => console.warn('Error al registrar el Service Worker', err));
         }
