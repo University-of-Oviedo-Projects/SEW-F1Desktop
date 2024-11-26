@@ -175,7 +175,7 @@ class Api {
             .addEventListener("click", () => this.showModeSelectionScreen());
 
         // Inicializar reconocimiento de voz
-        this.initSpeechRecognition();
+        this.supportsSpeechRecognition = this.initSpeechRecognition();
 
         // Cancelar la locución al salir de la página
         window.addEventListener("beforeunload", () => window.speechSynthesis.cancel());
@@ -236,7 +236,7 @@ class Api {
             normalModeButton.addEventListener('click', () => this.startGame('normal'));
             normalModeButton.dataset.eventAdded = true; // Marcar como registrado
         }
-        if (!voiceModeButton.dataset.eventAdded) {
+        if (!voiceModeButton.dataset.eventAdded && this.supportsSpeechRecognition) {
             voiceModeButton.addEventListener('click', () => this.startGame('voice'));
             voiceModeButton.dataset.eventAdded = true; // Marcar como registrado
         }
@@ -318,9 +318,10 @@ class Api {
             const messageContainer = document.querySelector('body > main > section:nth-of-type(2)'); 
             const paragraph = document.createElement('p');
             paragraph.textContent = `El reconocimiento de voz no es compatible con este navegador`;
+            console.error('El reconocimiento de voz no es compatible con este navegador');
             messageContainer.appendChild(paragraph);
-            setTimeout(() => { paragraph.remove(); }, 4000);     
-            return;
+            modeSelectionContainer.querySelector('button:nth-of-type(2)').disabled = true;
+            return false;
         }
 
         this.recognition = new SpeechRecognition();
@@ -329,28 +330,30 @@ class Api {
         this.recognition.interimResults = false;
         this.recognition.maxAlternatives = 1;
 
-        this.recognition.onresult = (event) => {
-            const speechResult = event.results[0][0].transcript;
-            const messageContainer = document.querySelector('body > main > section:nth-of-type(3)'); 
-            const paragraph = document.createElement('p');
-            paragraph.textContent = `Has dicho: ${speechResult}`;
-            messageContainer.appendChild(paragraph);
-            setTimeout(() => { paragraph.remove(); }, 4000);
-            this.checkAnswer(speechResult);
-
-            // Si el usuario responde antes de los 10 segundos, limpiar el temporizador
-            clearTimeout(this.voiceTimeout);
-
-            // Detener la barra de progreso cuando se detecte la respuesta por voz
-            if (this.progressInterval) {
-                clearInterval(this.progressInterval);  // Detener el intervalo
-            }
-        };
-
-        this.recognition.onerror = (event) => {
-            console.error('Speech recognition error detected: ' + event.error);
-        };
+        this.recognition.onresult = this.onSpeechResult.bind(this);
+        this.recognition.onerror = this.onSpeechError.bind(this);
+        return true;
     }
+
+    onSpeechResult(event) {
+        const speechResult = event.results[0][0].transcript;
+        const messageContainer = document.querySelector('body > main > section:nth-of-type(3)');
+        const paragraph = document.createElement('p');
+        paragraph.textContent = `Has dicho: ${speechResult}`;
+        messageContainer.appendChild(paragraph);
+        setTimeout(() => { paragraph.remove(); }, 4000);
+        this.checkAnswer(speechResult);
+    
+        clearTimeout(this.voiceTimeout);
+        if (this.progressInterval) {
+            clearInterval(this.progressInterval);
+        }
+    }
+    
+    onSpeechError(event) {
+        console.error('Speech recognition error detected: ' + event.error);
+    }
+    
 
     // Empenzar el reconocimiento de voz
     startSpeechRecognition() {
