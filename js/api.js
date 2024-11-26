@@ -1,3 +1,24 @@
+/**
+ * Clase Api
+ * 
+ * Este archivo JavaScript implementa la lógica principal de un juego de preguntas y respuestas.
+ * Incluye funcionalidades como:
+ * 
+ * 1. Gestión de las preguntas y respuestas del juego.
+ * 
+ * 2. Mecanismos para registrar y mostrar la puntuación del jugador.
+ * 
+ * 3. Soporte para diferentes modos de juego (normal y control por voz).
+ * 
+ * 4. Uso de APIs de HTML5 para mejorar la experiencia del usuario:
+ *    - **Audio**: Para reproducir sonidos de respuesta correcta e incorrecta.
+ *    - **SpeechSynthesis**: Para leer preguntas y opciones en voz alta en el modo por voz.
+ *    - **SpeechRecognition**: Para capturar respuestas del usuario mediante reconocimiento de voz.
+ *    - **Web Storage (localStorage)**: Para guardar y recuperar la puntuación más alta del jugador.
+ *    - **Canvas**: Para dibujar una barra de progreso que muestre el tiempo restante para responder.
+ *      
+ */
+
 class Api {
     constructor() {
         this.questions = [
@@ -139,8 +160,9 @@ class Api {
         // Obtener la puntuación más alta del almacenamiento local
         this.highScore = localStorage.getItem('highScore') || 0;
 
-        // Variable para almacenar el modo seleccionado
         this.gameMode = null; 
+        this.timeLimit = 15; 
+        this.progressInterval = null;
 
         // Crear las secciones dinámicamente
         this.createSections();
@@ -151,13 +173,6 @@ class Api {
         // Añadir evento al botón de inicio para mostrar la pantalla de selección de modo
         document.querySelector("body > main > section button")
             .addEventListener("click", () => this.showModeSelectionScreen());
-
-        // Registrar el Service Worker
-        if('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/js/service-worker.js')
-                .then(reg => console.log('Registro de Service Worker exitoso', reg))
-                .catch(err => console.warn('Error al registrar el Service Worker', err));
-        }
 
         // Inicializar reconocimiento de voz
         this.initSpeechRecognition();
@@ -268,9 +283,19 @@ class Api {
             optionsContainer.appendChild(button);
         });
 
+        // Crear el canvas para la barra de progreso
+        this.progressBarCanvas = document.createElement('canvas');
+        const optionsContainerToCanvas = document.querySelector('body > main > section:nth-of-type(4)');
+        this.progressBarCanvas.width = 400;  // Establecer el ancho del canvas
+        this.progressBarCanvas.height = 20; // Establecer la altura del canvas
+        this.progressBarContext = this.progressBarCanvas.getContext('2d');
+        optionsContainerToCanvas.appendChild(this.progressBarCanvas);
+
         // Leer pregunta en voz alta si el modo es de reconocimiento de voz
         if (this.gameMode === 'voice') {
             this.speakText(question.question + '. Las opciones son: ' + question.options.join(', '));
+        } else {
+            this.startProgressBar();
         }
     }
 
@@ -280,12 +305,6 @@ class Api {
 
         speech.onend = () => {
             this.startSpeechRecognition();  // Comenzar reconocimiento de voz solo después de la locución
-
-            // Iniciar un temporizador de 10 segundos para esperar la respuesta del usuario
-            this.voiceTimeout = setTimeout(() => {
-                // Si no se detecta respuesta en 10 segundos, se envía una respuesta vacía
-                this.checkAnswer("");
-            }, 10000); // 10 segundos
         };
 
         window.speechSynthesis.speak(speech);
@@ -312,7 +331,7 @@ class Api {
 
         this.recognition.onresult = (event) => {
             const speechResult = event.results[0][0].transcript;
-            const messageContainer = document.querySelector('body > main'); 
+            const messageContainer = document.querySelector('body > main > section:nth-of-type(3)'); 
             const paragraph = document.createElement('p');
             paragraph.textContent = `Has dicho: ${speechResult}`;
             messageContainer.appendChild(paragraph);
@@ -321,6 +340,11 @@ class Api {
 
             // Si el usuario responde antes de los 10 segundos, limpiar el temporizador
             clearTimeout(this.voiceTimeout);
+
+            // Detener la barra de progreso cuando se detecte la respuesta por voz
+            if (this.progressInterval) {
+                clearInterval(this.progressInterval);  // Detener el intervalo
+            }
         };
 
         this.recognition.onerror = (event) => {
@@ -331,6 +355,7 @@ class Api {
     // Empenzar el reconocimiento de voz
     startSpeechRecognition() {
         this.recognition.start();
+        this.startProgressBar();
     }
 
     // Comprobar la respuesta seleccionada
@@ -340,10 +365,19 @@ class Api {
 
         buttons.forEach(button => button.disabled = true);
 
+        if (this.progressInterval) {
+            clearInterval(this.progressInterval);  // Detener el intervalo
+        }
+
         if (selectedOption === question.answer) {
             this.score++;
             this.playSound('correct-answer.wav');
         } else {
+            if (navigator.vibrate) {
+                navigator.vibrate(500); 
+            } else {
+                console.log('La vibración no es compatible con este dispositivo');
+            }
             this.playSound('incorrect-answer.mp3');
         }
 
@@ -379,17 +413,18 @@ class Api {
             this.highScore = this.score;
         }
 
-        // Mostrar puntuación final
-        scoreDialog.innerHTML = `
-            <h2>Juego Finalizado</h2>
-            <p>Tu puntuación: <span class="final-score">${this.score}</span></p>
-            <p>Puntuación más alta: <span class="high-score">${this.highScore}</span></p>
-        `;
+        const h2 = document.createElement('h2');
+        h2.textContent = "Juego Finalizado";
+        const yourFinalPuntuacion = document.createElement('p');
+        yourFinalPuntuacion.textContent = `Tu puntuación: ${this.score}`;
+        const greatestPuntuacion =  document.createElement('p');       
+        greatestPuntuacion.textContent = `Puntuación más alta: ${this.highScore}`;
 
-        // Añadir la clase 'show' para mostrar el diálogo
+        scoreDialog.appendChild(h2);
+        scoreDialog.appendChild(yourFinalPuntuacion);
+        scoreDialog.appendChild(greatestPuntuacion);
+
         scoreDialog.classList.add('show');
-
-        // Mostrar el cuadro de diálogo
         scoreDialog.showModal();
 
         // Cerrar automáticamente el diálogo después de 4 segundos
@@ -418,4 +453,44 @@ class Api {
     getHighScore() {
         return localStorage.getItem("highScore") || 0;
     }
-}
+
+    startProgressBar() {
+        if (!this.progressBarCanvas) {
+            console.error('El canvas de la barra de progreso no está definido');
+            return;
+        }
+
+        const progressBarWidth = this.progressBarCanvas.width;
+        const context = this.progressBarContext;
+        const duration = 5000; // Duración de la barra de progreso en milisegundos (4 segundos)
+        const step = progressBarWidth / (duration / 50); // Calculamos cuántos píxeles debe retroceder cada 50 ms
+    
+        // Limpiar cualquier trazo anterior
+        context.clearRect(0, 0, progressBarWidth, this.progressBarCanvas.height);
+        
+        // Rellenar el fondo en gris (la barra completa al principio)
+        context.fillStyle = 'gray';
+        context.fillRect(0, 0, progressBarWidth, this.progressBarCanvas.height);
+    
+        let progress = progressBarWidth; // Iniciamos la barra llena
+    
+        // Función que actualiza la barra de progreso
+        const updateProgressBar = () => {
+            progress = Math.max(progress - step, 0);  // Retroceder la barra
+    
+            // Limpiar el área del canvas y dibujar la barra de progreso
+            context.clearRect(0, 0, progressBarWidth, this.progressBarCanvas.height);
+            context.fillStyle = 'green';
+            context.fillRect(0, 0, progress, this.progressBarCanvas.height);
+    
+            // Si ya se ha llegado al final, detener el intervalo
+            if (progress === 0) {
+                clearInterval(this.progressInterval);
+                this.checkAnswer(""); // Enviar una respuesta vacía
+            } 
+        }
+    
+        // Iniciar el intervalo para actualizar la barra de progreso
+        this.progressInterval = setInterval(updateProgressBar, 50); // Actualizar cada 50 ms
+    }
+}    
