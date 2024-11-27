@@ -72,6 +72,10 @@ class Noticias {
         const entradilla = document.querySelector('input[placeholder="Contenido"]').value;
         const autor = document.querySelector('input[placeholder="Autor"]').value;
 
+        if(!titular || !entradilla || !autor) {
+            return;
+        }
+
         const noticiaHtml = document.createElement('article');
         const header = document.createElement('header');
         const h2 = document.createElement('h2');
