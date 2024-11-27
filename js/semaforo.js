@@ -117,5 +117,67 @@ class Semaforo {
         if (this.startButton) {
             this.startButton.disabled = false;
         }
+
+        this.createRecordForm(reactionTimeSeconds);
     }
+
+    createRecordForm(reactionTimeSeconds) {
+        const formHtml = document.createElement("form");
+        formHtml.method = "post";
+        formHtml.action = "semaforo.php";
+
+        const labelNombre = document.createElement("label");
+        labelNombre.textContent = "Nombre:";
+        
+        const inputNombre = document.createElement("input");
+        inputNombre.type = "text";
+        inputNombre.id = "nombre";
+        inputNombre.name = "nombre";
+        inputNombre.required = true;
+
+        const labelApellidos = document.createElement("label");
+        labelApellidos.textContent = "Apellidos:";
+
+        const inputApellidos = document.createElement("input");
+        inputApellidos.type = "text";
+        inputApellidos.id = "apellidos";
+        inputApellidos.name = "apellidos";
+        inputApellidos.required = true;
+
+        const labelNivel = document.createElement("label");
+        labelNivel.textContent = "Nivel:";
+
+        const inputNivel = document.createElement("input");
+        inputNivel.type = "text";
+        inputNivel.id = "nivel";
+        inputNivel.name = "nivel";
+        inputNivel.value = this.difficulty;
+        inputNivel.readOnly = true;
+
+        const labelTiempo = document.createElement("label");
+        labelTiempo.textContent = "Tiempo de reacción (segundos):";
+
+        const inputTiempo = document.createElement("input");
+        inputTiempo.type = "text";
+        inputTiempo.id = "tiempo";
+        inputTiempo.name = "tiempo";
+        inputTiempo.value = reactionTimeSeconds;
+        inputTiempo.readOnly = true;
+
+        const button = document.createElement("button");
+        button.type = "submit";
+        button.textContent = "Guardar Récord";
+
+        formHtml.appendChild(labelNombre);
+        formHtml.appendChild(inputNombre);
+        formHtml.appendChild(labelApellidos);
+        formHtml.appendChild(inputApellidos);
+        formHtml.appendChild(labelNivel);
+        formHtml.appendChild(inputNivel);
+        formHtml.appendChild(labelTiempo);
+        formHtml.appendChild(inputTiempo);
+        formHtml.appendChild(button);
+
+        $('main').append(formHtml);
+    }    
 }

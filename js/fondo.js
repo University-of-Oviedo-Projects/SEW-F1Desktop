@@ -4,42 +4,26 @@ class Fondo {
         this.pais = pais;
         this.capital = capital;
         this.circuito = circuito;
-        this.obtenerImagenCircuito();
+        this.getFondo();
     }
 
-    obtenerImagenCircuito() {
-        const apiKey = 'aef049db4852b23d7b6f7303dfc8e7f2';  // Tu API Key
-        const url = 'https://api.flickr.com/services/rest/';
-        
-        const self = this;  // Referencia a 'this' para usar dentro de la función de éxito
-
-        $.ajax({
-            url: url,
-            dataType: 'json',
-            data: {
-                method: 'flickr.photos.search',
-                api_key: apiKey,
-                text: self.circuito,  // Buscar por el nombre del circuito
-                format: 'json',
-                nojsoncallback: 1,
-                per_page: 1,  // Obtener una sola imagen
-                page: 1
-            },
-            success: function(data) {
-                if (data.photos && data.photos.photo.length > 0) {
-                    const photo = data.photos.photo[0];
-                    const photoUrl = `https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`;
-                    
-                    // Establecer la imagen como fondo en el body
-                    $('body').css('background-image', `url(${photoUrl})`);
-                    $('body').css('background-size', 'cover');  // Hacer que la imagen cubra toda la pantalla
-                } else {
-                    console.log('No se encontraron imágenes para el circuito:', self.circuito);
-                }
-            },
-            error: function(error) {
-                console.error('Error en la consulta a la API de Flickr:', error);
-            }
+    // Método para realizar la consulta AJAX
+    getFondo() {
+        var flickrAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+        $.getJSON(flickrAPI, 
+        {
+            tags: this.circuito + ", F1, Formula 1, ",
+            tagmode: "all",
+            format: "json"
+        }).done(function(data) {
+            $("body").css({
+                "background-image": `url(${data.items[0].media.m.replace('_m', '_b')})`,
+                "height": "100vh",
+                "width": "100vw",
+                "background-size": "cover",
+                "background-repeat": "no-repeat",
+                "background-position": "center"
+            });
         });
     }
 }
