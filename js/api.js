@@ -185,6 +185,9 @@ class Api {
     createSections() {
         // Seleccionar el elemento main del DOM
         const main = document.querySelector('main');
+        main.setAttribute('data-name', 'main-api');
+        
+        document.querySelector("main section:nth-of-type(2)").setAttribute("data-state", "hidden");
 
         // Crear contenedor de puntuación
         const scoreContainer = document.createElement('section');

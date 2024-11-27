@@ -188,7 +188,7 @@ video {
 
 /* Especificidad 001 */
 img {
-    width: 40%;
+    width: 100%;
     height: auto;
 }
 
@@ -303,8 +303,8 @@ dialog[open] button[id="close-help"]:hover {
 
 /* ###################### Estilo del API.HTML ###################### */
 /* Especificidad 023 && 023, 046 */
-body[data-page="api"] main > section:nth-of-type(1),
-body[data-page="api"] main > section:nth-of-type(2) {
+main[data-name='main-api'] > section:nth-of-type(1),
+main[data-name='main-api']  > section:nth-of-type(2) {
     display: grid;
     grid-template-rows: auto auto; 
     justify-items: center; 
@@ -315,8 +315,8 @@ body[data-page="api"] main > section:nth-of-type(2) {
 }
 
 /* Especificidad 024 && 024, 048 */
-body[data-page="api"] main > section:nth-of-type(1) > h2,
-body[data-page="api"] main > section:nth-of-type(2) > h2 {
+main[data-name='main-api']  > section:nth-of-type(1) > h2,
+main[data-name='main-api']  > section:nth-of-type(2) > h2 {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 1rem;
@@ -324,8 +324,8 @@ body[data-page="api"] main > section:nth-of-type(2) > h2 {
 }
 
 /* Especificidad 024 && 024, 048 */
-body[data-page="api"] main > section:nth-of-type(1) > button,
-body[data-page="api"] main > section:nth-of-type(2) button {
+main[data-name='main-api']  > section:nth-of-type(1) > button,
+main[data-name='main-api']  > section:nth-of-type(2) button {
     padding: 1rem 2rem;
     font-size: 1.5rem; 
     background-color: #1F3B4D;
@@ -333,19 +333,18 @@ body[data-page="api"] main > section:nth-of-type(2) button {
     border: none;
     border-radius: 1em;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
     grid-row: 2; 
 }
 
 /* Especificidad 023 */
-body[data-page="api"] main > section:nth-of-type(3) {
+main[data-name='main-api']  > section:nth-of-type(3) {
     text-align: center;
     margin-top: 2rem;
     font-size: 1.5rem;
 }
 
 /* Especificidad 023 */
-body[data-page="api"] main > section:nth-of-type(4) {
+main[data-name='main-api']  > section:nth-of-type(4) {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -357,7 +356,7 @@ body[data-page="api"] main > section:nth-of-type(4) {
 }
 
 /* Especificidad 023 */
-body[data-page="api"] main > section:nth-of-type(5) {
+main[data-name='main-api']  > section:nth-of-type(5) {
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -369,7 +368,7 @@ body[data-page="api"] main > section:nth-of-type(5) {
 }
 
 /* Especificidad 024 */
-body[data-page="api"] main > section:nth-of-type(5) > button {
+main[data-name='main-api']  > section:nth-of-type(5) > button {
     width: 80%;
     padding: 1rem;
     margin-bottom: 1rem;
@@ -382,48 +381,43 @@ body[data-page="api"] main > section:nth-of-type(5) > button {
     transition: background-color 0.3s ease;
 }
 
-/* Espcificidad 013 */
-body[data-page="api"] main > section {
-    display: none; /* Ocultar todos los elementos por defecto */
-}
-
 /* Espcificidad 023 */
-body[data-page="api"] main > section[data-state="visible"] {
+main[data-name='main-api']  > section[data-state="visible"] {
     display: block; /* Mostrar elementos específicos */
 }
 
 /* Espcificidad 023 */
-body[data-page="api"] main > section[data-state="hidden"] {
+main[data-name='main-api']  > section[data-state="hidden"] {
     display: none; /* Ocultar elementos específicos */ 
 }
 
 /* Especificidad 034 */
-body[data-page="api"] main > section:nth-of-type(5) > button:hover {
+main[data-name='main-api']  > section:nth-of-type(5) > button:hover {
     background-color: #163240;
-    /* color heredado de body[data-page="api"] main > section:nth-of-type(4) > button */
+    /* color heredado de main > section:nth-of-type(4) > button */
 }
 
 /* Especificidad 034 */
-body[data-page="api"] main > section:nth-of-type(5) button[data-state="correct"] {
+main[data-name='main-api']  > section:nth-of-type(5) button[data-state="correct"] {
     background-color: #4CAF50;
-    /* color heredado de body[data-page="api"] main > section:nth-of-type(4) > button */
+    /* color heredado de main > section:nth-of-type(4) > button */
 }
 
 /* Especificidad 034 */
-body[data-page="api"] main > section:nth-of-type(5) button[data-state="incorrect"] {
+main[data-name='main-api']  > section:nth-of-type(5) button[data-state="incorrect"] {
     background-color: #F44336; 
-    /* color heredado de body[data-page="api"] main > section:nth-of-type(4) > button */
+    /* color heredado de main > section:nth-of-type(4) > button */
 }
 
 /* Especificidad 023 */
-body[data-page="api"] main > section:nth-of-type(5) {
+main[data-name='main-api']  > section:nth-of-type(5) {
     text-align: center;
     margin-top: 2rem;
     font-size: 1.5rem;
 }
 
 /* Especificidad 023 */
-body[data-page="api"] main > dialog:nth-of-type(1) {
+main[data-name='main-api']  > dialog:nth-of-type(1) {
     display: none;
     flex-direction: row;
     justify-content: center;
@@ -440,25 +434,25 @@ body[data-page="api"] main > dialog:nth-of-type(1) {
 }
 
 /* Especificidad 033 */
-body[data-page="api"] main > dialog:nth-of-type(1).show {
+main[data-name='main-api']  > dialog:nth-of-type(1).show {
     display: flex; 
     flex-direction: column; /* Alinea los elementos en columna */
 }
 
 /* Especificidad 024 */
-body[data-page="api"] main > dialog:nth-of-type(1) > h2 {
+main[data-name='main-api'] > dialog:nth-of-type(1) > h2 {
     margin-bottom: 1em;
 }
 
 /* Especificidad 024 */
-body[data-page="api"] main > dialog:nth-of-type(1) > p {
+main[data-name='main-api']  > dialog:nth-of-type(1) > p {
     margin: 0.5em 0;
 }
 
 /* Media Queries para adaptabilidad del Api.html */
 @media (max-width: 768px) {
     /* Especificidad 022 */
-    body[data-page="api"] >main > section:nth-of-type(2) button {
+    main[data-name='main-api']  > section:nth-of-type(2) button {
         /* Redefinir el tamaño de la fuente es necesario para que el texto no se desborde del botón */
         font-size: 1.2em;
         /* Redefinir el margin es necesario para que los botones esten bien separados */
@@ -467,7 +461,7 @@ body[data-page="api"] main > dialog:nth-of-type(1) > p {
     }
 
     /* Especificidad 024 */
-    body[data-page="api"] main > section:nth-of-type(4) > button {
+    main[data-name='main-api']  > section:nth-of-type(4) > button {
         /* Redefinir el tamaño de la fuente es necesario para que el texto no se desborde del botón */
         font-size: 1em;
         /* Redefinir el padding es necesario para que el texto no se desborde del botón */
@@ -484,15 +478,13 @@ form {
     border: 0.5em solid #ddd;
     border-radius: 0.5em;
     padding: 2em;
-    margin-bottom: 3em;
-    margin-left: 1em;
-    margin-right: 1em;
-    box-sizing: border-box;  
+    box-sizing: border-box; 
+    width: 100%;
+    margin: 1em auto; 
 }
 
 /* Especificidad: 002 */
 form label {
-    display: block;
     margin-top: 1em;
     font-weight: bold;
 }
@@ -526,7 +518,7 @@ form button {
     border-radius: 0.5em;
     cursor: pointer;
     transition: background-color 0.2s;
-    width: 100%;  /* Hace que el botón también ocupe el ancho completo */
+    width: 100%;  
 }
 
 /* Especificidad: 012 */
@@ -536,8 +528,8 @@ form button:hover {
 
 /* Especificidad: 003 */
 form input[type="text"]:focus, form textarea:focus, form input[type="file"]:focus {
-    outline: none; /* Para quitar el borde cuando se hace foco en los inputs */
-    border-color: #1F3B4D; /* Agrega un borde de color para indicar el foco */
+    outline: none; 
+    border-color: #1F3B4D; 
 }
 
 
@@ -577,7 +569,7 @@ main > section:nth-of-type(3) > svg  {
 
 /* ###################### Estilo para XML ###################### */
 /* Especificidad 022 */
-main section:nth-of-type(1) {
+main section:nth-of-type(1)[data-value="xml"] {
     align-items: center;
     border: 0.25em solid #ddd;
     border-radius: 0.5em;
@@ -589,7 +581,7 @@ main section:nth-of-type(1) {
 }
 
 /* Especificidad 023 */
-main section:nth-of-type(1) h3 {
+main section:nth-of-type(1)[data-value="xml"] h3 {
     font-size: 1.5em;
     color: #1F3B4D;
     margin-bottom: 1em;
@@ -599,7 +591,7 @@ main section:nth-of-type(1) h3 {
 }
 
 /* Especificidad 023 */
-main section:nth-of-type(1) p {
+main section:nth-of-type(1)[data-value="xml"] p {
     font-size: 1.2rem;
     color: #333;
     line-height: 1.5;
@@ -608,53 +600,53 @@ main section:nth-of-type(1) p {
 }
 
 /* Especificidad 023 && 023, 046 */
-main section:nth-of-type(1) ul, 
-main section:nth-of-type(1) ol {
+main section:nth-of-type(1)[data-value="xml"] ul, 
+main section:nth-of-type(1)[data-value="xml"] ol {
     padding-left: 1.5rem;
     margin-bottom: 1rem;
 }
 
 /* Especificidad 024 && 024, 048 */
-main section:nth-of-type(1) ul li, 
-main section:nth-of-type(1) ol li {
+main section:nth-of-type(1)[data-value="xml"] ul li, 
+main section:nth-of-type(1)[data-value="xml"] ol li {
     font-size: 1.2rem;
     color: #555;
     margin-bottom: 0.5rem;
 }
 
 /* Especificidad 023 */
-main section:nth-of-type(1) table {
+main section:nth-of-type(1)[data-value="xml"] table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 1.5rem;
 }
 
 /* Especificidad 024 && 024, 048 */
-main section:nth-of-type(1) table th, 
-main section:nth-of-type(1) table td {
+main section:nth-of-type(1)[data-value="xml"] table th, 
+main section:nth-of-type(1)[data-value="xml"] table td {
     padding: 0.5rem;
     border: 1px solid #ddd;
     text-align: left;
 }
 
 /* Especificidad 024 */
-main section:nth-of-type(1) table th {
+main section:nth-of-type(1)[data-value="xml"] table th {
     background-color: #f4f4f4;
     font-weight: bold;
 }
 
 /* Especificidad 034 */
-main section:nth-of-type(1) table tr:nth-child(even) {
+main section:nth-of-type(1)[data-value="xml"] table tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
 /* Especificidad 034 */
-main section:nth-of-type(1) table tr:hover {
+main section:nth-of-type(1)[data-value="xml"] table tr:hover {
     background-color: #f1f1f1;
 }
 
 /* Especificidad 023 */
-main section:nth-of-type(1) img {
+main section:nth-of-type(1)[data-value="xml"] img {
     max-width: 100%;
     height: auto;
     margin-bottom: 1rem;
@@ -664,7 +656,7 @@ main section:nth-of-type(1) img {
 }
 
 /* Especificidad 013 */
-main section:nth-of-type(1) video {
+main section:nth-of-type(1)[data-value="xml"] video {
     max-width: 100%;
     height: auto;
     margin-bottom: 1rem;
@@ -674,7 +666,7 @@ main section:nth-of-type(1) video {
 }
 
 /* Especificidad 023 */
-main section:nth-of-type(1) a {
+main section:nth-of-type(1)[data-value="xml"] a {
     display: block;
     margin-bottom: 1rem;
     color: #1F3B4D;
@@ -683,12 +675,12 @@ main section:nth-of-type(1) a {
 }
 
 /* Especificidad 033 */
-main section:nth-of-type(1) a:hover {
+main section:nth-of-type(1)[data-value="xml"] a:hover {
     text-decoration: underline;
 }
 
 /* Especificidad 023 */
-main section:nth-of-type(1) blockquote {
+main section:nth-of-type(1)[data-value="xml"] blockquote {
     margin: 1rem 0;
     padding: 1rem;
     background-color: #f9f9f9;
@@ -698,7 +690,7 @@ main section:nth-of-type(1) blockquote {
 }
 
 /* Especificidad 023 */
-main section:nth-of-type(1) header {
+main section:nth-of-type(1)[data-value="xml"] header {
     font-size: 1.3rem;
     font-weight: bold;
     color: #1F3B4D;
@@ -709,7 +701,7 @@ main section:nth-of-type(1) header {
 }
 
 /* Especificidad 023 */
-main section:nth-of-type(1) footer {
+main section:nth-of-type(1)[data-value="xml"] footer {
     font-size: 1rem;
     color: #777;
     margin-top: 1rem;
