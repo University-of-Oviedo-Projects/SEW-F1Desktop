@@ -14,13 +14,9 @@ class Semaforo {
     createStructure() {
         const main = document.querySelector("main");
 
-        const title = document.createElement("h2");
-        title.textContent = "Juego de Tiempo de Reacción - Semáforo";
-        main.appendChild(title);
-
         const semaforoContainer = document.createElement("section");
         const h2 = document.createElement('h2');
-        h2.textContent = "Semáforo"; 
+        h2.textContent = "¡Pon a prueba tus reflejos!"; 
         semaforoContainer.appendChild(h2);
         main.appendChild(semaforoContainer);
 
@@ -33,26 +29,27 @@ class Semaforo {
 
         // Botón de inicio
         this.startButton = document.createElement("button");
-        this.startButton.textContent = "Encendido";
+        this.startButton.textContent = "Arranque";
         this.startButton.onclick = () => this.initSequence();
         main.appendChild(this.startButton);
 
         // Botón para registrar tiempo de reacción
         this.reactionButton = document.createElement("button");
-        this.reactionButton.textContent = "Registrar Tiempo de Reacción";
+        this.reactionButton.textContent = "Reaccionar";
         this.reactionButton.onclick = () => this.stopReaction(); 
         this.reactionButton.disabled = true;
         main.appendChild(this.reactionButton);
 
         // Mostrar el tiempo de reacción
         this.reactionTimeDisplay = document.createElement("p");
-        this.reactionTimeDisplay.id = "reactionTime";
         main.appendChild(this.reactionTimeDisplay);
     }
 
     initSequence() {
         const main = document.querySelector("main");
         main.classList.add("load");  
+
+        this.reactionTimeDisplay.textContent = "";
         
         // Deshabilitar el botón de inicio
         if (this.startButton) {
@@ -106,7 +103,7 @@ class Semaforo {
         const reactionTimeSeconds = (reactionTime / 1000).toFixed(3); 
 
         // Mostrar el tiempo de reacción
-        this.reactionTimeDisplay.innerText = `Tiempo de reacción: ${reactionTimeSeconds} segundos`;
+        this.reactionTimeDisplay.textContent = `Tiempo de reacción: ${reactionTimeSeconds} segundos`;
 
         const main = document.querySelector("main");
         main.classList.remove("load");

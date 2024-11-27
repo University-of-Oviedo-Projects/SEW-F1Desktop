@@ -30,7 +30,7 @@
             <h1><a href="index.html">F1 Desktop</a></h1>
 
             <nav>
-                <a href="index.html">Home </a>
+                <a href="index.html">Inicio </a>
                 <a href="piloto.html">Piloto </a>
                 <a href="noticias.html">Noticias </a>
                 <a href="meteorologia.html">Meteorologia </a>
@@ -46,8 +46,6 @@
 
         <main>
             <h2>Calendario</h2>
-            <button>Mostrar Carreras</button>
-
             <!-- Contenedor para la información de carreras usando <section> -->
         </main>
 
@@ -69,20 +67,16 @@
 
         <script>
             document.addEventListener("DOMContentLoaded", () => {
-                const showRacesButton = document.querySelector("main button");
-
-                showRacesButton.addEventListener("click", function() {
-                    // Cargar dinámicamente el archivo si `Calendario` no ha sido cargado aún
-                    if (typeof Calendario === "undefined") {
-                        $.getScript("js/agenda.js", function() {
-                            const calendario = new Calendario();
-                            calendario.fetchRaces(); 
-                        });
-                    } else {
+                // Cargar dinámicamente el archivo si `Calendario` no ha sido cargado aún
+                if (typeof Calendario === "undefined") {
+                    $.getScript("js/agenda.js", function() {
                         const calendario = new Calendario();
-                        calendario.fetchRaces();
-                    }
-                });
+                        calendario.fetchRaces(); 
+                    });
+                } else {
+                    const calendario = new Calendario();
+                    calendario.fetchRaces();
+                }
 
                 new HelpHandler();    
             });

@@ -152,8 +152,7 @@ class Pais {
                     article.append(`<img src="https://openweathermap.org/img/w/${previs.icon}.png" alt="Icono del tiempo">`);
                     article.append(`<p>Precipitación: ${previs.rain} mm</p>`);
     
-                    // Insertar el artículo antes del footer
-                    $('footer').before(article); 
+                    $('main').append(article);
     
                     dayCount++; // Incrementar el contador de días
                 }

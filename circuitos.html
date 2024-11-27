@@ -13,7 +13,7 @@
         <title>F1 Desktop</title>
         <link rel="icon" type="image/x-icon" href="multimedia/imagenes/favicon-16x16.png">
         
-        <link rel="stylesheet" type="text/css" href="estilo/estilo.css" />-
+        <link rel="stylesheet" type="text/css" href="estilo/estilo.css" />
         <link rel="stylesheet" type="text/css" href="estilo/layout.css" />
 
         <!-- Añadir referencia al archivo google-maps.js -->
@@ -26,13 +26,6 @@
 
         <!-- Añadir referencia al archivo ayuda.js -->
         <script src="js/ayuda.js"></script>
-
-        <style>
-            main > section:nth-of-type(2) > div  {
-                height: 400px;
-                width: 100%;
-            }
-        </style>
     </head>
 
     <body>
@@ -40,7 +33,7 @@
             <h1><a href="index.html">F1 Desktop</a></h1>
 
             <nav>
-                <a href="index.html">Home </a>
+                <a href="index.html">Inicio </a>
                 <a href="piloto.html">Piloto </a>
                 <a href="noticias.html">Noticias </a>
                 <a href="meteorologia.html">Meteorologia </a>
@@ -58,7 +51,6 @@
             <h2>Circuitos</h2>
             
             <!-- Subir y procesar un archivo XML -->
-            <h3>Subir archivo XML</h3>
             <form>
                 <label for="xmlFileInput">Selecciona un archivo XML</label>
                 <input type="file" accept=".xml">
@@ -69,18 +61,12 @@
             </section>
 
             <!-- Subir y procesar un archivo KML -->
-            <h3>Subir archivo KML</h3>
             <form>
                 <label for="kmlFileInput">Selecciona un archivo KML</label>
                 <input type="file" accept=".kml">
             </form>
-            <section>
-                <h3>Contenido del archivo KML</h3>
-                <div></div>
-            </section>
 
             <!-- Subir y procesar un archivo SVG -->
-            <h3>Subir archivo SVG</h3>
             <form>
                 <label for="svgFileInput">Selecciona un archivo SVG</label>
                 <input type="file" accept=".svg">

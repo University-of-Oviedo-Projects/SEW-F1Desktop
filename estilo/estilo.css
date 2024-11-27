@@ -17,12 +17,12 @@ html {
 body { 
     background-color: #F4E1C1;
     color: #1F3B4D;
+    overflow-x: hidden;
 }
 
 /* Especificidad 002 */
 body, html {
     height: 100%;
-    margin: 0;
     display: flex;
     flex-direction: column;
 }
@@ -33,26 +33,35 @@ body > p {
     font-size: small;
 }
 
-/* Especificidad 011 */
-a:hover {
-    border: 0.25em solid #A9C4D4; /* Color de borde */
-    border-radius: 0.75em;
+body > p > a {
+    color: #ff0000;
 }
 
 /* ###################### Main del body ###################### */
 /* Especificidad 001 */
 main {
     margin-left: 0.4em;;
-    flex: 1; /* Ocupar todo el espacio disponible */
+    flex: 1; 
 }
 
-/* Especificidad 002 */
-main > h2 {
+/* Especificidad 001 && 001 && 001, 003 */
+h2, h3, h4 {
+    text-decoration: none;
+}
+
+/* Especificidad 001 */
+h2 {
     text-align: center;
 }
 
-/* Especificidad 002 */
-main > button {
+/* Especificidad 001 && 001, 002 */
+h3, h4 {
+    text-align: left;
+    text-decoration: underline;
+}
+
+/* Especificidad 001 */
+button {
     display: block;
     margin: 1em auto;
     padding: 0.5em 1em;
@@ -62,13 +71,6 @@ main > button {
     border: none;
     border-radius: 0.5em;
     cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-}
-
-/* Especificidad 002 */
-h3,h4 {
-    text-decoration: underline;
-    font-size: large;
 }
 
 /* ###################### Estilizacion de listas  ###################### */
@@ -99,6 +101,10 @@ ol {
 li {
     margin-bottom: 0.625rem;
     line-height: 1.5;
+}
+
+li a {
+    color: #ff0000;
 }
 
 /* Especificidad 002 */
@@ -473,50 +479,42 @@ body[data-page="api"] main > dialog:nth-of-type(1) > p {
 /* Especificidad: 001 */
 form {
     display: flex;
-    flex-direction: column;
+    flex-direction: column;  /* Mantener los elementos en columna */
     background-color: #f9f9f9;
-    /* color heredado de body */
     border: 0.5em solid #ddd;
     border-radius: 0.5em;
     padding: 2em;
-    margin-top: 1.5em;
     margin-bottom: 3em;
     margin-left: 1em;
     margin-right: 1em;
+    box-sizing: border-box;  
 }
 
 /* Especificidad: 002 */
 form label {
     display: block;
-    margin-bottom: 0.5em;
+    margin-top: 1em;
     font-weight: bold;
 }
 
 /* Especificidad: 012 */
-form input[type="text"], form textarea {
-    width: 60%;
+form input[type="text"], form textarea, form input[type="file"] {
     padding: 1em;
     margin: 0.5em 0;
     border: 0.25em solid #ddd;
     border-radius: 0.5em;
+    box-sizing: border-box;  /* Asegura que el padding no aumente el tamaño */
 }
 
 /* Especificidad: 012 */
 form input[type="file"] {
-    margin: 0.5em auto;
-    padding: 0.5em;
-    border: 0.25em solid #ccc;
-    border-radius: 0.5em;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    width: 100%;
-    box-sizing: border-box;
 }
 
 /* Especificidad: 022 */
 form input[type="file"]:hover {
     background-color: #e9e9e9;
-    /* color heredado de body */
 }
 
 /* Especificidad: 002 */
@@ -528,51 +526,35 @@ form button {
     border-radius: 0.5em;
     cursor: pointer;
     transition: background-color 0.2s;
+    width: 100%;  /* Hace que el botón también ocupe el ancho completo */
 }
 
 /* Especificidad: 012 */
 form button:hover {
     background-color: #163240;
-    /* color heredado de form button */
 }
+
+/* Especificidad: 003 */
+form input[type="text"]:focus, form textarea:focus, form input[type="file"]:focus {
+    outline: none; /* Para quitar el borde cuando se hace foco en los inputs */
+    border-color: #1F3B4D; /* Agrega un borde de color para indicar el foco */
+}
+
 
 
 /* ###################### Estilo para los mapas ###################### */
-/* Especificidad 011 */
-main[data-pages="mapa"] {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100%;
-}
-
-/* Especificidad 002 */
-main > h2 {
-    font-size: 2em;
-    margin-bottom: 1em;
-    text-decoration: underline;
-}
-
 /* Especificidad 012 */
-main[data-pages="mapa"] > div {
-    height: 50%;
-    width: 90%;
+main > div {
+    height: 60vh;
+    width: 100%;
+    margin-bottom: 1.5em
 }
 
 /* Especiicidad 011 */
-img[data-map="static-map"] {
-    width: 40%; 
-    height: 45%; 
+main > img {
+    width: 100%; 
+    height: 80vh; 
     margin-bottom: 2.5em; 
-}
-
-
-/* ######################### Mapa KML ######################*/
-/* Especificidad 013 */
-main > section:nth-of-type(2) > div  {
-    height: 60%;
-    width: 80%;
 }
 
 /* ######################### SVG ######################*/
@@ -595,29 +577,29 @@ main > section:nth-of-type(3) > svg  {
 
 /* ###################### Estilo para XML ###################### */
 /* Especificidad 022 */
-main section:nth-of-type(1)[data-value="xml"] {
+main section:nth-of-type(1) {
     align-items: center;
-    border: 1px solid #ddd;
-    border-radius: 0.5rem;
-    padding: 1rem;
+    border: 0.25em solid #ddd;
+    border-radius: 0.5em;
+    padding: 1em;
     width: 80%;
     background-color: #fff;
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-    margin: 1.5rem auto; /* Centrar la caja */
+    box-shadow: 0 0.25em 0.5em #0000001a;
+    margin: 1.5em auto; 
 }
 
 /* Especificidad 023 */
-main section:nth-of-type(1)[data-value="xml"] h3 {
-    font-size: 1.5rem;
+main section:nth-of-type(1) h3 {
+    font-size: 1.5em;
     color: #1F3B4D;
-    margin-bottom: 1rem;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 0.5rem;
+    margin-bottom: 1em;
+    border-bottom: 0.25em solid #ddd;
+    padding-bottom: 0.5em;
     text-align: center;
 }
 
 /* Especificidad 023 */
-main section:nth-of-type(1)[data-value="xml"] p {
+main section:nth-of-type(1) p {
     font-size: 1.2rem;
     color: #333;
     line-height: 1.5;
@@ -626,53 +608,53 @@ main section:nth-of-type(1)[data-value="xml"] p {
 }
 
 /* Especificidad 023 && 023, 046 */
-main section:nth-of-type(1)[data-value="xml"] ul, 
-main section:nth-of-type(1)[data-value="xml"] ol {
+main section:nth-of-type(1) ul, 
+main section:nth-of-type(1) ol {
     padding-left: 1.5rem;
     margin-bottom: 1rem;
 }
 
 /* Especificidad 024 && 024, 048 */
-main section:nth-of-type(1)[data-value="xml"] ul li, 
-main section:nth-of-type(1)[data-value="xml"] ol li {
+main section:nth-of-type(1) ul li, 
+main section:nth-of-type(1) ol li {
     font-size: 1.2rem;
     color: #555;
     margin-bottom: 0.5rem;
 }
 
 /* Especificidad 023 */
-main section:nth-of-type(1)[data-value="xml"] table {
+main section:nth-of-type(1) table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 1.5rem;
 }
 
 /* Especificidad 024 && 024, 048 */
-main section:nth-of-type(1)[data-value="xml"] table th, 
-main section:nth-of-type(1)[data-value="xml"] table td {
+main section:nth-of-type(1) table th, 
+main section:nth-of-type(1) table td {
     padding: 0.5rem;
     border: 1px solid #ddd;
     text-align: left;
 }
 
 /* Especificidad 024 */
-main section:nth-of-type(1)[data-value="xml"] table th {
+main section:nth-of-type(1) table th {
     background-color: #f4f4f4;
     font-weight: bold;
 }
 
 /* Especificidad 034 */
-main section:nth-of-type(1)[data-value="xml"] table tr:nth-child(even) {
+main section:nth-of-type(1) table tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
 /* Especificidad 034 */
-main section:nth-of-type(1)[data-value="xml"] table tr:hover {
+main section:nth-of-type(1) table tr:hover {
     background-color: #f1f1f1;
 }
 
 /* Especificidad 023 */
-main section:nth-of-type(1)[data-value="xml"] img {
+main section:nth-of-type(1) img {
     max-width: 100%;
     height: auto;
     margin-bottom: 1rem;
@@ -692,7 +674,7 @@ main section:nth-of-type(1) video {
 }
 
 /* Especificidad 023 */
-main section:nth-of-type(1)[data-value="xml"] a {
+main section:nth-of-type(1) a {
     display: block;
     margin-bottom: 1rem;
     color: #1F3B4D;
@@ -701,12 +683,12 @@ main section:nth-of-type(1)[data-value="xml"] a {
 }
 
 /* Especificidad 033 */
-main section:nth-of-type(1)[data-value="xml"] a:hover {
+main section:nth-of-type(1) a:hover {
     text-decoration: underline;
 }
 
 /* Especificidad 023 */
-main section:nth-of-type(1)[data-value="xml"] blockquote {
+main section:nth-of-type(1) blockquote {
     margin: 1rem 0;
     padding: 1rem;
     background-color: #f9f9f9;
@@ -716,7 +698,7 @@ main section:nth-of-type(1)[data-value="xml"] blockquote {
 }
 
 /* Especificidad 023 */
-main section:nth-of-type(1)[data-value="xml"] header {
+main section:nth-of-type(1) header {
     font-size: 1.3rem;
     font-weight: bold;
     color: #1F3B4D;
@@ -727,7 +709,7 @@ main section:nth-of-type(1)[data-value="xml"] header {
 }
 
 /* Especificidad 023 */
-main section:nth-of-type(1)[data-value="xml"] footer {
+main section:nth-of-type(1) footer {
     font-size: 1rem;
     color: #777;
     margin-top: 1rem;

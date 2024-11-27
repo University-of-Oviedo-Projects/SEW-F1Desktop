@@ -13,14 +13,13 @@ class Noticias {
             }, 4000);     
         }
 
-        // Oculta el h2 de "Últimas noticias"
-        document.querySelector('main section > h2').setAttribute('data-state', 'hidden');
+        document.querySelector('main > h2').setAttribute('data-state', 'hidden');
 
-        // Evento change del input de archivo
-        document.querySelector('input[type="file"]').addEventListener('change', (event) => this.readInputFile(event));
+        document.querySelector('input[type="file"]')
+            .addEventListener('change', (event) => this.readInputFile(event));
         
-        // Evento submit del formulario para añadir noticia
-        document.querySelector('main form:nth-of-type(2)').addEventListener('submit', (event) => this.addNoticia(event));
+        document.querySelector('main form:nth-of-type(2)')
+            .addEventListener('submit', (event) => this.addNoticia(event));
     }
 
     readInputFile(event) {
@@ -39,54 +38,61 @@ class Noticias {
     }
 
     displayNoticias(contents) {
-        // Mostrar el h2 de "Últimas noticias"
-        document.querySelector('main section > h2').setAttribute('data-state', 'visible');
+        document.querySelector('main > h2').setAttribute('data-state', 'visible');
 
         const lines = contents.split('\n');
         lines.forEach(line => {
             const [titular, entradilla, autor] = line.split('_');
-            const noticiaHtml = `
-                <article>
-                    <header>
-                        <h2>${titular}</h2>
-                    </header>
-                    <p>${entradilla}</p>
-                    <footer>
-                        <p><em>${autor}</em></p>
-                    </footer>
-                </article>
-            `;
-            document.querySelector('main section').insertAdjacentHTML('beforeend', noticiaHtml);
+            const noticiaHtml = document.createElement('article');
+            const header = document.createElement('header');
+            const h2 = document.createElement('h2');
+            h2.textContent = titular;
+            header.appendChild(h2);
+            noticiaHtml.appendChild(header);
+            const p = document.createElement('p');
+            p.textContent = entradilla;
+            noticiaHtml.appendChild(p);
+            const footer = document.createElement('footer');
+            const em = document.createElement('em');
+            em.textContent = autor;
+            footer.appendChild(em);
+            noticiaHtml.appendChild(footer);
+
+            const h2UltimasNoticias = document.querySelector('main h2');
+            const main = document.querySelector('main');
+            main.insertBefore(noticiaHtml, h2UltimasNoticias.nextSibling);
         });
     }
 
     addNoticia(event) {
         event.preventDefault();
+        document.querySelector('main > h2').setAttribute('data-state', 'visible');
 
-        // Mostrar el h2 de "Últimas noticias"
-        document.querySelector('main section > h2').setAttribute('data-state', 'visible');
-
-        // Obtener valores de los campos del formulario
         const titular = document.querySelector('input[placeholder="Titular"]').value;
         const entradilla = document.querySelector('input[placeholder="Contenido"]').value;
         const autor = document.querySelector('input[placeholder="Autor"]').value;
 
-        const noticiaHtml = `
-            <article>
-                <header>
-                    <h2>${titular}</h2>
-                </header>
-                <p>${entradilla}</p>
-                <footer>
-                    <p><em>${autor}</em></p>
-                </footer>
-            </article>
-        `;
-    
-        // Añadir la noticia al contenedor de noticias
-        document.querySelector('main section').insertAdjacentHTML('beforeend', noticiaHtml);
+        const noticiaHtml = document.createElement('article');
+        const header = document.createElement('header');
+        const h2 = document.createElement('h2');
+        h2.textContent = titular;
+        header.appendChild(h2);
+        noticiaHtml.appendChild(header);
+        const p = document.createElement('p');
+        p.textContent = entradilla;
+        noticiaHtml.appendChild(p);
+        const footer = document.createElement('footer');
+        const em = document.createElement('em');
+        em.textContent = autor;
+        footer.appendChild(em);
+        noticiaHtml.appendChild(footer);
+
+        const h2UltimasNoticias = document.querySelector('main h2');
+        const main = document.querySelector('main');
+        main.insertBefore(noticiaHtml, h2UltimasNoticias.nextSibling);
 
         // Limpiar los campos del formulario después de añadir la noticia
-        document.querySelector('form').reset();
+        const inputs = document.querySelectorAll('input[type="text"]');
+        inputs.forEach(input => input.value = '');
     }
 }

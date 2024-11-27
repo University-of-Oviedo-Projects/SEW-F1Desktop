@@ -28,8 +28,8 @@ class ProcesamientoCircuitos {
 
     // Método para mostrar el contenido del archivo XML en el HTML
     mostrarContenidoXML(xmlDoc) {
-        document.querySelector("main section:nth-of-type(1)").setAttribute("data-state", "visible");
-        const contenedor = document.querySelector("main section:nth-of-type(1)");
+        document.querySelector("main > section").setAttribute("data-state", "visible");
+        const contenedor = document.querySelector("main > section");
         contenedor.innerHTML = ""; // Limpiar contenido previo
 
         // Función auxiliar para crear elementos de texto
@@ -135,6 +135,14 @@ class ProcesamientoCircuitos {
 
     // Método para procesar archivos KML
     procesarArchivoKML(archivo) {
+        const h3 = document.createElement("h3");
+        h3.textContent = "Contenido del archivo KML";
+        const div = document.createElement("div");
+        const formKML = document.querySelector("main form:nth-of-type(3)");
+        const main = document.querySelector("main");
+        main.insertBefore(h3, formKML);
+        main.insertBefore(div, formKML);
+
         const lector = new FileReader();
         const coordinates = [];
             
@@ -146,7 +154,7 @@ class ProcesamientoCircuitos {
             // Verificar si hay errores en el KML
             const parseError = kmlDoc.querySelector("parsererror");
             if (parseError) {
-                document.querySelector("main section:nth-of-type(2)").innerText = "Error al parsear el KML";
+                document.querySelector("main > div").innerText = "Error al parsear el KML";
                 return;
             }
 
@@ -172,7 +180,7 @@ class ProcesamientoCircuitos {
     // Método para mostrar el contenido del archivo KML en el HTML
     mostrarContenidoKML(coordinates) {
         // Verificar que el contenedor del mapa está disponible
-        var mapDiv = document.querySelector("main > section:nth-of-type(2) > div");
+        var mapDiv = document.querySelector("main > div");
 
         // Crear el mapa
         var map = new google.maps.Map(mapDiv, {
@@ -197,15 +205,18 @@ class ProcesamientoCircuitos {
         coordinates.forEach(coord => bounds.extend(coord));
         map.fitBounds(bounds);
 
-        document.querySelector("main section:nth-of-type(2)").setAttribute("data-state", "visible");
-    }
-    
-    
+        document.querySelector("main > div").setAttribute("data-state", "visible");
+    }    
     
     // Método para procesar archivos SVG
     procesarArchivoSVG(archivo) {
-        const lector = new FileReader();
-            
+        const h3 = document.createElement("h3");
+        h3.textContent = "Contenido del archivo SVG";
+        const figure = document.createElement("figure");
+        document.querySelector("main").appendChild(h3);
+        document.querySelector("main").appendChild(figure);
+
+        const lector = new FileReader();            
         lector.onload = (e) => {
             const contenidoSVG = e.target.result;
             const parser = new DOMParser();
@@ -213,7 +224,7 @@ class ProcesamientoCircuitos {
             // Verificar si hay errores en el SVG
             const parseError = svgDoc.querySelector("parsererror");
             if (parseError) {
-                document.querySelector("main section:nth-of-type(3)").innerText = "Error al parsear el SVG";
+                document.querySelector("main > figure").innerText = "Error al parsear el SVG";
                 return;
             }
             // Procesar y mostrar el contenido del SVG
@@ -225,8 +236,8 @@ class ProcesamientoCircuitos {
 
     // Método para mostrar el contenido del archivo SVG en el HTML
     mostrarContenidoSVG(svgDoc) {
-        document.querySelector("main section:nth-of-type(3)").setAttribute("data-state", "visible");
-        const contenedor = document.querySelector("main section:nth-of-type(3)");
+        document.querySelector("main > figure").setAttribute("data-state", "visible");
+        const contenedor = document.querySelector("main > figure ");
 
         // Mostrar el contenido del SVG
         const svgElement = svgDoc.documentElement;
