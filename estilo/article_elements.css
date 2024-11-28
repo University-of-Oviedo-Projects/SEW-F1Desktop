@@ -29,7 +29,6 @@ article {
     box-shadow: 0 2em 2.5em #0000001a;
     margin: 0 auto;  
     padding: 0.8em;  
-    transition: transform 0.2s;
     background-color: #FFFFFF;
     border-radius: 2em;
     display: flex;

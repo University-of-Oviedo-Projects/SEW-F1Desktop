@@ -212,9 +212,7 @@ class ProcesamientoCircuitos {
     procesarArchivoSVG(archivo) {
         const h3 = document.createElement("h3");
         h3.textContent = "Contenido del archivo SVG";
-        const figure = document.createElement("figure");
         document.querySelector("main").appendChild(h3);
-        document.querySelector("main").appendChild(figure);
 
         const lector = new FileReader();            
         lector.onload = (e) => {
@@ -224,7 +222,7 @@ class ProcesamientoCircuitos {
             // Verificar si hay errores en el SVG
             const parseError = svgDoc.querySelector("parsererror");
             if (parseError) {
-                document.querySelector("main > figure").innerText = "Error al parsear el SVG";
+                document.querySelector("main").innerText = "Error al parsear el SVG";
                 return;
             }
             // Procesar y mostrar el contenido del SVG
@@ -236,11 +234,16 @@ class ProcesamientoCircuitos {
 
     // Método para mostrar el contenido del archivo SVG en el HTML
     mostrarContenidoSVG(svgDoc) {
-        document.querySelector("main > figure").setAttribute("data-state", "visible");
-        const contenedor = document.querySelector("main > figure ");
+        const contenedor = document.querySelector("main");
+        const svgElement = svgDoc.documentElement;        
+        const viewBox = svgElement.getAttribute("viewBox");
 
-        // Mostrar el contenido del SVG
-        const svgElement = svgDoc.documentElement;
+        if (!viewBox) {
+            const width = svgElement.getAttribute("width") || svgElement.clientWidth;
+            const height = svgElement.getAttribute("height") || svgElement.clientHeight;
+            svgElement.setAttribute("viewBox", `0 0 ${width} ${height}`);
+        }
+
         contenedor.appendChild(svgElement);
     }
 }

@@ -16,14 +16,20 @@ class Fondo {
             tagmode: "all",
             format: "json"
         }).done(function(data) {
-            $("body").css({
-                "background-image": `url(${data.items[0].media.m.replace('_m', '_b')})`,
-                "height": "100vh",
-                "width": "100vw",
-                "background-size": "cover",
-                "background-repeat": "no-repeat",
-                "background-position": "center"
-            });
+            if (data.items && data.items.length > 0) {
+                $("body").css({
+                    "background-image": `url(${data.items[0].media.m.replace('_m', '_b')})`,
+                    "height": "100vh",
+                    "width": "100vw",
+                    "background-size": "cover",
+                    "background-repeat": "no-repeat",
+                    "background-position": "center"
+                });
+            } else {
+                console.error("No se encontraron imágenes.");
+            }
+        }).fail(function() {
+            console.error("Error al realizar la consulta AJAX.");
         });
     }
 }
