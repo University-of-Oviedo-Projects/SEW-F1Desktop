@@ -13,8 +13,13 @@
         <title>F1 Desktop</title>
         <link rel="icon" type="image/x-icon" href="multimedia/imagenes/favicon-16x16.png">
         
-        <link rel="stylesheet" type="text/css" href="estilo/estilo.css" />
-        <link rel="stylesheet" type="text/css" href="estilo/layout.css" />
+        <!-- Preload de los estilos -->
+        <link rel="preload" href="estilo/layout.css" as="style">
+        <link rel="preload" href="estilo/estilo.css" as="style">
+
+        <!-- Después de que se haya descargado, se aplica el CSS -->
+        <link rel="stylesheet" href="estilo/layout.css">
+        <link rel="stylesheet" href="estilo/estilo.css">
         <link rel="stylesheet" type="text/css" href="estilo/semaforo.css" />
         
         <!-- Añadir referencia al archivo semaforo.js -->
