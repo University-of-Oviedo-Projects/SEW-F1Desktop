@@ -208,6 +208,9 @@ class Api {
 
         // Crear contenedor de puntuación final
         const finalScoreContainer = document.createElement('section');
+        const h21 = document.createElement('h2');
+        h21.textContent = "Puntuación Final";
+        finalScoreContainer.appendChild(h21);
         finalScoreContainer.classList.add('final-score-container');
         finalScoreContainer.setAttribute('data-state', 'hidden');
         main.appendChild(finalScoreContainer);
@@ -245,6 +248,7 @@ class Api {
 
         questionContainer.innerHTML = `<h2>${question.question}</h2>`;
         optionsContainer.innerHTML = '';
+        optionsContainer.innerHTML = `<h2>Opciones</h2>`;
 
         question.options.forEach(option => {
             const button = document.createElement('button');
