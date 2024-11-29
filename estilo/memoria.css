@@ -165,11 +165,6 @@ main > button {
         font-size: 0.6em; 
     }
 
-    /* Especificidad 004 */
-    main > section article img {
-        position: relative;
-    }
-
     /* Especificidad 002 */
     main > button {
         margin-left: 0;
