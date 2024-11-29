@@ -63,17 +63,15 @@ class ProcesamientoCircuitos {
         if (referencias) {
             const ref1 = document.createElement("a");
             ref1.href = referencias.getAttribute('enlace1');
-            ref1.target = "_blank";
             ref1.textContent = "Enlace 1";
             contenedor.appendChild(ref1);
             const ref2 = document.createElement("a");
             ref2.href = referencias.getAttribute('enlace2');
-            ref2.target = "_blank";
             ref2.textContent = "Enlace 2";
             contenedor.appendChild(ref2);
             const ref3 = document.createElement("a");
             ref3.href = referencias.getAttribute('enlace3');
-            ref3.target = "_blank";
+            console.log(ref3.href);
             ref3.textContent = "Enlace 3";
             contenedor.appendChild(ref3);
         }
