@@ -522,16 +522,6 @@ svg {
 
 /* ###################### Estilo para XML ###################### */
 
-/* Especificidad 023 */
-main > section img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 1em;
-    border: 1px solid #ddd;
-    border-radius: 0.5em;
-    box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
-}
-
 /* Especificidad 013 */
 main > section video {
     max-width: 100%;
@@ -571,9 +561,7 @@ main section header {
     font-size: 1.3em;
     font-weight: bold;
     color: #1F3B4D;
-    margin-top: 1em;
-    margin-bottom: 0.5em;
-    border-bottom: 1px solid #ddd;
+    margin-top: 0em auto;
     padding-bottom: 0.5em;
 }
 

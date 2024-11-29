@@ -128,14 +128,14 @@ class Memoria {
             // Crear el encabezado y añadirlo al artículo
             const header = document.createElement('header');
             const h2 = document.createElement('h2');
-            h2.textContent = "Memory card";
+            h2.textContent = "Tarjeta de memoria";
             header.appendChild(h2);
             article.appendChild(header);
 
             // Crear la imagen y añadirla al artículo
             const img = document.createElement('img');
             img.src = item.source;
-            img.alt = "Memory card";
+            img.alt = "Tarjeta de memoria";
             img.setAttribute('data-state', 'hidden');
 
             // Agregar la imagen al artículo
