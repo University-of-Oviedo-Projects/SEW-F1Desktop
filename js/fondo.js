@@ -1,10 +1,15 @@
 class Fondo {
     constructor(pais, capital, circuito) {
-        console.log("Creando una instancia de Fondo..."); 
         this.pais = pais;
         this.capital = capital;
         this.circuito = circuito;
         this.getFondo();
+
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden) {
+              socket.close(); 
+            }
+        });
     }
 
     // Método para realizar la consulta AJAX
@@ -12,7 +17,7 @@ class Fondo {
         var flickrAPI = "https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
         $.getJSON(flickrAPI, 
         {
-            tags: this.circuito + ", F1, Formula 1, ",
+            tags: this.circuito,
             tagmode: "all",
             format: "json"
         }).done(function(data) {

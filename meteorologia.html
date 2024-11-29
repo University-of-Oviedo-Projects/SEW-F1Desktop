@@ -7,24 +7,33 @@
         <meta name="description" content="Una página web que emula a la pagina web de la Formula 1, 
             incluyendo informacion sobre un piloto asignado, los circuitos, la meteorologia, 
             las noticias, los viajes y juegos." />
-        <meta name="keywords" content="Formula 1, Ocon, Carreras, Coches">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Formula 1, Ocon, Carreras, Coches" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <title>F1 Desktop</title>
-        <link rel="icon" type="image/x-icon" href="multimedia/imagenes/favicon-16x16.png">
-                
-        <link rel="stylesheet" type="text/css" href="estilo/estilo.css" />
-        <link rel="stylesheet" type="text/css" href="estilo/layout.css" />
-        <link rel="stylesheet" href="estilo/article_elements.css">
+        <link rel="icon" type="image/x-icon" href="multimedia/imagenes/favicon-16x16.png" />
+        
+        <!-- Preload de los estilos -->
+        <link rel="preload" href="estilo/layout.css" as="style">
+        <link rel="preload" href="estilo/estilo.css" as="style">
+        <link rel="preload" href="/estilo/article_elements.css" as="style">
 
-        <!-- Añadir referencia a jQuery Core 3.x minificada -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- Después de que se haya descargado, se aplica el CSS -->
+        <link rel="stylesheet" href="estilo/layout.css">
+        <link rel="stylesheet" href="estilo/estilo.css">
+        <link rel="stylesheet" href="/estilo/article_elements.css" />
 
-        <!-- Añadir referencia al  archivo pais.js -->
-        <script src="js/pais.js"></script>
+        <script src="js/pais.js" defer></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+        <script src="js/ayuda.js" defer></script>
 
-        <!-- Añadir referencia al archivo ayuda.js -->
-        <script src="js/ayuda.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const pais = new Pais("Países Bajos", "Amsterdam", 17879000);
+                const aside = document.querySelector("main > aside");
+                aside.innerHTML += pais.getAllInformation(); 
+            });
+        </script>
     </head>
 
     <body>
@@ -49,10 +58,7 @@
 
         <main>
             <h2>Meteorología</h2>
-
-            <aside>
-                <h3>Información del País</h3>
-            </aside>
+            <aside></aside>
         </main>
 
         <!-- Pie de página -->
@@ -70,12 +76,9 @@
                 <h2>Bienvenido a la ayuda web de F1Destkop</h2>
             </section>
         </dialog> 
-           
-        <!-- Script para cargar la ayuda -->
+
         <script>
             document.addEventListener("DOMContentLoaded", () => {
-                new Pais("Países Bajos", "Amsterdam", 17879000);
-                //document.querySelector("aside").innerHTML += pais.getAllInformation();
                 new HelpHandler(); 
             });
         </script>

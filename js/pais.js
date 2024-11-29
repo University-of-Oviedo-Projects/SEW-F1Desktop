@@ -3,10 +3,9 @@ class Pais {
         this.nombre_pais = nombre_pais;
         this.nombre_capital = nombre_capital;
         this.poblacion = poblacion;
+
         this.rellenarInformacion();
         this.obtenerPrevisionTiempo();
-
-        document.querySelector("aside").innerHTML += this.getAllInformation();
     }
 
     get nombrePais() {
@@ -62,9 +61,8 @@ class Pais {
     }
 
     obtenerReligionMayoritaria() {
-        return `Religión mayoritaria: ${this.religion_mayoritaria}`;
+        return `Religión mayoritaria: ${this.religion}`;
     }
-
 
     rellenarInformacion() {
         this.nombre_circuito = "Zandvoort";;
@@ -74,7 +72,7 @@ class Pais {
     }
 
     obtenerInfoPrincipal() {
-        return  this.obtenerNombrePais() + ', ' + this.obtenerCapitalPais;
+        return this.obtenerNombrePais() + ', ' + this.obtenerCapitalPais();
     }
     
     // Escribir información en el HTML
@@ -90,20 +88,22 @@ class Pais {
                 <li>Nombre del circuito: ${this.nombre_circuito}</li>
                 <li>Población: ${this.poblacion}</li>
                 <li>Forma de gobierno: ${this.forma_gobierno}</li>
-                <li>Religión mayoritaria: ${this.religion_mayoritaria}</li>
+                <li>Religión mayoritaria: ${this.religion}</li>
             </ul> `;
     }
 
     getAllInformation() {
         return `
+            <h3>Información del país</h3>
+
             <ul>
-                <li>${this.obtenerNombrePais()}</li>
-                <li>${this.obtenerCapitalPais()}</li>
-                <li>${this.obtenerPoblacionPais()}</li>
-                <li>${this.obtenerNombreCircuito()}</li>
-                <li>${this.obtenerFormaGobierno()}</li>
-                <li>${this.obtenerCoordMeta()}</li>
-                <li>${this.obtenerReligionMayoritaria()}</li>
+                <li>Nombre del país: ${this.nombre_pais}</li>
+                <li>Nombre del circuito: ${this.nombre_circuito}</li>
+                <li>Capital del país: ${this.nombre_capital}</li>
+                <li>Población: ${this.poblacion}</li>
+                <li>Forma de gobierno: ${this.forma_gobierno}</li>
+                <li>Coordenadas de la meta: ${this.coord_meta}</li>
+                <li>Religión mayoritaria: ${this.religion}</li>
             </ul>
         `;
     }
@@ -116,15 +116,12 @@ class Pais {
             url: url,
             method: 'GET',
             success: function(data) {
-                $('article').remove(); // Eliminar artículos anteriores
-    
-                // Usamos un objeto para guardar las previsiones por día
+                $('article').remove();
                 let previsionesPorDia = {};
     
                 $(data).find('time').each(function(index, element) {
-                    const date = $(element).attr('from').split('T')[0]; // Obtener solo la fecha, sin la hora
-    
-                    // Solo agregamos la previsión si no existe ya para ese día
+                    const date = $(element).attr('from').split('T')[0]; 
+
                     if (!previsionesPorDia[date]) {
                         previsionesPorDia[date] = {
                             date: date,
@@ -137,22 +134,25 @@ class Pais {
                     }
                 });
     
-                let dayCount = 0; // Contador para asegurarnos de que solo mostramos previsión de 5 días
+                let dayCount = 0; 
                 for (const date in previsionesPorDia) {
-                    if (dayCount >= 5) return; // Limitar a solo 5 días
+                    if (dayCount >= 5) return; 
                     const previs = previsionesPorDia[date];
     
-                    const article = $('<article></article>');
-                    const header = $('<header></header>');
-                    header.append(`<h2>${previs.date}</h2>`);
-                    article.append(header);
-                    article.append(`<p>Temperatura Máxima: ${previs.tempMax}°C</p>`);
-                    article.append(`<p>Temperatura Mínima: ${previs.tempMin}°C</p>`);
-                    article.append(`<p>Humedad: ${previs.humidity}%</p>`);
-                    article.append(`<img src="https://openweathermap.org/img/w/${previs.icon}.png" alt="Icono del tiempo">`);
-                    article.append(`<p>Precipitación: ${previs.rain} mm</p>`);
+                    const htmlContent = `
+                        <article>
+                            <header>
+                                <h2>${previs.date}</h2>
+                            </header>
+                            <p>Temperatura Máxima: ${previs.tempMax}°C</p>
+                            <p>Temperatura Mínima: ${previs.tempMin}°C</p>
+                            <p>Humedad: ${previs.humidity}%</p>
+                            <img src="https://openweathermap.org/img/w/${previs.icon}.png" alt="Icono del tiempo">
+                            <p>Precipitación: ${previs.rain} mm</p>
+                        </article>
+                    `;
     
-                    $('main').append(article);
+                    $('main').append(htmlContent);
     
                     dayCount++; // Incrementar el contador de días
                 }

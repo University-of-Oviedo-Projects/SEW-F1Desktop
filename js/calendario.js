@@ -2,7 +2,15 @@ class Calendario {
 
     constructor() {
         this.apiUrl = 'https://api.jolpi.ca/ergast/f1/2024.json';
+        this.preconnectAPI();
         this.fetchRaces();
+    }
+
+    preconnectAPI() {
+        const preconnect = document.createElement('link');
+        preconnect.rel = 'preconnect';
+        preconnect.href = 'https://api.jolpi.ca';
+        document.head.appendChild(preconnect);
     }
 
     fetchRaces() {
@@ -24,7 +32,7 @@ class Calendario {
         const raceContainer = document.querySelector('main');
 
         // Asegurarse de que está vacío antes de añadir contenido
-        raceContainer.innerHTML = '<h3>Carreras de la temporada</h3>';
+        raceContainer.innerHTML = '<h2>Carreras de la temporada</h2>';
 
         // Añadir cada carrera como un <article> en el contenedor
         races.forEach(race => {

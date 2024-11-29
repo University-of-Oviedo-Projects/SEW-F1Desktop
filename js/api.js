@@ -151,28 +151,25 @@ class Api {
             }
         ];
         
-        // Indicar el índice de la pregunta actual
-        this.currentQuestionIndex = 0;
-
-        // Inicializar la puntuación 
         this.score = 0;
-
-        // Obtener la puntuación más alta del almacenamiento local
-        this.highScore = localStorage.getItem('highScore') || 0;
-
         this.gameMode = null; 
         this.timeLimit = 15; 
         this.progressInterval = null;
+        this.currentQuestionIndex = 0;
 
-        // Crear las secciones dinámicamente
-        this.createSections();
+        // Obtener la puntuación más alta del almacenamiento local
+        this.highScore = localStorage.getItem('highScore') || 0;
+        this.createSections(); 
 
-        // Mostrar la pantalla de bienvenida
-        document.querySelector("body > main > section").setAttribute("data-state", "visible");
-         
-        // Añadir evento al botón de inicio para mostrar la pantalla de selección de modo
-        document.querySelector("body > main > section button")
-            .addEventListener("click", () => this.showModeSelectionScreen());
+        let normalModeButton = document.querySelector('main > section > button:nth-of-type(1)');
+        let voiceModeButton = document.querySelector('main > section > button:nth-of-type(2)');
+
+        if (normalModeButton && voiceModeButton) {
+            normalModeButton.addEventListener('click', () => this.startGame('normal'));
+            voiceModeButton.addEventListener('click', () => this.startGame('voice'));
+        } else {
+            console.error('No se encontraron los botones');
+        }
 
         // Inicializar reconocimiento de voz
         this.supportsSpeechRecognition = this.initSpeechRecognition();
@@ -185,9 +182,6 @@ class Api {
     createSections() {
         // Seleccionar el elemento main del DOM
         const main = document.querySelector('main');
-        main.setAttribute('data-name', 'main-api');
-        
-        document.querySelector("main section:nth-of-type(2)").setAttribute("data-state", "hidden");
 
         // Crear contenedor de puntuación
         const scoreContainer = document.createElement('section');
@@ -220,43 +214,21 @@ class Api {
 
         // Crear diálogo de puntuación final
         const scoreDialog = document.createElement('dialog');
-        scoreDialog.id = 'score-dialog';
         main.appendChild(scoreDialog);
-    }
-
-    showModeSelectionScreen() {
-        document.querySelector("body > main > section > button").setAttribute("data-state", "hidden");
-
-        const modeSelectionContainer = document.querySelector('main > section:nth-child(2)');
-        modeSelectionContainer.setAttribute('data-state', 'visible');
-
-        // Agregar eventos a los botones, asegurando que los eventos no se dupliquen
-        const normalModeButton = modeSelectionContainer.querySelector('button:nth-of-type(1)');
-        const voiceModeButton = modeSelectionContainer.querySelector('button:nth-of-type(2)');
-        
-        // Usar `addEventListener` con una comprobación para no registrar múltiples eventos
-        if (!normalModeButton.dataset.eventAdded) {
-            normalModeButton.addEventListener('click', () => this.startGame('normal'));
-            normalModeButton.dataset.eventAdded = true; // Marcar como registrado
-        }
-        if (!voiceModeButton.dataset.eventAdded && this.supportsSpeechRecognition) {
-            voiceModeButton.addEventListener('click', () => this.startGame('voice'));
-            voiceModeButton.dataset.eventAdded = true; // Marcar como registrado
-        }
     }
 
     startGame(gameMode) {
         this.gameMode = gameMode;
-        document.querySelector('main > section:nth-of-type(2)').setAttribute('data-state', 'hidden');
+        document.querySelector('main > section').setAttribute('data-state', 'hidden');
 
         // Mostrar las secciones de puntuación, pregunta y opciones
+        document.querySelector("body > main > section:nth-of-type(2)").setAttribute("data-state", "visible");
         document.querySelector("body > main > section:nth-of-type(3)").setAttribute("data-state", "visible");
         document.querySelector("body > main > section:nth-of-type(4)").setAttribute("data-state", "visible");
-        document.querySelector("body > main > section:nth-of-type(5)").setAttribute("data-state", "visible");
         this.showQuestion(); // Mostrar la primera pregunta
 
         const highScore = this.getHighScore();  // Web Storage
-        const messageContainer = document.querySelector('body > main > section:nth-of-type(3)'); 
+        const messageContainer = document.querySelector('body > main > section:nth-of-type(2)'); 
         const paragraph = document.createElement('p');
         paragraph.textContent = `Puntuación más alta: ${highScore}`;
         messageContainer.appendChild(paragraph);
@@ -267,8 +239,8 @@ class Api {
     }
 
     showQuestion() {
-        const questionContainer = document.querySelectorAll("body > main > section")[3];
-        const optionsContainer = document.querySelectorAll("body > main > section")[4];
+        const questionContainer = document.querySelectorAll("body > main > section")[2];
+        const optionsContainer = document.querySelectorAll("body > main > section")[3];
         const question = this.questions[this.currentQuestionIndex];
 
         questionContainer.innerHTML = `<h2>${question.question}</h2>`;
@@ -288,7 +260,7 @@ class Api {
 
         // Crear el canvas para la barra de progreso
         this.progressBarCanvas = document.createElement('canvas');
-        const optionsContainerToCanvas = document.querySelector('body > main > section:nth-of-type(4)');
+        const optionsContainerToCanvas = document.querySelector('body > main > section:nth-of-type(3)');
         this.progressBarCanvas.width = 400;  // Establecer el ancho del canvas
         this.progressBarCanvas.height = 20; // Establecer la altura del canvas
         this.progressBarContext = this.progressBarCanvas.getContext('2d');
@@ -318,7 +290,7 @@ class Api {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
         if (!SpeechRecognition) {
-            const messageContainer = document.querySelector('body > main > section:nth-of-type(2)'); 
+            const messageContainer = document.querySelector('body > main > section)'); 
             const paragraph = document.createElement('p');
             paragraph.textContent = `El reconocimiento de voz no es compatible con este navegador`;
             console.error('El reconocimiento de voz no es compatible con este navegador');
@@ -340,7 +312,7 @@ class Api {
 
     onSpeechResult(event) {
         const speechResult = event.results[0][0].transcript;
-        const messageContainer = document.querySelector('body > main > section:nth-of-type(3)');
+        const messageContainer = document.querySelector('body > main > section:nth-of-type(2)');
         const paragraph = document.createElement('p');
         paragraph.textContent = `Has dicho: ${speechResult}`;
         messageContainer.appendChild(paragraph);
@@ -367,7 +339,7 @@ class Api {
     // Comprobar la respuesta seleccionada
     checkAnswer(selectedOption) {
         const question = this.questions[this.currentQuestionIndex];
-        const buttons = document.querySelectorAll("body > main > section")[4].querySelectorAll("button");
+        const buttons = document.querySelectorAll("body > main > section")[3].querySelectorAll("button");
 
         buttons.forEach(button => button.disabled = true);
 
@@ -430,7 +402,7 @@ class Api {
         scoreDialog.appendChild(yourFinalPuntuacion);
         scoreDialog.appendChild(greatestPuntuacion);
 
-        scoreDialog.classList.add('show');
+        scoreDialog.setAttribute('data-state', 'show');
         scoreDialog.showModal();
 
         // Cerrar automáticamente el diálogo después de 4 segundos

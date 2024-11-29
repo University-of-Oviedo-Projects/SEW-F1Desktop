@@ -4,10 +4,9 @@ header, menu {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap; 
-    gap: 0.5rem; 
     width: 100%;
     box-sizing: border-box;
-    padding: 0.5rem;
+    padding: 1.5em;
     background-color: #0A1A2E;
     color: #FFFFFF;
 }
@@ -23,7 +22,7 @@ menu {
 h1 {
     color: #FFFFFF;
     text-decoration: none;
-    font-size: 1em;
+    font-size: 1.25em;
     margin: 0.5em;
     flex: 1 1 auto; 
     text-align: left; 
@@ -34,12 +33,11 @@ h1 {
 nav {
     display: flex;
     justify-content: center;
-    align-items: center;
     flex-wrap: wrap; 
-    gap: 0.5rem; 
+    gap: 1.05em; 
     flex: 2 1 auto; 
     width: auto; 
-    padding: 0.25rem; 
+    padding: 0.25em; 
     box-sizing: border-box;
 }
 
@@ -47,9 +45,9 @@ nav {
 a {
     text-decoration: none;           
     color: #FFFFFF;
-    font-size: 1em;
-    padding: 0.3rem 0.5rem; 
-    border-radius: 0.25rem;
+    font-size: 1.27em;
+    padding: 0.3em 0.5em; 
+    border-radius: 0.25em;
     white-space: nowrap; 
     text-align: center;
     flex: 0 0 auto; 
@@ -67,8 +65,8 @@ footer {
     flex-wrap: wrap; 
     justify-content: center;
     align-items: center;
-    padding: 0.5rem; 
-    margin: 0.25rem;
+    padding: 0.5em; 
+    margin: 0.25em;
     background-color: #0A1A2E;
     color: #FFFFFF;
     text-align: center;

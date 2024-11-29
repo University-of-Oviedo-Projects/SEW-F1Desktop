@@ -13,14 +13,19 @@
         <title>F1 Desktop</title>
         <link rel="icon" type="image/x-icon" href="multimedia/imagenes/favicon-16x16.png">
         
-        <link rel="stylesheet" type="text/css" href="estilo/estilo.css" />
-        <link rel="stylesheet" type="text/css" href="estilo/layout.css" />
+        <!-- Preload de los estilos -->
+        <link rel="preload" href="estilo/layout.css" as="style">
+        <link rel="preload" href="estilo/estilo.css" as="style">
+
+        <!-- Después de que se haya descargado, se aplica el CSS -->
+        <link rel="stylesheet" href="estilo/layout.css">
+        <link rel="stylesheet" href="estilo/estilo.css">
 
         <!-- Añadir referencia al archivo api.js -->
-        <script src="js/api.js"></script>
+        <script src="js/api.js" defer></script>
 
         <!-- Añadir referencia al archivo ayuda.js -->
-        <script src="js/ayuda.js"></script>
+        <script src="js/ayuda.js" defer></script>
     </head>
 
     <body data-page="api">
@@ -44,12 +49,6 @@
             >> <a href="api.html" title="Trivial F1">Trivial F1</a><p>
 
         <main>
-            <!-- Pantalla de bienvenida con botón de inicio -->
-            <section>
-                <h2>Trivial F1</h2>
-                <button>Iniciar Juego</button>
-            </section>
-
             <!-- Pantalla de selección de modo de juego -->
             <section>
                 <h2>Elige un modo de juego</h2>

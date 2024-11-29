@@ -1,7 +1,7 @@
 /* Author: Adrian Martinez Fuentes - UO295454 */
 
 /* Paleta de colores:
-    - Fondo de la web: F4E1C1 (Crema oscuro)
+    - Fondo de la web: F4E1C1 (Cema oscuro)
     - Texto de la web: 1F3B4D (Azul Marino Oscuro, 9.1 contraste con F4E1C1)
     - Fondo de Header: 1F3B4D (Azul Marino)
     - Texto de nav y h1: FFFFFF (Blanco, 11.73 contraste con 1F3B4D)
@@ -34,7 +34,7 @@ body > p {
 }
 
 body > p > a {
-    color: #ff0000;
+    color: #8F0000;
 }
 
 /* ###################### Main del body ###################### */
@@ -73,10 +73,24 @@ button {
     cursor: pointer;
 }
 
+/* Especificidad 001 */
+aside {
+    width: 100%; 
+    height: auto; 
+    display: flex;  
+    flex-direction: column;
+    min-width: 100%;
+    margin: 1em auto;
+}
+
+aside > h3 {
+    font-size: 1.15em;
+    margin-bottom: 0.25em;
+}
 /* ###################### Estilizacion de listas  ###################### */
 /* Especificidad 004 */
 ul, ol, dl, p {
-    font-size: 1.05rem;
+    font-size: 1.25em;
 }
 
 /* Especificidad 002 */
@@ -84,7 +98,7 @@ ul, ol {
     background-color: #EDD9B0; 
     /*color heredado de body*/
     list-style-position: inside;
-    margin: 0.313rem 0.625rem 0.625rem 0.625rem;
+    margin: 0.313em 0.625em 0.625em 0.625em;
 }
 
 /* Especificidad 001 */
@@ -99,12 +113,12 @@ ol {
 
 /* Especificidad 001 */
 li {
-    margin-bottom: 0.625rem;
+    margin-bottom: 0.625em;
     line-height: 1.5;
 }
 
 li a {
-    color: #ff0000;
+    color: #8F0000;
 }
 
 /* Especificidad 002 */
@@ -120,7 +134,7 @@ dt {
 
 /* Especificidad 001 */
 dd {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.5em;
 }
 
 /* ###################### Estilizacion de tablas ###################### */
@@ -131,7 +145,7 @@ table {
     border-collapse: collapse;
     border: 0.2em solid #333;
     font-family: Arial, sans-serif;
-    margin-bottom: 2rem;
+    margin-bottom: 2em;
     background-color: #fff;
     /* color heredado de body */
     box-shadow: 0 0.22em 0.5em #0000001a; 
@@ -139,10 +153,10 @@ table {
 
 /* Especificidad 002 */
 table caption {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
     margin-right: 0.4em;
-    font-size: 1.5rem;
+    font-size: 1.5em;
     text-decoration: underline;
     color: #333;
     /* background-color heredado de table */
@@ -188,7 +202,7 @@ video {
 
 /* Especificidad 001 */
 img {
-    width: 100%;
+    width: 40%;
     height: auto;
 }
 
@@ -302,122 +316,81 @@ dialog[open] button[id="close-help"]:hover {
 
 
 /* ###################### Estilo del API.HTML ###################### */
-/* Especificidad 023 && 023, 046 */
-main[data-name='main-api'] > section:nth-of-type(1),
-main[data-name='main-api']  > section:nth-of-type(2) {
-    display: grid;
-    grid-template-rows: auto auto; 
-    justify-items: center; 
-    align-items: center; 
-    text-align: center;
-    gap: 1rem;
-    margin: 2em;
-}
-
 /* Especificidad 024 && 024, 048 */
-main[data-name='main-api']  > section:nth-of-type(1) > h2,
-main[data-name='main-api']  > section:nth-of-type(2) > h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    grid-row: 1; 
-}
-
-/* Especificidad 024 && 024, 048 */
-main[data-name='main-api']  > section:nth-of-type(1) > button,
-main[data-name='main-api']  > section:nth-of-type(2) button {
-    padding: 1rem 2rem;
-    font-size: 1.5rem; 
-    background-color: #1F3B4D;
-    color: #FFFFFF;
-    border: none;
+main  section button {
+    padding: 1em 2em;
+    font-size: 1.5em; 
     border-radius: 1em;
     cursor: pointer;
-    grid-row: 2; 
 }
 
 /* Especificidad 023 */
-main[data-name='main-api']  > section:nth-of-type(3) {
-    text-align: center;
-    margin-top: 2rem;
-    font-size: 1.5rem;
+main  > section:nth-of-type(2) {
+    margin: 0 auto;
+    font-size: 0.75em;
 }
 
 /* Especificidad 023 */
-main[data-name='main-api']  > section:nth-of-type(4) {
+main  > section:nth-of-type(3) {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%; 
-    margin: 2rem auto; 
-    text-align: center; 
-    font-size: 1.5rem;
+    margin: 0 auto; 
 }
 
 /* Especificidad 023 */
-main[data-name='main-api']  > section:nth-of-type(5) {
+main  > section:nth-of-type(4) {
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%; 
-    margin: 2rem auto; 
-    text-align: center;
+    margin: 2em auto; 
     /* Redefinimos el margen para que no se desborde del contenedor */
     margin: 2em auto;
 }
 
 /* Especificidad 024 */
-main[data-name='main-api']  > section:nth-of-type(5) > button {
+main  > section:nth-of-type(4) > button {
     width: 80%;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-    background-color: #1F3B4D;
-    color: #FFFFFF;
-    border: none;
+    padding: 1em;
+    margin-bottom: 1em;
+    font-size: 1em;
     border-radius: 0.5em;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 /* Espcificidad 023 */
-main[data-name='main-api']  > section[data-state="visible"] {
+main  > section[data-state="visible"] {
     display: block; /* Mostrar elementos específicos */
 }
 
 /* Espcificidad 023 */
-main[data-name='main-api']  > section[data-state="hidden"] {
+main  > section[data-state="hidden"] {
     display: none; /* Ocultar elementos específicos */ 
 }
 
 /* Especificidad 034 */
-main[data-name='main-api']  > section:nth-of-type(5) > button:hover {
+main  > section:nth-of-type(4) > button:hover {
     background-color: #163240;
     /* color heredado de main > section:nth-of-type(4) > button */
 }
 
 /* Especificidad 034 */
-main[data-name='main-api']  > section:nth-of-type(5) button[data-state="correct"] {
+main  > section:nth-of-type(4) button[data-state="correct"] {
     background-color: #4CAF50;
     /* color heredado de main > section:nth-of-type(4) > button */
 }
 
 /* Especificidad 034 */
-main[data-name='main-api']  > section:nth-of-type(5) button[data-state="incorrect"] {
+main  > section:nth-of-type(4) button[data-state="incorrect"] {
     background-color: #F44336; 
     /* color heredado de main > section:nth-of-type(4) > button */
 }
 
 /* Especificidad 023 */
-main[data-name='main-api']  > section:nth-of-type(5) {
-    text-align: center;
-    margin-top: 2rem;
-    font-size: 1.5rem;
-}
-
-/* Especificidad 023 */
-main[data-name='main-api']  > dialog:nth-of-type(1) {
+main  > dialog:nth-of-type(1) {
     display: none;
     flex-direction: row;
     justify-content: center;
@@ -434,39 +407,19 @@ main[data-name='main-api']  > dialog:nth-of-type(1) {
 }
 
 /* Especificidad 033 */
-main[data-name='main-api']  > dialog:nth-of-type(1).show {
+main  > dialog:nth-of-type(1)[data-state="show"] {
     display: flex; 
     flex-direction: column; /* Alinea los elementos en columna */
 }
 
 /* Especificidad 024 */
-main[data-name='main-api'] > dialog:nth-of-type(1) > h2 {
+main > dialog:nth-of-type(1) > h2 {
     margin-bottom: 1em;
 }
 
 /* Especificidad 024 */
-main[data-name='main-api']  > dialog:nth-of-type(1) > p {
+main  > dialog:nth-of-type(1) > p {
     margin: 0.5em 0;
-}
-
-/* Media Queries para adaptabilidad del Api.html */
-@media (max-width: 768px) {
-    /* Especificidad 022 */
-    main[data-name='main-api']  > section:nth-of-type(2) button {
-        /* Redefinir el tamaño de la fuente es necesario para que el texto no se desborde del botón */
-        font-size: 1.2em;
-        /* Redefinir el margin es necesario para que los botones esten bien separados */
-        margin: 1.5em auto;
-        
-    }
-
-    /* Especificidad 024 */
-    main[data-name='main-api']  > section:nth-of-type(4) > button {
-        /* Redefinir el tamaño de la fuente es necesario para que el texto no se desborde del botón */
-        font-size: 1em;
-        /* Redefinir el padding es necesario para que el texto no se desborde del botón */
-        padding: 0.8em;
-    }
 }
 
 /* ###################### Estilo para formularios ###################### */
@@ -490,7 +443,7 @@ form label {
 }
 
 /* Especificidad: 012 */
-form input[type="text"], form textarea, form input[type="file"] {
+form input[type="text"], form textarea, form input[type="file"], form textarea {
     padding: 1em;
     margin: 0.5em 0;
     border: 0.25em solid #ddd;
@@ -549,7 +502,6 @@ main > img {
     margin-bottom: 2.5em; 
 }
 
-/* ######################### SVG ######################*/
 /* Especificidad 001 */
 svg {
     display: inline-block; 
@@ -569,121 +521,45 @@ svg {
 }
 
 /* ###################### Estilo para XML ###################### */
-/* Especificidad 022 */
-main section:nth-of-type(1)[data-value="xml"] {
-    align-items: center;
-    border: 0.25em solid #ddd;
-    border-radius: 0.5em;
-    padding: 1em;
-    width: 80%;
-    background-color: #fff;
-    box-shadow: 0 0.25em 0.5em #0000001a;
-    margin: 1.5em auto; 
-}
 
 /* Especificidad 023 */
-main section:nth-of-type(1)[data-value="xml"] h3 {
-    font-size: 1.5em;
-    color: #1F3B4D;
-    margin-bottom: 1em;
-    border-bottom: 0.25em solid #ddd;
-    padding-bottom: 0.5em;
-    text-align: center;
-}
-
-/* Especificidad 023 */
-main section:nth-of-type(1)[data-value="xml"] p {
-    font-size: 1.2rem;
-    color: #333;
-    line-height: 1.5;
-    margin-bottom: 1rem;
-    text-align: justify;
-}
-
-/* Especificidad 023 && 023, 046 */
-main section:nth-of-type(1)[data-value="xml"] ul, 
-main section:nth-of-type(1)[data-value="xml"] ol {
-    padding-left: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-/* Especificidad 024 && 024, 048 */
-main section:nth-of-type(1)[data-value="xml"] ul li, 
-main section:nth-of-type(1)[data-value="xml"] ol li {
-    font-size: 1.2rem;
-    color: #555;
-    margin-bottom: 0.5rem;
-}
-
-/* Especificidad 023 */
-main section:nth-of-type(1)[data-value="xml"] table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 1.5rem;
-}
-
-/* Especificidad 024 && 024, 048 */
-main section:nth-of-type(1)[data-value="xml"] table th, 
-main section:nth-of-type(1)[data-value="xml"] table td {
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    text-align: left;
-}
-
-/* Especificidad 024 */
-main section:nth-of-type(1)[data-value="xml"] table th {
-    background-color: #f4f4f4;
-    font-weight: bold;
-}
-
-/* Especificidad 034 */
-main section:nth-of-type(1)[data-value="xml"] table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-/* Especificidad 034 */
-main section:nth-of-type(1)[data-value="xml"] table tr:hover {
-    background-color: #f1f1f1;
-}
-
-/* Especificidad 023 */
-main section:nth-of-type(1)[data-value="xml"] img {
+main > section img {
     max-width: 100%;
     height: auto;
-    margin-bottom: 1rem;
+    margin-bottom: 1em;
     border: 1px solid #ddd;
-    border-radius: 0.5rem;
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.5em;
+    box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
 }
 
 /* Especificidad 013 */
-main section:nth-of-type(1)[data-value="xml"] video {
+main > section video {
     max-width: 100%;
     height: auto;
-    margin-bottom: 1rem;
+    margin-bottom: 1em;
     border: 1px solid #ddd;
-    border-radius: 0.5rem;
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.5em;
+    box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
 }
 
 /* Especificidad 023 */
-main section:nth-of-type(1)[data-value="xml"] a {
-    display: block;
-    margin-bottom: 1rem;
-    color: #1F3B4D;
+main > section a {
+    display: block ;
+    text-align: left;
+    color: #8F0000;
     text-decoration: none;
     font-weight: bold;
 }
 
 /* Especificidad 033 */
-main section:nth-of-type(1)[data-value="xml"] a:hover {
+main > section a:hover {
     text-decoration: underline;
 }
 
 /* Especificidad 023 */
-main section:nth-of-type(1)[data-value="xml"] blockquote {
-    margin: 1rem 0;
-    padding: 1rem;
+main section blockquote {
+    margin: 1em 0;
+    padding: 1em;
     background-color: #f9f9f9;
     border-left: 5px solid #ddd;
     font-style: italic;
@@ -691,22 +567,22 @@ main section:nth-of-type(1)[data-value="xml"] blockquote {
 }
 
 /* Especificidad 023 */
-main section:nth-of-type(1)[data-value="xml"] header {
-    font-size: 1.3rem;
+main section header {
+    font-size: 1.3em;
     font-weight: bold;
     color: #1F3B4D;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
     border-bottom: 1px solid #ddd;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.5em;
 }
 
 /* Especificidad 023 */
-main section:nth-of-type(1)[data-value="xml"] footer {
-    font-size: 1rem;
+main section footer {
+    font-size: 1em;
     color: #777;
-    margin-top: 1rem;
+    margin-top: 1em;
     border-top: 1px solid #ddd;
-    padding-top: 0.5rem;
+    padding-top: 0.5em;
     text-align: right;
 }

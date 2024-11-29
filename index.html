@@ -13,21 +13,26 @@
         <title>F1 Desktop</title>
         <link rel="icon" type="image/x-icon" href="multimedia/imagenes/favicon-16x16.png">
 
-        <link rel="stylesheet" type="text/css" href="estilo/estilo.css" />
-        <link rel="stylesheet" type="text/css" href="estilo/layout.css" />
+        <!-- Preload de los estilos -->
+        <link rel="preload" href="estilo/layout.css" as="style">
+        <link rel="preload" href="estilo/estilo.css" as="style">
+
+        <!-- Después de que se haya descargado, se aplica el CSS -->
+        <link rel="stylesheet" href="estilo/layout.css">
+        <link rel="stylesheet" href="estilo/estilo.css">
     
         <!-- Añadir referencia a jQuery Core 3.x minificada -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
 
         <!-- Añadir referencia al  archivo fondo.js -->
-        <script src="js/fondo.js"></script>   
+        <script src="js/fondo.js" defer async></script>   
         
         <!-- Añadir referencia al archivo ayuda.js -->
         <script src="js/ayuda.js"></script>
 
         <script>
             $(document).ready(function() {
-                new Fondo('Países Bajos', 'Amsterdam', 'Zandvoort');
+                new Fondo('Netherlands', 'Amsterdam', 'Zandvoort Circuit');
             });
         </script>
     </head>

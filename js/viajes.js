@@ -63,13 +63,13 @@ class Viajes {
     }
 
     showStaticMap() {
-        const mapUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${this.latitude},${this.longitude}&zoom=14&size=400x400&key=AIzaSyC6j4mF6blrc4kZ54S6vYZ2_FpMY9VzyRU`;
-
+        const mapUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${this.latitude},${this.longitude}&zoom=17&size=800x800&scale=4&markers=color:red%7C${this.latitude},${this.longitude}&key=AIzaSyC6j4mF6blrc4kZ54S6vYZ2_FpMY9VzyRU`;
+    
         const img = document.createElement('img');
         img.src = mapUrl;
         img.alt = "Ubicación actual";
         img.setAttribute('data-map', 'static-map');
-
+    
         const div = document.querySelector('main > div');
         const main = document.querySelector('main');
         main.insertBefore(img, div);
