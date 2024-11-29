@@ -69,7 +69,7 @@ class Noticias {
         document.querySelector('main > h2').setAttribute('data-state', 'visible');
 
         const titular = document.querySelector('input[placeholder="Titular"]').value;
-        const entradilla = document.querySelector('input[placeholder="Contenido"]').value;
+        const entradilla = document.querySelector('textarea[placeholder="Contenido"]').value;
         const autor = document.querySelector('input[placeholder="Autor"]').value;
 
         if(!titular || !entradilla || !autor) {
