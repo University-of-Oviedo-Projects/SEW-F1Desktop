@@ -80,7 +80,6 @@ class ProcesamientoCircuitos {
         if (fotos) {
             const img1 = document.createElement("img");
             img1.src = fotos.getAttribute('enlace1');
-            console.log(img1.src);
             img1.alt = "Foto 1";
             contenedor.appendChild(img1);
             const img2 = document.createElement("img");
