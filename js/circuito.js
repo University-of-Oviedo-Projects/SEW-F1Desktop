@@ -62,7 +62,7 @@ class ProcesamientoCircuitos {
         const referencias = xmlDoc.querySelector("referencias");
         if (referencias) {
             const ref1 = document.createElement("a");
-            ref1.href = referencias.getAttribute('enlace1');
+            ref1.href = "../" + referencias.getAttribute('enlace1');
             ref1.textContent = "Enlace 1";
             contenedor.appendChild(ref1);
             const ref2 = document.createElement("a");
@@ -71,7 +71,6 @@ class ProcesamientoCircuitos {
             contenedor.appendChild(ref2);
             const ref3 = document.createElement("a");
             ref3.href = referencias.getAttribute('enlace3');
-            console.log(ref3.href);
             ref3.textContent = "Enlace 3";
             contenedor.appendChild(ref3);
         }
@@ -81,6 +80,7 @@ class ProcesamientoCircuitos {
         if (fotos) {
             const img1 = document.createElement("img");
             img1.src = fotos.getAttribute('enlace1');
+            console.log(img1.src);
             img1.alt = "Foto 1";
             contenedor.appendChild(img1);
             const img2 = document.createElement("img");
