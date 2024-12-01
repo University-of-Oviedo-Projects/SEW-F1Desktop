@@ -62,7 +62,7 @@ class ProcesamientoCircuitos {
         const referencias = xmlDoc.querySelector("referencias");
         if (referencias) {
             const ref1 = document.createElement("a");
-            ref1.href = "../" + referencias.getAttribute('enlace1');
+            ref1.href = referencias.getAttribute('enlace1');
             ref1.textContent = "Enlace 1";
             contenedor.appendChild(ref1);
             const ref2 = document.createElement("a");
