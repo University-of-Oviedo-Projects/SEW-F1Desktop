@@ -574,3 +574,69 @@ main section footer {
     padding-top: 0.5em;
     text-align: right;
 }
+
+
+/* ###################### Estilo para carrusel (viajes.php) ###################### */
+/* Estilo para el contenedor del carrusel */
+article {
+    background-color: red;
+    position: relative;
+    max-width: 100%; /* Asegúrate de que el carrusel ocupe el 100% */
+    margin: 2em auto; /* Espacio alrededor del carrusel */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Oculta cualquier parte que sobresalga */
+    border-radius: 1em; /* Bordes redondeados */
+    box-shadow: 0 .5em 1.2em #0000004d; 
+}
+
+/* Estilo de las imágenes del carrusel */
+article > section img {
+    width: 100%; /* La imagen ocupa el 100% del ancho */
+    height: auto;
+    object-fit: cover; /* Mantener la proporción sin deformar */
+    border-radius: 10px; /* Bordes redondeados */
+    transition: transform 0.3s ease; /* Efecto de zoom suave */
+}
+
+/* Efecto de zoom al pasar el ratón sobre la imagen */
+article > section img:hover {
+    transform: scale(1.05); /* Ampliar ligeramente la imagen */
+}
+
+/* Estilo para los botones */
+article > button {
+    position: absolute;
+    top: 10px; /* Los botones estarán cerca de la parte superior */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo translúcido */
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 1.5rem; /* Tamaño más pequeño */
+    border-radius: 50%;
+    z-index: 2;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Estilo del botón izquierdo (anterior) */
+article > button.prev {
+    left: 10px; /* Botón anterior a la izquierda */
+}
+
+/* Estilo del botón derecho (siguiente) */
+article > button.next {
+    right: 10px; /* Botón siguiente a la derecha */
+}
+
+/* Cambio de estilo al pasar el ratón sobre los botones */
+article > button:hover {
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo más oscuro */
+    transform: scale(1.2); /* Aumentar el tamaño del botón al hacer hover */
+}
+
+/* Opcional: Margen debajo del encabezado */
+article > header {
+    margin-bottom: 10.2em;
+}

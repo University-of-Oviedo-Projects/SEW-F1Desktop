@@ -6,6 +6,9 @@ class Viajes {
 
         // Crear un botón para iniciar la geolocalización
         this.createGeolocationButton();
+
+        // Inicializar el carrusel
+        this.initializeCarousel();
     }
 
     createGeolocationButton() {
@@ -70,13 +73,26 @@ class Viajes {
         img.alt = "Ubicación actual";
         img.setAttribute('data-map', 'static-map');
     
-        const div = document.querySelector('main > div');
-        const main = document.querySelector('main');
-        main.insertBefore(img, div);
+        let div = document.querySelector('main > div');
+        let article = document.querySelector('main > article');
+
+        if (!div) {
+            div = document.createElement('div');
+            document.querySelector('main').insertBefore(div, article);
+        }
+        document.querySelector('main').insertBefore(img, article);
     }
 
     showDynamicMap() {
-        const map = new google.maps.Map(document.querySelector('main > div'), {
+        let div = document.querySelector('main > div');
+        let article = document.querySelector('main > article');
+
+        if (!div) {
+            div = document.createElement('div');
+            document.querySelector('main').insertBefore(article, div);
+        }
+
+        const map = new google.maps.Map(div, {
             center: { lat: this.latitude, lng: this.longitude },
             zoom: 14
         });
@@ -86,5 +102,44 @@ class Viajes {
             map: map,
             title: "Ubicación actual"
         });
+    }
+
+    initializeCarousel() {
+        const slides = document.querySelectorAll("img");
+        const nextSlide = document.querySelector("main > article > button");
+
+        let curSlide = 3;
+        let maxSlide = slides.length - 1;
+
+        nextSlide.addEventListener("click", function () {
+            // check if current slide is the last and reset current slide
+            if (curSlide === maxSlide) {
+                curSlide = 0;
+            } else {
+                curSlide++;
+            }
+
+            //   move slide by -100%
+            slides.forEach((slide, indx) => {
+                var trans = 100 * (indx - curSlide);
+                $(slide).css('transform', 'translateX(' + trans + '%)')
+            });
+        });
+
+        const prevSlide = document.querySelector("button:nth-of-type(2)");
+        prevSlide.addEventListener("click", function () {
+            // check if current slide is the first and reset current slide to last
+            if (curSlide === 0) {
+                curSlide = maxSlide;
+            } else {
+                curSlide--;
+            }
+
+            //   move slide by 100%
+            slides.forEach((slide, indx) => {
+                var trans = 100 * (indx - curSlide);
+                $(slide).css('transform', 'translateX(' + trans + '%)')
+            });
+        })
     }
 }

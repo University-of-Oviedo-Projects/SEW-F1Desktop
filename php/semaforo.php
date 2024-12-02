@@ -57,20 +57,24 @@
 
 <html lang="es">
     <head>
-        <meta charset="utf-8" />
+    <meta charset="utf-8" />
         <meta name="author" content="Adrián Martínez" />
         <meta name="description" content="Una página web que emula a la pagina web de la Formula 1, 
             incluyendo informacion sobre un piloto asignado, los circuitos, la meteorologia, 
             las noticias, los viajes y juegos." />
-        <meta name="keywords" content="Formula 1, Ocon, Carreras, Coches">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <title>F1 Desktop</title>
-        <link rel="icon" type="image/x-icon" href="multimedia/imagenes/favicon-16x16.png">
+        <meta name="keywords" content="Formula 1, Ocon, Carreras, Coches" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         
-        <link rel="stylesheet" type="text/css" href="../estilo/estilo.css" />
-        <link rel="stylesheet" type="text/css" href="../estilo/layout.css" />
-        <link rel="stylesheet" type="text/css" href="../estilo/semaforo.css" />
+        <title>F1 Desktop</title>
+        <link rel="icon" type="image/x-icon" href="multimedia/imagenes/favicon-16x16.png" />
+
+        <!-- Preload de los estilos -->
+        <link rel="preload" href="../estilo/layout.css" as="style"/>
+        <link rel="preload" href="../estilo/estilo.css" as="style"/>
+        
+        <link rel="stylesheet" href="../estilo/estilo.css" />
+        <link rel="stylesheet" href="../estilo/layout.css" />
+        <link rel="stylesheet" href="../estilo/semaforo.css" />
         
         <!-- Añadir referencia al archivo semaforo.js -->
         <script src="../js/semaforo.js"></script>
@@ -91,7 +95,7 @@
                 <a href="../piloto.html">Piloto </a>
                 <a href="../noticias.html">Noticias </a>
                 <a href="../meteorologia.html">Meteorologia </a>
-                <a href="../viajes.html">Viajes </a>
+                <a href="viajes.php">Viajes </a>
                 <a href="../calendario.html">Calendario </a>
                 <a href="../circuitos.html">Circuitos </a>
                 <a href="../juegos.html">Juegos </a>
