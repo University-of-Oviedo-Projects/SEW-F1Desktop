@@ -19,7 +19,7 @@ main h2 {
 main h2, main h3 {
     text-decoration: none;
     text-align: center;
-    margin-top: 0em auto;
+    margin: 0em auto;
 }
 
 /* Especificidad 002 */
@@ -43,6 +43,7 @@ button {
 main article {
     box-shadow: 0 2em 2.5em #0000001a;
     padding: 1em;
+    color: #000000;
     background-color: #FFFFFF;
     border-radius: 2em;
     display: flex;

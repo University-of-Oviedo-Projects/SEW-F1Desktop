@@ -30,7 +30,6 @@ class ProcesamientoCircuitos {
     mostrarContenidoXML(xmlDoc) {
         document.querySelector("main > section").setAttribute("data-state", "visible");
         const contenedor = document.querySelector("main > section");
-        contenedor.innerHTML = ""; // Limpiar contenido previo
 
         // Función auxiliar para crear elementos de texto
         const añadirElemento = (contenedor, titulo, valor) => {

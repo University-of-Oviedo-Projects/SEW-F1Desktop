@@ -72,17 +72,8 @@
 
         <script>
             document.addEventListener("DOMContentLoaded", () => {
-                // Cargar dinámicamente el archivo si `Calendario` no ha sido cargado aún
-                if (typeof Calendario === "undefined") {
-                    $.getScript("js/agenda.js", function() {
-                        const calendario = new Calendario();
-                        calendario.fetchRaces(); 
-                    });
-                } else {
-                    const calendario = new Calendario();
-                    calendario.fetchRaces();
-                }
-
+                const calendario = new Calendario();
+                calendario.fetchRaces();
                 new HelpHandler();    
             });
         </script>

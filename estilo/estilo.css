@@ -13,18 +13,14 @@ html {
     font-family: "helvetica neue", helvetica, arial, sans-serif;
 }
 
-/* Especificidad 001 */
-body { 
-    background-color: #F4E1C1;
-    color: #1F3B4D;
-    overflow-x: hidden;
-}
-
 /* Especificidad 002 */
-body, html {
+html, body {
     height: 100%;
     display: flex;
     flex-direction: column;
+    background-color: #F4E1C1;
+    color: #1F3B4D;
+    overflow-x: hidden;
 }
 
 /* Especificidad 001 */
@@ -35,6 +31,7 @@ body > p {
 
 body > p > a {
     color: #8F0000;
+    /* background-color heredado de body */
 }
 
 /* ###################### Main del body ###################### */
@@ -42,11 +39,6 @@ body > p > a {
 main {
     margin-left: 0.4em;;
     flex: 1; 
-}
-
-/* Especificidad 001 && 001 && 001, 003 */
-h2, h3, h4 {
-    text-decoration: none;
 }
 
 /* Especificidad 001 */
@@ -68,8 +60,6 @@ button {
     font-size: 1em;
     background-color: #1F3B4D;
     color: #fff;
-    border: none;
-    border-radius: 0.5em;
     cursor: pointer;
 }
 
@@ -95,8 +85,8 @@ ul, ol, dl, p {
 
 /* Especificidad 002 */
 ul, ol {
+    /* color heredado de body */
     background-color: #EDD9B0; 
-    /*color heredado de body*/
     list-style-position: inside;
     margin: 0.313em 0.625em 0.625em 0.625em;
 }
@@ -119,6 +109,7 @@ li {
 
 li a {
     color: #8F0000;
+    /* background-color heredado de li */
 }
 
 /* Especificidad 002 */
@@ -129,7 +120,6 @@ dt, dd {
 /* Especificidad 001 */
 dt {
     text-decoration: underline;
-    list-style: circle;
 }
 
 /* Especificidad 001 */
@@ -141,11 +131,9 @@ dd {
 /* Especificidad 001 */
 table {
     table-layout: fixed;
-    width: 100%;
-    border-collapse: collapse;
-    border: 0.2em solid #333;
+    width: 90%;
     font-family: Arial, sans-serif;
-    margin-bottom: 2em;
+    margin: 2em auto;
     background-color: #fff;
     /* color heredado de body */
     box-shadow: 0 0.22em 0.5em #0000001a; 
@@ -166,7 +154,6 @@ table caption {
 th, td {
     padding: 1em 2em; 
     text-align: left;
-    border: 0.5em solid #ddd; 
 }
 
 /* Especificidad 001 */
@@ -214,15 +201,11 @@ dialog[open] {
     max-height: 60%;
     margin: auto;
     padding: 1.5em;
-    border: 0.1em solid #ccc;
-    border-radius: 1em;
-    box-shadow: 0 0.25em 0.4em #0000001a;
     background-color: #fff;
     /* color heredado de body */
     z-index: 1000;
     resize: both;
     overflow: auto;
-    transition: all 0.3s ease-in-out;
 }
 
 /* Especificidad 012 */
@@ -266,23 +249,19 @@ dialog[open] ul li {
 }
 
 /* Especificidad 022 */
-dialog[open] button[id="close-help"] {
+dialog[open] button {
     display: block;
     margin: 1em auto 0;
     padding: 0.5em 1em;
     font-size: 1em;
     background-color: #1F3B4D;
     color: #fff;
-    border: none;
-    border-radius: 0.5em;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
 }
 
 /* Especificidad 032 */
-dialog[open] button[id="close-help"]:hover {
+dialog[open] button:hover {
     background-color: #163240;
-    /* color heredado de button[id="close-help"] */
+    /* color heredado de button */
 }
 
 /* Media Queries para el dialogo de ayuda */
@@ -320,7 +299,6 @@ dialog[open] button[id="close-help"]:hover {
 main  section button {
     padding: 1em 2em;
     font-size: 1.5em; 
-    border-radius: 1em;
     cursor: pointer;
 }
 
@@ -357,7 +335,6 @@ main  > section:nth-of-type(4) > button {
     padding: 1em;
     margin-bottom: 1em;
     font-size: 1em;
-    border-radius: 0.5em;
     cursor: pointer;
 }
 
@@ -397,8 +374,7 @@ main  > dialog:nth-of-type(1) {
     align-items: center;
     text-align: center;
     color: #1F3B4D;
-    border: none;
-    border-radius: 1em;
+    /* background-color heredado de dialog */
     padding: 2em;
     box-shadow: 0 0.25em 0.4em #00000033;
     width: 80%;
@@ -426,8 +402,9 @@ main  > dialog:nth-of-type(1) > p {
 /* Especificidad: 001 */
 form {
     display: flex;
-    flex-direction: column;  /* Mantener los elementos en columna */
+    flex-direction: column;  
     background-color: #f9f9f9;
+    /* color heredado de body */
     border: 0.5em solid #ddd;
     border-radius: 0.5em;
     padding: 2em;
@@ -445,46 +422,41 @@ form label {
 /* Especificidad: 012 */
 form input[type="text"], form textarea, form input[type="file"], form textarea {
     padding: 1em;
+    /* Redefinimos el padding para que no se desborde del contenedor */
     margin: 0.5em 0;
-    border: 0.25em solid #ddd;
-    border-radius: 0.5em;
-    box-sizing: border-box;  /* Asegura que el padding no aumente el tamaño */
+    /* Redefinimos el margen para que no se desborde del contenedor */
 }
 
 /* Especificidad: 012 */
 form input[type="file"] {
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 /* Especificidad: 022 */
 form input[type="file"]:hover {
     background-color: #e9e9e9;
+    /* color heredado de body */
 }
 
 /* Especificidad: 002 */
 form button {
     background-color: #1F3B4D;
     color: #fff;
-    border: none;
     padding: 1em 2em;
-    border-radius: 0.5em;
     cursor: pointer;
-    transition: background-color 0.2s;
     width: 100%;  
 }
 
 /* Especificidad: 012 */
 form button:hover {
     background-color: #163240;
+    /* color heredado de form button */
 }
 
 /* Especificidad: 003 */
 form input[type="text"]:focus, form textarea:focus, form input[type="file"]:focus {
     outline: none; 
-    border-color: #1F3B4D; 
 }
-
 
 
 /* ###################### Estilo para los mapas ###################### */
@@ -521,22 +493,12 @@ svg {
 }
 
 /* ###################### Estilo para XML ###################### */
-
-/* Especificidad 013 */
-main > section video {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 1em;
-    border: 1px solid #ddd;
-    border-radius: 0.5em;
-    box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
-}
-
 /* Especificidad 023 */
 main > section a {
     display: block ;
     text-align: left;
     color: #8F0000;
+    /* background-color heredado de body */
     text-decoration: none;
     font-weight: bold;
 }
@@ -551,92 +513,6 @@ main section blockquote {
     margin: 1em 0;
     padding: 1em;
     background-color: #f9f9f9;
-    border-left: 5px solid #ddd;
     font-style: italic;
     color: #555;
-}
-
-/* Especificidad 023 */
-main section header {
-    font-size: 1.3em;
-    font-weight: bold;
-    color: #1F3B4D;
-    margin-top: 0em auto;
-    padding-bottom: 0.5em;
-}
-
-/* Especificidad 023 */
-main section footer {
-    font-size: 1em;
-    color: #777;
-    margin-top: 1em;
-    border-top: 1px solid #ddd;
-    padding-top: 0.5em;
-    text-align: right;
-}
-
-
-/* ###################### Estilo para carrusel (viajes.php) ###################### */
-/* Estilo para el contenedor del carrusel */
-article {
-    background-color: red;
-    position: relative;
-    max-width: 100%; /* Asegúrate de que el carrusel ocupe el 100% */
-    margin: 2em auto; /* Espacio alrededor del carrusel */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden; /* Oculta cualquier parte que sobresalga */
-    border-radius: 1em; /* Bordes redondeados */
-    box-shadow: 0 .5em 1.2em #0000004d; 
-}
-
-/* Estilo de las imágenes del carrusel */
-article > section img {
-    width: 100%; /* La imagen ocupa el 100% del ancho */
-    height: auto;
-    object-fit: cover; /* Mantener la proporción sin deformar */
-    border-radius: 10px; /* Bordes redondeados */
-    transition: transform 0.3s ease; /* Efecto de zoom suave */
-}
-
-/* Efecto de zoom al pasar el ratón sobre la imagen */
-article > section img:hover {
-    transform: scale(1.05); /* Ampliar ligeramente la imagen */
-}
-
-/* Estilo para los botones */
-article > button {
-    position: absolute;
-    top: 10px; /* Los botones estarán cerca de la parte superior */
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo translúcido */
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 1.5rem; /* Tamaño más pequeño */
-    border-radius: 50%;
-    z-index: 2;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-/* Estilo del botón izquierdo (anterior) */
-article > button.prev {
-    left: 10px; /* Botón anterior a la izquierda */
-}
-
-/* Estilo del botón derecho (siguiente) */
-article > button.next {
-    right: 10px; /* Botón siguiente a la derecha */
-}
-
-/* Cambio de estilo al pasar el ratón sobre los botones */
-article > button:hover {
-    background-color: rgba(0, 0, 0, 0.8); /* Fondo más oscuro */
-    transform: scale(1.2); /* Aumentar el tamaño del botón al hacer hover */
-}
-
-/* Opcional: Margen debajo del encabezado */
-article > header {
-    margin-bottom: 10.2em;
 }

@@ -73,30 +73,25 @@ class Viajes {
         img.alt = "Ubicación actual";
         img.setAttribute('data-map', 'static-map');
     
-        let div = document.querySelector('main > div');
         let article = document.querySelector('main > article');
-
-        if (!div) {
-            div = document.createElement('div');
-            document.querySelector('main').insertBefore(div, article);
-        }
         document.querySelector('main').insertBefore(img, article);
     }
-
+    
     showDynamicMap() {
-        let div = document.querySelector('main > div');
+        let divDynamic = document.querySelector('main > div.dynamic-map');
         let article = document.querySelector('main > article');
-
-        if (!div) {
-            div = document.createElement('div');
-            document.querySelector('main').insertBefore(article, div);
+    
+        if (!divDynamic) {
+            divDynamic = document.createElement('div');
+            divDynamic.classList.add('dynamic-map');
+            document.querySelector('main').insertBefore(divDynamic, article);
         }
-
-        const map = new google.maps.Map(div, {
+    
+        const map = new google.maps.Map(divDynamic, {
             center: { lat: this.latitude, lng: this.longitude },
             zoom: 14
         });
-
+    
         new google.maps.Marker({
             position: { lat: this.latitude, lng: this.longitude },
             map: map,

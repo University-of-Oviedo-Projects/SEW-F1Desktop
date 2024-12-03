@@ -185,12 +185,12 @@ class Api {
 
         // Crear contenedor de puntuación
         const scoreContainer = document.createElement('section');
-        const h2 = document.createElement('h2');
-        h2.textContent = "Puntuación: ";
+        const h21 = document.createElement('h2');
+        h21.textContent = "Puntuación: ";
         const span = document.createElement('span');
         span.textContent = "0";
-        h2.appendChild(span);
-        scoreContainer.appendChild(h2);
+        h21.appendChild(span);
+        scoreContainer.appendChild(h21);
         scoreContainer.setAttribute('data-state', 'hidden');
         main.appendChild(scoreContainer);
 
@@ -198,19 +198,25 @@ class Api {
         const questionContainer = document.createElement('section');
         questionContainer.classList.add('question-container');
         questionContainer.setAttribute('data-state', 'hidden');
+        const h22 = document.createElement('h2');
+        h22.textContent = "Pregunta";
+        questionContainer.appendChild(h22);
         main.appendChild(questionContainer);
 
         // Crear contenedor de opciones
         const optionsContainer = document.createElement('section');
         optionsContainer.classList.add('options-container');
+        const h23 = document.createElement('h2');
+        h23.textContent = "Opciones";
+        optionsContainer.appendChild(h23);
         optionsContainer.setAttribute('data-state', 'hidden');
         main.appendChild(optionsContainer);
 
         // Crear contenedor de puntuación final
         const finalScoreContainer = document.createElement('section');
-        const h21 = document.createElement('h2');
-        h21.textContent = "Puntuación Final";
-        finalScoreContainer.appendChild(h21);
+        const h24 = document.createElement('h2');
+        h24.textContent = "Puntuación Final";
+        finalScoreContainer.appendChild(h24);
         finalScoreContainer.classList.add('final-score-container');
         finalScoreContainer.setAttribute('data-state', 'hidden');
         main.appendChild(finalScoreContainer);
@@ -413,7 +419,7 @@ class Api {
         setTimeout(() => {
             scoreDialog.classList.remove('show');
             scoreDialog.close();
-        }, 4000);
+        }, 7000);
     }
 
     // Sonido de respuesta correcta o incorrecta
@@ -444,8 +450,8 @@ class Api {
 
         const progressBarWidth = this.progressBarCanvas.width;
         const context = this.progressBarContext;
-        const duration = 5000; // Duración de la barra de progreso en milisegundos (4 segundos)
-        const step = progressBarWidth / (duration / 50); // Calculamos cuántos píxeles debe retroceder cada 50 ms
+        const duration = 8000; 
+        const step = progressBarWidth / (duration / 50); 
     
         // Limpiar cualquier trazo anterior
         context.clearRect(0, 0, progressBarWidth, this.progressBarCanvas.height);

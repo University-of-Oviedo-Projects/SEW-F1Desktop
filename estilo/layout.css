@@ -41,8 +41,9 @@ nav {
     box-sizing: border-box;
 }
 
-/* Especificidad 002 */
-a {
+
+/* Especificidad 003 & 001, 004 */
+menu li a, a {
     text-decoration: none;           
     color: #FFFFFF;
     font-size: 1.27em;
@@ -52,6 +53,11 @@ a {
     text-align: center;
     flex: 0 0 auto; 
     transition: color 0.3s;
+}
+
+/* Especificidad 002 */
+menu li {
+    list-style: none
 }
 
 /* Especificidad 024 */
