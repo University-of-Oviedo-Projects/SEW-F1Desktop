@@ -4,7 +4,6 @@ header, menu {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap; 
-    width: 100%;
     box-sizing: border-box;
     padding: 1.5em;
     background-color: #0A1A2E;
@@ -12,15 +11,20 @@ header, menu {
 }
 
 /* Especificidad 001 */
-menu {
-    width: 50%; /* Ancho reducido del menú (puedes ajustarlo según lo desees) */
-    margin: 0 auto; /* Centra el menú */
+header {
+    width: 100%;
 }
 
+/* Especificidad 001 */
+menu {
+    width: 50%; 
+    margin: 0 auto; 
+}
 
 /* Especificidad 002 */
 h1 {
     color: #FFFFFF;
+    /* backgroud-color heredado de header */
     text-decoration: none;
     font-size: 1.25em;
     margin: 0.5em;
@@ -46,13 +50,13 @@ nav {
 menu li a, a {
     text-decoration: none;           
     color: #FFFFFF;
+    /* backgroud-color heredado de menu */
     font-size: 1.27em;
     padding: 0.3em 0.5em; 
     border-radius: 0.25em;
     white-space: nowrap; 
     text-align: center;
     flex: 0 0 auto; 
-    transition: color 0.3s;
 }
 
 /* Especificidad 002 */
@@ -63,6 +67,7 @@ menu li {
 /* Especificidad 024 */
 a:hover, a:focus {
     color: #eb950c;
+    /* backgroud-color heredado de la regla header, menu */
 }
 
 /* Especificidad 001 */
