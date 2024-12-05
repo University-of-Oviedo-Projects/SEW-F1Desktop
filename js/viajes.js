@@ -4,22 +4,50 @@ class Viajes {
         this.longitude = null;
         this.error = null;
 
+        // Ocultar el div
+        document.querySelector('main > div').setAttribute('data-state', 'hidden');
+
         // Crear un botón para iniciar la geolocalización
         this.createGeolocationButton();
 
         // Inicializar el carrusel
         this.initializeCarousel();
-    }
+    }    
 
     createGeolocationButton() {
         const button = document.createElement("button");
         button.textContent = "Mostrar mi ubicación";
-        button.addEventListener("click", this.requestLocation.bind(this));
         const h2 = document.querySelector("main > h2");
         h2.insertAdjacentElement("afterend", button);
+
+        // Ahora solo cargamos Google Maps cuando el botón es presionado
+        button.addEventListener("click", this.loadGoogleMaps.bind(this));
     }
 
+    loadGoogleMaps() {
+        const script = document.createElement('script');
+        script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyC6j4mF6blrc4kZ54S6vYZ2_FpMY9VzyRU&callback=initMap";
+        script.async = true;
+        script.defer = true;
+        
+        window.initMap = () => {
+            this.requestLocation(); 
+        };
+
+        script.onerror = () => {
+            this.error = "Ocurrió un error al cargar Google Maps.";
+            const p = document.createElement('p');
+            p.textContent = this.error;
+            document.querySelector('main').insertBefore(p, document.querySelector('main > div'));
+            setTimeout(() => { p.remove(); }, 4000);
+        }
+    
+        document.body.appendChild(script); 
+    }  
+
     requestLocation() {
+        document.querySelector('main > div').setAttribute('data-state', 'visible');
+
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 this.setPosition.bind(this),
@@ -68,17 +96,17 @@ class Viajes {
     showStaticMap() {
         const mapUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${this.latitude},${this.longitude}&zoom=17&size=800x800&scale=4&markers=color:red%7C${this.latitude},${this.longitude}&key=AIzaSyC6j4mF6blrc4kZ54S6vYZ2_FpMY9VzyRU`;
     
-        const img = document.createElement('img');
+        let img = document.createElement('img');
         img.src = mapUrl;
         img.alt = "Ubicación actual";
         img.setAttribute('data-map', 'static-map');
     
-        let article = document.querySelector('main > article');
-        document.querySelector('main').insertBefore(img, article);
+        const div = document.querySelector('main > div');
+        document.querySelector('main').insertBefore(img, div);
     }
     
     showDynamicMap() {
-        let divDynamic = document.querySelector('main > div.dynamic-map');
+        let divDynamic = document.querySelector('main > div');
         let article = document.querySelector('main > article');
     
         if (!divDynamic) {
@@ -100,41 +128,48 @@ class Viajes {
     }
 
     initializeCarousel() {
-        const slides = document.querySelectorAll("img");
-        const nextSlide = document.querySelector("main > article > button");
+        const script = document.createElement('script');
+        script.src = "https://code.jquery.com/jquery-3.6.0.min.js";
+        script.onload = () => {
+            const slides = document.querySelectorAll("img");
+            const nextSlide = document.querySelector("main > article > button");
 
-        let curSlide = 3;
-        let maxSlide = slides.length - 1;
+            let curSlide = 3;
+            let maxSlide = slides.length - 1;
 
-        nextSlide.addEventListener("click", function () {
-            // check if current slide is the last and reset current slide
-            if (curSlide === maxSlide) {
-                curSlide = 0;
-            } else {
-                curSlide++;
-            }
+            nextSlide.addEventListener("click", function () {
+                // check if current slide is the last and reset current slide
+                if (curSlide === maxSlide) {
+                    curSlide = 0;
+                } else {
+                    curSlide++;
+                }
 
-            //   move slide by -100%
-            slides.forEach((slide, indx) => {
-                var trans = 100 * (indx - curSlide);
-                $(slide).css('transform', 'translateX(' + trans + '%)')
+                // move slide by -100%
+                slides.forEach((slide, indx) => {
+                    var trans = 100 * (indx - curSlide);
+                    $(slide).css('transform', 'translateX(' + trans + '%)');
+                });
             });
-        });
 
-        const prevSlide = document.querySelector("button:nth-of-type(2)");
-        prevSlide.addEventListener("click", function () {
-            // check if current slide is the first and reset current slide to last
-            if (curSlide === 0) {
-                curSlide = maxSlide;
-            } else {
-                curSlide--;
-            }
+            const prevSlide = document.querySelector("button:nth-of-type(2)");
+            prevSlide.addEventListener("click", function () {
+                // check if current slide is the first and reset current slide to last
+                if (curSlide === 0) {
+                    curSlide = maxSlide;
+                } else {
+                    curSlide--;
+                }
 
-            //   move slide by 100%
-            slides.forEach((slide, indx) => {
-                var trans = 100 * (indx - curSlide);
-                $(slide).css('transform', 'translateX(' + trans + '%)')
+                // move slide by 100%
+                slides.forEach((slide, indx) => {
+                    var trans = 100 * (indx - curSlide);
+                    $(slide).css('transform', 'translateX(' + trans + '%)');
+                });
             });
-        })
+        }
+    
+        // Añadir el script al documento
+        document.head.appendChild(script);
     }
-}
+}    

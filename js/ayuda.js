@@ -1,3 +1,16 @@
+/*
+    Esta clase se encarga de mostrar un popup de ayuda al usuario
+    cuando presiona la tecla F1 o hace clic en el botón de ayuda.
+
+    El contenido de ayuda se muestra en un <dialog> que se abre
+    con el método showModal() y se cierra con el método close().
+
+    El contenido de ayuda se crea directamente en el <dialog> sin
+    necesidad de crear un div adicional. Se crean secciones con
+    títulos y contenido o listas de elementos. 
+    
+    Al final de cada se añade un botón para cerrar el popup. 
+*/
 class HelpHandler {
     constructor() {
         this.prepareHelpButton();
@@ -22,15 +35,11 @@ class HelpHandler {
         }
     }
 
-    // Función para mostrar el popup de ayuda sin usar div
     showHelpPopup() {
         const helpPopup = document.querySelector("dialog");
-        helpPopup.innerHTML = ""; // Limpia cualquier contenido previo
-        this.createHelpContent(helpPopup); // Agrega contenido directamente al <dialog>
-        helpPopup.scrollTop = 0; // Asegura el desplazamiento en la parte superior
+        this.createHelpContent(helpPopup); 
 
-        // Agrega el evento para cerrar
-        const closeHelpButton = helpPopup.querySelector("#close-help");
+        const closeHelpButton = helpPopup.querySelector("dialog > button");
         if (closeHelpButton) {
             closeHelpButton.addEventListener("click", () => {
                 this.closeHelpPopup();
@@ -40,15 +49,12 @@ class HelpHandler {
         helpPopup.showModal();
     }
 
-    // Función para cerrar el popup de ayuda
     closeHelpPopup() {
         const helpPopup = document.querySelector("dialog");
         helpPopup.close();
     }
 
-    // Función para crear el contenido de ayuda directamente en el dialog
     createHelpContent(helpPopup) {
-        // Crear secciones de ayuda
         const sections = [
             {
                 title: "¿Cómo funciona?",
@@ -65,46 +71,42 @@ class HelpHandler {
             {
                 title: "Secciones disponibles:",
                 list: [
-                    "Home: Página principal con información general.",
-                    "Piloto: Información sobre el piloto de F1 Esteban Ocon.",
-                    "Noticias: Crear y ver las ultimas noticias sobre la F!.",
-                    "Meteorología: Información meteorológica sobre el circuito de Zandvoort.",
-                    "Viajes: Mapa estatico  dinamico de tu ubicación.",
-                    "Circuitos: Información el circuito de Zandvoort.",
-                    "Calendario: Calendario de carreras de la temporada.",
-                    "Juegos: Mini juegos relacionados con la Fórmula 1.",
+                    "Home: página principal.",
+                    "Piloto: información sobre el piloto Esteban Ocon.",
+                    "Noticias: ver las ultimas noticias sobre la F1, crear noticias.",
+                    "Meteorología: información sobre Países Bajos, predicción meteorológica sobre el circuito de Zandvoort.",
+                    "Viajes: consultar cambio de moneda, mapas y carrusel de fotos.",
+                    "Circuitos: obtener informacion de zandvoort mediante archivos.",
+                    "Calendario: carreras de la temporada actual de F1.",
+                    "Juegos: mini juegos relacionados con la Fórmula 1.",
                 ],
             },
         ];
 
         // Añadir contenido al <dialog>
         sections.forEach((section) => {
-            // Título de la sección
             const title = document.createElement("h3");
             title.textContent = section.title;
             helpPopup.appendChild(title);
 
-            // Contenido o lista de la sección
-            if (section.content) {
+            if (section.content) { // Si la sección tiene contenido
                 const paragraph = document.createElement("p");
                 paragraph.innerHTML = section.content;
                 helpPopup.appendChild(paragraph);
             }
 
-            if (section.list) {
+            if (section.list) { // Si la sección tiene una lista
                 const ul = document.createElement("ul");
                 section.list.forEach((item) => {
                     const li = document.createElement("li");
-                    li.innerHTML = `<strong>${item.split(":")[0]}:</strong> ${item.split(":")[1]}`;
+                    li.innerHTML = `${item.split(":")[0]}: ${item.split(":")[1]}`;
                     ul.appendChild(li);
                 });
                 helpPopup.appendChild(ul);
             }
         });
 
-        // Botón de cierre
         const closeButton = document.createElement("button");
-        closeButton.id = "close-help";
         closeButton.textContent = "Cerrar";
         helpPopup.appendChild(closeButton);
     }

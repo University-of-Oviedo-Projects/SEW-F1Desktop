@@ -5,41 +5,92 @@
         private $capital;
         private $pais;
         private $fotos;
-
+    
         public function __construct($capital, $pais) {
             $this->capital = $capital;
             $this->pais = $pais;
             $this->fotos = [];
         }
-
+    
         public function fetchfotos() {
             $apiKey = 'aef049db4852b23d7b6f7303dfc8e7f2';
-            $url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=$apiKey&tags=" . urlencode($this->pais) . "&per_page=10&format=json&nojsoncallback=1";
+            $url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=$apiKey&tags=" . urlencode($this->pais) . "&per_page=5&format=json&nojsoncallback=1";
+    
+            // Usar cURL con keep-alive para mejorar la eficiencia de las solicitudes
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Connection: keep-alive')); // Hacer que la conexión se mantenga viva
+            $response = curl_exec($ch);
+    
+            // Verificar si hubo un error con la solicitud
+            if ($response === false) {
+                echo "No se pudo conectar con la API de Flickr: " . curl_error($ch);
+                curl_close($ch);
+                return;
+            }
+            curl_close($ch);
+    
+            // Decodificar la respuesta JSON
+            $data = json_decode($response, true);
+    
+            // Verificar si la respuesta contiene fotos
+            if (!isset($data['photos']['photo']) || count($data['photos']['photo']) == 0) {
+                echo "No se encontraron fotos para el país especificado.";
+                return;
+            }
+    
+            // Recoger las URLs de las fotos y almacenarlas
+            foreach ($data['photos']['photo'] as $photo) {
+                $photoUrl = "https://farm{$photo['farm']}.staticflickr.com/{$photo['server']}/{$photo['id']}_{$photo['secret']}_m.jpg"; 
+                $this->fotos[] = $photoUrl;
+            }
+        }
+    
+        public function renderizarCarrusel() {
+            foreach ($this->fotos as $index => $foto) {
+                echo "<img src=\"$foto\" alt=\"Foto de $this->pais\" loading=\"lazy\" />";
+            }
+        }
+    }
+          
+
+    class Moneda {
+        private $baseCurrency;
+        private $targetCurrency;
+        private $apiKey = "fca_live_f978WHzGyG3KBNjyUovfpzQac2ILRUDselGWDbPG"; 
+        public function __construct($baseCurrency, $targetCurrency) {
+            $this->baseCurrency = $baseCurrency;
+            $this->targetCurrency = $targetCurrency;
+        }
+
+        public function obtenerCambio() {
+            $url = "https://api.freecurrencyapi.com/v1/latest?apikey={$this->apiKey}&base_currency={$this->baseCurrency}";
             
-            $response = file_get_contents($url);
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $response = curl_exec($ch);
+            curl_close($ch);
+
             if ($response === false) {
                 echo "No se pudo conectar con la API de Flickr.";
                 return;
             }
-        
+
+            if ($response === FALSE) {
+                throw new Exception("Error al conectar con el servicio de cambio de moneda.");
+            }
+
             $data = json_decode($response, true);
-            if (!isset($data['photos']['photo'])) { 
-                echo "No se encontraron fotos para el país especificado.";
-                return;
-            }
-        
-            foreach ($data['photos']['photo'] as $photo) { 
-                $photoUrl = "https://farm{$photo['farm']}.staticflickr.com/{$photo['server']}/{$photo['id']}_{$photo['secret']}.jpg";
-                $this->fotos[] = $photoUrl;
+
+            if (isset($data['data'][$this->targetCurrency])) {
+                return $data['data'][$this->targetCurrency];
+            } else {
+                throw new Exception("No se encontró la tasa de cambio para {$this->targetCurrency}.");
             }
         }
-        
-        public function renderizarCarrusel() {
-            foreach ($this->fotos as $foto) {
-                echo "<img src=\"$foto\" alt=\"Foto de $this->pais\" />";
-            }
-        }
-    }       
+    }
 ?>
 
 <html lang="es">
@@ -53,94 +104,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <title>F1 Desktop</title>
-        <link rel="icon" type="image/x-icon" href="multimedia/imagenes/favicon-16x16.png">
+        <link rel="icon" type="image/x-icon" href="../multimedia/imagenes/favicon-16x16.png">
         
         <!-- Preload de los estilos -->
         <link rel="preload" href="../estilo/layout.css" as="style">
         <link rel="preload" href="../estilo/estilo.css" as="style">
+        <link rel="preload" href="../js/viajes.js" as="script">
+        <link rel="preload" href="../js/ayuda.js" as="script">
 
         <!-- Después de que se haya descargado, se aplica el CSS -->
         <link rel="stylesheet" href="../estilo/layout.css">
         <link rel="stylesheet" href="../estilo/estilo.css">
-
-        <!-- Este script carga Google Maps de manera correcta, sin el atributo charset -->
-        <script defer async 
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6j4mF6blrc4kZ54S6vYZ2_FpMY9VzyRU" >
-        </script>
-
-        <!-- Añadir referencia a jQuery -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-        <!-- Slick Carousel -->
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 
         <!-- Añadir referencia al archivo viajes.js -->
         <script src="../js/viajes.js"></script>
 
         <!-- Añadir referencia al archivo ayuda.js -->
         <script src="../js/ayuda.js"></script>
-
-        <style>
-            article {
-                width: 100%;
-                max-width: 100vh;
-                height: 70vh;
-                position: relative;
-                overflow: hidden; 
-                margin: 2em auto;
-                border-radius: 1em;
-            }
-
-            article h3 {
-                width: 100%;
-                text-align: center;
-                margin-bottom: 0.5em;
-                font-size: 2em;
-            }
-
-            main > article img {
-                width: 100%;
-                max-width: 100vh;
-                height: 60vh;
-                position: absolute;
-                transition: all 0.5s;
-                object-fit: cover;
-                border-radius: 0.5em;
-            }
-
-            main > article button {
-                position: absolute;
-                width: 2em;
-                height: 2em;
-                padding: 0.5em;
-                border: none;
-                border-radius: 50%;
-                z-index: 10;
-                cursor: pointer;
-                background-color: #fff;
-                font-size: 1em;
-                display: flex;
-                flex-direction: column;
-                align-items:center;
-                justify-content: center;
-            }
-
-            main > article button:active {
-                transform: scale(1.1);
-            }
-
-            main > article button:nth-of-type(2) {
-                top: 50%;
-                left: 2%;
-            }
-
-            main > article button:nth-of-type(1) {
-                top: 50%;
-                right: 2%;
-            }
-        </style>
     </head>
 
     <body>
@@ -162,9 +142,24 @@
         <p>Estas en <a href="index.html" title="Home">Inicio</a> 
             >> <a href="viajes.html" title="Viajes">Viajes</a><p>
 
-        <main data-pages="mapa">
+        <main>
+            <?php
+                try {
+                    $paisMoneda = "EUR"; 
+                    $cambioMoneda = "USD";
+
+                    $moneda = new Moneda($paisMoneda, $cambioMoneda);
+                    $tasaCambio = $moneda->obtenerCambio();
+                    $formattedTasaCambio = number_format($tasaCambio, 2);
+
+                    echo "<p>Cambio de moneda: 1 {$paisMoneda} equivale a {$formattedTasaCambio} {$cambioMoneda}</p>";
+                } catch (Exception $e) {
+                    echo "<p>Error con el cambio d emoneda: " . $e->getMessage() . "</p>";
+                }
+            ?>
+
             <h2>Mapas estáticos y dinámicos</h2>
-            <!--<div></div>-->
+            <div></div>
 
             <article>
                 <header>

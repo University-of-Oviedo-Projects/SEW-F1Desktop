@@ -28,25 +28,26 @@ class Calendario {
     }
 
     displayRaces(races) {
-        // Seleccionar el contenedor <section> dentro de <main>
         const raceContainer = document.querySelector('main');
-
-        // Asegurarse de que está vacío antes de añadir contenido
-        raceContainer.innerHTML = '<h2>Carreras de la temporada</h2>';
-
-        // Añadir cada carrera como un <article> en el contenedor
+        
         races.forEach(race => {
-            const raceElement = document.createElement('article');
-            raceElement.innerHTML = `
-                <header>
-                    <h3>${race.raceName}</h3>
-                </header>
-                <p><strong>Circuito:</strong> ${race.Circuit.circuitName}</p>
-                <p><strong>Coordenadas:</strong> ${race.Circuit.Location.lat}, ${race.Circuit.Location.long}</p>
-                <p><strong>Fecha y Hora:</strong> ${race.date} ${race.time}</p>
-            `;
-
-            raceContainer.appendChild(raceElement);
+            const article = document.createElement('article');
+            const header = document.createElement('header');
+            const h3 = document.createElement('h3');
+            h3.textContent = race.raceName;
+            header.appendChild(h3);
+            article.appendChild(header);
+            const p1 = document.createElement('p');
+            p1.textContent = `Circuito: ${race.Circuit.circuitName}`;	
+            article.appendChild(p1);
+            const p2 = document.createElement('p');
+            p2.textContent = `Coordenadas: ${race.Circuit.Location.lat}, ${race.Circuit.Location.long}`;
+            article.appendChild(p2);
+            const p3 = document.createElement('p');
+            p3.textContent = `Fecha y Hora: ${race.date} ${race.time}`;
+            article.appendChild(p3);
+            raceContainer.appendChild(article);
         });
     }
+    
 }

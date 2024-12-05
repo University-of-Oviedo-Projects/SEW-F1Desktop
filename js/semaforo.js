@@ -48,8 +48,10 @@ class Semaforo {
     initSequence() {
         const main = document.querySelector("main");
         main.classList.add("load");  
-
         this.reactionTimeDisplay.textContent = "";
+
+        const form = document.querySelector("main > form");
+        if(form) { form.remove(); }
         
         // Deshabilitar el botón de inicio
         if (this.startButton) {
@@ -122,6 +124,9 @@ class Semaforo {
     }
 
     createRecordForm(reactionTimeSeconds) {
+        const currentForm = document.querySelector("main > form");
+        if(currentForm) { currentForm.remove(); }
+
         const formHtml = document.createElement("form");
         formHtml.method = "post";
         formHtml.action = "semaforo.php";
