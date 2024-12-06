@@ -24,15 +24,23 @@ html, body {
     margin: 0em;
 }
 
-/* Especificidad 001 */
+/* Especificidad 002 */
 body > p {
     margin-left: 0.4em;;
     font-size: small;
 }
 
+/* Especificidad 003 */
 body > p > a {
     color: #8F0000;
     /* background-color heredado de body */
+}
+
+/* Espcificidad 002 */
+body > button { /* Boton de ayuda global */
+    margin-left: auto;
+    margin-right: 2em;
+    margin-top: 1em;
 }
 
 /* ###################### Main del body ###################### */

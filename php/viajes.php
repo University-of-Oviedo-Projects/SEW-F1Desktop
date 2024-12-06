@@ -140,7 +140,10 @@
         </header>
 
         <p>Estas en <a href="index.html" title="Home">Inicio</a> 
-            >> <a href="viajes.html" title="Viajes">Viajes</a><p>
+            >> <a href="viajes.html" title="Viajes">Viajes</a></p>
+
+        <!-- Botón para abrir el popup de ayuda -->
+        <button>Ayuda</button>
 
         <main>
             <?php
@@ -179,8 +182,6 @@
 
         <!-- Pie de página -->
         <footer>
-            <!-- Botón para abrir el popup de ayuda -->
-            <button>Ayuda</button>
             <!-- Información del autor -->
             <p>&copy; Adrián Martínez, F1 Desktop</p>
         </footer>

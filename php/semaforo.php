@@ -106,6 +106,9 @@
             >> <a href="../juegos.html" title="Juegos">Juegos</a>
             >> <a href="php/semaforo.php" title="Reacción">Reacción</a></p>
 
+        <!-- Botón para abrir el popup de ayuda -->
+        <button>Ayuda</button>
+
         <main> 
             <!-- Aquí se mostrará el juego -->
         </main>
@@ -135,8 +138,6 @@
 
         <!-- Pie de página -->
         <footer>
-            <!-- Botón para abrir el popup de ayuda -->
-            <button>Ayuda</button>
             <!-- Texto de derechos de autor -->
             <p>&copy; Adrián Martínez, F1 Desktop</p>
         </footer>

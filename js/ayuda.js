@@ -27,7 +27,7 @@ class HelpHandler {
         });
 
         // Detectar el clic en el botón de ayuda
-        const openHelpButton = document.querySelector("footer button");
+        const openHelpButton = document.querySelector("body > button");
         if (openHelpButton) {
             openHelpButton.addEventListener("click", () => {
                 this.showHelpPopup();
@@ -37,6 +37,7 @@ class HelpHandler {
 
     showHelpPopup() {
         const helpPopup = document.querySelector("dialog");
+        helpPopup.innerHTML = ""; // Limpiar el contenido anterior
         this.createHelpContent(helpPopup); 
 
         const closeHelpButton = helpPopup.querySelector("dialog > button");
