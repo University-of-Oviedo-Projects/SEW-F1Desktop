@@ -36,9 +36,9 @@ class Memoria {
 
     createAndLoadGameTutorial() {
         // Selección de elementos del tutorial
-        const tutorialButton = document.querySelector('button');  
-        const tutorialPopup = document.querySelector('dialog');  
-        const closeTutorial = tutorialPopup.querySelector('button');  
+        const tutorialButton = document.querySelector('main > section > button');  
+        const tutorialPopup = document.querySelector('main > section > dialog');  
+        const closeTutorial = tutorialPopup.querySelector('main > section > dialog > button');  
 
         // Mostrar el tutorial
         tutorialButton.addEventListener('click', () => {

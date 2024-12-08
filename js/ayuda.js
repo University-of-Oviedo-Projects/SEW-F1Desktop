@@ -36,11 +36,11 @@ class HelpHandler {
     }
 
     showHelpPopup() {
-        const helpPopup = document.querySelector("dialog");
+        const helpPopup = document.querySelector("footer+dialog");
         helpPopup.innerHTML = ""; // Limpiar el contenido anterior
         this.createHelpContent(helpPopup); 
 
-        const closeHelpButton = helpPopup.querySelector("dialog > button");
+        const closeHelpButton = helpPopup.querySelector("footer+dialog > button");
         if (closeHelpButton) {
             closeHelpButton.addEventListener("click", () => {
                 this.closeHelpPopup();
@@ -51,7 +51,7 @@ class HelpHandler {
     }
 
     closeHelpPopup() {
-        const helpPopup = document.querySelector("dialog");
+        const helpPopup = document.querySelector("footer+dialog");
         helpPopup.close();
     }
 
