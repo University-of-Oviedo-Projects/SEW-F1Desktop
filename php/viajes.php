@@ -125,7 +125,7 @@
 
     <body>
         <header>
-            <h1><a href="index.html">F1 Desktop</a></h1>
+            <h1><a href="../index.html">F1 Desktop</a></h1>
 
             <nav>
                 <a href="../index.html">Home </a>
@@ -139,8 +139,7 @@
             </nav>
         </header>
 
-        <p>Estas en <a href="index.html" title="Home">Inicio</a> 
-            >> <a href="viajes.html" title="Viajes">Viajes</a></p>
+        <p>Estas en <a href="index.html" title="Home">Inicio</a> >> Viajes</p>
 
         <!-- Botón para abrir el popup de ayuda -->
         <button>Ayuda</button>

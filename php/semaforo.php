@@ -88,7 +88,7 @@
 
     <body>
         <header>
-            <h1><a href="index.html">F1 Desktop</a></h1>
+            <h1><a href="../index.html">F1 Desktop</a></h1>
 
             <nav>
                 <a href="../index.html">Home </a>
@@ -103,8 +103,7 @@
         </header>
 
         <p>Estas en <a href="../index.html" title="Home">Inicio</a> 
-            >> <a href="../juegos.html" title="Juegos">Juegos</a>
-            >> <a href="php/semaforo.php" title="Reacción">Reacción</a></p>
+            >> <a href="../juegos.html" title="Juegos">Juegos</a> >> Reacción</p>
 
         <!-- Botón para abrir el popup de ayuda -->
         <button>Ayuda</button>
