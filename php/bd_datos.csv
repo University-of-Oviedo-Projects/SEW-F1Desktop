@@ -1,0 +1,24 @@
+id_carrera,nombre,fecha,nombre_circuito
+1,"Gran Premio de Mónaco",2024-05-26,"Circuito de Mónaco"
+2,"Gran Premio de Gran Bretaña",2024-07-07,Silverstone
+3,"Gran Premio de Bélgica",2024-08-25,"Circuito de Spa-Francorchamps"
+
+id_circuito,nombre,pais,longitud_km
+1,"Circuito de Mónaco",Mónaco,3.337
+2,Silverstone,"Reino Unido",5.891
+3,"Circuito de Spa-Francorchamps",Bélgica,7.004
+
+id_escuderia,nombre,pais
+1,Mercedes,Alemania
+2,Ferrari,Italia
+3,"Red Bull Racing",Austria
+
+id_piloto,nombre,apellido,nacionalidad,id_escuderia
+1,Lewis,Hamilton,Británico,1
+2,Charles,Leclerc,Monegasco,2
+3,Max,Verstappen,Neerlandés,3
+
+id_resultado,id_piloto,id_carrera,posicion,puntos
+1,1,1,1,25
+2,2,1,2,18
+

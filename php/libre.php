@@ -15,9 +15,9 @@
                 $this->db_name = "f1_management";
         }
 
-        private function connectDB() {
-            $this->conn = new mysqli($this->server, $this->user, 
-                $this->pass, $this->db_name);
+        private function connectDB($dbName = null) {
+            $this->conn = new mysqli($this->server, $this->user, $this->pass, $dbName);
+    
             if ($this->conn->connect_error) {
                 die("Connection failed: " . $this->conn->connect_error);
             }
@@ -29,17 +29,25 @@
 
         public function establecerBD() {
             $this->connectDB();
+    
             $sqlFile = './libre.sql';  
             $sql = file_get_contents($sqlFile);
+    
             if ($sql === false) return "Error al leer el archivo SQL.";
-        
+    
             if ($this->conn->multi_query($sql)) {
-                do { if ($result = $this->conn->store_result()) $result->free(); } 
-                while ($this->conn->next_result());
-
+                do {
+                    if ($result = $this->conn->store_result()) {
+                        $result->free();
+                    }
+                } while ($this->conn->next_result());
+    
                 $this->cerrarConexion();
+                $this->connectDB($this->db_name);
+                $this->cerrarConexion();
+    
                 return "Base de datos y tablas creadas correctamente.";
-
+    
             } else {
                 $this->cerrarConexion();
                 return "Error al ejecutar el archivo SQL: " . $this->conn->error;
@@ -47,7 +55,7 @@
         }
         
         public function importCSV($filePath) {
-            $this->connectDB();
+            $this->connectDB($this->db_name);
             $file = fopen($filePath, "r");
         
             if (!$file) {
@@ -55,37 +63,88 @@
                 return "Error al abrir el archivo CSV.";
             }
         
-            // consultas para cada tabla
+            // Consultas para cada tabla
             $queries = [
-                'escuderias' => "INSERT INTO Escuderias (nombre, pais) VALUES (?, ?)",
-                'pilotos' => "INSERT INTO Pilotos (nombre, apellido, nacionalidad, id_escuderia) VALUES (?, ?, ?, ?)",
-                'carreras' => "INSERT INTO Carreras (nombre, fecha, nombre_circuito) VALUES (?, ?, ?)",
-                'circuitos' => "INSERT INTO Circuitos (nombre, pais, longitud_km) VALUES (?, ?, ?)",
-                'resultados' => "INSERT INTO Resultados (id_piloto, id_carrera, posicion, puntos) VALUES (?, ?, ?, ?)"
+                'Escuderias' => "INSERT INTO Escuderias (nombre, pais) VALUES (?, ?)",
+                'Pilotos' => "INSERT INTO Pilotos (nombre, apellido, nacionalidad, id_escuderia) VALUES (?, ?, ?, ?)",
+                'Carreras' => "INSERT INTO Carreras (nombre, fecha, nombre_circuito) VALUES (?, ?, ?)",
+                'Circuitos' => "INSERT INTO Circuitos (nombre, pais, longitud_km) VALUES (?, ?, ?)",
+                'Resultados' => "INSERT INTO Resultados (id_piloto, id_carrera, posicion, puntos) VALUES (?, ?, ?, ?)"
             ];
         
-            $currentTable = '';
-            $rows = [];
-            $query = null; 
+            $currentTable = '';  
+            $rows = [];          
+            $query = null;     
         
             // Leer el archivo CSV y procesar los datos
             while (($data = fgetcsv($file, 1000, ",")) !== FALSE) {
-                if (empty($data[0])) continue; // Ignorar líneas vacías
-        
-                if (isset($queries[$data[0]])) { // Comprobar si es una tabla válida
-                    if ($currentTable && !empty($rows) && $query) { // Ejecutar la consulta 
-                        $this->executeQuery($query, $rows);  
-                    }
-        
-                    $rows = [];  
-                    $currentTable = $data[0];  
+                if (empty($data[0])) continue;  
 
-                    // Preparar la consulta para la tabla actual
-                    $query = $this->conn->prepare($queries[$currentTable]); 
+                $data = array_map(function($value) {
+                    return trim($value, '"');
+                }, $data);
+        
+                if (count($data) == 3 && in_array($data[2], ['nombre', 'pais', 'longitud_km'])) {
+                    if ($currentTable && !empty($rows) && $query) {
+                        $this->executeQuery($query, $rows);
+                        $rows = [];
+                    }
+                    $currentTable = 'Circuitos';
+                    $columns = $data;
+                    $query = $this->conn->prepare($queries['Circuitos']);
+
+                } elseif (count($data) == 3 && in_array($data[2], ['nombre', 'fecha', 'nombre_circuito'])) {
+                    if ($currentTable && !empty($rows) && $query) {
+                        $this->executeQuery($query, $rows);
+                        $rows = [];
+                    }
+                    $currentTable = 'Carreras';
+                    $columns = $data;
+                    $query = $this->conn->prepare($queries['Carreras']);
+
+                } elseif (count($data) == 2 && in_array($data[0], ['nombre', 'nacionalidad'])) {
+                    if ($currentTable && !empty($rows) && $query) {
+                        $this->executeQuery($query, $rows);
+                        $rows = [];
+                    }
+                    $currentTable = 'Escuderias';
+                    $columns = $data;
+                    $query = $this->conn->prepare($queries['Escuderias']);
+
+                } elseif (count($data) == 4 && in_array($data[2], ['nombre', 'nacionalidad', 'escuderia', 'id_escuderia'])) {
+                    if ($currentTable && !empty($rows) && $query) {
+                        $this->executeQuery($query, $rows);
+                        $rows = [];
+                    }
+                    $currentTable = 'Pilotos';
+                    $columns = $data;
+                    $query = $this->conn->prepare($queries['Pilotos']);
+
+                } elseif (count($data) == 4 && in_array($data[0], ['id_piloto', 'id_carrera', 'posicion', 'puntos'])) {
+                    if ($currentTable && !empty($rows) && $query) {
+                        $this->executeQuery($query, $rows);
+                        $rows = [];
+                    }
+                    $currentTable = 'Resultados';
+                    $columns = $data;
+                    $query = $this->conn->prepare($queries['Resultados']);
+                }
+
+                if ($data[0] === 'nombre' || $data[0] === 'id_piloto'
+                    || $data[0] === 'pais' || $data[0] === 'nombre_circuito'
+                    || $data[0] === 'apellido' || $data[0] === 'fecha'
+                    || $data[0] === 'nacionalidad' || $data[0] === 'posicion'
+                    || $data[0] === 'longitud_km' || $data[0] === 'puntos'
+                    || $data[0] === 'escuderia' || $data[0] === 'id_escuderia'
+                    || $data[0] === 'id_carrera') {
+                    continue;  
                 }
         
+                // Añadir los datos a las filas de la tabla actual
                 if ($currentTable && count($data) > 1) {
-                    $rows[] = $data; // Añadir la fila a la tabla actual
+                    $data = array_map(function($value) {
+                        return trim($value, '"');}, $data);
+                    $rows[] = $data;
                 }
             }
         
@@ -97,6 +156,7 @@
             fclose($file);
             $this->cerrarConexion();
             return "Datos importados correctamente desde el archivo CSV.";
+
         }
         
         private function executeQuery($query, $rows) {
@@ -118,24 +178,31 @@
         }              
         
         public function exportCSV() {
-            $this->connectDB();
+            $this->connectDB($this->db_name);;
             $fileName = "bd_datos.csv";
 
             $file = fopen($fileName, "w");
-            $tablas = $this->conn->query("SHOW tables");
+            $tablas = $this->conn->query("SHOW TABLES");
         
             if ($tablas->num_rows > 0) {
                 while ($table = $tablas->fetch_array()) {
                     $nombreTabla = $table[0];
-                    fputcsv($file, array($nombreTabla));
+                    $columnas = $this->conn->query("DESCRIBE $nombreTabla");
+                    $encabezados = [];
+
+                    while ($columna = $columnas->fetch_assoc()) {
+                        $encabezados[] = $columna['Field'];
+                    }
+                    
+                    fputcsv($file, $encabezados);
                     $resultado = $this->conn->query("SELECT * FROM $nombreTabla");
-        
+
                     if ($resultado->num_rows > 0) {
                         while ($row = $resultado->fetch_assoc()) {
                             fputcsv($file, array_values($row)); 
                         }
                     }
-
+  
                     fputcsv($file, []);
                 }
             }
@@ -143,10 +210,10 @@
             fclose($file);
             $this->cerrarConexion();
             return "Datos exportados a archivo CSV: <a href='$fileName' download>Descargar</a>";
-        }
+        }        
         
         public function registrarCarrera($nombre, $fecha, $nombre_circuito_carrera) {
-            $this->connectDB();
+            $this->connectDB($this->db_name);;
             $nombre_circuito = $nombre_circuito_carrera;
 
             // Verificar si el circuito ya existe en la base de datos
@@ -171,7 +238,7 @@
         }
 
         public function obtenerPilotos() {
-            $this->connectDB();
+            $this->connectDB($this->db_name);;
             $query = "SELECT nombre, apellido FROM Pilotos";
             $result = $this->conn->query($query);
             
@@ -185,7 +252,7 @@
         }
 
         public function obtenerEscuderias() {
-            $this->connectDB();
+            $this->connectDB($this->db_name);;
             $query = "SELECT nombre, pais FROM Escuderias";
             $result = $this->conn->query($query);
 
@@ -199,7 +266,7 @@
         }
 
         public function obtenerCircuitos() {
-            $this->connectDB();
+            $this->connectDB($this->db_name);;
             $query = "SELECT nombre FROM Circuitos";
             $result = $this->conn->query($query);
 
@@ -213,7 +280,7 @@
         }
 
         public function obtenerCarreras() {
-            $this->connectDB();
+            $this->connectDB($this->db_name);;
             $query = "SELECT nombre, fecha, nombre_circuito FROM Carreras";
             $result = $this->conn->query($query);
 
@@ -227,7 +294,7 @@
         }
 
         public function registrarResultado($piloto, $carrera, $posicion, $puntos) {
-            $this->connectDB();
+            $this->connectDB($this->db_name);;
 
             $nombre_parts = explode(" ", $piloto);
             $nombre_piloto = $nombre_parts[0];
@@ -270,7 +337,7 @@
         }
         
         public function verResultadosPilotos() {
-            $this->connectDB();
+            $this->connectDB($this->db_name);;
 
             $query = "SELECT p.nombre, p.apellido, c.nombre AS carrera, r.posicion, r.puntos 
                       FROM Resultados r 
@@ -291,7 +358,7 @@
         }
 
         public function estadisticasPilotos() {
-            $this->connectDB();
+            $this->connectDB($this->db_name);;
             $query = "SELECT p.nombre, p.apellido, SUM(r.puntos) AS puntos_totales
                       FROM Pilotos p
                       JOIN Resultados r ON p.id_piloto = r.id_piloto
@@ -313,7 +380,7 @@
         }
 
         public function mejoresResultadosPorCarrera() {
-            $this->connectDB();
+            $this->connectDB($this->db_name);;
             
             // Consulta SQL para obtener los mejores resultados por carrera
             $query = "SELECT c.nombre AS carrera, c.fecha, p.nombre AS piloto_nombre, p.apellido AS piloto_apellido, r.posicion
@@ -357,7 +424,7 @@
         }        
 
         public function registrarPiloto($nombre, $apellido, $nacionalidad, $nombre_escuderia) {
-            $this->connectDB();
+            $this->connectDB($this->db_name);;
 
             // Check if the escuderia exists in the escuderias table
             $find_escuderia = $this->conn->prepare("SELECT id_escuderia FROM Escuderias WHERE nombre = ?");
@@ -378,7 +445,7 @@
         }
 
         public function registrarCircuito($nombre, $pais, $longitud) {
-            $this->connectDB();
+            $this->connectDB($this->db_name);;
             $query = $this->conn->prepare("INSERT INTO Circuitos (nombre, pais, longitud_km) VALUES (?, ?, ?)");
             $query->bind_param("ssi", $nombre, $pais, $longitud);
             $query->execute();
