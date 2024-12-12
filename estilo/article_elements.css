@@ -42,7 +42,7 @@ article:hover {
     transform: scale(1.02);
 }
 
-/* Especificidad: 002 && 002, 004 */
+/* Especificidades 002, 002 */
 article header, article footer {
     justify-content: center;
     align-items: center;

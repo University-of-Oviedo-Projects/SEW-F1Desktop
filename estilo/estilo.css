@@ -30,12 +30,6 @@ body > p {
     font-size: small;
 }
 
-/* Especificidad 003 */
-body > p > a {
-    color: #8F0000;
-    /* background-color heredado de body */
-}
-
 /* Espcificidad 002 */
 body > button { /* Boton de ayuda global */
     margin-left: auto;
@@ -43,7 +37,6 @@ body > button { /* Boton de ayuda global */
     margin-top: 1em;
 }
 
-/* ###################### Main del body ###################### */
 /* Especificidad 001 */
 main {
     margin: 0.5em;
@@ -55,7 +48,7 @@ h2 {
     text-align: center;
 }
 
-/* Especificidad 001 && 001, 002 */
+/* Especificidades: 001, 001 */
 h3, h4 {
     text-align: left;
     text-decoration: underline;
@@ -82,17 +75,19 @@ aside {
     margin: 1em auto;
 }
 
+/* Especificidad 002 */
 aside > h3 {
     font-size: 1.15em;
     margin-bottom: 0.25em;
 }
+
 /* ###################### Estilizacion de listas  ###################### */
-/* Especificidad 004 */
+/* Especificidades: 001, 001, 001, 001 */
 ul, ol, dl, p {
     font-size: 1.25em;
 }
 
-/* Especificidad 002 */
+/* Especificidades: 001, 001 */
 ul, ol {
     /* color heredado de body */
     background-color: #EDD9B0; 
@@ -116,6 +111,7 @@ li {
     line-height: 1.5;
 }
 
+/* Especificidad 002 */
 li a {
     color: #8F0000;
     /* background-color heredado de li */
@@ -304,7 +300,7 @@ dialog[open] button:hover {
 
 
 /* ###################### Estilo del API.HTML ###################### */
-/* Especificidad 024 && 024, 048 */
+/* Especificidades 024, 024 */
 main  section button {
     padding: 1em 2em;
     font-size: 1.5em; 
@@ -347,14 +343,9 @@ main  > section:nth-of-type(4) > button {
     cursor: pointer;
 }
 
-/* Espcificidad 023 */
-main  > section[data-state="visible"] {
-    display: block; /* Mostrar elementos específicos */
-}
-
-/* Espcificidad 023 */
-main  > section[data-state="hidden"] {
-    display: none; /* Ocultar elementos específicos */ 
+/* Especificidad 001 */
+canvas {
+    margin: 1em auto;
 }
 
 /* Especificidad 034 */
@@ -364,13 +355,13 @@ main  > section:nth-of-type(4) > button:hover {
 }
 
 /* Especificidad 034 */
-main  > section:nth-of-type(4) button[data-state="correct"] {
+main  > section:nth-of-type(4) button[title="correct-answer"] {
     background-color: #4CAF50;
     /* color heredado de main > section:nth-of-type(4) > button */
 }
 
 /* Especificidad 034 */
-main  > section:nth-of-type(4) button[data-state="incorrect"] {
+main  > section:nth-of-type(4) button[title="incorrect-answer"] {
     background-color: #F44336; 
     /* color heredado de main > section:nth-of-type(4) > button */
 }
@@ -392,7 +383,7 @@ main  > dialog:nth-of-type(1) {
 }
 
 /* Especificidad 033 */
-main  > dialog:nth-of-type(1)[data-state="show"] {
+main > dialog:nth-of-type(1) {
     display: flex; 
     flex-direction: column; /* Alinea los elementos en columna */
 }
@@ -490,17 +481,6 @@ svg {
     height: auto;
 }
 
-/* ###################### Mostrar/Ocultar elementos ###################### */
-/* Especificidad 010 */
-[data-state="hidden"] {
-    display: none;
-}
-
-/* Especificidad 010 */
-[data-state="visible"] {
-    display: block;
-}
-
 /* ###################### Estilo para XML (circuitos.html) ###################### */
 /* Especificidad 023 */
 main > section a {
@@ -593,8 +573,8 @@ main > div+article button:nth-of-type(1) {
     right: 2%;
 }
 
-
 /* ###################### Estilo para el parrafo de cambio de moneda (viajes.php) ###################### */
+/* Especificidad 002 */
 main > p {
     margin-bottom: 3em;
 }

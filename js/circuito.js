@@ -1,7 +1,7 @@
 class ProcesamientoCircuitos {
     constructor() {
         document.querySelectorAll("main section")
-            .forEach(section => section.setAttribute("data-state", "hidden"));
+            .forEach(section => section.setAttribute("hidden", ''));
     }
 
     procesarArchivoXML(archivo) {
@@ -28,7 +28,7 @@ class ProcesamientoCircuitos {
 
     // Método para mostrar el contenido del archivo XML en el HTML
     mostrarContenidoXML(xmlDoc) {
-        document.querySelector("main > section").setAttribute("data-state", "visible");
+        document.querySelector("main > section").removeAttribute('hidden');
         const contenedor = document.querySelector("main > section");
 
         // Función auxiliar para crear elementos de texto
@@ -201,7 +201,7 @@ class ProcesamientoCircuitos {
         coordinates.forEach(coord => bounds.extend(coord));
         map.fitBounds(bounds);
 
-        document.querySelector("main > div").setAttribute("data-state", "visible");
+        document.querySelector("main > div").removeAttribute('hidden');
     }    
     
     // Método para procesar archivos SVG

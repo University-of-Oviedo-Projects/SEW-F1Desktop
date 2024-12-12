@@ -4,9 +4,6 @@ class Viajes {
         this.longitude = null;
         this.error = null;
 
-        // Ocultar el div
-        document.querySelector('main > div').setAttribute('data-state', 'hidden');
-
         // Crear un botón para iniciar la geolocalización
         this.createGeolocationButton();
 
@@ -19,8 +16,6 @@ class Viajes {
         button.textContent = "Mostrar mi ubicación";
         const h2 = document.querySelector("main > h2");
         h2.insertAdjacentElement("afterend", button);
-
-        // Ahora solo cargamos Google Maps cuando el botón es presionado
         button.addEventListener("click", this.loadGoogleMaps.bind(this));
     }
 
@@ -46,8 +41,6 @@ class Viajes {
     }  
 
     requestLocation() {
-        document.querySelector('main > div').setAttribute('data-state', 'visible');
-
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 this.setPosition.bind(this),
@@ -63,8 +56,9 @@ class Viajes {
     }
 
     setPosition(position) {
-        document.querySelector('main > button').setAttribute('data-state', 'hidden');
-        
+        document.querySelector('main > div').removeAttribute('hidden')
+        document.querySelector('main > button').remove();   
+
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
         this.showStaticMap();
@@ -99,7 +93,6 @@ class Viajes {
         let img = document.createElement('img');
         img.src = mapUrl;
         img.alt = "Ubicación actual";
-        img.setAttribute('data-map', 'static-map');
     
         const div = document.querySelector('main > div');
         document.querySelector('main').insertBefore(img, div);
@@ -111,7 +104,6 @@ class Viajes {
     
         if (!divDynamic) {
             divDynamic = document.createElement('div');
-            divDynamic.classList.add('dynamic-map');
             document.querySelector('main').insertBefore(divDynamic, article);
         }
     
@@ -138,14 +130,12 @@ class Viajes {
             let maxSlide = slides.length - 1;
 
             nextSlide.addEventListener("click", function () {
-                // check if current slide is the last and reset current slide
                 if (curSlide === maxSlide) {
                     curSlide = 0;
                 } else {
                     curSlide++;
                 }
 
-                // move slide by -100%
                 slides.forEach((slide, indx) => {
                     var trans = 100 * (indx - curSlide);
                     $(slide).css('transform', 'translateX(' + trans + '%)');
@@ -153,15 +143,14 @@ class Viajes {
             });
 
             const prevSlide = document.querySelector("button:nth-of-type(2)");
+
             prevSlide.addEventListener("click", function () {
-                // check if current slide is the first and reset current slide to last
                 if (curSlide === 0) {
                     curSlide = maxSlide;
                 } else {
                     curSlide--;
                 }
 
-                // move slide by 100%
                 slides.forEach((slide, indx) => {
                     var trans = 100 * (indx - curSlide);
                     $(slide).css('transform', 'translateX(' + trans + '%)');
@@ -169,7 +158,6 @@ class Viajes {
             });
         }
     
-        // Añadir el script al documento
         document.head.appendChild(script);
     }
 }    

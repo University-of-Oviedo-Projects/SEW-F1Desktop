@@ -161,7 +161,7 @@
             ?>
 
             <h2>Mapas estáticos y dinámicos</h2>
-            <div></div>
+            <div hidden></div>
 
             <article>
                 <header>

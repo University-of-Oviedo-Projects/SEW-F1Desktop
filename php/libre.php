@@ -2,7 +2,6 @@
 
 <?php
     class Controller {
-        // Atributos
         private $server;
         private $user;
         private $pass;
@@ -14,7 +13,6 @@
                 $this->user = "DBUSER2024";
                 $this->pass = "DBPSWD2024";
                 $this->db_name = "f1_management";
-                $this->connectDB() ;
         }
 
         private function connectDB() {
@@ -25,206 +23,114 @@
             }
         }
 
-        public function establecerBD() {
-            $create_db = "CREATE DATABASE IF NOT EXISTS $this->db_name COLLATE utf8_spanish_ci";
-            if ($this->conn->query($create_db) !== TRUE) {
-                echo "Error creando la base de datos: " . $$this->conn->error;
-            }            
-            $this->conn->select_db($this->db_name);
-
-            $tables = [
-                "CREATE TABLE IF NOT EXISTS Escuderias (
-                    id_escuderia INT AUTO_INCREMENT PRIMARY KEY,
-                    nombre VARCHAR(50) NOT NULL UNIQUE,
-                    pais VARCHAR(50) NOT NULL
-                )",
-                
-                "CREATE TABLE IF NOT EXISTS Circuitos (
-                    id_circuito INT AUTO_INCREMENT PRIMARY KEY,
-                    nombre VARCHAR(50) NOT NULL UNIQUE,
-                    pais VARCHAR(50) NOT NULL,
-                    longitud_km FLOAT NOT NULL
-                )",
-                
-                "CREATE TABLE IF NOT EXISTS Pilotos (
-                    id_piloto INT AUTO_INCREMENT PRIMARY KEY,
-                    nombre VARCHAR(50) NOT NULL,
-                    apellido VARCHAR(50) NOT NULL,
-                    nacionalidad VARCHAR(50) NOT NULL,
-                    escuderia_nombre VARCHAR(50) NOT NULL,
-                    FOREIGN KEY (escuderia_nombre) REFERENCES Escuderias(nombre)
-                    ON DELETE CASCADE ON UPDATE CASCADE
-                )",
-                
-                "CREATE TABLE IF NOT EXISTS Carreras (
-                    id_carrera INT AUTO_INCREMENT PRIMARY KEY,
-                    nombre VARCHAR(50) NOT NULL UNIQUE,
-                    fecha DATE NOT NULL,
-                    nombre_circuito VARCHAR(50) NOT NULL,
-                    FOREIGN KEY (nombre_circuito) REFERENCES Circuitos(nombre)
-                    ON DELETE CASCADE ON UPDATE CASCADE
-                )",
-                
-                "CREATE TABLE IF NOT EXISTS Resultados (
-                    id_resultado INT AUTO_INCREMENT PRIMARY KEY,
-                    id_piloto INT NOT NULL,  
-                    nombre_piloto VARCHAR(100) NOT NULL,  
-                    apellido_piloto VARCHAR(100) NOT NULL,  
-                    id_carrera INT NOT NULL, 
-                    nombre_carrera VARCHAR(100) NOT NULL,
-                    nombre_circuito VARCHAR(100) NOT NULL,
-                    posicion INT NOT NULL,
-                    puntos INT NOT NULL,
-                    FOREIGN KEY (id_piloto) REFERENCES Pilotos(id_piloto)  
-                        ON DELETE CASCADE ON UPDATE CASCADE,
-                    FOREIGN KEY (id_carrera) REFERENCES Carreras(id_carrera)
-                        ON DELETE CASCADE ON UPDATE CASCADE
-                );",
-            ];
-
-            foreach ($tables as $table) {
-                if ($this->conn->query($table) !== TRUE) {
-                    return "<p>Error al crear tabla: " . $this->conn->error . "</p>";
-                }
-            }
-
-            $sqlStatements = [
-                "INSERT INTO Escuderias (nombre, pais) VALUES
-                ('Mercedes', 'Alemania'),
-                ('Ferrari', 'Italia'),
-                ('Red Bull Racing', 'Austria');",
-            
-                "INSERT INTO Circuitos (nombre, pais, longitud_km) VALUES
-                ('Circuito de Mónaco', 'Mónaco', 3.337),
-                ('Silverstone', 'Reino Unido', 5.891),
-                ('Circuito de Spa-Francorchamps', 'Bélgica', 7.004);",
-            
-                "INSERT INTO Pilotos (nombre, apellido, nacionalidad, escuderia_nombre) VALUES
-                ('Lewis', 'Hamilton', 'Británico', 'Mercedes'),
-                ('Charles', 'Leclerc', 'Monegasco', 'Ferrari'),
-                ('Max', 'Verstappen', 'Neerlandés', 'Red Bull Racing');",
-            
-                "INSERT INTO Carreras (nombre, fecha, nombre_circuito) VALUES
-                ('Gran Premio de Mónaco', '2024-05-26', 'Circuito de Mónaco'),
-                ('Gran Premio de Gran Bretaña', '2024-07-07', 'Silverstone'),
-                ('Gran Premio de Bélgica', '2024-08-25', 'Circuito de Spa-Francorchamps');",
-            
-                "INSERT INTO Resultados (id_piloto, nombre_piloto, apellido_piloto, id_carrera, nombre_carrera, nombre_circuito, posicion, puntos) VALUES
-                (1, 'Lewis', 'Hamilton', 1, 'Gran Premio de Mónaco', 'Circuito de Mónaco', 1, 25),
-                (2, 'Charles', 'Leclerc', 1, 'Gran Premio de Mónaco', 'Circuito de Mónaco', 2, 18);"
-            ];
-
-            foreach ($sqlStatements as $sql) {
-                if ($this->conn->query($sql) === FALSE) {
-                    return "Error: " . $sql . $this->conn->error;
-                }
-            }
-
-            return "Base de datos creada correctamente.";
+        private function cerrarConexion() {
+            if ($this->conn) $this->conn->close();  
         }
 
-        public function dropAllTablas() {
-            $this->conn->query("SET FOREIGN_KEY_CHECKS = 0");
-            $resultado = $this->conn->query("SHOW TABLES");
+        public function establecerBD() {
+            $this->connectDB();
+            $sqlFile = './libre.sql';  
+            $sql = file_get_contents($sqlFile);
+            if ($sql === false) return "Error al leer el archivo SQL.";
         
-            if ($resultado->num_rows > 0) {
-                while ($row = $resultado->fetch_assoc()) {
-                    $nombreTabla = reset($row);
-        
-                    if (!$this->conn->query("DROP TABLE IF EXISTS $nombreTabla")) {
-                        return "Error al eliminar la tabla $nombreTabla: " . $this->conn->error;
-                    }
-                }
+            if ($this->conn->multi_query($sql)) {
+                do { if ($result = $this->conn->store_result()) $result->free(); } 
+                while ($this->conn->next_result());
+
+                $this->cerrarConexion();
+                return "Base de datos y tablas creadas correctamente.";
+
             } else {
-                return  "No se encontraron tablas en la base de datos.";
+                $this->cerrarConexion();
+                return "Error al ejecutar el archivo SQL: " . $this->conn->error;
             }
-            
-            $this->conn->query("SET FOREIGN_KEY_CHECKS = 1");
-        }        
+        }
         
         public function importCSV($filePath) {
+            $this->connectDB();
             $file = fopen($filePath, "r");
         
-            if ($file === FALSE) {
-                return  "Error al abrir el archivo CSV.";
+            if (!$file) {
+                $this->cerrarConexion();
+                return "Error al abrir el archivo CSV.";
             }
         
-            $currentTable = '';  
-            $header = [];    
-            $query = null;       
+            // consultas para cada tabla
+            $queries = [
+                'escuderias' => "INSERT INTO Escuderias (nombre, pais) VALUES (?, ?)",
+                'pilotos' => "INSERT INTO Pilotos (nombre, apellido, nacionalidad, id_escuderia) VALUES (?, ?, ?, ?)",
+                'carreras' => "INSERT INTO Carreras (nombre, fecha, nombre_circuito) VALUES (?, ?, ?)",
+                'circuitos' => "INSERT INTO Circuitos (nombre, pais, longitud_km) VALUES (?, ?, ?)",
+                'resultados' => "INSERT INTO Resultados (id_piloto, id_carrera, posicion, puntos) VALUES (?, ?, ?, ?)"
+            ];
         
+            $currentTable = '';
+            $rows = [];
+            $query = null; 
+        
+            // Leer el archivo CSV y procesar los datos
             while (($data = fgetcsv($file, 1000, ",")) !== FALSE) {
-                if (empty($data[0])) { continue; }
+                if (empty($data[0])) continue; // Ignorar líneas vacías
         
-                if (in_array($data[0], ['Escuderias', 'Pilotos', 'Carreras', 'Circuitos', 'Resultados'])) {
-                    if (!empty($currentTable)) {
-                        foreach ($rows as $row) {
-                            $query->execute();
-                        }
+                if (isset($queries[$data[0]])) { // Comprobar si es una tabla válida
+                    if ($currentTable && !empty($rows) && $query) { // Ejecutar la consulta 
+                        $this->executeQuery($query, $rows);  
                     }
         
-                    $currentTable = $data[0];
-                    $header = fgetcsv($file, 1000, ","); 
-                    $rows = [];
-        
-                    switch ($currentTable) {
-                        case 'Escuderias':
-                            $query = $this->conn->prepare("INSERT INTO Escuderias (nombre, pais) VALUES (?, ?)");
-                            break;
-                        case 'Pilotos':
-                            $query = $this->conn->prepare("INSERT INTO Pilotos (nombre, apellido, nacionalidad, id_escuderia) VALUES (?, ?, ?, ?)");
-                            break;
-                        case 'Carreras':
-                            $query = $this->conn->prepare("INSERT INTO Carreras (nombre, fecha, id_circuito) VALUES (?, ?, ?)");
-                            break;
-                        case 'Circuitos':
-                            $query = $this->conn->prepare("INSERT INTO Circuitos (nombre, pais, longitud_km) VALUES (?, ?, ?)");
-                            break;
-                        case 'Resultados':
-                            $query = $this->conn->prepare("INSERT INTO resultadoados (id_piloto, id_carrera, posicion, puntos) VALUES (?, ?, ?, ?)");
-                            break;
-                        default:
-                            fclose($file);
-                            return "Tabla desconocida: $currentTable";
-                    }
+                    $rows = [];  
+                    $currentTable = $data[0];  
+
+                    // Preparar la consulta para la tabla actual
+                    $query = $this->conn->prepare($queries[$currentTable]); 
                 }
         
-                if (!empty($data) && count($data) > 1) {
-                    $query->bind_param(str_repeat('s', count($header)), ...$data);
-                    $rows[] = $data;
+                if ($currentTable && count($data) > 1) {
+                    $rows[] = $data; // Añadir la fila a la tabla actual
                 }
             }
         
-            if (!empty($rows)) {
-                foreach ($rows as $row) {
-                    $query->execute();
-                }
+            // Ejecutamos la consulta final para la última tabla
+            if ($currentTable && !empty($rows) && $query) {
+                $this->executeQuery($query, $rows);
             }
         
             fclose($file);
+            $this->cerrarConexion();
             return "Datos importados correctamente desde el archivo CSV.";
         }
         
+        private function executeQuery($query, $rows) {
+            foreach ($rows as $row) {
+                $types = '';
+                foreach ($row as $value) {
+                    // Determinar el tipo de dato de cada valor en la fila
+                    $types .= is_int($value) ? 'i' : (is_float($value) ? 'd' : 's');
+                }
+        
+                if (!$query->bind_param($types, ...$row)) {
+                    return "Error al enlazar los parámetros: " . $query->error;
+                }
+        
+                if (!$query->execute()) {
+                    return "Error al insertar los datos: " . $query->error;
+                }
+            }
+        }              
+        
         public function exportCSV() {
+            $this->connectDB();
             $fileName = "bd_datos.csv";
+
             $file = fopen($fileName, "w");
             $tablas = $this->conn->query("SHOW tables");
         
             if ($tablas->num_rows > 0) {
                 while ($table = $tablas->fetch_array()) {
                     $nombreTabla = $table[0];
-                    fputcsv($file, array("Datos de la tabla: $nombreTabla"));
+                    fputcsv($file, array($nombreTabla));
                     $resultado = $this->conn->query("SELECT * FROM $nombreTabla");
         
                     if ($resultado->num_rows > 0) {
-                        $headers = [];
-                        $columns = $resultado->fetch_fields();                        
-
-                        foreach ($columns as $column) {
-                            $headers[] = $column->name;
-                        }
-
-                        fputcsv($file, $headers);
                         while ($row = $resultado->fetch_assoc()) {
                             fputcsv($file, array_values($row)); 
                         }
@@ -235,10 +141,14 @@
             }
         
             fclose($file);
+            $this->cerrarConexion();
             return "Datos exportados a archivo CSV: <a href='$fileName' download>Descargar</a>";
         }
         
-        public function registrarCarrera($nombre, $fecha, $nombre_circuito) {
+        public function registrarCarrera($nombre, $fecha, $nombre_circuito_carrera) {
+            $this->connectDB();
+            $nombre_circuito = $nombre_circuito_carrera;
+
             // Verificar si el circuito ya existe en la base de datos
             $query = $this->conn->prepare("SELECT id_circuito FROM Circuitos WHERE nombre = ?");
             $query->bind_param("s", $nombre_circuito);
@@ -246,62 +156,122 @@
             $result = $query->get_result();
         
             if ($result->num_rows == 0) {
-                return "Error: El circuito '$nombre_circuito' no existe en el sistema. Por favor, ingresa un circuito válido.";
+                $this->cerrarConexion();
+                return "Error: El circuito '$nombre_circuito' no existe en el sistema.
+                     Por favor, ingresa un circuito válido.";
             }
         
-            $query = $this->conn->prepare("INSERT INTO Carreras (nombre, fecha, nombre_circuito) VALUES (?, ?, ?)");
+            $query = $this->conn->prepare("INSERT INTO Carreras 
+                (nombre, fecha, nombre_circuito) VALUES (?, ?, ?)");
+
             $query->bind_param("sss", $nombre, $fecha, $nombre_circuito);
             $query->execute();
+            $this->cerrarConexion();
             return "Carrera '$nombre' registrada correctamente.";
         }
 
-        public function registrarResultado($nombre_piloto, $apellido_piloto, 
-                $nombre_carrera, $nombre_circuito, $posicion, $puntos) {
-            // 1. Obtener id_piloto a partir del nombre y apellido
+        public function obtenerPilotos() {
+            $this->connectDB();
+            $query = "SELECT nombre, apellido FROM Pilotos";
+            $result = $this->conn->query($query);
+            
+            if ($result->num_rows > 0) {
+                echo "<option value='' disabled selected>Seleccione una opción</option>";
+                while ($row = $result->fetch_assoc()) {
+                    echo "<option value='" . $row['nombre'] . " " . $row['apellido'] . "'>" . $row['nombre'] . " " . $row['apellido'] . "</option>";
+                }
+            }
+            $this->cerrarConexion();
+        }
+
+        public function obtenerEscuderias() {
+            $this->connectDB();
+            $query = "SELECT nombre, pais FROM Escuderias";
+            $result = $this->conn->query($query);
+
+            if ($result->num_rows > 0) {
+                echo "<option value='' disabled selected>Seleccione una opción</option>";
+                while ($row = $result->fetch_assoc()) {
+                    echo "<option value='" . $row['nombre'] . "'>" . $row['nombre'] . " - " . $row['pais'] . "</option>";
+                }
+            }
+            $this->cerrarConexion();
+        }
+
+        public function obtenerCircuitos() {
+            $this->connectDB();
+            $query = "SELECT nombre FROM Circuitos";
+            $result = $this->conn->query($query);
+
+            if ($result->num_rows > 0) {
+                echo "<option value='' disabled selected>Seleccione una opción</option>";
+                while ($row = $result->fetch_assoc()) {
+                    echo "<option value='" . $row['nombre'] . "'>" . $row['nombre'] . "</option>";
+                }
+            }
+            $this->cerrarConexion();
+        }
+
+        public function obtenerCarreras() {
+            $this->connectDB();
+            $query = "SELECT nombre, fecha, nombre_circuito FROM Carreras";
+            $result = $this->conn->query($query);
+
+            if ($result->num_rows > 0) {
+                echo "<option value='' disabled selected>Seleccione una opción</option>";
+                while ($row = $result->fetch_assoc()) {
+                    echo "<option value='" . $row['nombre'] . "'>" . $row['nombre'] . " - " . $row['fecha'] . " - " . $row['nombre_circuito'] . "</option>";
+                }
+            }
+            $this->cerrarConexion();
+        }
+
+        public function registrarResultado($piloto, $carrera, $posicion, $puntos) {
+            $this->connectDB();
+
+            $nombre_parts = explode(" ", $piloto);
+            $nombre_piloto = $nombre_parts[0];
+            $apellido_piloto = $nombre_parts[count($nombre_parts) - 1];
+        
+            // 1. Obtener id_circuito a partir del nombre_circuito
+            $query_carrera = $this->conn->prepare("SELECT * FROM Carreras WHERE nombre = ?");
+            $query_carrera->bind_param("s", $carrera);
+            $query_carrera->execute();
+            $result_carrera = $query_carrera->get_result();
+            
+            // 2. Obtener id_piloto a partir del nombre y apellido
             $query_piloto = $this->conn->prepare("SELECT id_piloto FROM Pilotos WHERE nombre = ? AND apellido = ?");
             $query_piloto->bind_param("ss", $nombre_piloto, $apellido_piloto);
             $query_piloto->execute();
             $result_piloto = $query_piloto->get_result();
-        
-            if ($result_piloto->num_rows > 0) {
+
+            if ($result_carrera->num_rows > 0 && $result_piloto->num_rows > 0) {
+                $row_carrera = $result_carrera->fetch_assoc();
+                $id_carrera = $row_carrera['id_carrera'];
+
                 $row_piloto = $result_piloto->fetch_assoc();
                 $id_piloto = $row_piloto['id_piloto'];
         
-                // 2. Obtener id_carrera a partir del nombre_carrera
-                $query_carrera = $this->conn->prepare("SELECT id_carrera FROM Carreras WHERE nombre = ?");
-                $query_carrera->bind_param("s", $nombre_carrera);
-                $query_carrera->execute();
-                $result_carrera = $query_carrera->get_result();
+                // 2. Insertar el resultado en la tabla Resultados
+                $query_resultado = $this->conn->prepare("INSERT INTO Resultados 
+                            (id_piloto, id_carrera, posicion, puntos) 
+                            VALUES (?, ?, ?, ?)");
         
-                if ($result_carrera->num_rows > 0) {
-                    $row_carrera = $result_carrera->fetch_assoc();
-                    $id_carrera = $row_carrera['id_carrera'];
+                $query_resultado->bind_param("iiii", $id_piloto, $id_carrera, $posicion, $puntos);
+                $query_resultado->execute();
+                $this->cerrarConexion();
         
-                    // 3. Obtener id_circuito a partir del nombre_circuito
-                    $query_circuito = $this->conn->prepare("SELECT id_circuito FROM Circuitos WHERE nombre = ?");
-                    $query_circuito->bind_param("s", $nombre_circuito);
-                    $query_circuito->execute();
-                    $result_circuito = $query_circuito->get_result();
-        
-                    if ($result_circuito->num_rows > 0) {        
-                        // 4. Insertar el resultado en la tabla Resultados
-                        $query_resultado = $this->conn->prepare("INSERT INTO Resultados (id_piloto, nombre_piloto, apellido_piloto, id_carrera, nombre_carrera, nombre_circuito, posicion, puntos) VALUES (?, ?, ?, ?, ?, ?, ?)");
-                        $query_resultado->bind_param("issssii", $id_piloto, $nombre_piloto, $apellido_piloto, $id_carrera, $nombre_carrera, $nombre_circuito, $posicion, $puntos);
-                        $query_resultado->execute();
-        
-                        return "Resultado registrado correctamente para el piloto $nombre_piloto $apellido_piloto en la carrera $nombre_carrera.";
-                    } else {
-                        return "Error: No se encontró el circuito $nombre_circuito.";
-                    }
-                } else {
-                    return "Error: No se encontró la carrera $nombre_carrera.";
-                }
+                return "Resultado registrado correctamente.";
+            
             } else {
-                return "Error: No se encontró el piloto $nombre_piloto $apellido_piloto.";
+                $this->cerrarConexion();
+                return "Error.";
             }
         }
-
+        
         public function verResultadosPilotos() {
+            $this->connectDB();
+
             $query = "SELECT p.nombre, p.apellido, c.nombre AS carrera, r.posicion, r.puntos 
                       FROM Resultados r 
                       JOIN Pilotos p ON r.id_piloto = p.id_piloto
@@ -309,15 +279,19 @@
             $result = $this->conn->query($query);
             
             if ($result->num_rows > 0) {
+                $resultados = "";
                 while ($row = $result->fetch_assoc()) {
-                    return "Piloto: " . $row['nombre'] . " " . $row['apellido'] . " - Carrera: " . $row['carrera'] . " - Posición: " . $row['posicion'] . " - Puntos: " . $row['puntos'];
+                    $resultados .= "<p>Piloto: " . $row['nombre'] . " " . $row['apellido'] . " - Carrera: " . $row['carrera'] . " - Posición: " . $row['posicion'] . " - Puntos: " . $row['puntos'] . "</p>";
                 }
+                return $resultados; 
             } else {
+                $this->cerrarConexion();
                 return "No hay resultados registrados.";
             }
         }
 
         public function estadisticasPilotos() {
+            $this->connectDB();
             $query = "SELECT p.nombre, p.apellido, SUM(r.puntos) AS puntos_totales
                       FROM Pilotos p
                       JOIN Resultados r ON p.id_piloto = r.id_piloto
@@ -325,43 +299,91 @@
             $result = $this->conn->query($query);
             
             if ($result->num_rows > 0) {
+                $estadisticas = ""; 
                 while ($row = $result->fetch_assoc()) {
-                    return "Piloto: " . $row['nombre'] . " " . $row['apellido'] . " - Puntos Totales: " . $row['puntos_totales'];
+                    $estadisticas .= "<p>Piloto: " . $row['nombre'] . " " . $row['apellido'] . " - Puntos Totales: " . $row['puntos_totales'] . "</p>";
                 }
+                
+                $this->cerrarConexion(); 
+                return $estadisticas; 
             } else {
+                $this->cerrarConexion();
                 return "No hay resultados de pilotos.";
             }
         }
 
         public function mejoresResultadosPorCarrera() {
-            $query = "SELECT c.nombre AS carrera, p.nombre, p.apellido, r.posicion
+            $this->connectDB();
+            
+            // Consulta SQL para obtener los mejores resultados por carrera
+            $query = "SELECT c.nombre AS carrera, c.fecha, p.nombre AS piloto_nombre, p.apellido AS piloto_apellido, r.posicion
                       FROM Resultados r
                       JOIN Pilotos p ON r.id_piloto = p.id_piloto
                       JOIN Carreras c ON r.id_carrera = c.id_carrera
-                      ORDER BY r.posicion ASC";
-
+                      ORDER BY c.nombre, r.posicion ASC";  
+        
             $result = $this->conn->query($query);
+            
             if ($result->num_rows > 0) {
+                $resultados = ""; 
+                $current_carrera = "";  
+                $count = 0;  
+        
                 while ($row = $result->fetch_assoc()) {
-                    return "Carrera: " . $row['carrera'] . " - Piloto: " . $row['nombre'] . " " . $row['apellido'] . " - Posición: " . $row['posicion'];
+                    if ($current_carrera !== $row['carrera']) {
+                        if ($current_carrera !== "") {
+                            $resultados .= "</ul>";  
+                        }
+                        
+                        $current_carrera = $row['carrera'];  
+                        $resultados .= "<h3>" . $row['carrera'] . " - " . $row['fecha'] . "</h3>"; 
+                        $resultados .= "<ul>";  
+                        $count = 0;  
+                    }
+        
+                    if ($count < 3) {
+                        $resultados .= "<li>Posición: " . $row['posicion'] . " - Piloto: " . $row['piloto_nombre'] . " " . $row['piloto_apellido'] . "</li>";
+                        $count++;  
+                    }
                 }
+        
+                $resultados .= "</ul>";  
+                $this->cerrarConexion();                
+                return $resultados; 
             } else {
+                $this->cerrarConexion(); // Cerramos la conexión al finalizar
                 return "No hay resultados de carreras.";
             }
-        }
+        }        
 
         public function registrarPiloto($nombre, $apellido, $nacionalidad, $nombre_escuderia) {
-            $query = $this->conn->prepare("INSERT INTO Pilotos (nombre, apellido, nacionalidad, nombre_escuderia) VALUES (?, ?, ?, ?)");
-            $query->bind_param("sssi", $nombre, $apellido, $nacionalidad, $nombre_escuderia);
+            $this->connectDB();
+
+            // Check if the escuderia exists in the escuderias table
+            $find_escuderia = $this->conn->prepare("SELECT id_escuderia FROM Escuderias WHERE nombre = ?");
+            $find_escuderia->bind_param("s", $nombre_escuderia);
+            $find_escuderia->execute();
+            $resultados = $find_escuderia->get_result();
+
+            if ($resultados->num_rows <= 0) {
+                return "Error: La escudería '$nombre_escuderia' no existe en el sistema.
+                     Por favor, ingresa una escudería válida.";
+            }
+
+            $query = $this->conn->prepare("INSERT INTO Pilotos (nombre, apellido, nacionalidad, id_escuderia) VALUES (?, ?, ?, ?)");
+            $query->bind_param("ssss", $nombre, $apellido, $nacionalidad, $id_escuderia);
             $query->execute();
+            $this->cerrarConexion();
             return "Piloto registrado correctamente.";
         }
 
-        public function registrarCircuito($nombre, $fecha, $longitud) {
-            $query = $this->conn->prepare("INSERT INTO Circuitos (nombre, pais, longitud) VALUES (?, ?, ?)");
+        public function registrarCircuito($nombre, $pais, $longitud) {
+            $this->connectDB();
+            $query = $this->conn->prepare("INSERT INTO Circuitos (nombre, pais, longitud_km) VALUES (?, ?, ?)");
             $query->bind_param("ssi", $nombre, $pais, $longitud);
             $query->execute();
-            return "Carrera registrada correctamente.";
+            $this->cerrarConexion();
+            return "Circuito registrado correctamente.";
         }       
     }
 ?>
@@ -416,39 +438,44 @@
             $mensajes = array();  
 
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
                 if (isset($_POST['create_db'])) {
-                    $mensajes['create_db'] = $controller->establecerBD();
-                
+                    $mensajes['create_db'] = $controller->establecerBD();       
+
                 } else if (isset($_POST['import_csv'])) {
-                    $mensajes['import_csv'] = $controller->importCSV($_FILES['csv_import']['tmp_name']);
-                
+                    if (isset($_FILES['csv_import']) && $_FILES['csv_import']['error'] === UPLOAD_ERR_OK) {
+                        $path = $_FILES['csv_import']['tmp_name'];
+                        $mensajes['import_csv'] = $controller->importCSV($path);
+                    } else {
+                        $mensajes['import_csv'] = "Hubo un error al cargar el archivo.";
+                    }               
+
                 } else if (isset($_POST['export_csv'])) {
-                    $mensajes['export_csv'] = $controller->exportCSV();
-                
+                    $mensajes['export_csv'] = $controller->exportCSV();          
+
                 } else if (isset($_POST['registrar_carrera'])) {
-                    $mensajes['registrar_carrera'] = $controller->registrarCarrera($_POST['nombre_carrera'], $_POST['fecha_carrera'], $_POST['nombre_circuito']);
+                    $mensajes['registrar_carrera'] = $controller->registrarCarrera($_POST['nombre_carrera'], $_POST['fecha_carrera'], $_POST['nombre_circuito_carrera']);
                 
                 } else if (isset($_POST['registrar_resultado'])) {
-                    $mensajes['registrar_resultado'] = $controller->registrarResultado($_POST['nombre_piloto'], $_POST['apellido_piloto'], $_POST['nombre_carrera'], $_POST['nombre_circuito'], $_POST['posicion'], $_POST['puntos']);
-                
+                    $mensajes['registrar_resultado'] = $controller->registrarResultado(
+                        $_POST['piloto'],  
+                        $_POST['carrera'], 
+                        $_POST['posicion'],        
+                        $_POST['puntos']           
+                    );
                 } else if (isset($_POST['ver_resultados'])) {
-                    $mensajes['ver_resultados'] = $controller->verResultadosPilotos();
+                    $mensajes['ver_resultados'] = $controller->verResultadosPilotos();                
                 
                 } else if (isset($_POST['estadisticas_pilotos'])) {
-                    $mensajes['estadisticas_pilotos'] = $controller->estadisticasPilotos();
+                    $mensajes['estadisticas_pilotos'] = $controller->estadisticasPilotos();                
                 
                 } else if (isset($_POST['mejores_resultados'])) {
-                    $mensajes['mejores_resultados'] = $controller->mejoresResultadosPorCarrera();
+                    $mensajes['mejores_resultados'] = $controller->mejoresResultadosPorCarrera();                
                 
                 } else if (isset($_POST['registrar_piloto'])) {
                     $mensajes['registrar_piloto'] = $controller->registrarPiloto($_POST['nombre_piloto'], $_POST['apellido_piloto'], $_POST['nacionalidad_piloto'], $_POST['escuderia_piloto']);
                 
                 } else if (isset($_POST['registrar_circuito'])) {
-                    $mensajes['registrar_circuito'] = $controller->registrarCircuito($_POST['nombre_circuito'], $_POST['pais_circuito'], $_POST['longitud_circuito']);
-                
-                } else if (isset($_POST['drop_db'])) {
-                    $mensajes['drop_db'] = $controller->dropAllTablas();
+                    $mensajes['registrar_circuito'] = $controller->registrarCircuito($_POST['nombre_circuito'], $_POST['pais_circuito'], $_POST['longitud_circuito']);                
                 }
             }
         ?>
@@ -456,7 +483,7 @@
         <main>
             <h2>Gestión Avanzada de Fórmula 1</h2>
             
-            <!-- Formulario Crear Base de Datos -->
+            <!-- Formulario para crear tablas y restaurar tablas -->
             <form method="POST">
                 <button type="submit" name="create_db">Crear Base de Datos</button>
                 <?php if (isset($mensajes['create_db'])): ?>
@@ -464,91 +491,50 @@
                 <?php endif; ?>
             </form>
 
-            <!-- Formulario Importar CSV -->
+            <!-- Importtar datos de CSV -->
             <form method="POST" enctype="multipart/form-data">
-                <label for="csv_import">Importar Datos desde CSV:</label>
-                <input type="file" id="csv_import" name="csv_import" accept=".csv" />
-                <button type="submit" name="import_csv">Importar CSV</button>
+                <label for="csv_import">Importar datos de un CSV:</label>
+                <input type="file" id="csv_import" name="csv_import" accept=".csv" required />
+                <button type="submit" name="import_csv" id="import_csv">Importar datos del CSV</button>
                 <?php if (isset($mensajes['import_csv'])): ?>
                     <p><?php echo $mensajes['import_csv']; ?></p>
                 <?php endif; ?>
             </form>
 
-            <!-- Formulario Exportar CSV -->
+            <!-- Exportar datos a CSV -->
             <form method="POST">
-                <button type="submit" name="export_csv">Exportar Datos</button>
+                <label for="export_csv">Exportar Datos a CSV:</label>
+                <button type="submit" id="export_csv" name="export_csv">Exportar Datos a CSV</button>
                 <?php if (isset($mensajes['export_csv'])): ?>
                     <p><?php echo $mensajes['export_csv']; ?></p>
                 <?php endif; ?>
             </form>
 
-            <!-- Formulario Registrar Carrera -->
+            <!-- Formulario ver informacion de la BD -->
             <form method="POST">
-                <h3>Registrar Nueva Carrera</h3>
-                <label for="nombre_carrera">Nombre del Gran Premio: </label>
-                <input type="text" id="nombre_carrera" name="nombre_carrera" required/>
-                
-                <label for="fecha_carrera">Fecha del Gran Premio: </label>
-                <input type="date" id="fecha_carrera" name="fecha_carrera" required/>
-                
-                <label for="nombre_circuito">Nombre del Circuito: </label>
-                <input type="text" id="nombre_circuito" name="nombre_circuito" required/>
-                
-                <button type="submit" name="registrar_carrera">Registrar Carrera</button>
-                <?php if (isset($mensajes['registrar_carrera'])): ?>
-                    <p><?php echo $mensajes['registrar_carrera']; ?></p>
-                <?php endif; ?>
-            </form>
-
-            <!-- Formulario Registrar Resultado -->
-            <form method="POST">
-                <h3>Registrar Resultado de Piloto en una Carrera</h3>
-                <label for="id_piloto">Piloto: </label>
-                <input type="text" id="id_piloto" name="id_piloto" required/>
-                
-                <label for="id_carrera_resultado">Carrera: </label>
-                <input type="text" id="id_carrera_resultado" name="id_carrera_resultado" required/>
-                
-                <label for="posicion">Posición: </label>
-                <input type="number" id="posicion" name="posicion" required/>
-                
-                <label for="puntos">Puntos: </label>
-                <input type="number" id="puntos" name="puntos" required/>
-                
-                <button type="submit" name="registrar_resultado">Registrar Resultado</button>
-                <?php if (isset($mensajes['registrar_resultado'])): ?>
-                    <p><?php echo $mensajes['registrar_resultado']; ?></p>
-                <?php endif; ?>
-            </form>
-
-            <!-- Formulario Ver Resultados -->
-            <form method="POST">
-                <h3>Ver Resultados de Pilotos</h3>
+                <!-- Ver resultados de todos los pilotos -->
+                <h3>Resultados de Pilotos en Carreras</h3>
                 <button type="submit" name="ver_resultados">Ver Resultados</button>
                 <?php if (isset($mensajes['ver_resultados'])): ?>
                     <p><?php echo $mensajes['ver_resultados']; ?></p>
                 <?php endif; ?>
-            </form>
 
-            <!-- Formulario Estadísticas de Pilotos -->
-            <form method="POST">
-                <h3>Estadísticas de Pilotos</h3>
-                <button type="submit" name="estadisticas_pilotos">Ver Estadísticas</button>
+                <!-- Ver las estadísticas de los pilotos -->
+                <h3>Mundial de Pilotos</h3>
+                <button type="submit" name="estadisticas_pilotos">Ver clasificación</button>
                 <?php if (isset($mensajes['estadisticas_pilotos'])): ?>
                     <p><?php echo $mensajes['estadisticas_pilotos']; ?></p>
                 <?php endif; ?>
-            </form>
 
-            <!-- Formulario Mejores Resultados -->
-            <form method="POST">
-                <h3>Mejores Resultados por Carrera</h3>
-                <button type="submit" name="mejores_resultados">Ver Mejores Resultados</button>
+                <!-- Ver los mejores resultados de cada carrera -->
+                <h3>Podium de cada Carrera</h3>
+                <button type="submit" name="mejores_resultados">Ver podiums</button>
                 <?php if (isset($mensajes['mejores_resultados'])): ?>
                     <p><?php echo $mensajes['mejores_resultados']; ?></p>
                 <?php endif; ?>
             </form>
 
-            <!-- Formulario Registrar Piloto -->
+            <!-- Formulario para registrar un nuevo piloto junto con su escudería -->
             <form method="POST">
                 <h3>Registrar Nuevo Piloto</h3>
                 <label for="nombre_piloto">Nombre del Piloto: </label>
@@ -561,7 +547,12 @@
                 <input type="text" id="nacionalidad_piloto" name="nacionalidad_piloto" required/>
                 
                 <label for="escuderia_piloto">Nombre de la Escudería: </label>
-                <input type="text" id="escuderia_piloto" name="escuderia_piloto" required/>
+                <select id="escuderia_piloto" name="escuderia_piloto" required>
+                    <?php
+                        $controller = new Controller();
+                        $controller->obtenerEscuderias();                                              
+                    ?>
+                </select>
                 
                 <button type="submit" name="registrar_piloto">Registrar Piloto</button>
                 <?php if (isset($mensajes['registrar_piloto'])): ?>
@@ -569,7 +560,7 @@
                 <?php endif; ?>
             </form>
 
-            <!-- Formulario Registrar Circuito -->
+            <!-- Formulario para registrar un nuevo circuito -->
             <form method="POST">
                 <h3>Registrar Nuevo Circuito</h3>
                 <label for="nombre_circuito">Nombre del Circuito: </label>
@@ -579,7 +570,7 @@
                 <input type="text" id="pais_circuito" name="pais_circuito" required/>
                 
                 <label for="longitud_circuito">Longitud del Circuito (km): </label>
-                <input type="number" id="longitud_circuito" name="longitud_circuito" required/>
+                <input type="number" id="longitud_circuito" name="longitud_circuito" required step="0.01"/>
                 
                 <button type="submit" name="registrar_circuito">Registrar Circuito</button>
                 <?php if (isset($mensajes['registrar_circuito'])): ?>
@@ -587,14 +578,67 @@
                 <?php endif; ?>
             </form>
 
-            <!-- Formulario Restaurar Base de Datos -->
+            <!-- Formulario para registrar una nueva carrera -->
             <form method="POST">
-                <button type="submit" name="drop_db">Restaurar Base de Datos</button>
-                <?php if (isset($mensajes['drop_db'])): ?>
-                    <p><?php echo $mensajes['drop_db']; ?></p>
+                <h3>Registrar Nueva Carrera</h3>
+                <label for="nombre_carrera">Nombre del Gran Premio: </label>
+                <input type="text" id="nombre_carrera" name="nombre_carrera" required/>
+                
+                <label for="fecha_carrera">Fecha del Gran Premio: </label>
+                <input type="date" id="fecha_carrera" name="fecha_carrera" required/>
+                
+                <label for="nombre_circuito_carrera">Circuito: </label>
+                <select id="nombre_circuito_carrera" name="nombre_circuito_carrera" required>
+                    <?php
+                        $controller = new Controller();
+                        $controller->obtenerCircuitos();                                              
+                    ?>
+                </select>
+                
+                <button type="submit" name="registrar_carrera">Registrar Carrera</button>
+                <?php if (isset($mensajes['registrar_carrera'])): ?>
+                    <p><?php echo $mensajes['registrar_carrera']; ?></p>
                 <?php endif; ?>
             </form>
+
+            <!-- Formulario para registrar un resultado de un piloto en una carrera -->
+            <form method="POST">
+            <h3>Registrar Resultado de Piloto en una Carrera</h3>
+
+            <!-- Desplegable de Piloto -->
+            <label for="piloto">Piloto: </label>
+            <select id="piloto" name="piloto" required>
+                <?php
+                    // Obtener los pilotos disponibles desde la base de datos
+                    $controller = new Controller();
+                    $controller->obtenerPilotos();
+                ?>
+            </select>
+
+            <!-- Desplegable de Carrera -->
+            <label for="carrera">Carrera: </label>
+            <select id="carrera" name="carrera" required>
+                <?php
+                    // Obtener las carreras disponibles desde la base de datos
+                    $controller = new Controller();
+                    $controller->obtenerCarreras();
+                ?>
+            </select>
+
+            <!-- Campos de Posición y Puntos -->
+            <label for="posicion">Posición: </label>
+            <input type="number" id="posicion" name="posicion" required/>
+            <label for="puntos">Puntos: </label>
+            <input type="number" id="puntos" name="puntos" required/>
+
+            <button type="submit" name="registrar_resultado">Registrar Resultado</button>
+            
+            <?php if (isset($mensajes['registrar_resultado'])): ?>
+                <p><?php echo $mensajes['registrar_resultado']; ?></p>
+            <?php endif; ?>
+        </form>
         </main>
+
         <!-- Pie de página -->
         <footer>
             <!-- Información del autor -->

@@ -13,7 +13,7 @@ class Noticias {
             }, 4000);     
         }
 
-        document.querySelector('main > h2').setAttribute('data-state', 'hidden');
+        document.querySelector('main > h2').setAttribute('hidden', '');
 
         document.querySelector('input[type="file"]')
             .addEventListener('change', (event) => this.readInputFile(event));
@@ -38,7 +38,7 @@ class Noticias {
     }
 
     displayNoticias(contents) {
-        document.querySelector('main > h2').setAttribute('data-state', 'visible');
+        document.querySelector('main > h2').removeAttribute('hidden');
 
         const lines = contents.split('\n');
         lines.forEach(line => {
@@ -66,7 +66,7 @@ class Noticias {
 
     addNoticia(event) {
         event.preventDefault();
-        document.querySelector('main > h2').setAttribute('data-state', 'visible');
+        document.querySelector('main > h2').removeAttribute('hidden');
 
         const titular = document.querySelector('input[placeholder="Titular"]').value;
         const entradilla = document.querySelector('textarea[placeholder="Contenido"]').value;

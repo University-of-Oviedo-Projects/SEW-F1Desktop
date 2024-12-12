@@ -180,15 +180,16 @@ class Api {
         span.textContent = "0";
         h21.appendChild(span);
         scoreContainer.appendChild(h21);
-        scoreContainer.setAttribute('data-state', 'hidden');
+        scoreContainer.setAttribute('hidden', '');
         main.appendChild(scoreContainer);
 
         // Crear contenedor de pregunta
         const questionContainer = document.createElement('section');
         questionContainer.classList.add('question-container');
-        questionContainer.setAttribute('data-state', 'hidden');
+        questionContainer.setAttribute('hidden', '');
         const h22 = document.createElement('h2');
         h22.textContent = "Pregunta";
+        h22.setAttribute('hidden', '');
         questionContainer.appendChild(h22);
         main.appendChild(questionContainer);
 
@@ -198,7 +199,7 @@ class Api {
         const h23 = document.createElement('h2');
         h23.textContent = "Opciones";
         optionsContainer.appendChild(h23);
-        optionsContainer.setAttribute('data-state', 'hidden');
+        optionsContainer.setAttribute('hidden', '');
         main.appendChild(optionsContainer);
 
         // Crear contenedor de puntuación final
@@ -207,32 +208,24 @@ class Api {
         h24.textContent = "Puntuación Final";
         finalScoreContainer.appendChild(h24);
         finalScoreContainer.classList.add('final-score-container');
-        finalScoreContainer.setAttribute('data-state', 'hidden');
+        finalScoreContainer.setAttribute('hidden', '');
         main.appendChild(finalScoreContainer);
-
-        // Crear diálogo de puntuación final
-        const scoreDialog = document.createElement('dialog');
-        main.appendChild(scoreDialog);
     }
 
     startGame() {
-        document.querySelector('main > section').setAttribute('data-state', 'hidden');
+        document.querySelector('main > section').setAttribute('hidden', '');
 
         // Mostrar las secciones de puntuación, pregunta y opciones
-        document.querySelector("body > main > section:nth-of-type(2)").setAttribute("data-state", "visible");
-        document.querySelector("body > main > section:nth-of-type(3)").setAttribute("data-state", "visible");
-        document.querySelector("body > main > section:nth-of-type(4)").setAttribute("data-state", "visible");
+        document.querySelector("body > main > section:nth-of-type(2)").removeAttribute('hidden')
+        document.querySelector("body > main > section:nth-of-type(3)").removeAttribute('hidden')
+        document.querySelector("body > main > section:nth-of-type(4)").removeAttribute('hidden')
         this.showQuestion(); // Mostrar la primera pregunta
 
         const highScore = this.getHighScore();  // Web Storage
         const messageContainer = document.querySelector('body > main > section:nth-of-type(2)'); 
         const paragraph = document.createElement('p');
         paragraph.textContent = `Puntuación más alta: ${highScore}`;
-        messageContainer.appendChild(paragraph);
-            
-        setTimeout(() => {
-            paragraph.remove();
-        }, 4000);        
+        messageContainer.appendChild(paragraph);       
     }
 
     showQuestion() {
@@ -288,9 +281,9 @@ class Api {
 
         buttons.forEach(btn => {
             if (question.answer.toLowerCase() === btn.textContent.toLowerCase()) {
-                btn.setAttribute('data-state', 'correct');
+                btn.setAttribute('title', 'correct-answer');
             } else {
-                btn.setAttribute('data-state', 'incorrect');
+                btn.setAttribute('title', 'incorrect-answer');
             }
 
             btn.disabled = true;
@@ -309,7 +302,8 @@ class Api {
     }
 
     endGame() {
-        const scoreDialog = document.querySelector("body > main > dialog");
+        const container = document.querySelector('main');
+        const scoreDialog = document.createElement('dialog');
 
         if (this.score > this.highScore) {
             localStorage.setItem('highScore', this.score);
@@ -318,21 +312,23 @@ class Api {
 
         const h2 = document.createElement('h2');
         h2.textContent = "Juego Finalizado";
+        scoreDialog.appendChild(h2);
         const yourFinalPuntuacion = document.createElement('p');
         yourFinalPuntuacion.textContent = `Tu puntuación: ${this.score}`;
-        const greatestPuntuacion =  document.createElement('p');       
-        greatestPuntuacion.textContent = `Puntuación más alta: ${this.highScore}`;
-
-        scoreDialog.appendChild(h2);
         scoreDialog.appendChild(yourFinalPuntuacion);
+        const greatestPuntuacion =  document.createElement('p');       
+        greatestPuntuacion.textContent = `Puntuación más alta: ${this.highScore}`;       
         scoreDialog.appendChild(greatestPuntuacion);
-        scoreDialog.setAttribute('data-state', 'show');
+
+        container.appendChild(scoreDialog);
         scoreDialog.showModal();
 
         setTimeout(() => {
-            scoreDialog.classList.remove('show');
             scoreDialog.close();
-        }, 7000);
+            scoreDialog.remove();
+        }, 4000);
+
+        
     }
 
     playSound(filename) {

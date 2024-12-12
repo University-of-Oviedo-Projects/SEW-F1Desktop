@@ -21,6 +21,12 @@ menu {
     margin: 0 auto; 
 }
 
+/* Especificidad 003 */
+body > p > a {
+    color: #8F0000;
+    /* background-color heredado de body */
+}
+
 /* Especificidad 002 */
 h1 {
     color: #FFFFFF;
@@ -46,7 +52,7 @@ nav {
 }
 
 
-/* Especificidad 003 & 001, 004 */
+/* Especificidades 003, 001 */
 menu li a, a {
     text-decoration: none;           
     color: #FFFFFF;

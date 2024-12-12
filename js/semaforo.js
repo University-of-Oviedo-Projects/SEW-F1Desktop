@@ -22,8 +22,7 @@ class Semaforo {
 
         for (let i = 1; i <= this.lights; i++) {
             const light = document.createElement("div");
-            light.className = "light";
-            light.id = `light${i}`;
+            light.className = `light${i}`;
             semaforoContainer.appendChild(light);
         }
 
@@ -46,8 +45,10 @@ class Semaforo {
     }
 
     initSequence() {
-        const main = document.querySelector("main");
-        main.classList.add("load");  
+        const section = document.querySelector("main > section");
+        
+        if(section.classList.contains("unload")) { section.classList.remove("unload"); }
+        section.classList.add("load");  
         this.reactionTimeDisplay.textContent = "";
 
         const form = document.querySelector("main > form");
@@ -85,9 +86,9 @@ class Semaforo {
     }
 
     turnOffLights() {
-        const main = document.querySelector("main");
-        main.classList.remove("load"); 
-        main.classList.add("unload"); 
+        const section = document.querySelector("main > section");
+        section.classList.remove("load");  
+        section.classList.add("unload"); 
 
         this.unload_moment = new Date();
 
@@ -106,10 +107,6 @@ class Semaforo {
 
         // Mostrar el tiempo de reacción
         this.reactionTimeDisplay.textContent = `Tiempo de reacción: ${reactionTimeSeconds} segundos`;
-
-        const main = document.querySelector("main");
-        main.classList.remove("load");
-        main.classList.remove("unload");
 
         // Deshabilitar el botón de reacción y habilitar el de inicio
         if (this.reactionButton) {

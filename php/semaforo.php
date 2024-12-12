@@ -15,7 +15,6 @@
             $this->user = "DBUSER2024";
             $this->pass = "DBPSWD2024";
             $this->dbname = "records";
-            $this->connectDB() ;
         }
 
     private function connectDB() {
@@ -27,14 +26,17 @@
     }
 
     public function insertRecord($nombre, $apellidos, $nivel, $tiempo) {
+        $this->connectDB();
         $stmt = $this->conn
             ->prepare("INSERT INTO registro (nombre, apellidos, nivel, tiempo) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("ssdd", $nombre, $apellidos, $nivel, $tiempo);
         $stmt->execute();
         $stmt->close();
+        $this->conn->close();
     }
 
     public function getTopRecords() {
+        $this->connectDB();
         $stmt = $this->conn->prepare("SELECT nombre, apellidos, tiempo 
                     FROM registro ORDER BY tiempo ASC LIMIT 10");
         $stmt->execute();
@@ -45,15 +47,18 @@
             while ($row = $result->fetch_assoc()) {
                 $records[] = $row;
             }
+
+            $stmt->close();
+            $this->conn->close();
             return $records;
         } else {
+            $stmt->close();
+            $this->conn->close();
             return [];
         }
     }
 }
 ?>
-
-
 
 <html lang="es">
     <head>
@@ -66,7 +71,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         
         <title>F1 Desktop</title>
-        <link rel="icon" type="image/x-icon" href="multimedia/imagenes/favicon-16x16.png" />
+        <link rel="icon" type="image/x-icon" href="../multimedia/imagenes/favicon-16x16.png" />
 
         <!-- Preload de los estilos -->
         <link rel="preload" href="../estilo/layout.css" as="style"/>

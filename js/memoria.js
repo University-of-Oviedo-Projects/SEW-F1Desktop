@@ -122,7 +122,6 @@ class Memoria {
         this.elements.forEach((item) => {
             // Crear un nuevo artículo para cada elemento
             const article = document.createElement('article');
-            article.setAttribute('data-element', item.element);
             article.setAttribute('data-state', 'card-hidden');
 
             // Crear el encabezado y añadirlo al artículo
@@ -136,7 +135,7 @@ class Memoria {
             const img = document.createElement('img');
             img.src = item.source;
             img.alt = "Tarjeta de memoria";
-            img.setAttribute('data-state', 'hidden');
+            img.setAttribute('hidden', '');
 
             // Agregar la imagen al artículo
             article.appendChild(img);
@@ -164,7 +163,7 @@ class Memoria {
         article.setAttribute('data-state', 'card-revealed');
 
         const img = article.querySelector('img');
-        img.setAttribute('data-state', 'visible');
+        img.removeAttribute('hidden');
 
         if (!this.hasFlippedCard) {
             this.hasFlippedCard = true;
