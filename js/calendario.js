@@ -22,7 +22,7 @@ class Calendario {
                 this.displayRaces(data.MRData.RaceTable.Races);
             },
             error: (error) => {
-                console.error('Error fetching race data:', error);
+                // No hacer nada en caso de error
             }
         });
     }

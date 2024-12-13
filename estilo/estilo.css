@@ -329,8 +329,6 @@ main  > section:nth-of-type(4) {
     justify-content: center;
     align-items: center;
     width: 100%; 
-    margin: 2em auto; 
-    /* Redefinimos el margen para que no se desborde del contenedor */
     margin: 2em auto;
 }
 
@@ -368,8 +366,8 @@ main  > section:nth-of-type(4) button[title="incorrect-answer"] {
 
 /* Especificidad 023 */
 main  > dialog:nth-of-type(1) {
-    display: none;
-    flex-direction: row;
+    display: flex; 
+    flex-direction: column; 
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -380,12 +378,6 @@ main  > dialog:nth-of-type(1) {
     width: 80%;
     max-width: 50%;
     margin: auto;
-}
-
-/* Especificidad 033 */
-main > dialog:nth-of-type(1) {
-    display: flex; 
-    flex-direction: column; /* Alinea los elementos en columna */
 }
 
 /* Especificidad 024 */
@@ -417,14 +409,6 @@ form {
 form label {
     margin-top: 1em;
     font-weight: bold;
-}
-
-/* Especificidad: 012 */
-form input[type="text"], form textarea, form input[type="file"], form textarea {
-    padding: 1em;
-    /* Redefinimos el padding para que no se desborde del contenedor */
-    margin: 0.5em 0;
-    /* Redefinimos el margen para que no se desborde del contenedor */
 }
 
 /* Especificidad: 012 */

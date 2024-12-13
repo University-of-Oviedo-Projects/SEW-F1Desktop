@@ -13,58 +13,49 @@ class Semaforo {
 
     createStructure() {
         const main = document.querySelector("main");
-
-        const semaforoContainer = document.createElement("section");
         const h2 = document.createElement('h2');
-        h2.textContent = "¡Pon a prueba tus reflejos!"; 
-        semaforoContainer.appendChild(h2);
-        main.appendChild(semaforoContainer);
+        
+        h2.textContent = "Semáforo"; 
+        main.appendChild(h2);
 
         for (let i = 1; i <= this.lights; i++) {
             const light = document.createElement("div");
             light.className = `light${i}`;
-            semaforoContainer.appendChild(light);
+            main.appendChild(light);
         }
 
-        // Botón de inicio
         this.startButton = document.createElement("button");
         this.startButton.textContent = "Arranque";
         this.startButton.onclick = () => this.initSequence();
         main.appendChild(this.startButton);
 
-        // Botón para registrar tiempo de reacción
         this.reactionButton = document.createElement("button");
-        this.reactionButton.textContent = "Reaccionar";
+        this.reactionButton.textContent = "Reacción";
         this.reactionButton.onclick = () => this.stopReaction(); 
         this.reactionButton.disabled = true;
         main.appendChild(this.reactionButton);
 
-        // Mostrar el tiempo de reacción
         this.reactionTimeDisplay = document.createElement("p");
         main.appendChild(this.reactionTimeDisplay);
     }
 
     initSequence() {
-        const section = document.querySelector("main > section");
+        const main = document.querySelector("main");
         
-        if(section.classList.contains("unload")) { section.classList.remove("unload"); }
-        section.classList.add("load");  
+        if(main.classList.contains("unload")) { main.classList.remove("unload"); }
+        main.classList.add("load");  
         this.reactionTimeDisplay.textContent = "";
 
         const form = document.querySelector("main > form");
         if(form) { form.remove(); }
         
-        // Deshabilitar el botón de inicio
         if (this.startButton) {
             this.startButton.disabled = true;
         } else {
-            console.error("Start button not found");
             return;
         }
 
         let minSeconds, maxSeconds;
-
-        // Determinar el rango de tiempo según la dificultad
         if (this.difficulty === 0.2) {
             minSeconds = 2;
             maxSeconds = 4;
@@ -86,29 +77,23 @@ class Semaforo {
     }
 
     turnOffLights() {
-        const section = document.querySelector("main > section");
-        section.classList.remove("load");  
-        section.classList.add("unload"); 
+        const main = document.querySelector("main");
+        main.classList.remove("load");  
+        main.classList.add("unload"); 
 
         this.unload_moment = new Date();
 
-        // Usar la referencia almacenada para el botón de reacción
         if (this.reactionButton) {
             this.reactionButton.disabled = false;
-        } else {
-            console.error("Reaction button not found");
-        }
+        } 
     }
 
     stopReaction() {
         this.clic_moment = new Date();
         const reactionTime = this.clic_moment - this.unload_moment; 
         const reactionTimeSeconds = (reactionTime / 1000).toFixed(3); 
-
-        // Mostrar el tiempo de reacción
         this.reactionTimeDisplay.textContent = `Tiempo de reacción: ${reactionTimeSeconds} segundos`;
 
-        // Deshabilitar el botón de reacción y habilitar el de inicio
         if (this.reactionButton) {
             this.reactionButton.disabled = true;
         }

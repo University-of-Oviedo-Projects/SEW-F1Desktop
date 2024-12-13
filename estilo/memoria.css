@@ -104,7 +104,7 @@ main > section article[data-state="card-revealed"] header h2 {
     display: none;
 }
 
-/* Estilo para el diálogo */
+/* Especificidad 001 */
 dialog {
     width: 100%;
     max-width: 31.25em;
@@ -115,13 +115,13 @@ dialog {
     text-align: center;
 }
 
-/* Estilo para el fondo del diálogo */
+/* Especificidad 002 */
 dialog::backdrop {
     background: #00000080;
     /* color heredado del body */
 }
 
-/* Estilo para el botón del tutorial */
+/* Especificidad 002 */
 main > button {
     margin-left: 5em;
     padding: 1em 2em;
@@ -190,4 +190,3 @@ main > button {
     }
     
 }
-

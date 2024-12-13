@@ -2,14 +2,12 @@
 
 <?php
     class Record {
-        // Atributos
         private $server;
         private $user;
         private $pass;
         private $dbname;
         private $conn;
 
-        // Constructor
         public function __construct() {
             $this->server = "localhost";
             $this->user = "DBUSER2024";
@@ -42,20 +40,16 @@
         $stmt->execute();
         $result = $stmt->get_result();
 
+        $records = [];
         if ($result->num_rows > 0) {
-            $records = [];
             while ($row = $result->fetch_assoc()) {
                 $records[] = $row;
             }
-
-            $stmt->close();
-            $this->conn->close();
-            return $records;
-        } else {
-            $stmt->close();
-            $this->conn->close();
-            return [];
         }
+        
+        $stmt->close();
+        $this->conn->close();
+        return $records;
     }
 }
 ?>
@@ -64,9 +58,8 @@
     <head>
     <meta charset="utf-8" />
         <meta name="author" content="Adrián Martínez" />
-        <meta name="description" content="Una página web que emula a la pagina web de la Formula 1, 
-            incluyendo informacion sobre un piloto asignado, los circuitos, la meteorologia, 
-            las noticias, los viajes y juegos." />
+        <meta name="description" content="Este documento consiste en un minijuego de 
+            reaccion simulando las luces del semaforo de salida de un Gran Premio de F1" />
         <meta name="keywords" content="Formula 1, Ocon, Carreras, Coches" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         
@@ -80,34 +73,29 @@
         <link rel="stylesheet" href="../estilo/estilo.css" />
         <link rel="stylesheet" href="../estilo/layout.css" />
         <link rel="stylesheet" href="../estilo/semaforo.css" />
-        
-        <!-- Añadir referencia al archivo semaforo.js -->
+
         <script src="../js/semaforo.js"></script>
-
-        <!-- Añadir referencia a jQuery -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-        <!-- Añadir referencia al archivo ayuda.js -->
         <script src="../js/ayuda.js"></script>
     </head>
 
     <body>
         <header>
-            <h1><a href="../index.html">F1 Desktop</a></h1>
+            <h1><a href="../index.html" target="_self" title="Pagina de inicio">F1 Desktop</a></h1>
 
             <nav>
-                <a href="../index.html">Home </a>
-                <a href="../piloto.html">Piloto </a>
-                <a href="../noticias.html">Noticias </a>
-                <a href="../meteorologia.html">Meteorologia </a>
-                <a href="viajes.php">Viajes </a>
-                <a href="../calendario.html">Calendario </a>
-                <a href="../circuitos.html">Circuitos </a>
-                <a href="../juegos.html">Juegos </a>
+                <a href="../index.html" target="_self" title="Página principal de inicio, regresa a la página principal">Inicio</a>
+                <a href="../piloto.html" target="_self" title="Información sobre los pilotos">Piloto</a>
+                <a href="../noticias.html" target="_self" title="Últimas noticias y actualizaciones">Noticias</a>
+                <a href="../meteorologia.html" target="_self" title="Pronóstico meteorológico y condiciones climáticas">Meteorologia</a>
+                <a href="viajes.php" target="_self" title="Información sobre viajes y destinos">Viajes</a>
+                <a href="../calendario.html" target="_self" title="Calendario de eventos y actividades">Calendario</a>
+                <a href="../circuitos.html" target="_self" title="Detalles sobre los circuitos y pistas">Circuitos</a>
+                <a href="../juegos.html" target="_self" title="Juegos y actividades interactivas">Juegos</a>
             </nav>
         </header>
 
-        <p>Estas en <a href="../index.html" title="Home">Inicio</a> 
+        <p>Estas en <a href="../index.html" title="Pagina de inicio">Inicio</a> 
             >> <a href="../juegos.html" title="Juegos">Juegos</a> >> Reacción</p>
 
         <!-- Botón para abrir el popup de ayuda -->

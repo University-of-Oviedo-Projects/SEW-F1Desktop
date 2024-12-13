@@ -81,7 +81,7 @@ class Memoria {
     }
 
     checkForMatch() {
-        this.firstCard.getAttribute("data-element") === this.secondCard.getAttribute("data-element") ?
+        this.firstCard.element === this.secondCard.element ?
             this.disableCards() : this.unflipCards();
     }
 
@@ -123,6 +123,7 @@ class Memoria {
             // Crear un nuevo artículo para cada elemento
             const article = document.createElement('article');
             article.setAttribute('data-state', 'card-hidden');
+            article.element = item.element;
 
             // Crear el encabezado y añadirlo al artículo
             const header = document.createElement('header');

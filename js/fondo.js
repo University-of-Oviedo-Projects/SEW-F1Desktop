@@ -12,7 +12,6 @@ class Fondo {
         });
     }
 
-    // Método para realizar la consulta AJAX
     getFondo() {
         var flickrAPI = "https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
         $.getJSON(flickrAPI, 
@@ -30,11 +29,9 @@ class Fondo {
                     "background-repeat": "no-repeat",
                     "background-position": "center"
                 });
-            } else {
-                console.error("No se encontraron imágenes.");
-            }
-        }).fail(function() {
-            console.error("Error al realizar la consulta AJAX.");
-        });
+            } 
+        }).fail(
+            // No hacer nada en caso de error
+        );
     }
 }

@@ -157,9 +157,8 @@ class Pais {
                     dayCount++; // Incrementar el contador de días
                 }
             },
-            error: function(error) {
-                console.error('Error al obtener la previsión del tiempo:', error);
-            }
+            error: function(error) { // No hacer nada en caso de error 
+                }
         });
     }    
 }

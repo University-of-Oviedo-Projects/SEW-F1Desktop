@@ -5,56 +5,52 @@
         <meta charset="utf-8" />
 
         <meta name="author" content="Adrián Martínez" />
-        <meta name="description" content="Una página web que emula a la pagina web de la Formula 1, 
-            incluyendo informacion sobre un piloto asignado, los circuitos, la meteorologia, 
-            las noticias, los viajes y juegos." />
-        <meta name="keywords" content="Formula 1, Calendario, Carreras, Coches">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Documento en el cual se pueden ver las carreras
+            de Formula 1 para la temporada actual." />
+        <meta name="keywords" content="Formula 1, Calendario, Carreras, Coches" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         
         <title>F1 Desktop</title>
-        <link rel="icon" type="image/x-icon" href="multimedia/imagenes/favicon-16x16.png">
+        <link rel="icon" type="image/x-icon" href="multimedia/imagenes/favicon-16x16.png" />
         
         <!-- Preload de los estilos -->
-        <link rel="preload" href="estilo/layout.css" as="style">
-        <link rel="preload" href="estilo/estilo.css" as="style">
-        <link rel="preload" href="estilo/calendario_grid.css" as="style">
+        <link rel="preload" href="estilo/layout.css" as="style" />
+        <link rel="preload" href="estilo/estilo.css" as="style" />
+        <link rel="preload" href="estilo/calendario_grid.css" as="style" />
 
-        <!-- Después de que se haya descargado, se aplica el CSS -->
+        
         <link rel="stylesheet" href="estilo/layout.css"/>
         <link rel="stylesheet" href="estilo/estilo.css"/>
         <link rel="stylesheet" href="estilo/calendario_grid.css" />
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
-
         <script src="js/calendario.js" defer></script>
+        <script src="js/ayuda.js"></script>
 
         <script>
             document.addEventListener("DOMContentLoaded", () => {
                 new Calendario();
             });
-        </script>
-
-        <!-- Añadir referencia al archivo ayuda.js -->
-        <script src="js/ayuda.js"></script>
+        </script>        
     </head>
 
     <body>
         <header>
-            <h1><a href="index.html" target="_self">F1 Desktop</a></h1>
+            <h1><a href="index.html" target="_self" title="Pagina de inicio">F1 Desktop</a></h1>
 
             <nav>
-                <a href="index.html" target="_self" title="Página principal de inicio, regresa a la página principal">Home</a>
+                <a href="index.html" target="_self" title="Página principal de inicio, regresa a la página principal">Inicio</a>
                 <a href="piloto.html" target="_self" title="Información sobre los pilotos">Piloto</a>
                 <a href="noticias.html" target="_self" title="Últimas noticias y actualizaciones">Noticias</a>
                 <a href="meteorologia.html" target="_self" title="Pronóstico meteorológico y condiciones climáticas">Meteorologia</a>
-                <a href="viajes.php" target="_self" title="Información sobre viajes y destinos">Viajes</a>
+                <a href="./php/viajes.php" target="_self" title="Información sobre viajes y destinos">Viajes</a>
                 <a href="calendario.html" target="_self" title="Calendario de eventos y actividades">Calendario</a>
                 <a href="circuitos.html" target="_self" title="Detalles sobre los circuitos y pistas">Circuitos</a>
                 <a href="juegos.html" target="_self" title="Juegos y actividades interactivas">Juegos</a>
             </nav>
         </header>
 
-        <p>Estas en <a href="index.html" title="Home">Inicio</a> >> Calendario</p>
+        <p>Estas en <a href="index.html" title="Pagina de inicio">Inicio</a> >> Calendario</p>
             
         <!-- Botón para abrir el popup de ayuda -->
         <button>Ayuda</button>

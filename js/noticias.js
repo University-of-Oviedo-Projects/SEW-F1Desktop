@@ -1,7 +1,7 @@
 class Noticias {
     constructor() {
         if (window.File && window.FileReader && window.FileList && window.Blob) {
-            console.log("Todas las APIs de File están soportadas.");
+            // El navegador soporta todas las APIs necesarias
         } else {
             const messageContainer = document.querySelector('body > main > section'); 
             const paragraph = document.createElement('p');

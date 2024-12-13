@@ -4,43 +4,41 @@
     class Carrusel {
         private $capital;
         private $pais;
+        private $ciudad;
         private $fotos;
     
         public function __construct($capital, $pais) {
             $this->capital = $capital;
             $this->pais = $pais;
+            $this->ciudad = "Zandvoort";
             $this->fotos = [];
         }
     
         public function fetchfotos() {
             $apiKey = 'aef049db4852b23d7b6f7303dfc8e7f2';
-            $url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=$apiKey&tags=" . urlencode($this->pais) . "&per_page=5&format=json&nojsoncallback=1";
+            $tags = urlencode("F1, " . $this->pais . ", " . $this->capital . "," . $this->ciudad);
+            $url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=$apiKey&tags=$tags&per_page=5&format=json&nojsoncallback=1";
     
-            // Usar cURL con keep-alive para mejorar la eficiencia de las solicitudes
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Connection: keep-alive')); // Hacer que la conexión se mantenga viva
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Connection: keep-alive')); 
             $response = curl_exec($ch);
     
-            // Verificar si hubo un error con la solicitud
             if ($response === false) {
                 echo "No se pudo conectar con la API de Flickr: " . curl_error($ch);
                 curl_close($ch);
                 return;
             }
+
             curl_close($ch);
-    
-            // Decodificar la respuesta JSON
             $data = json_decode($response, true);
     
-            // Verificar si la respuesta contiene fotos
             if (!isset($data['photos']['photo']) || count($data['photos']['photo']) == 0) {
                 echo "No se encontraron fotos para el país especificado.";
                 return;
             }
     
-            // Recoger las URLs de las fotos y almacenarlas
             foreach ($data['photos']['photo'] as $photo) {
                 $photoUrl = "https://farm{$photo['farm']}.staticflickr.com/{$photo['server']}/{$photo['id']}_{$photo['secret']}_m.jpg"; 
                 $this->fotos[] = $photoUrl;
@@ -54,7 +52,6 @@
         }
     }
           
-
     class Moneda {
         private $baseCurrency;
         private $targetCurrency;
@@ -97,9 +94,8 @@
     <head>
         <meta charset="utf-8" />
         <meta name="author" content="Adrián Martínez" />
-        <meta name="description" content="Una página web que emula a la pagina web de la Formula 1, 
-            incluyendo informacion sobre un piloto asignado, los circuitos, la meteorologia, 
-            las noticias, los viajes y juegos." />
+        <meta name="description" content="Este documento ofrece un carrusel con imagenes sobre
+            Países Bajos, mapas con la localizacion del usuario y un cambio de moneda de € a $" />
         <meta name="keywords" content="Formula 1, Ocon, Carreras, Coches">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -112,34 +108,30 @@
         <link rel="preload" href="../js/viajes.js" as="script">
         <link rel="preload" href="../js/ayuda.js" as="script">
 
-        <!-- Después de que se haya descargado, se aplica el CSS -->
         <link rel="stylesheet" href="../estilo/layout.css">
         <link rel="stylesheet" href="../estilo/estilo.css">
 
-        <!-- Añadir referencia al archivo viajes.js -->
         <script src="../js/viajes.js"></script>
-
-        <!-- Añadir referencia al archivo ayuda.js -->
         <script src="../js/ayuda.js"></script>
     </head>
 
     <body>
         <header>
-            <h1><a href="../index.html">F1 Desktop</a></h1>
+            <h1><a href="../index.html" target="_self" title="Pagina de inicio">F1 Desktop</a></h1>
 
             <nav>
-                <a href="../index.html">Home </a>
-                <a href="../piloto.html">Piloto </a>
-                <a href="../noticias.html">Noticias </a>
-                <a href="../meteorologia.html">Meteorologia </a>
-                <a href="viajes.php">Viajes </a>
-                <a href="../calendario.html">Calendario </a>
-                <a href="../circuitos.html">Circuitos </a>
-                <a href="../juegos.html">Juegos </a>
+                <a href="../index.html" target="_self" title="Página principal de inicio, regresa a la página principal">Inicio</a>
+                <a href="../piloto.html" target="_self" title="Información sobre los pilotos">Piloto</a>
+                <a href="../noticias.html" target="_self" title="Últimas noticias y actualizaciones">Noticias</a>
+                <a href="../meteorologia.html" target="_self" title="Pronóstico meteorológico y condiciones climáticas">Meteorologia</a>
+                <a href="viajes.php" target="_self" title="Información sobre viajes y destinos">Viajes</a>
+                <a href="../calendario.html" target="_self" title="Calendario de eventos y actividades">Calendario</a>
+                <a href="../circuitos.html" target="_self" title="Detalles sobre los circuitos y pistas">Circuitos</a>
+                <a href="../juegos.html" target="_self" title="Juegos y actividades interactivas">Juegos</a>
             </nav>
         </header>
 
-        <p>Estas en <a href="index.html" title="Home">Inicio</a> >> Viajes</p>
+        <p>Estas en <a href="../index.html" target="_self" title="Pagina de inicio">F1 Desktop</a> >> Viajes</p>
 
         <!-- Botón para abrir el popup de ayuda -->
         <button>Ayuda</button>

@@ -160,9 +160,7 @@ class Api {
         let normalModeButton = document.querySelector('main > section > button');
         if (normalModeButton) {
             normalModeButton.addEventListener('click', () => this.startGame('normal'));
-        } else {
-            console.error('No se encontraron los botones');
-        }
+        } 
 
         this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
     }
@@ -273,9 +271,7 @@ class Api {
         } else {
             if (navigator.vibrate) {
                 navigator.vibrate(500); 
-            } else {
-                console.log('La vibración no es compatible con este dispositivo');
-            }
+            } 
             this.playSound('incorrect-answer.mp3');
         }
 
@@ -338,10 +334,10 @@ class Api {
                 source.buffer = audioBuffer;
                 source.connect(this.audioContext.destination);
                 source.start();
-                console.log('Audio is playing');
+                ('Audio is playing');
             })
             .catch(error => {
-                console.error('Error playing audio:', error);
+                // No hacer nada si hay un error
             });
     }
 
@@ -361,7 +357,6 @@ class Api {
 
     startProgressBar() {
         if (!this.progressBarCanvas) {
-            console.error('El canvas de la barra de progreso no está definido');
             return;
         }
 

@@ -148,7 +148,6 @@
                 }
             }
         
-            // Ejecutamos la consulta final para la última tabla
             if ($currentTable && !empty($rows) && $query) {
                 $this->executeQuery($query, $rows);
             }
@@ -381,8 +380,7 @@
 
         public function mejoresResultadosPorCarrera() {
             $this->connectDB($this->db_name);;
-            
-            // Consulta SQL para obtener los mejores resultados por carrera
+    
             $query = "SELECT c.nombre AS carrera, c.fecha, p.nombre AS piloto_nombre, p.apellido AS piloto_apellido, r.posicion
                       FROM Resultados r
                       JOIN Pilotos p ON r.id_piloto = p.id_piloto
@@ -418,7 +416,7 @@
                 $this->cerrarConexion();                
                 return $resultados; 
             } else {
-                $this->cerrarConexion(); // Cerramos la conexión al finalizar
+                $this->cerrarConexion(); 
                 return "No hay resultados de carreras.";
             }
         }        
@@ -426,7 +424,6 @@
         public function registrarPiloto($nombre, $apellido, $nacionalidad, $nombre_escuderia) {
             $this->connectDB($this->db_name);;
 
-            // Check if the escuderia exists in the escuderias table
             $find_escuderia = $this->conn->prepare("SELECT id_escuderia FROM Escuderias WHERE nombre = ?");
             $find_escuderia->bind_param("s", $nombre_escuderia);
             $find_escuderia->execute();
@@ -470,31 +467,29 @@
         <link rel="preload" href="../estilo/layout.css" as="style"/>
         <link rel="preload" href="../estilo/estilo.css" as="style"/>
 
-        <!-- Después de que se haya descargado, se aplica el CSS -->
         <link rel="stylesheet" href="../estilo/layout.css"/>
         <link rel="stylesheet" href="../estilo/estilo.css"/>
         
-        <!-- Añadir referencia al archivo ayuda.js -->
         <script src="../js/ayuda.js" defer></script>
     </head>
 
     <body>
         <header>
-            <h1><a href="../index.html">F1 Desktop</a></h1>
+            <h1><a href="../index.html" target="_self" title="Pagina de inicio">F1 Desktop</a></h1>
 
             <nav>
-                <a href="../index.html">Inicio </a>
-                <a href="../piloto.html">Piloto </a>
-                <a href="../noticias.html">Noticias </a>
-                <a href="../meteorologia.html">Meteorologia </a>
-                <a href="viajes.php">Viajes </a>
-                <a href="../calendario.html">Calendario </a>
-                <a href="../circuitos.html">Circuitos </a>
-                <a href="../juegos.html">Juegos </a>
+                <a href="../index.html" target="_self" title="Página principal de inicio, regresa a la página principal">Inicio</a>
+                <a href="../piloto.html" target="_self" title="Información sobre los pilotos">Piloto</a>
+                <a href="../noticias.html" target="_self" title="Últimas noticias y actualizaciones">Noticias</a>
+                <a href="../meteorologia.html" target="_self" title="Pronóstico meteorológico y condiciones climáticas">Meteorologia</a>
+                <a href="viajes.php" target="_self" title="Información sobre viajes y destinos">Viajes</a>
+                <a href="../calendario.html" target="_self" title="Calendario de eventos y actividades">Calendario</a>
+                <a href="../circuitos.html" target="_self" title="Detalles sobre los circuitos y pistas">Circuitos</a>
+                <a href="../juegos.html" target="_self" title="Juegos y actividades interactivas">Juegos</a>
             </nav>
         </header>
 
-        <p>Estas en <a href="../index.html" title="Home">Inicio</a> 
+        <p>Estas en <a href="../index.html" title="Pagina de inicio">Inicio</a> 
             >> <a href="../juegos.html" title="Juegos">Juegos</a> >> Gestion F1</p>
 
         <!-- Botón para abrir el popup de ayuda -->
@@ -686,7 +681,6 @@
             <label for="carrera">Carrera: </label>
             <select id="carrera" name="carrera" required>
                 <?php
-                    // Obtener las carreras disponibles desde la base de datos
                     $controller = new Controller();
                     $controller->obtenerCarreras();
                 ?>
