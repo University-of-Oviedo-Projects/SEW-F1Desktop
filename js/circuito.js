@@ -1,5 +1,23 @@
 class ProcesamientoCircuitos {
     constructor() {
+        // Obtener los elementos de los formularios
+        const xmlFileInput = document.querySelector('main form:nth-of-type(1) input[type="file"]');
+        const kmlFileInput = document.querySelector('main form:nth-of-type(2) input[type="file"]');
+        const svgFileInput = document.querySelector('main form:nth-of-type(3) input[type="file"]');
+
+        // Añadir eventos para procesar los archivos
+        xmlFileInput.addEventListener("change", () => {
+            this.procesarArchivoXML(xmlFileInput.files[0]);
+        });
+
+        kmlFileInput.addEventListener("change", () => {
+            this.procesarArchivoKML(kmlFileInput.files[0]);
+        });
+
+        svgFileInput.addEventListener("change", () => {
+            this.procesarArchivoSVG(svgFileInput.files[0]);
+        });
+        
         document.querySelectorAll("main section")
             .forEach(section => section.setAttribute("hidden", ''));
     }

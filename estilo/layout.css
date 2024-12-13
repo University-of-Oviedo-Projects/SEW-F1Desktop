@@ -65,6 +65,12 @@ menu li a, a {
     flex: 0 0 auto; 
 }
 
+/* Especificidad 003 */
+form p a {
+    color: #0000ff;
+    /* backgroud-color heredado de form */
+}
+
 /* Especificidad 002 */
 menu li {
     list-style: none

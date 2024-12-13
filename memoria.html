@@ -20,8 +20,14 @@
         <link rel="stylesheet" href="estilo/estilo.css"/>
         <link rel="stylesheet" type="text/css" href="estilo/memoria.css" />
 
-        <script src="js/memoria.js"></script>
-        <script src="js/ayuda.js"></script>
+        <script src="js/memoria.js" defer></script>
+        <script src="js/ayuda.js" defer></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                new MemoryGame();
+            });
+        </script>
     </head>
 
     <body>
@@ -59,19 +65,14 @@
             <p>&copy; Adrián Martínez, F1 Desktop</p>
         </footer>
 
-        <!-- Popup de ayuda -->
         <dialog>
-            <!-- Contenido de la ayuda -->
-            <section>
-                <h2>Bienvenido a la ayuda web de F1Destkop</h2>
-            </section>
-        </dialog> 
+            <!-- Ayuda Global -->
+        </dialog>
 
         <!-- Script para cargar el juego y la ayuda -->
         <script>
             document.addEventListener("DOMContentLoaded", () => {
-                new HelpHandler();    
-                new Memoria();
+                new AyudaGlobal();    
             });
         </script>
     </body>

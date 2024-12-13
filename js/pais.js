@@ -139,21 +139,30 @@ class Pais {
                     if (dayCount >= 5) return; 
                     const previs = previsionesPorDia[date];
     
-                    const htmlContent = `
-                        <article>
-                            <header>
-                                <h2>${previs.date}</h2>
-                            </header>
-                            <p>Temperatura Máxima: ${previs.tempMax}°C</p>
-                            <p>Temperatura Mínima: ${previs.tempMin}°C</p>
-                            <p>Humedad: ${previs.humidity}%</p>
-                            <img src="https://openweathermap.org/img/w/${previs.icon}.png" alt="Icono del tiempo">
-                            <p>Precipitación: ${previs.rain} mm</p>
-                        </article>
-                    `;
-    
-                    $('main').append(htmlContent);
-    
+                    const article = $('<article></article>');
+                    const header = $('<header></header>');
+                    const h3 = $('<h3></h3>');
+                    h3.text(previs.date);
+                    header.append(h3);
+                    article.append(header);
+                    const p1 = $('<p></p>');
+                    p1.text(`Temperatura Máxima: ${previs.tempMax}°C`);
+                    article.append(p1);
+                    const p2 = $('<p></p>');
+                    p2.text(`Temperatura Mínima: ${previs.tempMin}°C`);
+                    article.append(p2);
+                    const p3 = $('<p></p>');
+                    p3.text(`Humedad: ${previs.humidity}%`);
+                    article.append(p3);
+                    const img = $('<img></img>');
+                    img.attr('src', `https://openweathermap.org/img/w/${previs.icon}.png`);
+                    img.attr('alt', 'Icono del tiempo');
+                    article.append(img);
+                    const p4 = $('<p></p>');
+                    p4.text(`Precipitación: ${previs.rain} mm`);
+                    article.append(p4);
+
+                    $('main').append(article);
                     dayCount++; // Incrementar el contador de días
                 }
             },

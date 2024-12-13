@@ -54,6 +54,12 @@ h3, h4 {
     text-decoration: underline;
 }
 
+/* Especificidad 002 */
+header > h3 {
+    text-align: center;
+    text-decoration: none;
+}
+
 /* Especificidad 001 */
 button {
     display: block;
@@ -199,8 +205,8 @@ img {
 }
 
 /* ###################### Ayuda global de la web ###################### */
-/* Especificidad 011 */
-dialog[open] {
+/* Especificidad 002 */
+footer+dialog {
     width: 80%;
     max-width: 100%;
     max-height: 60%;
@@ -213,8 +219,8 @@ dialog[open] {
     overflow: auto;
 }
 
-/* Especificidad 012 */
-dialog[open] h2 {
+/* Especificidad 003 */
+footer+dialog h2 {
     font-size: 1.8em;
     margin-bottom: 1em;
     text-align: center;
@@ -222,8 +228,8 @@ dialog[open] h2 {
     /* background-color heredado de dialog */
 }
 
-/* Especificidad 012 */
-dialog[open] h3 {
+/* Especificidad 003 */
+footer+dialog h3 {
     font-size: 1.5em;
     margin-top: 1em;
     margin-bottom: 0.5em;
@@ -231,30 +237,30 @@ dialog[open] h3 {
     /* background-color heredado de dialog */
 }
 
-/* Especificidad 012 */
-dialog[open] p {
+/* Especificidad 003 */
+footer+dialog p {
     font-size: 1.2em;
     margin-bottom: 0.5em;
     color: #666;
     /* background-color heredado de dialog */
 }
 
-/* Especificidad 012 */
-dialog[open] ul {
+/* Especificidad 003 */
+footer+dialog ul {
     list-style-type: disc;
     padding-left: 1.5em;
 }
 
-/* Especificidad 013 */
-dialog[open] ul li {
+/* Especificidad 004 */
+footer+dialog ul li {
     font-size: 1.2em;
     margin-bottom: 0.5em;
     color: #777;
     /* background-color heredado de ul */
 }
 
-/* Especificidad 012 */
-dialog[open] button {
+/* Especificidad 003 */
+footer+dialog button {
     display: block;
     margin: 1em auto 0;
     padding: 0.5em 1em;
@@ -263,41 +269,40 @@ dialog[open] button {
     color: #fff;
 }
 
-/* Especificidad 022 */
-dialog[open] button:hover {
+/* Especificidad 013 */
+footer+dialog button:hover {
     background-color: #163240;
     /* color heredado de button */
 }
 
 /* Media Queries para el dialogo de ayuda */
 @media (max-width: 768px) {
-    /* Especificidad 011 */
-    dialog[open] {
+    /* Especificidad 002 */
+    footer+dialog {
         /* Redefinir width es necesario para que el dialogo se ajuste al ancho de la pantalla */
         width: 90%;
         /* Redefinir el padding es necesario para que el contenido no se desborde del dialogo */
         padding: 1em;
     }
 
-    /* Especificidad 012 */
-    dialog[open] h2 {
+    /* Especificidad 003 */
+    footer+dialog h2 {
         /* Redefinir el tamaño de la fuente es necesario para que el texto no se desborde del dialogo */
         font-size: 1.5em;
     }
 
-    /* Especificidad 012 */
-    dialog[open] h3 {
+    /* Especificidad 003 */
+    footer+dialog h3 {
         /* Redefinir el tamaño de la fuente es necesario para que el texto no se desborde del dialogo */
         font-size: 1.3em;
     }
 
-    /* Especificidades 012, 013 */
-    dialog[open] p, dialog[open] ul li {
+    /* Especificidades 003, 004 */
+    footer+dialog p, footer+dialog ul li {
         /* Redefinir el tamaño de la fuente es necesario para que el texto no se desborde del dialogo */
         font-size: 1em;
     }
 }
-
 
 /* ###################### Estilo del API.HTML ###################### */
 /* Especificidades 003 */
@@ -349,18 +354,6 @@ canvas {
 /* Especificidad 023 */
 main  > section:nth-of-type(4) > button:hover {
     background-color: #163240;
-    /* color heredado de main > section:nth-of-type(4) > button */
-}
-
-/* Especificidad 023 */
-main  > section:nth-of-type(4) button[title="correct-answer"] {
-    background-color: #4CAF50;
-    /* color heredado de main > section:nth-of-type(4) > button */
-}
-
-/* Especificidad 023 */
-main  > section:nth-of-type(4) button[title="incorrect-answer"] {
-    background-color: #F44336; 
     /* color heredado de main > section:nth-of-type(4) > button */
 }
 

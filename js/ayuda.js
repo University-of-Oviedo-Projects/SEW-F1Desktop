@@ -11,7 +11,7 @@
     
     Al final de cada se añade un botón para cerrar el popup. 
 */
-class HelpHandler {
+class AyudaGlobal {
     constructor() {
         this.prepareHelpButton();
     }
@@ -22,7 +22,7 @@ class HelpHandler {
         document.addEventListener("keydown", (event) => {
             if (event.key === "F1") {
                 event.preventDefault(); // Evita la ayuda predeterminada del navegador
-                this.showHelpPopup();
+                this.createHelpContent();
             }
         });
 
@@ -30,32 +30,11 @@ class HelpHandler {
         const openHelpButton = document.querySelector("body > button");
         if (openHelpButton) {
             openHelpButton.addEventListener("click", () => {
-                this.showHelpPopup();
+                this.createHelpContent();
             });
         }
     }
-
-    showHelpPopup() {
-        const helpPopup = document.querySelector("footer+dialog");
-        helpPopup.innerHTML = ""; // Limpiar el contenido anterior
-        this.createHelpContent(helpPopup); 
-
-        const closeHelpButton = helpPopup.querySelector("footer+dialog > button");
-        if (closeHelpButton) {
-            closeHelpButton.addEventListener("click", () => {
-                this.closeHelpPopup();
-            });
-        }
-
-        helpPopup.showModal();
-    }
-
-    closeHelpPopup() {
-        const helpPopup = document.querySelector("footer+dialog");
-        helpPopup.close();
-    }
-
-    createHelpContent(helpPopup) {
+    createHelpContent() {
         const sections = [
             {
                 title: "¿Cómo funciona?",
@@ -84,31 +63,38 @@ class HelpHandler {
             },
         ];
 
-        // Añadir contenido al <dialog>
+        const dialog = document.querySelector("body > dialog");
+        dialog.innerHTML = ""; // Limpiar el contenido anterior
+
         sections.forEach((section) => {
             const title = document.createElement("h3");
             title.textContent = section.title;
-            helpPopup.appendChild(title);
+            dialog.appendChild(title);
 
-            if (section.content) { // Si la sección tiene contenido
+            if (section.content) { 
                 const paragraph = document.createElement("p");
                 paragraph.innerHTML = section.content;
-                helpPopup.appendChild(paragraph);
+                dialog.appendChild(paragraph);
             }
 
-            if (section.list) { // Si la sección tiene una lista
+            if (section.list) { 
                 const ul = document.createElement("ul");
                 section.list.forEach((item) => {
                     const li = document.createElement("li");
                     li.innerHTML = `${item.split(":")[0]}: ${item.split(":")[1]}`;
                     ul.appendChild(li);
                 });
-                helpPopup.appendChild(ul);
+                dialog.appendChild(ul);
             }
         });
 
         const closeButton = document.createElement("button");
         closeButton.textContent = "Cerrar";
-        helpPopup.appendChild(closeButton);
+        closeButton.addEventListener("click", () => {
+            dialog.close(); 
+        });
+
+        dialog.appendChild(closeButton);
+        dialog.showModal();
     }
 }

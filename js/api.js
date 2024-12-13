@@ -277,10 +277,8 @@ class Api {
 
         buttons.forEach(btn => {
             if (question.answer.toLowerCase() === btn.textContent.toLowerCase()) {
-                btn.setAttribute('title', 'correct-answer');
-            } else {
-                btn.setAttribute('title', 'incorrect-answer');
-            }
+                btn.textContent += ' (correcta)';
+            } 
 
             btn.disabled = true;
         });

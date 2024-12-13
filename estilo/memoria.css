@@ -38,11 +38,11 @@ main article {
     background-color: #FFFFFF;
     /* color heredado del body */
     box-sizing: border-box;
+    border-radius: 0.5em;
     display: grid;
     cursor: pointer;
     transform-style: preserve-3d; 
-    transition: transform 0.6s;  
-    transform: rotateY(0);      
+    transition: transform 0.5s;       
 }
 
 /* Especificidad 003 */
@@ -60,7 +60,7 @@ main article header {
 }
 
 /* Especificidad 004 */
-main article header h2 {
+main article header h3 {
     color: #000;
     /* background-color heredado del article header */
     text-align: center;
@@ -71,6 +71,7 @@ main article header h2 {
 main article img {
     margin: 0.1em auto;
     transform: rotateY(180deg);
+    backface-visibility: hidden;
 }
 
 /* Especificidad 012 */
@@ -90,7 +91,7 @@ main article[data-state="card-revealed"] img {
 }
 
 /* Especificidad 014 */
-main article[data-state="card-revealed"] header h2 {
+main article[data-state="card-revealed"] header h3 {
     display: none;
 }
 
@@ -109,18 +110,6 @@ dialog {
 dialog::backdrop {
     background: #00000080;
     /* color heredado del body */
-}
-
-/* Especificidad 002 */
-main > button {
-    margin-left: 5em;
-    padding: 1em 2em;
-    background-color: #1F3B4D;
-    color: #fff;
-    border: none;
-    border-radius: 0.5em;
-    cursor: pointer;
-    font-size: 1.2em;
 }
 
 /* Pantallas pequeñas (teléfonos) */
@@ -150,15 +139,9 @@ main > button {
     }
 
     /* Especificidad 004 */
-    main > article header h2 {
+    main > article header h3 {
         text-align: center; 
-        font-size: 0.6em; 
-    }
-
-    /* Especificidad 002 */
-    main > button {
-        /* Redefinir el margin es necesario para que el boton se muestre correctamente */
-        margin: 0 1em;
+        font-size: 0.85em; 
     }
 
     /* Especificidad 001 */

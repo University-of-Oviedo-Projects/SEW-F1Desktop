@@ -3,11 +3,8 @@ class Viajes {
         this.latitude = null;
         this.longitude = null;
         this.error = null;
-
-        // Crear un botón para iniciar la geolocalización
+        
         this.createGeolocationButton();
-
-        // Inicializar el carrusel
         this.initializeCarousel();
     }    
 
@@ -21,7 +18,7 @@ class Viajes {
 
     loadGoogleMaps() {
         const script = document.createElement('script');
-        script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyC6j4mF6blrc4kZ54S6vYZ2_FpMY9VzyRU&callback=initMap";
+        script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDfmip4lu4OXDuJ-DSiuoXLYb26CCQQEGk&callback=initMap";
         script.async = true;
         script.defer = true;
         
@@ -88,7 +85,8 @@ class Viajes {
     }
 
     showStaticMap() {
-        const mapUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${this.latitude},${this.longitude}&zoom=17&size=800x800&scale=4&markers=color:red%7C${this.latitude},${this.longitude}&key=AIzaSyC6j4mF6blrc4kZ54S6vYZ2_FpMY9VzyRU`;
+        const apiKey = "AIzaSyDfmip4lu4OXDuJ-DSiuoXLYb26CCQQEGk";
+        const mapUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${this.latitude},${this.longitude}&zoom=17&size=800x800&scale=4&markers=color:red%7C${this.latitude},${this.longitude}&key=${apiKey}`;
     
         let img = document.createElement('img');
         img.src = mapUrl;
@@ -122,6 +120,7 @@ class Viajes {
     initializeCarousel() {
         const script = document.createElement('script');
         script.src = "https://code.jquery.com/jquery-3.6.0.min.js";
+        
         script.onload = () => {
             const slides = document.querySelectorAll("img");
             const nextSlide = document.querySelector("main > article > button");

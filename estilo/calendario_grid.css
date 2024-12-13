@@ -1,7 +1,7 @@
 /* Especificidad 001 */
 main {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+    grid-template-columns: repeat(auto-fit, minmax(17em, 1fr)); 
     gap: 2.5em;
     justify-items: center;
     margin: 1em 1em;
@@ -48,7 +48,7 @@ main article {
     border-radius: 2em;
     display: flex;
     flex-direction: column;
-    width: 100%; 
+    width: 90%; 
 }
 
 /* Especificidad 012 */

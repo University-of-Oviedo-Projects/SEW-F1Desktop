@@ -45,9 +45,9 @@ class Noticias {
             const [titular, entradilla, autor] = line.split('_');
             const noticiaHtml = document.createElement('article');
             const header = document.createElement('header');
-            const h2 = document.createElement('h2');
-            h2.textContent = titular;
-            header.appendChild(h2);
+            const h3 = document.createElement('h3');
+            h3.textContent = titular;
+            header.appendChild(h3);
             noticiaHtml.appendChild(header);
             const p = document.createElement('p');
             p.textContent = entradilla;

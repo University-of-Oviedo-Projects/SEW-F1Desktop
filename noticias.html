@@ -21,9 +21,15 @@
         <link rel="stylesheet" href="estilo/estilo.css"/>
         <link rel="stylesheet" href="estilo/article_elements.css" />
 
-        <script defer src="js/ayuda.js"></script>
+        <script defer src="js/ayuda.js" defer></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script defer src="js/noticias.js"></script>
+        <script defer src="js/noticias.js" defer></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                new Noticias();
+            });
+        </script>
     </head>
 
     <body>
@@ -85,19 +91,14 @@
             <p>&copy; Adrián Martínez, F1 Desktop</p>
         </footer>
 
-        <!-- Popup de ayuda -->
         <dialog>
-            <!-- Contenido de la ayuda -->
-            <section>
-                <h2>Bienvenido a la ayuda web de F1Destkop</h2>
-            </section>
-        </dialog> 
+            <!-- Ayuda Global -->
+        </dialog>
            
         <!-- Script para cargar la información de la ayuda -->
         <script>
             document.addEventListener("DOMContentLoaded", () => {
-                new HelpHandler();     
-                new Noticias();
+                new AyudaGlobal();     
             });
         </script>
     </body>

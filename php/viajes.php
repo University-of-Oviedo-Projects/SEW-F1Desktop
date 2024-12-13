@@ -112,7 +112,13 @@
         <link rel="stylesheet" href="../estilo/estilo.css">
 
         <script src="../js/viajes.js"></script>
-        <script src="../js/ayuda.js"></script>
+        <script src="../js/ayuda.js" defer></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                new Viajes();
+            });
+        </script>
     </head>
 
     <body>
@@ -157,7 +163,7 @@
 
             <article>
                 <header>
-                    <h2>Carrusel</h2>
+                    <h3>Carrusel</h3>
                 </header>
 
                 <?php
@@ -177,19 +183,14 @@
             <p>&copy; Adrián Martínez, F1 Desktop</p>
         </footer>
 
-        <!-- Popup de ayuda -->
         <dialog>
-            <!-- Contenido de la ayuda -->
-            <section>
-                <h2>Bienvenido a la ayuda web de F1Destkop</h2>
-            </section>
-        </dialog> 
+            <!-- Ayuda Global -->
+        </dialog>
            
         <!-- Script para cargar la ayuda -->
         <script>
             document.addEventListener("DOMContentLoaded", () => {
-                new Viajes();
-                new HelpHandler(); 
+                new AyudaGlobal();
             });
         </script>
     </body>

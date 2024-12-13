@@ -69,14 +69,21 @@
         <!-- Preload de los estilos -->
         <link rel="preload" href="../estilo/layout.css" as="style"/>
         <link rel="preload" href="../estilo/estilo.css" as="style"/>
+        <link rel="preload" href="../estilo/semaforo.css" as="style"/>
         
         <link rel="stylesheet" href="../estilo/estilo.css" />
         <link rel="stylesheet" href="../estilo/layout.css" />
         <link rel="stylesheet" href="../estilo/semaforo.css" />
 
-        <script src="../js/semaforo.js"></script>
+        <script src="../js/semaforo.js" defer></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="../js/ayuda.js"></script>
+        <script src="../js/ayuda.js" defer></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                new Semaforo();
+            });
+        </script>
     </head>
 
     <body>
@@ -134,19 +141,14 @@
             <p>&copy; Adrián Martínez, F1 Desktop</p>
         </footer>
 
-        <!-- Popup de ayuda -->
         <dialog>
-            <!-- Contenido de la ayuda -->
-            <section>
-                <h2>Bienvenido a la ayuda web de F1Destkop</h2>
-            </section>
+            <!-- Ayuda Global -->
         </dialog> 
         
         <!-- Script para cargar el juego y la ayuda -->
         <script>
             document.addEventListener("DOMContentLoaded", () => {
-                new Semaforo();  
-                new HelpHandler(); 
+                new AyudaGlobal(); 
             });
         </script>
     </body>

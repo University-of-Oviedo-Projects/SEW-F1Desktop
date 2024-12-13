@@ -39,9 +39,9 @@ class Memoria {
         
         tutorialButton.addEventListener('click', () => {
             const dialog = document.createElement('dialog');
-            const h2 = document.createElement('h2');
-            h2.textContent = '¿Cómo jugar?';
-            dialog.appendChild(h2);
+            const h3 = document.createElement('h3');
+            h3.textContent = '¿Cómo jugar?';
+            dialog.appendChild(h3);
             const p = document.createElement('p');
             p.textContent = 'El objetivo del juego es encontrar todas las parejas de cartas en el menor tiempo posible. Haz clic en dos cartas para ver sus imágenes; si coinciden, se quedarán reveladas, de lo contrario se voltearán de nuevo. ¡Buena suerte!';
             dialog.appendChild(p);
@@ -59,9 +59,7 @@ class Memoria {
 
     shuffleElements() {
         for (let i = this.elements.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1)); // Índice aleatorio entre 0 y i           
-
-            // Intercambia los elementos en las posiciones i y j
+            const j = Math.floor(Math.random() * (i + 1));           
             [this.elements[i], this.elements[j]] = [this.elements[j], this.elements[i]];
         }
     }
@@ -133,9 +131,9 @@ class Memoria {
 
             // Crear el encabezado y añadirlo al artículo
             const header = document.createElement('header');
-            const h2 = document.createElement('h2');
-            h2.textContent = "Tarjeta de memoria";
-            header.appendChild(h2);
+            const h3 = document.createElement('h3');
+            h3.textContent = "Tarjeta de memoria";
+            header.appendChild(h3);
             article.appendChild(header);
 
             // Crear la imagen y añadirla al artículo
