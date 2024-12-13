@@ -35,19 +35,25 @@ class Memoria {
     }
 
     createAndLoadGameTutorial() {
-        // Selección de elementos del tutorial
-        const tutorialButton = document.querySelector('main > section > button');  
-        const tutorialPopup = document.querySelector('main > section > dialog');  
-        const closeTutorial = tutorialPopup.querySelector('main > section > dialog > button');  
-
-        // Mostrar el tutorial
+        const tutorialButton = document.querySelector('main > button'); 
+        
         tutorialButton.addEventListener('click', () => {
-            tutorialPopup.showModal();
-        });
-
-        // Cerrar el tutorial
-        closeTutorial.addEventListener('click', () => {
-            tutorialPopup.close();
+            const dialog = document.createElement('dialog');
+            const h2 = document.createElement('h2');
+            h2.textContent = '¿Cómo jugar?';
+            dialog.appendChild(h2);
+            const p = document.createElement('p');
+            p.textContent = 'El objetivo del juego es encontrar todas las parejas de cartas en el menor tiempo posible. Haz clic en dos cartas para ver sus imágenes; si coinciden, se quedarán reveladas, de lo contrario se voltearán de nuevo. ¡Buena suerte!';
+            dialog.appendChild(p);
+            const button = document.createElement('button');
+            button.addEventListener('click', () => {
+                dialog.close();
+                dialog.remove();
+            });
+            button.textContent = 'Cerrar';
+            dialog.appendChild(button);
+            document.querySelector('main').appendChild(dialog);
+            dialog.showModal();
         });
     }
 
@@ -89,35 +95,35 @@ class Memoria {
         this.firstCard.setAttribute("data-state", "card-revealed");
         this.secondCard.setAttribute("data-state", "card-revealed");
 
-        // Eliminar el evento click de las cartas que ya han sido emparejadas
         this.resetBoard();
-
-        // Comprobar si el usuario ha ganado
         this.checkForWin();
     }
 
     checkForWin() {
-        // Seleccionar todas las cartas y comprobar si todas están reveladas
         const allCards = document.querySelectorAll('article');
-
-        // Comprobar si todas las cartas están reveladas
         const allRevealed = Array.from(allCards).every(card => 
                 card.getAttribute('data-state') === 'card-revealed');
 
         if (allRevealed) {
-            // Extraer el popup del DOM
-            const popup = document.querySelector('main dialog:nth-of-type(2)');
-
-            // Mostrar el popup por 5 segundos            
-            popup.showModal();
-
-            // Cerrar el popup después de 2 segundos
-            setTimeout(() => { popup.close(); }, 3500);
+            const dialog = document.createElement('dialog');
+            const h2 = document.createElement('h2');
+            h2.textContent = '¡Felicidades!';
+            dialog.appendChild(h2);
+            const p = document.createElement('p');
+            p.textContent = '¡Has encontrado todas las parejas! ¿Quieres jugar de nuevo?';
+            dialog.appendChild(p);
+            document.querySelector('main').appendChild(dialog);
+            
+            dialog.showModal();
+            setTimeout(() => { 
+                dialog.close(); 
+                dialog.remove();
+            }, 3500);
         }
     }
 
     createElements() {
-        const container = document.querySelector('main section'); 
+        const container = document.querySelector('main'); 
 
         this.elements.forEach((item) => {
             // Crear un nuevo artículo para cada elemento

@@ -27,7 +27,7 @@ body > p > a {
     /* background-color heredado de body */
 }
 
-/* Especificidad 002 */
+/* Especificidad 001 */
 h1 {
     color: #FFFFFF;
     /* backgroud-color heredado de header */
@@ -70,7 +70,7 @@ menu li {
     list-style: none
 }
 
-/* Especificidad 024 */
+/* Especificidad 011 en cada selector */
 a:hover, a:focus {
     color: #eb950c;
     /* backgroud-color heredado de la regla header, menu */

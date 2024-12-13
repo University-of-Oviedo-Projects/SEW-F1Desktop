@@ -155,7 +155,7 @@ table caption {
     /* background-color heredado de table */
 }
 
-/* Especificidad 002 */
+/* Especificidad 001 en cada selector */
 th, td {
     padding: 1em 2em; 
     text-align: left;
@@ -253,7 +253,7 @@ dialog[open] ul li {
     /* background-color heredado de ul */
 }
 
-/* Especificidad 022 */
+/* Especificidad 012 */
 dialog[open] button {
     display: block;
     margin: 1em auto 0;
@@ -263,7 +263,7 @@ dialog[open] button {
     color: #fff;
 }
 
-/* Especificidad 032 */
+/* Especificidad 022 */
 dialog[open] button:hover {
     background-color: #163240;
     /* color heredado de button */
@@ -291,7 +291,7 @@ dialog[open] button:hover {
         font-size: 1.3em;
     }
 
-    /* Especificidad 025 */
+    /* Especificidades 012, 013 */
     dialog[open] p, dialog[open] ul li {
         /* Redefinir el tamaño de la fuente es necesario para que el texto no se desborde del dialogo */
         font-size: 1em;
@@ -300,20 +300,20 @@ dialog[open] button:hover {
 
 
 /* ###################### Estilo del API.HTML ###################### */
-/* Especificidades 024, 024 */
-main  section button {
+/* Especificidades 003 */
+main section button {
     padding: 1em 2em;
     font-size: 1.5em; 
     cursor: pointer;
 }
 
-/* Especificidad 023 */
-main  > section:nth-of-type(2) {
+/* Especificidad 012 */
+main > section:nth-of-type(2) {
     margin: 0 auto;
     font-size: 0.75em;
 }
 
-/* Especificidad 023 */
+/* Especificidad 012 */
 main  > section:nth-of-type(3) {
     display: flex;
     flex-direction: column;
@@ -323,7 +323,7 @@ main  > section:nth-of-type(3) {
     margin: 0 auto; 
 }
 
-/* Especificidad 023 */
+/* Especificidad 012 */
 main  > section:nth-of-type(4) {
     flex-direction: column;
     justify-content: center;
@@ -332,7 +332,7 @@ main  > section:nth-of-type(4) {
     margin: 2em auto;
 }
 
-/* Especificidad 024 */
+/* Especificidad 013 */
 main  > section:nth-of-type(4) > button {
     width: 80%;
     padding: 1em;
@@ -346,25 +346,25 @@ canvas {
     margin: 1em auto;
 }
 
-/* Especificidad 034 */
+/* Especificidad 023 */
 main  > section:nth-of-type(4) > button:hover {
     background-color: #163240;
     /* color heredado de main > section:nth-of-type(4) > button */
 }
 
-/* Especificidad 034 */
+/* Especificidad 023 */
 main  > section:nth-of-type(4) button[title="correct-answer"] {
     background-color: #4CAF50;
     /* color heredado de main > section:nth-of-type(4) > button */
 }
 
-/* Especificidad 034 */
+/* Especificidad 023 */
 main  > section:nth-of-type(4) button[title="incorrect-answer"] {
     background-color: #F44336; 
     /* color heredado de main > section:nth-of-type(4) > button */
 }
 
-/* Especificidad 023 */
+/* Especificidad 012 */
 main  > dialog:nth-of-type(1) {
     display: flex; 
     flex-direction: column; 
@@ -380,12 +380,12 @@ main  > dialog:nth-of-type(1) {
     margin: auto;
 }
 
-/* Especificidad 024 */
+/* Especificidad 013 */
 main > dialog:nth-of-type(1) > h2 {
     margin-bottom: 1em;
 }
 
-/* Especificidad 024 */
+/* Especificidad 013 */
 main  > dialog:nth-of-type(1) > p {
     margin: 0.5em 0;
 }
@@ -437,21 +437,21 @@ form button:hover {
     /* color heredado de form button */
 }
 
-/* Especificidad: 003 */
+/* Especificidades: 022, 012, 022 */
 form input[type="text"]:focus, form textarea:focus, form input[type="file"]:focus {
     outline: none; 
 }
 
 
 /* ###################### Estilo para los mapas ###################### */
-/* Especificidad 012 */
+/* Especificidad 002 */
 main > div {
     height: 60vh;
     width: 100%;
     margin-bottom: 1.5em
 }
 
-/* Especiicidad 011 */
+/* Especiicidad 002 */
 main > img {
     width: 100%; 
     height: 80vh; 
@@ -466,7 +466,7 @@ svg {
 }
 
 /* ###################### Estilo para XML (circuitos.html) ###################### */
-/* Especificidad 023 */
+/* Especificidad 002 */
 main > section a {
     display: block ;
     text-align: left;
@@ -476,12 +476,12 @@ main > section a {
     font-weight: bold;
 }
 
-/* Especificidad 033 */
+/* Especificidad 013 */
 main > section a:hover {
     text-decoration: underline;
 }
 
-/* Especificidad 023 */
+/* Especificidad 003 */
 main section blockquote {
     margin: 1em 0;
     padding: 1em;

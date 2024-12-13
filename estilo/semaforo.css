@@ -16,7 +16,7 @@ main > form {
     grid-column: 1 / -1;    
 }
 
-/* Especificidades 002, 003 */
+/* Especificidades 002 */
 main > h2 {
     text-decoration: none;
     grid-column: 1 / -1; 

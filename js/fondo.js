@@ -4,12 +4,6 @@ class Fondo {
         this.capital = capital;
         this.circuito = circuito;
         this.getFondo();
-
-        document.addEventListener("visibilitychange", () => {
-            if (document.hidden) {
-              socket.close(); 
-            }
-        });
     }
 
     getFondo() {
