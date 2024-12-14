@@ -2,15 +2,7 @@ class Calendario {
 
     constructor() {
         this.apiUrl = 'https://api.jolpi.ca/ergast/f1/2024.json';
-        this.preconnectAPI();
         this.fetchRaces();
-    }
-
-    preconnectAPI() {
-        const preconnect = document.createElement('link');
-        preconnect.rel = 'preconnect';
-        preconnect.href = 'https://api.jolpi.ca';
-        document.head.appendChild(preconnect);
     }
 
     fetchRaces() {

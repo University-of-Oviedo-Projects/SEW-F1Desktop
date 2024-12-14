@@ -53,9 +53,9 @@ class Noticias {
             p.textContent = entradilla;
             noticiaHtml.appendChild(p);
             const footer = document.createElement('footer');
-            const em = document.createElement('em');
-            em.textContent = autor;
-            footer.appendChild(em);
+            const p2 = document.createElement('p');
+            p2.textContent = autor;
+            footer.appendChild(p2);
             noticiaHtml.appendChild(footer);
 
             const h2UltimasNoticias = document.querySelector('main h2');
@@ -86,9 +86,9 @@ class Noticias {
         p.textContent = entradilla;
         noticiaHtml.appendChild(p);
         const footer = document.createElement('footer');
-        const em = document.createElement('em');
-        em.textContent = autor;
-        footer.appendChild(em);
+        const p2 = document.createElement('p');
+        p2.textContent = autor;
+        footer.appendChild(p2);
         noticiaHtml.appendChild(footer);
 
         const h2UltimasNoticias = document.querySelector('main h2');

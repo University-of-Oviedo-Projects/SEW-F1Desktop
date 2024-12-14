@@ -29,13 +29,14 @@
         <script>
             document.addEventListener("DOMContentLoaded", () => {
                 new Semaforo();  
+                new AyudaGlobal();
             });
         </script>
     </head>
 
     <body>
         <header>
-            <h1><a href="index.html" target="_self">F1 Desktop</a></h1>
+            <h1><a href="index.html" target="_self"  title="Página de Inicio">F1 Desktop</a></h1>
             <nav>
                 <a href="index.html" target="_self" title="Página principal de inicio, regresa a la página principal">Inicio</a>
                 <a href="piloto.html" target="_self" title="Información sobre los pilotos">Piloto</a>
@@ -52,29 +53,15 @@
             >> <a href="juegos.html" title="Juegos">Juegos</a>
             >> Reacción</p>
 
-        <!-- Botón para abrir el popup de ayuda -->
         <button>Ayuda</button>
+        <dialog> <!-- Ayuda Global --> </dialog>
 
         <main> 
             <!-- Aquí se mostrará el juego -->
         </main>
 
-        <!-- Pie de página -->
         <footer>
-            <!-- Texto de derechos de autor -->
             <p>&copy; Adrián Martínez, F1 Desktop</p>
         </footer>
-
-        <!-- Popup de ayuda -->
-        <dialog>
-            <!-- Ayuda Global -->
-        </dialog>
-        
-        <!-- Script para cargar el juego y la ayuda -->
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                new AyudaGlobal(); 
-            });
-        </script>
     </body>
 </html>

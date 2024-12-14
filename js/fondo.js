@@ -18,7 +18,7 @@ class Fondo {
                 $("body").css({
                     "background-image": `url(${data.items[0].media.m.replace('_m', '_b')})`,
                     "height": "100vh",
-                    "width": "100vw",
+                    "width": "100%",
                     "background-size": "cover",
                     "background-repeat": "no-repeat",
                     "background-position": "center"

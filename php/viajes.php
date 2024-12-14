@@ -117,6 +117,7 @@
         <script>
             document.addEventListener("DOMContentLoaded", () => {
                 new Viajes();
+                new AyudaGlobal();
             });
         </script>
     </head>
@@ -139,10 +140,11 @@
 
         <p>Estas en <a href="../index.html" target="_self" title="Pagina de inicio">F1 Desktop</a> >> Viajes</p>
 
-        <!-- Botón para abrir el popup de ayuda -->
         <button>Ayuda</button>
+        <dialog> <!-- Ayuda Global --> </dialog>
 
         <main>
+            <!-- Cambio de moneda -->
             <?php
                 try {
                     $paisMoneda = "EUR"; 
@@ -158,40 +160,27 @@
                 }
             ?>
 
+            <!-- Google Maps API -->
             <h2>Mapas estáticos y dinámicos</h2>
-            <div hidden></div>
+            <div hidden> <!-- Contenedor del mapa dinámico --> </div>
 
+            <!-- Carrusel de imágenes -->
             <article>
                 <header>
                     <h3>Carrusel</h3>
                 </header>
-
                 <?php
                     $carousel = new Carrusel('Amsterdam', 'Netherlands');
                     $carousel->fetchfotos();
                     $carousel->renderizarCarrusel();
                 ?>
-
                 <button> &gt; </button>
                 <button> &lt; </button>
             </article>
         </main>
 
-        <!-- Pie de página -->
-        <footer>
-            <!-- Información del autor -->
+        <footer>            
             <p>&copy; Adrián Martínez, F1 Desktop</p>
         </footer>
-
-        <dialog>
-            <!-- Ayuda Global -->
-        </dialog>
-           
-        <!-- Script para cargar la ayuda -->
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                new AyudaGlobal();
-            });
-        </script>
     </body>
 </html>

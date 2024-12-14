@@ -26,13 +26,14 @@
         <script>
             document.addEventListener("DOMContentLoaded", () => {
                 new Memoria();
+                new AyudaGlobal();
             });
         </script>
     </head>
 
     <body>
         <header>
-            <h1><a href="index.html" target="_self">F1 Desktop</a></h1>
+            <h1><a href="index.html" target="_self"  title="Página de Inicio">F1 Desktop</a></h1>
 
             <nav>
                 <a href="index.html" target="_self" title="Página principal de inicio, regresa a la página principal">Inicio</a>
@@ -49,31 +50,16 @@
         <p>Estas en <a href="index.html" title="Inicio">Inicio</a> 
             >> <a href="juegos.html" title="Juegos">Juegos</a> >> Memoria</p>
         
-        <!-- Botón para abrir el popup de ayuda -->
         <button>Ayuda</button>
+        <dialog> <!-- Ayuda Global --> </dialog>
 
         <main>
-            <!-- Contenedor del juego -->
             <h2>Juego de memoria</h2>
-                <!-- Botón para abrir el tutorial -->
             <button>Tutorial</button>        
         </main>        
 
-        <!-- Pie de página -->
         <footer>
-            <!-- Texto de derechos de autor -->
             <p>&copy; Adrián Martínez, F1 Desktop</p>
         </footer>
-
-        <dialog>
-            <!-- Ayuda Global -->
-        </dialog>
-
-        <!-- Script para cargar el juego y la ayuda -->
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                new AyudaGlobal();    
-            });
-        </script>
     </body>
 </html>

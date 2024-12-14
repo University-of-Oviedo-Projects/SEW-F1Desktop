@@ -471,6 +471,12 @@
         <link rel="stylesheet" href="../estilo/estilo.css"/>
         
         <script src="../js/ayuda.js" defer></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                new AyudaGlobal();
+            });
+        </script>
     </head>
 
     <body>
@@ -492,8 +498,8 @@
         <p>Estas en <a href="../index.html" title="Pagina de inicio">Inicio</a> 
             >> <a href="../juegos.html" title="Juegos">Juegos</a> >> Gestion F1</p>
 
-        <!-- Botón para abrir el popup de ayuda -->
         <button>Ayuda</button>
+        <dialog> <!-- Ayuda Global --> </dialog>
 
         <?php
             $controller = new Controller();
@@ -665,56 +671,43 @@
 
             <!-- Formulario para registrar un resultado de un piloto en una carrera -->
             <form method="POST">
-            <h3>Registrar Resultado de Piloto en una Carrera</h3>
+                <h3>Registrar Resultado de Piloto en una Carrera</h3>
 
-            <!-- Desplegable de Piloto -->
-            <label for="piloto">Piloto: </label>
-            <select id="piloto" name="piloto" required>
-                <?php
-                    // Obtener los pilotos disponibles desde la base de datos
-                    $controller = new Controller();
-                    $controller->obtenerPilotos();
-                ?>
-            </select>
+                <!-- Desplegable de Piloto -->
+                <label for="piloto">Piloto: </label>
+                <select id="piloto" name="piloto" required>
+                    <?php
+                        // Obtener los pilotos disponibles desde la base de datos
+                        $controller = new Controller();
+                        $controller->obtenerPilotos();
+                    ?>
+                </select>
 
-            <!-- Desplegable de Carrera -->
-            <label for="carrera">Carrera: </label>
-            <select id="carrera" name="carrera" required>
-                <?php
-                    $controller = new Controller();
-                    $controller->obtenerCarreras();
-                ?>
-            </select>
+                <!-- Desplegable de Carrera -->
+                <label for="carrera">Carrera: </label>
+                <select id="carrera" name="carrera" required>
+                    <?php
+                        $controller = new Controller();
+                        $controller->obtenerCarreras();
+                    ?>
+                </select>
 
-            <!-- Campos de Posición y Puntos -->
-            <label for="posicion">Posición: </label>
-            <input type="number" id="posicion" name="posicion" required/>
-            <label for="puntos">Puntos: </label>
-            <input type="number" id="puntos" name="puntos" required/>
+                <!-- Campos de Posición y Puntos -->
+                <label for="posicion">Posición: </label>
+                <input type="number" id="posicion" name="posicion" required/>
+                <label for="puntos">Puntos: </label>
+                <input type="number" id="puntos" name="puntos" required/>
 
-            <button type="submit" name="registrar_resultado">Registrar Resultado</button>
-            
-            <?php if (isset($mensajes['registrar_resultado'])): ?>
-                <p><?php echo $mensajes['registrar_resultado']; ?></p>
-            <?php endif; ?>
-        </form>
+                <button type="submit" name="registrar_resultado">Registrar Resultado</button>
+                
+                <?php if (isset($mensajes['registrar_resultado'])): ?>
+                    <p><?php echo $mensajes['registrar_resultado']; ?></p>
+                <?php endif; ?>
+            </form>
         </main>
 
-        <!-- Pie de página -->
         <footer>
-            <!-- Información del autor -->
             <p>&copy; Adrián Martínez, F1 Desktop</p>
         </footer>
-
-        <dialog>
-            <!-- Ayuda Global -->
-        </dialog>
-           
-        <!-- Script para cargar la ayuda -->
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                new AyudaGlobal();                 
-            });
-        </script>
     </body>
 </html>

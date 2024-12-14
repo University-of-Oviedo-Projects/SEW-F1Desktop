@@ -46,7 +46,12 @@ class ProcesamientoCircuitos {
 
     // Método para mostrar el contenido del archivo XML en el HTML
     mostrarContenidoXML(xmlDoc) {
-        document.querySelector("main > section").removeAttribute('hidden');
+        const section = document.createElement("section");
+        const h3 = document.createElement("h3");
+        h3.textContent = "Contenido del archivo XML";
+        section.appendChild(h3);
+        const kmlForm = document.querySelector("main form:nth-of-type(2)");
+        document.querySelector("main").insertBefore(section, kmlForm);
         const contenedor = document.querySelector("main > section");
 
         // Función auxiliar para crear elementos de texto
@@ -149,11 +154,11 @@ class ProcesamientoCircuitos {
 
     // Método para procesar archivos KML
     procesarArchivoKML(archivo) {
+        const main = document.querySelector("main");
+        const formKML = document.querySelector("main form:nth-of-type(3)");
         const h3 = document.createElement("h3");
         h3.textContent = "Contenido del archivo KML";
-        const div = document.createElement("div");
-        const formKML = document.querySelector("main form:nth-of-type(3)");
-        const main = document.querySelector("main");
+        const div = document.createElement("div");        
         main.insertBefore(h3, formKML);
         main.insertBefore(div, formKML);
 

@@ -19,12 +19,18 @@
         <link rel="stylesheet" href="estilo/layout.css"/>
         <link rel="stylesheet" href="estilo/estilo.css"/>
 
-        <script src="js/ayuda.js"></script>
+        <script src="js/ayuda.js" defer></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                new AyudaGlobal();
+            });
+        </script>
     </head>
 
     <body>
         <header>
-            <h1><a href="index.html" target="_self">F1 Desktop</a></h1>
+            <h1><a href="index.html" target="_self"  title="Página de Inicio">F1 Desktop</a></h1>
 
             <nav>
                 <a href="index.html" target="_self" title="Página principal de inicio, regresa a la página principal">Inicio</a>
@@ -40,35 +46,22 @@
 
         <p>Estas en <a href="index.html" title="Inicio">Inicio</a> >> Juegos</p>
 
-        <!-- Botón para abrir el popup de ayuda -->
         <button>Ayuda</button>
+        <dialog> <!-- Ayuda Global --> </dialog>
 
         <main>
             <h2>¡Bienvenido a los juegos de la F1!</h2>
             
             <menu>
-                <li><a href="memoria.html">Memoria</a></li>
-                <li><a href="php/semaforo.php">Reacción</a></li>
-                <li><a href="api.html">Trivial F1</a></li>
-                <li><a href="php/libre.php">Gestion F1</a></li>
+                <li><a href="memoria.html" title="Juego de memoria">Memoria</a></li>
+                <li><a href="php/semaforo.php" title="Juego de reacción">Reacción</a></li>
+                <li><a href="api.html" title="Juego de preguntas y respuestas">Trivial F1</a></li>
+                <li><a href="php/libre.php" title="Gestion avanzada de la Formula 1">Gestion F1</a></li>
             </menu>
         </main>
 
-        <!-- Pie de página -->
         <footer>
-            <!-- Información del autor -->
             <p>&copy; Adrián Martínez, F1 Desktop</p>
         </footer>
-
-        <dialog>
-            <!-- Ayuda Global -->
-        </dialog> 
-           
-        <!-- Script para cargar la ayuda -->
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                new AyudaGlobal();    
-            });
-        </script>
     </body>
 </html>

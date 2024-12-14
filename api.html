@@ -21,10 +21,11 @@
 
         <script src="js/api.js" defer></script>
         <script src="js/ayuda.js"></script>
-
+    
         <script>
             document.addEventListener("DOMContentLoaded", () => {
                 new Api();
+                new AyudaGlobal();
             });
         </script>
     </head>
@@ -48,8 +49,8 @@
         <p>Estas en <a href="index.html" title="Inicio">Inicio</a> 
             >> <a href="juegos.html" title="Juegos">Juegos</a> >> Trivial F1</p>
 
-        <!-- Botón para abrir el popup de ayuda -->
         <button>Ayuda</button>
+        <dialog> <!-- Ayuda Global --> </dialog>
 
         <main>
             <!-- Pantalla de selección de modo de juego -->
@@ -59,21 +60,8 @@
             </section>
         </main>
         
-        <!-- Pie de página -->
         <footer>
-            <!-- Información del autor -->
             <p>&copy; Adrián Martínez, F1 Desktop</p>
-        </footer>
-
-        <dialog>
-            <!-- Ayuda Global -->
-        </dialog>
-           
-        <!-- Script para cargar la información de la ayuda -->
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                new AyudaGlobal();    
-            });
-        </script>
+        </footer>           
     </body>
 </html>

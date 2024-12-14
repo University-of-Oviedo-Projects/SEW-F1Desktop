@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <circuito
+    xml:lang="es"
     xmlns="http://www.uniovi.es"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.uniovi.es circuito.xsd" >

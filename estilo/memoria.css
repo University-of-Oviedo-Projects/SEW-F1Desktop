@@ -126,7 +126,6 @@ dialog::backdrop {
     main > h2 {
         /* Reducir el tamaño del texto es necesario para garantizar la legibilidad */
         font-size: 0.8em;
-        /* Redefinir el grid-column es necesario para que el titulo se muestre correctamente */
         margin: 0.5em auto;
     }
 
@@ -148,7 +147,6 @@ dialog::backdrop {
     dialog {
         /* Redefinir el padding es necesario para que el dialogo se muestre correctamente */
         padding: 0.5em;
-        /* Reedinir el tamaño de la fuente es necesario para garantizar la legibilidad */
         font-size: 0.9em; 
     }
     

@@ -23,13 +23,15 @@
         <link rel="stylesheet" href="estilo/estilo.css"/>
         <link rel="stylesheet" href="estilo/calendario_grid.css" />
 
+        <script src="https://api.jolpi.ca" defer></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
         <script src="js/calendario.js" defer></script>
-        <script src="js/ayuda.js"></script>
+        <script src="js/ayuda.js" defer></script>
 
         <script>
             document.addEventListener("DOMContentLoaded", () => {
                 new Calendario();
+                new AyudaGlobal();
             });
         </script>        
     </head>
@@ -52,28 +54,16 @@
 
         <p>Estas en <a href="index.html" title="Pagina de inicio">Inicio</a> >> Calendario</p>
             
-        <!-- Botón para abrir el popup de ayuda -->
         <button>Ayuda</button>
+        <dialog> <!-- Ayuda Global --> </dialog>
 
         <main>
             <!-- Contenedor para la información de carreras -->
             <h2>Carreras de la temporada</h2>
         </main>
 
-        <!-- Pie de página -->
         <footer>
-            <!-- Información del autor -->
             <p>&copy; Adrián Martínez, F1 Desktop</p>
         </footer>
-
-        <dialog>
-            <!-- Ayuda Global -->
-        </dialog>           
-
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                new AyudaGlobal();    
-            });
-        </script>
     </body>
 </html>

@@ -1,9 +1,9 @@
 import xml.etree.ElementTree as ET
 import numpy as np
 
-def parse_xml(xml_file):
+def parse_xml():
     try:
-        tree = ET.parse("circuitoEsquema.xml")
+        tree = ET.parse("./circuitoEsquema.xml")
         root = tree.getroot()
     except IOError:
         print("No se encuentra el archivo 'circuitoEsquema.xml'")
@@ -35,7 +35,7 @@ def create_svg_content(altitudes, width=1400, height=400, margin=50):
 
     svg_content = [
         '<?xml version="1.0" encoding="UTF-8" ?>',
-        f'<svg xmlns="http://www.w3.org/2000/svg" version="2.0" width="{width}" height="{height}">'
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}">'
     ]
 
     points = [f"{margin},{height}"] 
@@ -58,11 +58,8 @@ def save_svg(svg_content, svg_file):
     with open(svg_file, 'w') as file:
         file.write(svg_content)
 
-
 def main():
-    xml_file_path = "./circuitoEsquema.xml"
-    coordinates = parse_xml(xml_file_path)
-
+    coordinates = parse_xml()
     svg_content = create_svg_content(coordinates)
     output_svg_path = "./perfil.svg"
     save_svg(svg_content, output_svg_path)

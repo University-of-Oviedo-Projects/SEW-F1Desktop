@@ -24,10 +24,40 @@ html, body {
     margin: 0em;
 }
 
+/* Especificidad 001 en cada selector */
+header, menu {
+    background-color: #0A1A2E;
+    color: #FFFFFF;
+}
+
+/* Especificidad 001 */
+h1 {
+    color: #FFFFFF;
+    /* backgroud-color heredado de header */
+    text-decoration: none;
+    font-size: 1.25em;
+    margin: 0.5em;
+    flex: 1 1 auto; 
+    text-align: left; 
+    white-space: nowrap; 
+}
+
 /* Especificidad 002 */
 body > p {
     margin-left: 0.4em;;
     font-size: small;
+}
+
+/* Especificidad 003 */
+body > p > a {
+    color: #8F0000;
+    /* background-color heredado de body */
+}
+
+/* Especificidad 011 en cada selector */
+a:hover, a:focus {
+    color: #eb950c;
+    /* backgroud-color heredado de la regla header, menu */
 }
 
 /* Espcificidad 002 */
@@ -87,6 +117,30 @@ aside > h3 {
     margin-bottom: 0.25em;
 }
 
+/* Especificidad 001 */
+footer {
+    background-color: #0A1A2E;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+/* Especificidad 011 */
+footer button {
+    padding: 0.5em 1em;
+    background-color: #0000ff; 
+    color: #FFFFFF;
+    border: none;
+    border-radius: 0.5em;
+    cursor: pointer;
+    margin: 0.5em;
+}
+
+/* Especificidad 012 */
+footer p {
+    margin: 0.5em;
+    text-align: center;
+}
+
 /* ###################### Estilizacion de listas  ###################### */
 /* Especificidades: 001, 001, 001, 001 */
 ul, ol, dl, p {
@@ -95,8 +149,8 @@ ul, ol, dl, p {
 
 /* Especificidades: 001, 001 */
 ul, ol {
-    /* color heredado de body */
     background-color: #EDD9B0; 
+    /* color heredado de body */
     list-style-position: inside;
     margin: 0.313em 0.625em 0.625em 0.625em;
 }
@@ -205,8 +259,8 @@ img {
 }
 
 /* ###################### Ayuda global de la web ###################### */
-/* Especificidad 002 */
-footer+dialog {
+/* Especificidad 003 */
+body > button+dialog {
     width: 80%;
     max-width: 100%;
     max-height: 60%;
@@ -219,17 +273,8 @@ footer+dialog {
     overflow: auto;
 }
 
-/* Especificidad 003 */
-footer+dialog h2 {
-    font-size: 1.8em;
-    margin-bottom: 1em;
-    text-align: center;
-    color: #333;
-    /* background-color heredado de dialog */
-}
-
-/* Especificidad 003 */
-footer+dialog h3 {
+/* Especificidad 004 en cada uno de los 2 selectores */
+body > button+dialog h2, body > button+dialog h3 {
     font-size: 1.5em;
     margin-top: 1em;
     margin-bottom: 0.5em;
@@ -237,30 +282,30 @@ footer+dialog h3 {
     /* background-color heredado de dialog */
 }
 
-/* Especificidad 003 */
-footer+dialog p {
+/* Especificidad 004 */
+body > button+dialog p {
     font-size: 1.2em;
     margin-bottom: 0.5em;
     color: #666;
     /* background-color heredado de dialog */
 }
 
-/* Especificidad 003 */
-footer+dialog ul {
+/* Especificidad 004 */
+body > button+dialog ul {
     list-style-type: disc;
     padding-left: 1.5em;
 }
 
-/* Especificidad 004 */
-footer+dialog ul li {
+/* Especificidad 005 */
+body > button+dialog ul li {
     font-size: 1.2em;
     margin-bottom: 0.5em;
     color: #777;
     /* background-color heredado de ul */
 }
 
-/* Especificidad 003 */
-footer+dialog button {
+/* Especificidad 004 */
+body > button+dialog button {
     display: block;
     margin: 1em auto 0;
     padding: 0.5em 1em;
@@ -269,36 +314,36 @@ footer+dialog button {
     color: #fff;
 }
 
-/* Especificidad 013 */
-footer+dialog button:hover {
+/* Especificidad 014 */
+body > button+dialog button:hover {
     background-color: #163240;
     /* color heredado de button */
 }
 
 /* Media Queries para el dialogo de ayuda */
 @media (max-width: 768px) {
-    /* Especificidad 002 */
-    footer+dialog {
+    /* Especificidad 003 */
+    body > button+dialog {
         /* Redefinir width es necesario para que el dialogo se ajuste al ancho de la pantalla */
         width: 90%;
         /* Redefinir el padding es necesario para que el contenido no se desborde del dialogo */
         padding: 1em;
     }
 
-    /* Especificidad 003 */
-    footer+dialog h2 {
+    /* Especificidad 004 */
+    body > button+dialog h2 {
         /* Redefinir el tamaño de la fuente es necesario para que el texto no se desborde del dialogo */
         font-size: 1.5em;
     }
 
-    /* Especificidad 003 */
-    footer+dialog h3 {
+    /* Especificidad 004 */
+    body > button+dialog h3 {
         /* Redefinir el tamaño de la fuente es necesario para que el texto no se desborde del dialogo */
         font-size: 1.3em;
     }
 
-    /* Especificidades 003, 004 */
-    footer+dialog p, footer+dialog ul li {
+    /* Especificidades 004, 005 */
+    body > button+dialog p, body > button+dialog ul li {
         /* Redefinir el tamaño de la fuente es necesario para que el texto no se desborde del dialogo */
         font-size: 1em;
     }
@@ -354,7 +399,7 @@ canvas {
 /* Especificidad 023 */
 main  > section:nth-of-type(4) > button:hover {
     background-color: #163240;
-    /* color heredado de main > section:nth-of-type(4) > button */
+    /* color heredado de button */
 }
 
 /* Especificidad 012 */
@@ -435,6 +480,31 @@ form input[type="text"]:focus, form textarea:focus, form input[type="file"]:focu
     outline: none; 
 }
 
+/* Especificidad 003 */
+form p a {
+    color: #0000ff;
+    /* backgroud-color heredado de form */
+}
+
+/* ###################### Estilo para el menú de juegos ###################### */
+/* Especificidades 003, 001 */
+menu li a, a {
+    text-decoration: none;           
+    color: #FFFFFF;
+    /* backgroud-color heredado de la menu */
+    font-size: 1.27em;
+    padding: 0.3em 0.5em; 
+    border-radius: 0.25em;
+    white-space: nowrap; 
+    text-align: center;
+    flex: 0 0 auto; 
+}
+
+
+/* Especificidad 002 */
+menu li {
+    list-style: none
+}
 
 /* ###################### Estilo para los mapas ###################### */
 /* Especificidad 002 */
@@ -526,6 +596,7 @@ main > div+article button {
     z-index: 10;
     cursor: pointer;
     background-color: #fff;
+    color: #1F3B4D;
     font-size: 1em;
     display: flex;
     flex-direction: column;

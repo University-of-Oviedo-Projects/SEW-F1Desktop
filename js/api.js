@@ -183,7 +183,6 @@ class Api {
 
         // Crear contenedor de pregunta
         const questionContainer = document.createElement('section');
-        questionContainer.classList.add('question-container');
         questionContainer.setAttribute('hidden', '');
         const h22 = document.createElement('h2');
         h22.textContent = "Pregunta";
@@ -193,7 +192,6 @@ class Api {
 
         // Crear contenedor de opciones
         const optionsContainer = document.createElement('section');
-        optionsContainer.classList.add('options-container');
         const h23 = document.createElement('h2');
         h23.textContent = "Opciones";
         optionsContainer.appendChild(h23);
@@ -205,7 +203,6 @@ class Api {
         const h24 = document.createElement('h2');
         h24.textContent = "Puntuación Final";
         finalScoreContainer.appendChild(h24);
-        finalScoreContainer.classList.add('final-score-container');
         finalScoreContainer.setAttribute('hidden', '');
         main.appendChild(finalScoreContainer);
     }

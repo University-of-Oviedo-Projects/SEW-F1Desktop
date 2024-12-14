@@ -32,13 +32,14 @@
         <script>
             document.addEventListener("DOMContentLoaded", () => {
                 new Viajes();
+                new AyudaGlobal();
             });
         </script>
     </head>
 
     <body>
         <header>
-            <h1><a href="index.html" target="_self">F1 Desktop</a></h1>
+            <h1><a href="index.html" target="_self"  title="Página de Inicio">F1 Desktop</a></h1>
             <nav>
                 <a href="index.html" target="_self" title="Página principal de inicio, regresa a la página principal">Inicio</a>
                 <a href="piloto.html" target="_self" title="Información sobre los pilotos">Piloto</a>
@@ -53,30 +54,16 @@
 
         <p>Estas en <a href="index.html" title="Inicio" >Inicio</a> >> Viajes</p>
         
-        <!-- Botón para abrir el popup de ayuda -->
         <button>Ayuda</button>
+        <dialog> <!-- Ayuda Global --> </dialog>
 
         <main>
             <h2>Mapas estáticos y dinámicos</h2>
-            <div></div>
+            <div> <!-- Contenedor del mapa dinámico --> </div>
         </main>
 
-        <!-- Pie de página -->
         <footer>
-            <!-- Información del autor -->
             <p>&copy; Adrián Martínez, F1 Desktop</p>
         </footer>
-
-        <dialog>
-            <!-- Ayuda Global -->
-        </dialog>
-           
-        <!-- Script para cargar la ayuda -->
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                new Viajes();
-                new AyudaGlobal(); 
-            });
-        </script>
     </body>
 </html>

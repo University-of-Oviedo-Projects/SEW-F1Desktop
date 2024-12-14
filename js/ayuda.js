@@ -53,10 +53,10 @@ class AyudaGlobal {
                 list: [
                     "Home: página principal.",
                     "Piloto: información sobre el piloto Esteban Ocon.",
-                    "Noticias: ver las ultimas noticias sobre la F1, crear noticias.",
+                    "Noticias: ver las ultimas noticias sobre la F1 o crear noticias.",
                     "Meteorología: información sobre Países Bajos, predicción meteorológica sobre el circuito de Zandvoort.",
                     "Viajes: consultar cambio de moneda, mapas y carrusel de fotos.",
-                    "Circuitos: obtener informacion de zandvoort mediante archivos.",
+                    "Circuitos: obtener informacion mediante subida archivos.",
                     "Calendario: carreras de la temporada actual de F1.",
                     "Juegos: mini juegos relacionados con la Fórmula 1.",
                 ],
@@ -65,6 +65,11 @@ class AyudaGlobal {
 
         const dialog = document.querySelector("body > dialog");
         dialog.innerHTML = ""; // Limpiar el contenido anterior
+
+        const title = document.createElement("h2");
+        title.textContent = "Ayuda global de F1Desktop";
+        dialog.appendChild(title);
+        
 
         sections.forEach((section) => {
             const title = document.createElement("h3");
