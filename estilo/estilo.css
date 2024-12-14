@@ -50,8 +50,14 @@ body > p {
 
 /* Especificidad 003 */
 body > p > a {
-    color: #8F0000;
+    color: #003366;
     /* background-color heredado de body */
+}
+
+/* Espcificidad 013 */
+body > p > a:hover {
+    color: #0000ff;
+    /* backgroud-color heredado de body */
 }
 
 /* Especificidad 011 en cada selector */
