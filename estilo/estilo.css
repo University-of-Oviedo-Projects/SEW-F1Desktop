@@ -49,7 +49,7 @@ body > p {
 }
 
 /* Quitamos las migas de navegacion */
-@media (max-width: 430px) {
+@media (max-width: 770px) {
     /* Especificidad 002 */
     body > p {
         display: none;
