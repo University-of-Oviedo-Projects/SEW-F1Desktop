@@ -40,3 +40,42 @@ footer {
     padding: 0.5em; 
     margin: 0.25em;
 }
+
+/* Media Queries */
+@media (max-width: 490px) {
+    /* Especificidad 002 */
+    header > h1 {
+        font-size: 0.85em;
+    }
+
+    /* Especificidad 001 */
+    nav {
+        /* Redefinimos el column gap para que se vea mejor en pantallas pequeñas */
+        column-gap: 0.6em;
+        /* Redefinimos el row gap para que se vea mejor en pantallas pequeñas */
+        row-gap: 0.6em;
+        /* Redefinimos el flex-wrap para que los elementos se vean mejor en pantallas pequeñas */
+        justify-content: flex-start;
+    }
+    
+    /* Especificidad 002 */
+    nav a {
+        text-align: left;
+        padding: 0em;
+        font-size: 1em;
+        box-sizing: border-box;
+    }
+
+    /* Especificidad 001 */
+    footer {
+        /* Reducimos el padding para que se vea mejor en pantallas pequeñas */
+        padding: 0.25em;
+        /* Reducimos el margen para que se vea mejor en pantallas pequeñas */
+        margin: 0.25em;
+    }
+
+    /* Especificidad 002 */
+    footer > p {
+        font-size: 0.85em;
+    }
+}

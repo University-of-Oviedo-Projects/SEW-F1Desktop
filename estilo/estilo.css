@@ -48,6 +48,14 @@ body > p {
     font-size: small;
 }
 
+/* Quitamos las migas de navegacion */
+@media (max-width: 430px) {
+    /* Especificidad 002 */
+    body > p {
+        display: none;
+    }
+}
+
 /* Especificidad 003 */
 body > p > a {
     color: #003366;
@@ -60,9 +68,15 @@ body > p > a:hover {
     /* backgroud-color heredado de body */
 }
 
-/* Especificidad 011 en cada selector */
-a:hover, a:focus {
+/* Especificidad 011 */
+a:hover {
     color: #eb950c;
+    /* backgroud-color heredado de la regla header, menu */
+}
+
+/* Especificidad 010 */
+.active {
+    color: #F9AED5;
     /* backgroud-color heredado de la regla header, menu */
 }
 
