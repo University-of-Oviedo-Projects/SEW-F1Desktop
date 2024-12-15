@@ -17,14 +17,14 @@
         enlace3="https://www.redbull.com/mx-es/f1-circuito-zandvoort-lo-que-debes-saber" />
 
     <fotos
-        enlace1="../multimedia/imagenes/zandvoort-1.jpg"
-        enlace2="../multimedia/imagenes/zandvoort-2.jpg"
-        enlace3="../multimedia/imagenes/zandvoort-3.jpg" />
+        enlace1="./zandvoort-1.jpg"
+        enlace2="./imagenes/zandvoort-2.jpg"
+        enlace3="./zandvoort-3.jpg" />
 
     <videos
-        enlace1="../multimedia/videos/zandvoort-2024-pole.mp4"
-        enlace2="../multimedia/videos/zandvoort-verstappen-lap.mp4"
-        enlace3="../multimedia/videos/zandvoort-drone.mp4" />
+        enlace1="./zandvoort-2024-pole.mp4"
+        enlace2="./zandvoort-verstappen-lap.mp4"
+        enlace3=".zandvoort-drone.mp4" />
 
     <centro-pista>
         <coordenada>

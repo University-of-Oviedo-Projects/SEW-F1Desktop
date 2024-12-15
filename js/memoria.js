@@ -21,16 +21,9 @@ class Memoria {
         this.firstCard = null;
         this.secondCard = null;
 
-        // Barajar los elementos
         this.shuffleElements();
-
-        // Crear los elementos en el DOM
         this.createElements();
-
-        // Añadir los eventos a los elementos
         this.addEventListeners();
-
-        // Cargar el tutorial
         this.createAndLoadGameTutorial();
     }
 
@@ -39,12 +32,15 @@ class Memoria {
         
         tutorialButton.addEventListener('click', () => {
             const dialog = document.createElement('dialog');
+
             const h3 = document.createElement('h3');
             h3.textContent = '¿Cómo jugar?';
             dialog.appendChild(h3);
+
             const p = document.createElement('p');
             p.textContent = 'El objetivo del juego es encontrar todas las parejas de cartas en el menor tiempo posible. Haz clic en dos cartas para ver sus imágenes; si coinciden, se quedarán reveladas, de lo contrario se voltearán de nuevo. ¡Buena suerte!';
             dialog.appendChild(p);
+            
             const button = document.createElement('button');
             button.addEventListener('click', () => {
                 dialog.close();
@@ -52,6 +48,7 @@ class Memoria {
             });
             button.textContent = 'Cerrar';
             dialog.appendChild(button);
+
             document.querySelector('main').appendChild(dialog);
             dialog.showModal();
         });
@@ -66,16 +63,15 @@ class Memoria {
 
     unflipCards() {
         this.lockBoard = true;
-
+    
         setTimeout(() => {
-            this.firstCard.setAttribute("data-state", "card-hidden");
-            this.firstCard.querySelector("img").setAttribute('data-state', 'card-hidden');
-            this.secondCard.setAttribute("data-state", "card-hidden");
-            this.secondCard.querySelector("img").setAttribute('data-state', 'card-hidden');
-
+            this.firstCard.setAttribute("data-state", "hidden");
+            this.firstCard.querySelector("img").setAttribute('hidden', '');
+            this.secondCard.setAttribute("data-state", "hidden");
+            this.secondCard.querySelector("img").setAttribute('hidden', '');           
             this.resetBoard();
         }, 700);
-    }
+    }    
 
     resetBoard() {
         this.hasFlippedCard = false;
@@ -85,13 +81,17 @@ class Memoria {
     }
 
     checkForMatch() {
-        this.firstCard.element === this.secondCard.element ?
-            this.disableCards() : this.unflipCards();
+        this.firstCard.getAttribute('data-element') 
+            === this.secondCard.getAttribute('data-element')
+            ? this.disableCards() : this.unflipCards();
     }
 
     disableCards() {
-        this.firstCard.setAttribute("data-state", "card-revealed");
-        this.secondCard.setAttribute("data-state", "card-revealed");
+        this.firstCard.removeAttribute("data-state", "flip");
+        this.secondCard.removeAttribute("data-state", "flip");
+
+        this.firstCard.setAttribute("data-state", "revealed");
+        this.secondCard.setAttribute("data-state", "revealed");
 
         this.resetBoard();
         this.checkForWin();
@@ -100,7 +100,7 @@ class Memoria {
     checkForWin() {
         const allCards = document.querySelectorAll('article');
         const allRevealed = Array.from(allCards).every(card => 
-                card.getAttribute('data-state') === 'card-revealed');
+                card.getAttribute('data-state') === 'revealed');
 
         if (allRevealed) {
             const dialog = document.createElement('dialog');
@@ -116,7 +116,7 @@ class Memoria {
             setTimeout(() => { 
                 dialog.close(); 
                 dialog.remove();
-            }, 3500);
+            }, 1700);
         }
     }
 
@@ -124,28 +124,22 @@ class Memoria {
         const container = document.querySelector('main'); 
 
         this.elements.forEach((item) => {
-            // Crear un nuevo artículo para cada elemento
             const article = document.createElement('article');
-            article.setAttribute('data-state', 'card-hidden');
-            article.element = item.element;
+            article.setAttribute('data-state', 'hidden');
+            article.setAttribute('data-element', item.element);
 
-            // Crear el encabezado y añadirlo al artículo
             const header = document.createElement('header');
             const h3 = document.createElement('h3');
             h3.textContent = "Tarjeta de memoria";
             header.appendChild(h3);
             article.appendChild(header);
 
-            // Crear la imagen y añadirla al artículo
             const img = document.createElement('img');
             img.src = item.source;
-            img.alt = "Tarjeta de memoria";
+            img.alt = item.element;
             img.setAttribute('hidden', '');
 
-            // Agregar la imagen al artículo
             article.appendChild(img);
-
-            // Agregar el artículo al contenedor
             container.appendChild(article);
         });
     }
@@ -158,23 +152,25 @@ class Memoria {
         });
     }
 
-    flipCard(article) {
-        if (article.getAttribute('data-state') === 'card-revealed'
+    flipCard(game) {
+        let cardToFlip = game;
+
+        if (cardToFlip.getAttribute('data-state') === 'revealed'
             || this.lockBoard
-            || article === this.firstCard) {
+            || cardToFlip === this.firstCard) {
             return;
         }
 
-        article.setAttribute('data-state', 'card-revealed');
-
-        const img = article.querySelector('img');
+        cardToFlip.setAttribute('data-state', 'flip');
+        const img = cardToFlip.querySelector('img');
         img.removeAttribute('hidden');
 
         if (!this.hasFlippedCard) {
             this.hasFlippedCard = true;
-            this.firstCard = article;
+            this.firstCard = cardToFlip;
         } else {
-            this.secondCard = article;
+            this.secondCard = cardToFlip;
+            this.lockBoard = true;
             this.checkForMatch();
         }
     }

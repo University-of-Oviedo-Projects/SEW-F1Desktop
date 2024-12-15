@@ -36,7 +36,7 @@ button {
     background-color: #1F3B4D;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.5em;
 }
 
 /* Especificidad 002 */

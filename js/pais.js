@@ -65,7 +65,7 @@ class Pais {
     }
 
     rellenarInformacion() {
-        this.nombre_circuito = "Zandvoort";;
+        this.nombre_circuito = "Circuit Park Zandvoort";;
         this.forma_gobierno = "Monarquía parlamentaria";
         this.coord_meta = "4.5408, 52.3889, 17.84";
         this.religion = "Catolica";
@@ -75,7 +75,6 @@ class Pais {
         return this.obtenerNombrePais() + ', ' + this.obtenerCapitalPais();
     }
     
-    // Escribir información en el HTML
     mostrarInfoEnHTML() {
         const parrafo = document.createElement("p");
         parrafo.textContent =  this.coordMeta();

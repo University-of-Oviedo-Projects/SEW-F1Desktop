@@ -155,7 +155,6 @@
             fclose($file);
             $this->cerrarConexion();
             return "Datos importados correctamente desde el archivo CSV.";
-
         }
         
         private function executeQuery($query, $rows) {
@@ -559,7 +558,7 @@
                 <?php endif; ?>
             </form>
 
-            <!-- Importtar datos de CSV -->
+            <!-- Importar datos de CSV -->
             <form method="POST" enctype="multipart/form-data">
                 <label for="csv_import">Importar datos de un CSV:</label>
                 <input type="file" id="csv_import" name="csv_import" accept=".csv" required />

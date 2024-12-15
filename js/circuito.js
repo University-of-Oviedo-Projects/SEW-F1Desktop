@@ -1,11 +1,9 @@
 class ProcesamientoCircuitos {
     constructor() {
-        // Obtener los elementos de los formularios
         const xmlFileInput = document.querySelector('main form:nth-of-type(1) input[type="file"]');
         const kmlFileInput = document.querySelector('main form:nth-of-type(2) input[type="file"]');
         const svgFileInput = document.querySelector('main form:nth-of-type(3) input[type="file"]');
 
-        // Añadir eventos para procesar los archivos
         xmlFileInput.addEventListener("change", () => {
             this.procesarArchivoXML(xmlFileInput.files[0]);
         });
@@ -37,14 +35,12 @@ class ProcesamientoCircuitos {
                 return;
             }
 
-            // Procesar y mostrar el contenido del XML
             this.mostrarContenidoXML(xmlDoc);
         };
 
         lector.readAsText(archivo);
     }
 
-    // Método para mostrar el contenido del archivo XML en el HTML
     mostrarContenidoXML(xmlDoc) {
         const section = document.createElement("section");
         const h3 = document.createElement("h3");
@@ -54,14 +50,12 @@ class ProcesamientoCircuitos {
         document.querySelector("main").insertBefore(section, kmlForm);
         const contenedor = document.querySelector("main > section");
 
-        // Función auxiliar para crear elementos de texto
         const añadirElemento = (contenedor, titulo, valor) => {
             const p = document.createElement("p");
             p.textContent = `${titulo}: ${valor}`;
             contenedor.appendChild(p);
         };
 
-        // Acceder a los nodos XML y mostrar su contenido
         const nombre = xmlDoc.querySelector("nombre")?.textContent;
         const longitudCircuito = xmlDoc.querySelector("longitud_circuito")?.textContent;
         const anchuraMedia = xmlDoc.querySelector("anchura_media")?.textContent;
@@ -80,7 +74,6 @@ class ProcesamientoCircuitos {
         if (ciudad) añadirElemento(contenedor, "Ciudad", ciudad);
         if (pais) añadirElemento(contenedor, "País", pais);
 
-        // Mostrar referencias
         const referencias = xmlDoc.querySelector("referencias");
         if (referencias) {
             const ref1 = document.createElement("a");
@@ -97,7 +90,6 @@ class ProcesamientoCircuitos {
             contenedor.appendChild(ref3);
         }
 
-        // Mostrar fotos
         const fotos = xmlDoc.querySelector("fotos");
         if (fotos) {
             const img1 = document.createElement("img");
@@ -114,7 +106,6 @@ class ProcesamientoCircuitos {
             contenedor.appendChild(img3);
         }
 
-        // Mostrar videos
         const videos = xmlDoc.querySelector("videos");
         if (videos) {
             const video1 = document.createElement("video");
@@ -131,7 +122,6 @@ class ProcesamientoCircuitos {
             contenedor.appendChild(video3);
         }
 
-        // Mostrar centro de pista
         const centroPista = xmlDoc.querySelector("centro-pista > coordenada");
         if (centroPista) {
             const longitud = centroPista.querySelector("longitud")?.textContent;
@@ -140,7 +130,6 @@ class ProcesamientoCircuitos {
             añadirElemento(contenedor, "Centro de Pista", `Longitud: ${longitud}, Latitud: ${latitud}, Altitud: ${altitud}`);
         }
 
-        // Mostrar puntos
         const puntos = xmlDoc.querySelectorAll("puntos > tramo");
         puntos.forEach((tramo, index) => {
             const distancia = tramo.getAttribute("distancia");
@@ -152,7 +141,6 @@ class ProcesamientoCircuitos {
         });
     }
 
-    // Método para procesar archivos KML
     procesarArchivoKML(archivo) {
         const main = document.querySelector("main");
         const formKML = document.querySelector("main form:nth-of-type(3)");
@@ -196,18 +184,14 @@ class ProcesamientoCircuitos {
         lector.readAsText(archivo);
     }
 
-    // Método para mostrar el contenido del archivo KML en el HTML
     mostrarContenidoKML(coordinates) {
-        // Verificar que el contenedor del mapa está disponible
         var mapDiv = document.querySelector("main > div");
 
-        // Crear el mapa
         var map = new google.maps.Map(mapDiv, {
             zoom: 10,
             center: coordinates.length > 0 ? coordinates[0] : { lat: 0, lng: 0 }
         });
 
-        // Crear la polilínea
         const spaPolyline = new google.maps.Polyline({
             path: coordinates,
             geodesic: true,
@@ -216,10 +200,7 @@ class ProcesamientoCircuitos {
             strokeWeight: 4
         });
 
-        // Añadir la polilínea al mapa
         spaPolyline.setMap(map);
-
-        // Ajustar los límites del mapa
         const bounds = new google.maps.LatLngBounds();
         coordinates.forEach(coord => bounds.extend(coord));
         map.fitBounds(bounds);
@@ -229,29 +210,33 @@ class ProcesamientoCircuitos {
     
     // Método para procesar archivos SVG
     procesarArchivoSVG(archivo) {
-        const h3 = document.createElement("h3");
-        h3.textContent = "Contenido del archivo SVG";
-        document.querySelector("main").appendChild(h3);
+        const h3 = document.querySelector("main form:nth-of-type(3) + h3");
+        if (h3) h3.remove();
+        const svg = document.querySelector("main svg");
+        if (svg) svg.remove();
 
-        const lector = new FileReader();            
+        const h3New = document.createElement("h3");
+        h3New.textContent = "Contenido del archivo SVG";
+        document.querySelector("main").appendChild(h3New);
+        const lector = new FileReader();       
+
         lector.onload = (e) => {
             const contenidoSVG = e.target.result;
             const parser = new DOMParser();
             const svgDoc = parser.parseFromString(contenidoSVG, "image/svg+xml");
-            // Verificar si hay errores en el SVG
             const parseError = svgDoc.querySelector("parsererror");
+
             if (parseError) {
                 document.querySelector("main").innerText = "Error al parsear el SVG";
                 return;
             }
+
             // Procesar y mostrar el contenido del SVG
             this.mostrarContenidoSVG(svgDoc);
         };
         lector.readAsText(archivo);
     }
     
-
-    // Método para mostrar el contenido del archivo SVG en el HTML
     mostrarContenidoSVG(svgDoc) {
         const contenedor = document.querySelector("main");
         const svgElement = svgDoc.documentElement;        
@@ -262,7 +247,7 @@ class ProcesamientoCircuitos {
             const height = svgElement.getAttribute("height") || svgElement.clientHeight;
             svgElement.setAttribute("viewBox", `0 0 ${width} ${height}`);
         }
-
+        
         contenedor.appendChild(svgElement);
     }
 }

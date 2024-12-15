@@ -74,24 +74,26 @@ main article img {
     backface-visibility: hidden;
 }
 
-/* Especificidad 012 */
-main article[data-state="card-revealed"] {
+/* Especificidad 012 en cada selector */
+main article[data-state="revealed"],
+main article[data-state="flip"] {
     transform: rotateY(180deg);
 }
 
 /* Especificidad 013 */
-main article[data-state="card-hidden"] img {
+main article[data-state="hidden"] img {
     display: none;
 }
 
 /* Especificidad 014 */
-main article[data-state="card-revealed"] img {
+main article[data-state="revealed"] img {
     height: 15vh;
-    display: block;
+    backface-visibility: visible;
 }
 
-/* Especificidad 014 */
-main article[data-state="card-revealed"] header h3 {
+/* Especificidad 014 en cada selector */
+main article[data-state="revealed"] header h3,
+main article[data-state="flip"] header h3 {
     display: none;
 }
 

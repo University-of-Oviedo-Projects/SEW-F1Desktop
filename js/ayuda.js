@@ -16,9 +16,7 @@ class AyudaGlobal {
         this.prepareHelpButton();
     }
 
-    // Función para preparar el botón de ayuda
     prepareHelpButton() {
-        // Detectar la tecla F1
         document.addEventListener("keydown", (event) => {
             if (event.key === "F1") {
                 event.preventDefault(); // Evita la ayuda predeterminada del navegador
@@ -26,7 +24,6 @@ class AyudaGlobal {
             }
         });
 
-        // Detectar el clic en el botón de ayuda
         const openHelpButton = document.querySelector("body > button");
         if (openHelpButton) {
             openHelpButton.addEventListener("click", () => {
