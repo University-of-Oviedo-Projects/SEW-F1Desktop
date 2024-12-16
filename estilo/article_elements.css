@@ -37,6 +37,12 @@ article {
     flex: 1 1 15%;  
 }
 
+article img {
+    background-color: #3674f0eb;
+    /* color heredado de article */
+    border-radius: 1em;
+}
+
 /* Especificidad: 011 */
 article:hover {
     transform: scale(1.02);

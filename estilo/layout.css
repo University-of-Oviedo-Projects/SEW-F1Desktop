@@ -16,7 +16,10 @@ header {
 /* Especificidad 001 */
 menu {
     width: 50%; 
-    margin: 0 auto; 
+    margin-top: 0.5em;
+    margin-bottom: 2.5em;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Especificidad 001 */
@@ -43,9 +46,13 @@ footer {
 
 /* Media Queries */
 @media (max-width: 490px) {
+    main > h2 {
+        font-size: 1.05em;
+    }
+
     /* Especificidad 002 */
     header > h1 {
-        font-size: 0.85em;
+        font-size: 1.05em;
     }
 
     /* Especificidad 001 */
@@ -64,6 +71,11 @@ footer {
         padding: 0em;
         font-size: 1em;
         box-sizing: border-box;
+    }
+
+    /* Especificidad 002 & 001 */
+    menu li a, a {
+        font-size: 0.65em;
     }
 
     /* Especificidad 001 */

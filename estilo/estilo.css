@@ -1,7 +1,7 @@
 /* Author: Adrian Martinez Fuentes - UO295454 */
 
 /* Paleta de colores:
-    - Fondo de la web: F4E1C1 (Cema oscuro)
+    - Fondo de la web: F4E1C1 (Crema oscuro)
     - Texto de la web: 1F3B4D (Azul Marino Oscuro, 9.1 contraste con F4E1C1)
     - Fondo de Header: 1F3B4D (Azul Marino)
     - Texto de nav y h1: FFFFFF (Blanco, 11.73 contraste con 1F3B4D)
@@ -506,20 +506,32 @@ form p a {
     /* backgroud-color heredado de form */
 }
 
+/* Media Queries */
+@media (max-width: 490px) {
+    /* Especificidad 002 */
+    form label {
+        font-size: 1em;
+    }
+
+    /* Especificidad 002 */
+    form button {
+        /* Redefinir el padding es necesario para que el boton se vea mejor en pantallas pequeñas */
+        padding: 0.5em 1em;
+    }
+}
+
 /* ###################### Estilo para el menú de juegos ###################### */
 /* Especificidades 003, 001 */
 menu li a, a {
     text-decoration: none;           
     color: #FFFFFF;
-    /* backgroud-color heredado de la menu */
-    font-size: 1.27em;
+    /* backgroud-color heredado de menu */
     padding: 0.3em 0.5em; 
     border-radius: 0.25em;
     white-space: nowrap; 
     text-align: center;
     flex: 0 0 auto; 
 }
-
 
 /* Especificidad 002 */
 menu li {
@@ -536,8 +548,6 @@ main > div {
 
 /* Especiicidad 002 */
 main > img {
-    width: 100%; 
-    height: 80vh; 
     margin-bottom: 2.5em; 
 }
 
@@ -557,6 +567,15 @@ main > section a {
     /* background-color heredado de body */
     text-decoration: none;
     font-weight: bold;
+}
+
+/* Especificidad 003 en cada selector */
+main > section img, main > section video {
+    width: 50%;
+    height: auto;
+    margin-right: 2em;
+    object-fit: cover;
+    border-radius: 0.5em;
 }
 
 /* Especificidad 013 */

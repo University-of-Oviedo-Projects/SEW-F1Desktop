@@ -123,16 +123,23 @@ class Memoria {
     createElements() {
         const container = document.querySelector('main'); 
 
+        const section = document.createElement('section');
+        const h2 = document.createElement('h2');
+        h2.textContent = 'Juego de memoria';
+        section.appendChild(h2);
+
+        const button = document.createElement('button');
+        button.textContent = 'Tutorial';
+        container.appendChild(button);
+
         this.elements.forEach((item) => {
             const article = document.createElement('article');
             article.setAttribute('data-state', 'hidden');
             article.setAttribute('data-element', item.element);
 
-            const header = document.createElement('header');
             const h3 = document.createElement('h3');
             h3.textContent = "Tarjeta de memoria";
-            header.appendChild(h3);
-            article.appendChild(header);
+            article.appendChild(h3);
 
             const img = document.createElement('img');
             img.src = item.source;
@@ -140,8 +147,10 @@ class Memoria {
             img.setAttribute('hidden', '');
 
             article.appendChild(img);
-            container.appendChild(article);
+            section.appendChild(article);
         });
+
+        container.appendChild(section);
     }
 
     addEventListeners() {

@@ -65,7 +65,7 @@ class Pais {
     }
 
     rellenarInformacion() {
-        this.nombre_circuito = "Circuit Park Zandvoort";;
+        this.nombre_circuito = "Zandvoort";;
         this.forma_gobierno = "Monarquía parlamentaria";
         this.coord_meta = "4.5408, 52.3889, 17.84";
         this.religion = "Catolica";
@@ -139,11 +139,9 @@ class Pais {
                     const previs = previsionesPorDia[date];
     
                     const article = $('<article></article>');
-                    const header = $('<header></header>');
                     const h3 = $('<h3></h3>');
                     h3.text(previs.date);
-                    header.append(h3);
-                    article.append(header);
+                    article.append(h3);
                     const p1 = $('<p></p>');
                     p1.text(`Temperatura Máxima: ${previs.tempMax}°C`);
                     article.append(p1);
@@ -154,7 +152,7 @@ class Pais {
                     p3.text(`Humedad: ${previs.humidity}%`);
                     article.append(p3);
                     const img = $('<img></img>');
-                    img.attr('src', `https://openweathermap.org/img/w/${previs.icon}.png`);
+                    img.attr('src', `https://openweathermap.org/img/wn/${previs.icon}.png`);
                     img.attr('alt', 'Icono del tiempo');
                     article.append(img);
                     const p4 = $('<p></p>');

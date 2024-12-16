@@ -34,7 +34,7 @@ class Viajes {
             setTimeout(() => { p.remove(); }, 4000);
         }
     
-        document.body.appendChild(script); 
+        document.head.appendChild(script); 
     }  
 
     requestLocation() {

@@ -1,42 +1,42 @@
 <!DOCTYPE html>
 
-<!--
-    ESTE DOCUMENTO ACTUALMENTE NO SE USA EN LA WEB, VER SEMAFORO.PHP
--->
-    
 <html lang="es">
     <head>
-        <meta charset="utf-8" />
-        <meta name="author" content="Adrián Martínez" />
-        <meta name="description" content="Mini juego de reaccion sobre un semaforo de Formula 1." />
-        <meta name="keywords" content="Formula 1, Ocon, Carreras, Coches" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        
-        <title>F1 Desktop</title>
-        <link rel="icon" type="image/x-icon" href="multimedia/imagenes/favicon-16x16.png" />
+        <meta charset="utf-8">
+            <meta name="author" content="Adrián Martínez">
+            <meta name="description" content="Este documento consiste en un minijuego de 
+                reaccion simulando las luces del semaforo de salida de un Gran Premio de F1">
+            <meta name="keywords" content="Formula 1, Ocon, Carreras, Coches">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            
+            <title>F1 Desktop</title>
+            <link rel="icon" type="image/x-icon" href="multimedia/imagenes/favicon-16x16.png">
 
-        <!-- Preload de los estilos -->
-        <link rel="preload" href="estilo/layout.css" as="style"/>
-        <link rel="preload" href="estilo/estilo.css" as="style"/>
+            <!-- Preload de los estilos -->
+            <link rel="preload" href="estilo/layout.css" as="style">
+            <link rel="preload" href="estilo/estilo.css" as="style">
+            <link rel="preload" href="estilo/semaforo.css" as="style">
+            
+            <link rel="stylesheet" href="estilo/estilo.css">
+            <link rel="stylesheet" href="estilo/layout.css">
+            <link rel="stylesheet" href="estilo/semaforo.css">
 
-        <link rel="stylesheet" href="estilo/layout.css"/>
-        <link rel="stylesheet" href="estilo/estilo.css"/>
-        <link rel="stylesheet" type="text/css" href="estilo/semaforo.css" />
-        
-        <script src="js/semaforo.js" defer></script>
-        <script src="js/ayuda.js" defer></script>
+            <script src="js/semaforo.js" defer=""></script>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="js/ayuda.js" defer=""></script>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                new Semaforo();  
-                new AyudaGlobal();
-            });
-        </script>
-    </head>
+            <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                    new Semaforo();
+                    new AyudaGlobal();
+                });
+            </script>
+        </head>
 
     <body>
         <header>
-            <h1><a href="index.html" target="_self"  title="Página de Inicio">F1 Desktop</a></h1>
+            <h1><a href="index.html" target="_self" title="Pagina de inicio">F1 Desktop</a></h1>
+
             <nav>
                 <a href="index.html" target="_self" title="Página principal de inicio, regresa a la página principal">Inicio</a>
                 <a href="piloto.html" target="_self" title="Información sobre los pilotos">Piloto</a>
@@ -49,19 +49,26 @@
             </nav>
         </header>
 
-        <p>Estas en <a href="index.html" title="Inicio">Inicio</a> 
-            >> <a href="juegos.html" title="Juegos">Juegos</a>
-            >> Reacción</p>
+        <p>Estas en <a href="index.html" title="Pagina de inicio">Inicio</a> 
+            &gt;&gt; <a href="juegos.html" title="Juegos">Juegos</a> &gt;&gt; Reacción</p>
 
         <button>Ayuda</button>
         <dialog> <!-- Ayuda Global --> </dialog>
 
         <main> 
-            <!-- Aquí se mostrará el juego -->
-        </main>
+            <menu>
+                <li><a href="memoria.html" title="Juego de memoria">Memoria</a></li>
+                <li><a href="semaforo.html" title="Juego de reacción">Reacción</a></li>
+                <li><a href="api.html" title="Juego de preguntas y respuestas">Trivial F1</a></li>
+                <li><a href="f1-management.html" title="Gestion avanzada de la Formula 1">Gestion F1</a></li>
+            </menu>
 
+            <!-- Aquí se mostrará el juego -->
+        <h2>Semáforo</h2><div class="light1"></div><div class="light2"></div><div class="light3"></div><div class="light4"></div><button>Arranque</button><button disabled="">Reacción</button><p></p></main>
+
+        
         <footer>
-            <p>&copy; Adrián Martínez, F1 Desktop</p>
+            <p>© Adrián Martínez, F1 Desktop</p>
         </footer>
     </body>
 </html>

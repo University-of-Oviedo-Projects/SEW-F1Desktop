@@ -487,10 +487,10 @@
                 <a href="../piloto.html" target="_self" title="Información sobre los pilotos">Piloto</a>
                 <a href="../noticias.html" target="_self" title="Últimas noticias y actualizaciones">Noticias</a>
                 <a href="../meteorologia.html" target="_self" title="Pronóstico meteorológico y condiciones climáticas">Meteorologia</a>
-                <a class="active" href="viajes.php" target="_self" title="Información sobre viajes y destinos">Viajes</a>
+                <a href="viajes.php" target="_self" title="Información sobre viajes y destinos">Viajes</a>
                 <a href="../calendario.html" target="_self" title="Calendario de eventos y actividades">Calendario</a>
                 <a href="../circuitos.html" target="_self" title="Detalles sobre los circuitos y pistas">Circuitos</a>
-                <a href="../juegos.html" target="_self" title="Juegos y actividades interactivas">Juegos</a>
+                <a class="active" href="../juegos.html" target="_self" title="Juegos y actividades interactivas">Juegos</a>
             </nav>
         </header>
 
@@ -548,6 +548,13 @@
         ?>
         
         <main>
+            <menu>
+                <li><a href="../memoria.html" title="Juego de memoria">Memoria</a></li>
+                <li><a href="semaforo.php" title="Juego de reacción">Reacción</a></li>
+                <li><a href="../api.html" title="Juego de preguntas y respuestas">Trivial F1</a></li>
+                <li><a href="f1-management.php" title="Gestion avanzada de la Formula 1">Gestion F1</a></li>
+            </menu>
+
             <h2>Gestión Avanzada de Fórmula 1</h2>
             
             <!-- Formulario para crear tablas y restaurar tablas -->
