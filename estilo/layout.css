@@ -46,13 +46,14 @@ footer {
 
 /* Media Queries */
 @media (max-width: 490px) {
+    /* Especificidad 002 */
     main > h2 {
-        font-size: 1.05em;
+        font-size: 1.15em;
     }
 
     /* Especificidad 002 */
     header > h1 {
-        font-size: 1.05em;
+        font-size: 1.55em;
     }
 
     /* Especificidad 001 */
@@ -69,13 +70,13 @@ footer {
     nav a {
         text-align: left;
         padding: 0em;
-        font-size: 1em;
+        font-size: 1.15em;
         box-sizing: border-box;
     }
 
     /* Especificidad 002 & 001 */
     menu li a, a {
-        font-size: 0.65em;
+        font-size: 1.15em;
     }
 
     /* Especificidad 001 */
@@ -88,6 +89,6 @@ footer {
 
     /* Especificidad 002 */
     footer > p {
-        font-size: 0.85em;
+        font-size: 1.15em;
     }
 }

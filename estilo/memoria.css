@@ -30,7 +30,7 @@ main > section article {
     justify-content: center;
     align-items: center;
     width: 20%;
-    height: 25vh;
+    height: 28vh;
     border: 0.25em solid #000;
     background-color: #FFFFFF;
     /* color heredado del body */
@@ -52,7 +52,9 @@ main > section article h3 {
 
 /* Especificidad 004 */
 main > section article img {
-    position: absolute;
+    position: relative;
+    width: 30%;
+    margin: auto;
     transform: rotateY(180deg);
     backface-visibility: hidden;
 }
@@ -70,7 +72,6 @@ main > section article[data-state="hidden"] img {
 
 /* Especificidad 014 */
 main > section article[data-state="revealed"] img {
-    height: 15vh;
     backface-visibility: visible;
 }
 
@@ -100,7 +101,7 @@ dialog::backdrop {
 /* Pantallas pequeñas (teléfonos) */
 @media (max-width: 767px){
     /* Especificidad 001 */
-    main {
+    main > section {
         width: 90%;
     }
 
@@ -121,6 +122,12 @@ dialog::backdrop {
     }
 
     /* Especificidad 004 */
+    main > section article img {
+        /* Redeinir el tamaño de la imagen es necesario para que se muestre correctamente */
+        width: 50%;
+    }
+
+    /* Especificidad 004 */
     main > section article h3 {
         font-size: 0.75em;
     }
@@ -130,5 +137,13 @@ dialog::backdrop {
         /* Redefinir el padding es necesario para que el diálogo se muestre correctamente */
         padding: 0.5em;
         font-size: 0.9em; 
+    }
+}
+
+@media (max-width: 525px){
+    /* Especificidad 004 */
+    main > section article img {
+        /* Redeinir el tamaño de la imagen es necesario para que se muestre correctamente */
+        width: 70%;
     }
 }

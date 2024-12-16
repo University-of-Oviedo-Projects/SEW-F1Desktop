@@ -552,7 +552,7 @@
                 <li><a href="../memoria.html" title="Juego de memoria">Memoria</a></li>
                 <li><a href="semaforo.php" title="Juego de reacción">Reacción</a></li>
                 <li><a href="../api.html" title="Juego de preguntas y respuestas">Trivial F1</a></li>
-                <li><a href="f1-management.php" title="Gestion avanzada de la Formula 1">Gestion F1</a></li>
+                <li><a class="active" href="f1-management.php" title="Gestion avanzada de la Formula 1">Gestion F1</a></li>
             </menu>
 
             <h2>Gestión Avanzada de Fórmula 1</h2>

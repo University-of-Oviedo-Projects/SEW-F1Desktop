@@ -16,21 +16,21 @@
         <!-- Preload de los estilos -->
         <link rel="preload" href="estilo/layout.css" as="style" />
         <link rel="preload" href="estilo/estilo.css" as="style" />
-        <link rel="preload" href="estilo/calendario_grid.css" as="style" />
+        <link rel="preload" href="estilo/agenda_grid.css" as="style" />
 
         
         <link rel="stylesheet" href="estilo/layout.css"/>
         <link rel="stylesheet" href="estilo/estilo.css"/>
-        <link rel="stylesheet" href="estilo/calendario_grid.css" />
+        <link rel="stylesheet" href="estilo/agenda_grid.css" />
 
         <script src="https://api.jolpi.ca" defer></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
-        <script src="js/calendario.js" defer></script>
+        <script src="js/agenda.js" defer></script>
         <script src="js/ayuda.js" defer></script>
 
         <script>
             document.addEventListener("DOMContentLoaded", () => {
-                new Calendario();
+                new Agenda();
                 new AyudaGlobal();
             });
         </script>        
@@ -60,6 +60,7 @@
         <main>
             <!-- Contenedor para la información de carreras -->
             <h2>Carreras de la temporada</h2>
+            <button>Mostrar carreras</button>
         </main>
 
         <footer>

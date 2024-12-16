@@ -1,8 +1,10 @@
-class Calendario {
+class Agenda {
 
     constructor() {
         this.apiUrl = 'https://api.jolpi.ca/ergast/f1/2024.json';
-        this.fetchRaces();
+        document.querySelector('main > button').addEventListener('click', () => {
+            this.fetchRaces();
+        });
     }
 
     fetchRaces() {
@@ -20,14 +22,20 @@ class Calendario {
     }
 
     displayRaces(races) {
-        const raceContainer = document.querySelector('main');
+        document.querySelector('main > button').remove();
+        const container = document.querySelector('main');
+
+        const section = document.createElement('section');
+        const h3 = document.createElement('h3');
+        h3.textContent = 'Agenda';
+        section.appendChild(h3);
         
         races.forEach(race => {
             const article = document.createElement('article');
             const header = document.createElement('header');
-            const h3 = document.createElement('h3');
-            h3.textContent = race.raceName;
-            header.appendChild(h3);
+            const h4 = document.createElement('h4');
+            h4.textContent = race.raceName;
+            header.appendChild(h4);
             article.appendChild(header);
             const p1 = document.createElement('p');
             p1.textContent = `Circuito: ${race.Circuit.circuitName}`;	
@@ -38,8 +46,10 @@ class Calendario {
             const p3 = document.createElement('p');
             p3.textContent = `Fecha y Hora: ${race.date} ${race.time}`;
             article.appendChild(p3);
-            raceContainer.appendChild(article);
+            section.appendChild(article);
         });
+
+        container.appendChild(section);
     }
     
 }

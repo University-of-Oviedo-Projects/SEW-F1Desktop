@@ -1,11 +1,11 @@
 -- Eliminar la base de datos si ya existe
-DROP DATABASE IF EXISTS f1_management;
+DROP DATABASE IF EXISTS f1_gestion;
 
 -- Crear la base de datos nuevamente
-CREATE DATABASE f1_management COLLATE utf8_spanish_ci;
+CREATE DATABASE f1_gestion COLLATE utf8_spanish_ci;
 
 -- Usar la base de datos recién creada
-USE f1_management;
+USE f1_gestion;
 
 -- Eliminar tablas si existen
 DROP TABLE IF EXISTS Resultados;
