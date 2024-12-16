@@ -52,8 +52,8 @@ nav a {
         font-size: 1.55em;
     }
 
-    /* Especificidad 002 */
-    nav a {
+    /* Especificidad 002, 003 */
+    nav a, menu li a {
         font-size: 1.25em;
     }
 }
@@ -63,8 +63,9 @@ nav a {
     h1 {
         font-size: 1.35em;
     }
-    /* Especificidad 002 */
-    nav a {
+
+    /* Especificidad 002, 003 */
+    nav a, menu li a {
         font-size: 1.05em;
     }
 }
@@ -548,6 +549,10 @@ form p a {
 }
 
 /* ###################### Estilo para el menú de juegos ###################### */
+menu li a {
+    font-size: 1.35em;
+}
+
 /* Especificidades 003, 001 */
 menu li a, a {
     text-decoration: none;           
