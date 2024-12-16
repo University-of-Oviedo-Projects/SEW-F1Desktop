@@ -35,11 +35,38 @@ h1 {
     color: #FFFFFF;
     /* backgroud-color heredado de header */
     text-decoration: none;
-    font-size: 1.25em;
+    font-size: 1.75em;
     margin: 0.5em;
     flex: 1 1 auto; 
     text-align: left; 
     white-space: nowrap; 
+}
+
+nav a {
+    font-size: 1.5em;
+}
+
+@media (max-width: 840px) {
+    /* Especificidad 001 */
+    h1 {
+        font-size: 1.55em;
+    }
+
+    /* Especificidad 002 */
+    nav a {
+        font-size: 1.25em;
+    }
+}
+
+@media (max-width: 490px) {
+    /* Especificidad 001 */
+    h1 {
+        font-size: 1.35em;
+    }
+    /* Especificidad 002 */
+    nav a {
+        font-size: 1.05em;
+    }
 }
 
 /* Especificidad 002 */
