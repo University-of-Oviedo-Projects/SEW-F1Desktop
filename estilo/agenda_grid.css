@@ -41,6 +41,22 @@ main h3, main > button {
     font-size: 1.5em;
 }
 
+@media (max-width: 780px) {
+    /* Especificidad 002 */
+    main > button {
+        /* Redefinir el tamaño de la fuente es necesario para evitar que se vea muy grande en pantallas pequeñas */
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 490px) {
+    /* Especificidad 002 */
+    main > button {
+        /* Redefinir el tamaño de la fuente es necesario para evitar que se vea muy grande en pantallas pequeñas */
+        font-size: 1.05em;
+    }
+}
+
 /* Especificidad 002 */
 main > button {
     display: flex;
@@ -52,7 +68,6 @@ main > button {
     padding: 0.5em 1em;
     margin: 1em auto;
     cursor: pointer;
-
 }
 
 /* Especificidad 003 */

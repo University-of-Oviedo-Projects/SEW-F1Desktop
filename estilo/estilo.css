@@ -61,28 +61,27 @@ menu li {
 }
 
 @media (max-width: 840px) {
-    /* Especificidad 001 */
-    h1 {
-        /* Redefinir el tamaño de la fuente es necesario para que el texto no se desborde del header */
-        font-size: 1.55em;
+    /* Especificidad 003 */
+    body > header > h1 {
+        font-size: 1.35em;
     }
 
-    /* Especificidad 002, 003 */
-    nav a, menu li a {
+    /* Especificidad 004, 003 */
+    body > header > nav a, menu li a {
         /* Redefinir el tamaño de la fuente es necesario para que el texto no se desborde */
         font-size: 1.25em;
     }
 }
 
 @media (max-width: 490px) {
-    /* Especificidad 001 */
-    h1 {
+    /* Especificidad 003 */
+    body > header > h1 {
         /* Redefinir el tamaño de la fuente es necesario para que el texto no se desborde del header */
-        font-size: 1.35em;
+        font-size: 1.15em;
     }
 
-    /* Especificidad 002, 003 */
-    nav a, menu li a {
+    /* Especificidad 004, 003 */
+    body > header > nav a, menu li a {
         /* Redefinir el tamaño de la fuente es necesario para que el texto no se desborde */
         font-size: 1.05em;
     }
