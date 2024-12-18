@@ -220,6 +220,11 @@ ul, ol {
     margin: auto;
 }
 
+/* Especificidad 005 */
+main section ul li a {
+    display: inline;
+}
+
 /* Especificidad 001 */
 ul {
     list-style-type: circle;
@@ -617,7 +622,7 @@ svg {
 /* ###################### Estilo para XML (circuitos.html) ###################### */
 /* Especificidad 003 */
 main > section a {
-    margin: auto 2em;
+    display: block;
     text-align: left;
     font-weight: bold;
 }
