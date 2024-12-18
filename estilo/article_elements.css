@@ -37,6 +37,7 @@ article {
     flex: 1 1 15%;  
 }
 
+/* Espesificidad: 002 */
 article img {
     background-color: #3674f0eb;
     /* color heredado de article */

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 
-
 <html lang="es">
     <head>
         <meta charset="utf-8">
@@ -25,7 +24,7 @@
             document.addEventListener("DOMContentLoaded", () => {
                 new AyudaGlobal();
             });
-        </script>
+            </script>
     </head>
 
     <body>
@@ -56,7 +55,7 @@
                 <li><a href="memoria.html" title="Juego de memoria">Memoria</a></li>
                 <li><a href="semaforo.html" title="Juego de reacción">Reacción</a></li>
                 <li><a href="api.html" title="Juego de preguntas y respuestas">Trivial F1</a></li>
-                <li><a href="f1-management.html" title="Gestion avanzada de la Formula 1">Gestion F1</a></li>
+                <li><a class="active" href="f1-gestion.html" title="Gestion avanzada de la Formula 1">Gestion F1</a></li>
             </menu>
 
             <h2>Gestión Avanzada de Fórmula 1</h2>
@@ -108,7 +107,7 @@
                 
                 <label for="escuderia_piloto">Nombre de la Escudería: </label>
                 <select id="escuderia_piloto" name="escuderia_piloto" required="">
-                    <option value="" disabled="" selected="">Seleccione una opción</option><option value="Mercedes">Mercedes - Alemania</option><option value="Ferrari">Ferrari - Italia</option><option value="Red Bull Racing">Red Bull Racing - Austria</option><option value="Aston Martin">Aston Martin - Reino Unido</option><option value="Alpine">Alpine - Francia</option><option value="McLaren">McLaren - Reino Unido</option>                </select>
+                    <option value="" disabled="" selected="">Seleccione una opción</option><option value="Mercedes">Mercedes - Alemania</option><option value="Ferrari">Ferrari - Italia</option><option value="Red Bull Racing">Red Bull Racing - Austria</option>                </select>
                 
                 <button type="submit" name="registrar_piloto">Registrar Piloto</button>
                             </form>
@@ -139,7 +138,7 @@
                 
                 <label for="nombre_circuito_carrera">Circuito: </label>
                 <select id="nombre_circuito_carrera" name="nombre_circuito_carrera" required="">
-                    <option value="" disabled="" selected="">Seleccione una opción</option><option value="Circuito de Albert Park">Circuito de Albert Park</option><option value="Circuito de Mónaco">Circuito de Mónaco</option><option value="Circuito de Spa-Francorchamps">Circuito de Spa-Francorchamps</option><option value="Monza">Monza</option><option value="Silverstone">Silverstone</option><option value="Suzuka">Suzuka</option>                </select>
+                    <option value="" disabled="" selected="">Seleccione una opción</option><option value="Circuito de Mónaco">Circuito de Mónaco</option><option value="Circuito de Spa-Francorchamps">Circuito de Spa-Francorchamps</option><option value="Silverstone">Silverstone</option>                </select>
                 
                 <button type="submit" name="registrar_carrera">Registrar Carrera</button>
                             </form>
@@ -151,12 +150,12 @@
                 <!-- Desplegable de Piloto -->
                 <label for="piloto">Piloto: </label>
                 <select id="piloto" name="piloto" required="">
-                    <option value="" disabled="" selected="">Seleccione una opción</option><option value="Lewis Hamilton">Lewis Hamilton</option><option value="Charles Leclerc">Charles Leclerc</option><option value="Max Verstappen">Max Verstappen</option><option value="Sebastian Vettel Alemán">Sebastian Vettel Alemán</option><option value="Esteban Ocon Francés">Esteban Ocon Francés</option><option value="Lando Norris Británico">Lando Norris Británico</option>                </select>
+                    <option value="" disabled="" selected="">Seleccione una opción</option><option value="Lewis Hamilton">Lewis Hamilton</option><option value="Charles Leclerc">Charles Leclerc</option><option value="Max Verstappen">Max Verstappen</option>                </select>
 
                 <!-- Desplegable de Carrera -->
                 <label for="carrera">Carrera: </label>
                 <select id="carrera" name="carrera" required="">
-                    <option value="" disabled="" selected="">Seleccione una opción</option><option value="Gran Premio de Mónaco">Gran Premio de Mónaco - 2024-05-26 - Circuito de Mónaco</option><option value="Gran Premio de Gran Bretaña">Gran Premio de Gran Bretaña - 2024-07-07 - Silverstone</option><option value="Gran Premio de Bélgica">Gran Premio de Bélgica - 2024-08-25 - Circuito de Spa-Francorchamps</option><option value="Gran Premio de Australia">Gran Premio de Australia - 2024-03-24 - Circuito de Albert Park</option><option value="Gran Premio de Italia">Gran Premio de Italia - 2024-05-12 - Monza</option><option value="Gran Premio de Japón">Gran Premio de Japón - 2024-09-29 - Suzuka</option>                </select>
+                    <option value="" disabled="" selected="">Seleccione una opción</option><option value="Gran Premio de Mónaco">Gran Premio de Mónaco - 2024-05-26 - Circuito de Mónaco</option><option value="Gran Premio de Gran Bretaña">Gran Premio de Gran Bretaña - 2024-07-07 - Silverstone</option><option value="Gran Premio de Bélgica">Gran Premio de Bélgica - 2024-08-25 - Circuito de Spa-Francorchamps</option>                </select>
 
                 <!-- Campos de Posición y Puntos -->
                 <label for="posicion">Posición: </label>

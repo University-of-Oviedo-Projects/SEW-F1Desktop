@@ -18,7 +18,8 @@ DROP TABLE IF EXISTS Escuderias;
 CREATE TABLE Escuderias (
     id_escuderia INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL UNIQUE,
-    pais VARCHAR(50) NOT NULL
+    pais VARCHAR(50) NOT NULL,
+    sede VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Circuitos (
@@ -60,10 +61,10 @@ CREATE TABLE Resultados (
 );
 
 -- Insertar datos de ejemplo
-INSERT INTO Escuderias (nombre, pais) VALUES
-    ('Mercedes', 'Alemania'),
-    ('Ferrari', 'Italia'),
-    ('Red Bull Racing', 'Austria');
+INSERT INTO Escuderias (nombre, pais, sede) VALUES
+    ('Mercedes', 'Alemania', "Brackley"),
+    ('Ferrari', 'Italia', "Maranello"),
+    ('Red Bull Racing', 'Austria', "Milton Keynes");
 
 INSERT INTO Circuitos (nombre, pais, longitud_km) VALUES
     ('Circuito de Mónaco', 'Mónaco', 3.337),

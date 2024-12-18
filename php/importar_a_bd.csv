@@ -8,15 +8,15 @@
 "Gran Premio de Italia","2024-05-12","Monza"
 "Gran Premio de Japón","2024-09-29","Suzuka"
 
-"nombre","nacionalidad"
-"Aston Martin","Reino Unido"
-"Alpine","Francia"
-"McLaren","Reino Unido"
+"nombre","pais","sede"
+"Aston Martin","Reino Unido","Silverstone"
+"Alpine","Francia","Enstone"
+"McLaren","Reino Unido","Woking"
 
-"nombre","nacionalidad","escuderia","id_escuderia"
-"Sebastian Vettel","Alemán","Aston Martin",5
-"Esteban Ocon","Francés","Alpine",5
-"Lando Norris","Británico","McLaren",6
+"nombre","apellido","nacionalidad","id_escuderia"
+"Sebastian","Vettel","Alemán",5
+"Esteban","Ocon","Francés",5
+"Lando","Norris","Británico",6
 
 "id_piloto","id_carrera","posicion","puntos"
 "4","4","1","25"

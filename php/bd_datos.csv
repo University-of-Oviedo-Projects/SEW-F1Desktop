@@ -14,21 +14,21 @@ id_circuito,nombre,pais,longitud_km
 5,Monza,Italia,5.79
 6,Suzuka,Japón,5.8
 
-id_escuderia,nombre,pais
-1,Mercedes,Alemania
-2,Ferrari,Italia
-3,"Red Bull Racing",Austria
-4,"Aston Martin","Reino Unido"
-5,Alpine,Francia
-6,McLaren,"Reino Unido"
+id_escuderia,nombre,pais,sede
+1,Mercedes,Alemania,Brackley
+2,Ferrari,Italia,Maranello
+3,"Red Bull Racing",Austria,"Milton Keynes"
+4,"Aston Martin","Reino Unido",Silverstone
+5,Alpine,Francia,Enstone
+6,McLaren,"Reino Unido",Woking
 
 id_piloto,nombre,apellido,nacionalidad,id_escuderia
 1,Lewis,Hamilton,Británico,1
 2,Charles,Leclerc,Monegasco,2
 3,Max,Verstappen,Neerlandés,3
-4,"Sebastian Vettel",Alemán,"Aston Martin",5
-5,"Esteban Ocon",Francés,Alpine,5
-6,"Lando Norris",Británico,McLaren,6
+4,Sebastian,Vettel,Alemán,5
+5,Esteban,Ocon,Francés,5
+6,Lando,Norris,Británico,6
 
 id_resultado,id_piloto,id_carrera,posicion,puntos
 1,1,1,1,25

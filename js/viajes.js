@@ -18,8 +18,7 @@ class Viajes {
 
     loadGoogleMaps() {
         const script = document.createElement('script');
-        script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDfmip4lu4OXDuJ-DSiuoXLYb26CCQQEGk&callback=initMap";
-        script.async = true;
+        script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDfmip4lu4OXDuJ-DSiuoXLYb26CCQQEGk&callback=initMap&loading=async&libraries=marker";
         script.defer = true;
         
         window.initMap = () => {
@@ -107,12 +106,13 @@ class Viajes {
     
         const map = new google.maps.Map(divDynamic, {
             center: { lat: this.latitude, lng: this.longitude },
-            zoom: 14
+            zoom: 14,
+            mapId: "c1b1b1b1b1b1b1b1"
         });
     
-        new google.maps.Marker({
-            position: { lat: this.latitude, lng: this.longitude },
+        new google.maps.marker.AdvancedMarkerElement({
             map: map,
+            position: { lat: this.latitude, lng: this.longitude },            
             title: "Ubicación actual"
         });
     }

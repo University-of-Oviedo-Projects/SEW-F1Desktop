@@ -1,4 +1,6 @@
-/* Especificidad 001 */
+/* Author: Adrian Martinez Fuentes - UO295454 */
+
+/* Especificidad 002 */
 main > section {
     display: flex;
     flex-direction: unset;
@@ -100,8 +102,9 @@ dialog::backdrop {
 
 /* Pantallas pequeñas (teléfonos) */
 @media (max-width: 767px){
-    /* Especificidad 001 */
+    /* Especificidad 002 */
     main > section {
+        /* Redefine el tamaño del contenedor de las cartas para que se muestren correctamente */
         width: 90%;
     }
 
@@ -116,7 +119,6 @@ dialog::backdrop {
     main > section article {
         flex: 1 1 calc(33.33% - 1em); 
         max-width: calc(33.33% - 1em);
-
         /* Redefinir el tamaño de la carta es necesario para que se muestre correctamente */
         height: 16vh; 
     }

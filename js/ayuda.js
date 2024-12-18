@@ -4,10 +4,6 @@
 
     El contenido de ayuda se muestra en un <dialog> que se abre
     con el método showModal() y se cierra con el método close().
-
-    El contenido de ayuda se crea directamente en el <dialog> sin
-    necesidad de crear un div adicional. Se crean secciones con
-    títulos y contenido o listas de elementos. 
     
     Al final de cada se añade un botón para cerrar el popup. 
 */

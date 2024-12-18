@@ -20,7 +20,6 @@ class Semaforo {
 
         for (let i = 1; i <= this.lights; i++) {
             const light = document.createElement("div");
-            light.className = `light${i}`;
             main.appendChild(light);
         }
 
@@ -55,38 +54,21 @@ class Semaforo {
             return;
         }
 
-        let minSeconds, maxSeconds;
-        if (this.difficulty === 0.2) {
-            minSeconds = 2;
-            maxSeconds = 4;
-        } else if (this.difficulty === 0.5) {
-            minSeconds = 4;
-            maxSeconds = 6;
-        } else if (this.difficulty === 0.8) {
-            minSeconds = 6;
-            maxSeconds = 8;
-        }
-
-        const randomSeconds = Math.floor(Math.random() * (maxSeconds - minSeconds + 1)) + minSeconds; 
-        const timeoutDuration = randomSeconds * 1000;
-
-        // Esperar aleatoriamente para apagar las luces
+        const timeoutDuration = this.difficulty * 1000;
         setTimeout(() => {
-            this.turnOffLights();
-        }, timeoutDuration);
+            this.unload_moment = new Date();
+            this.endSequence();
+        }, 2000 + timeoutDuration);
     }
 
-    turnOffLights() {
+    endSequence() {
         const main = document.querySelector("main");
-        main.classList.remove("load");  
-        main.classList.add("unload"); 
+        main.classList.remove("load");  main.classList.add("unload"); 
+    
+        this.reactionButton.disabled = false;
+        this.startButton.disabled = true;
+      }
 
-        this.unload_moment = new Date();
-
-        if (this.reactionButton) {
-            this.reactionButton.disabled = false;
-        } 
-    }
 
     stopReaction() {
         this.clic_moment = new Date();

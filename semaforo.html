@@ -1,37 +1,35 @@
 <!DOCTYPE html>
 
-<html lang="es">
-    <head>
-        <meta charset="utf-8">
-            <meta name="author" content="Adrián Martínez">
-            <meta name="description" content="Este documento consiste en un minijuego de 
-                reaccion simulando las luces del semaforo de salida de un Gran Premio de F1">
-            <meta name="keywords" content="Formula 1, Ocon, Carreras, Coches">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            
-            <title>F1 Desktop</title>
-            <link rel="icon" type="image/x-icon" href="multimedia/imagenes/favicon-16x16.png">
+<html lang="es"><head>
+    <meta charset="utf-8">
+        <meta name="author" content="Adrián Martínez">
+        <meta name="description" content="Este documento consiste en un minijuego de 
+            reaccion simulando las luces del semaforo de salida de un Gran Premio de F1">
+        <meta name="keywords" content="Formula 1, Ocon, Carreras, Coches">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>F1 Desktop</title>
+        <link rel="icon" type="image/x-icon" href="multimedia/imagenes/favicon-16x16.png">
 
-            <!-- Preload de los estilos -->
-            <link rel="preload" href="estilo/layout.css" as="style">
-            <link rel="preload" href="estilo/estilo.css" as="style">
-            <link rel="preload" href="estilo/semaforo.css" as="style">
-            
-            <link rel="stylesheet" href="estilo/estilo.css">
-            <link rel="stylesheet" href="estilo/layout.css">
-            <link rel="stylesheet" href="estilo/semaforo.css">
+        <!-- Preload de los estilos -->
+        <link rel="preload" href="estilo/layout.css" as="style">
+        <link rel="preload" href="estilo/estilo.css" as="style">
+        <link rel="preload" href="estilo/semaforo.css" as="style">
+        
+        <link rel="stylesheet" href="estilo/estilo.css">
+        <link rel="stylesheet" href="estilo/layout.css">
+        <link rel="stylesheet" href="estilo/semaforo.css">
 
-            <!-- <script src="js/semaforo.js" defer></script> -->
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script src="js/ayuda.js" defer></script>
+        <script src="js/semaforo.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="js/ayuda.js" defer=""></script>
 
-            <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                    //new Semaforo();
-                    new AyudaGlobal();
-                });
-            </script>
-        </head>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                new AyudaGlobal();
+            });
+        </script>
+    </head>
 
     <body>
         <header>
@@ -63,16 +61,21 @@
                 <li><a href="f1-gestion.html" title="Gestion avanzada de la Formula 1">Gestion F1</a></li>
             </menu>
 
-            <!-- Aquí se mostrará el juego -->
+            <!-- Aquí se mostrará el juego -->  
+            <script>
+                new Semaforo();
+            </script>
+
             <h2>Semáforo</h2>
-            <div class="light1"></div>
-            <div class="light2"></div>
-            <div class="light3"></div>
-            <div class="light4"></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+
             <button>Arranque</button>
-            <button disabled="">Reacción</button>
-            <p></p>
+            <button disabled="">Reacción</button><p></p>             
         </main>
+
         <footer>
             <p>© Adrián Martínez, F1 Desktop</p>
         </footer>

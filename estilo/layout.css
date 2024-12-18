@@ -1,4 +1,6 @@
-/* Especificidad 002 */
+/* Author: Adrian Martinez Fuentes - UO295454 */
+
+/* Especificidad 001 en cada selector */
 header, menu {
     display: flex;
     justify-content: center;
@@ -74,7 +76,7 @@ footer {
         box-sizing: border-box;
     }
 
-    /* Especificidad 002 & 001 */
+    /* Especificidades: 002, 001 */
     menu li a, a {
         font-size: 1.15em;
     }

@@ -1,3 +1,5 @@
+/* Author: Adrian Martinez Fuentes - UO295454 */
+
 /* Especificidad 001 */
 main {
     display: grid;
@@ -20,6 +22,11 @@ main > form {
     grid-column: 1 / -1;    
 }
 
+/* Espesificidad 002 */
+main > ol {
+    grid-column: 1 / -1;
+}
+
 /* Especificidades 002 */
 main > h2 {
     text-decoration: none;
@@ -30,7 +37,7 @@ main > h2 {
     margin-bottom: 1em;   
 }
 
-/* Especificidad 011 en cada selector */
+/* Especificidad 002 */
 main div {
     width: 100%;   
     height: 15vw;
@@ -112,22 +119,22 @@ main > p {
 }
 
 /* Especificidad 020 */
-.load > :nth-child(3)  {
+.load > :nth-child(4)  {
     animation-delay: 0.5s;
 }
 
 /* Especificidad 020 */
-.load > :nth-child(4)   {
+.load > :nth-child(5)   {
     animation-delay: 1s;
 }
 
 /* Especificidad 020 */
-.load > :nth-child(5)  {
+.load > :nth-child(6)  {
     animation-delay: 1.5s;
 }
 
 /* Especificidad 020 */
-.load > :nth-child(6)  {
+.load > :nth-child(7)  {
     animation-delay: 2s;
 }
 
