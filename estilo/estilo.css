@@ -77,8 +77,13 @@ nav a, menu li a {
 
 /* Especificidad 002 */
 body > p {
+    font-size: 1.2em;
     margin-left: 0.4em;;
-    font-size: small;
+}
+
+body > p > a {
+    color: #6B0000;
+    /* background-color heredado de body */
 }
 
 /* Quitamos las migas de navegacion */
@@ -87,12 +92,6 @@ body > p {
     body > p {
         display: none;
     }
-}
-
-/* Especificidad 003 */
-body > p > a {
-    color: #003366;
-    /* background-color heredado de body */
 }
 
 /* Espcificidad 013 */
@@ -135,6 +134,11 @@ h2 {
 h3, h4 {
     text-align: left;
     text-decoration: underline;
+}
+
+/* Especificidad 001 */
+h4 {
+    font-size: 1.05em;
 }
 
 /* Especificidad 002 */
