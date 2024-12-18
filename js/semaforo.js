@@ -40,8 +40,13 @@ class Semaforo {
 
     initSequence() {
         const main = document.querySelector("main");
-        
+        const recordH3 = document.querySelector("main > h3");
+        const recordsList = document.querySelector("main > ol");
+
+        if(recordH3) { recordH3.remove(); }
+        if(recordsList) { recordsList.remove(); }        
         if(main.classList.contains("unload")) { main.classList.remove("unload"); }
+        
         main.classList.add("load");  
         this.reactionTimeDisplay.textContent = "";
 
