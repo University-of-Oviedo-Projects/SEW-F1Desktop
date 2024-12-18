@@ -31,7 +31,7 @@ header, menu {
 }
 
 /* Especificidad 001 */
-h1 {
+header > h1 {
     color: #FFFFFF;
     /* backgroud-color heredado de header */
     text-decoration: none;
@@ -42,9 +42,22 @@ h1 {
     white-space: nowrap; 
 }
 
-/* Especificidad 002, 003 */
-nav a, menu li a {
+/* Especificidad 003, 003, 003 */
+header > nav a, menu li a, header > h1 a {
+    text-decoration: none;           
+    color: #FFFFFF;
+    /* backgroud-color heredado de menu */
+    padding: 0.3em 0.5em; 
+    border-radius: 0.25em;
+    white-space: nowrap; 
+    text-align: center;
+    flex: 0 0 auto; 
     font-size: 1.5em;
+}
+
+/* Especificidad 002 */
+menu li {
+    list-style: none
 }
 
 @media (max-width: 840px) {
@@ -81,9 +94,21 @@ body > p {
     margin-left: 0.4em;;
 }
 
-body > p > a {
+/* Especificidad 002 */
+body a {
     color: #6B0000;
+    text-decoration: none;
     /* background-color heredado de body */
+}
+
+/* Especificidad 013, 012 */
+body > p > a:hover, main a:hover {
+    text-decoration: underline
+}
+
+/* Especificidad 014 */
+main > menu > li > a:hover {
+    text-decoration: none;
 }
 
 /* Quitamos las migas de navegacion */
@@ -94,14 +119,8 @@ body > p > a {
     }
 }
 
-/* Espcificidad 013 */
-body > p > a:hover {
-    color: #0000AD;
-    /* backgroud-color heredado de body */
-}
-
-/* Especificidad 012 */
-nav a:hover {
+/* Especificidad 012, 013 */
+nav a:hover, menu li a:hover {
     color: #F9C97B;
     /* backgroud-color heredado de la regla header, menu */
 }
@@ -551,25 +570,6 @@ form p a {
     }
 }
 
-/* ###################### Estilo para el menú de juegos ###################### */
-
-/* Especificidades 003, 001 */
-menu li a, a {
-    text-decoration: none;           
-    color: #FFFFFF;
-    /* backgroud-color heredado de menu */
-    padding: 0.3em 0.5em; 
-    border-radius: 0.25em;
-    white-space: nowrap; 
-    text-align: center;
-    flex: 0 0 auto; 
-}
-
-/* Especificidad 002 */
-menu li {
-    list-style: none
-}
-
 /* ###################### Estilo para los mapas ###################### */
 /* Especificidad 002 */
 main > div {
@@ -602,17 +602,14 @@ svg {
 /* ###################### Estilo para XML (circuitos.html) ###################### */
 /* Especificidad 003 */
 main > section a {
-    display: block ;
+    margin: auto 2em;
     text-align: left;
-    color: #6B0000;
-    /* background-color heredado de body */
-    text-decoration: none;
     font-weight: bold;
 }
 
 /* Especificidad 003 en cada selector */
 main > section img, main > section video {
-    width: 50%;
+    width: 70%;
     height: auto;
     margin-right: 2em;
     object-fit: cover;
