@@ -217,12 +217,28 @@ ul, ol {
     background-color: #EDD9B0; 
     /* color heredado de body */
     list-style-position: inside;
-    margin: 0.313em 0.625em 0.625em 0.625em;
+    margin: auto;
 }
 
 /* Especificidad 001 */
 ul {
     list-style-type: circle;
+}
+
+@media (max-width: 768px) {
+    /* Especificidad 003 */
+    main section > ul {
+        /* Redefinir el tamaño de la fuente es necesario para que el texto no se desborde */
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 460px) {
+    /* Especificidad 003 */
+    main section > ul {
+        /* Redefinir el tamaño de la fuente es necesario para que el texto no se desborde */
+        font-size: 0.85em;
+    }
 }
 
 /* Especificidad 001 */
