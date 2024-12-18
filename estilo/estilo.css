@@ -97,19 +97,19 @@ body > p > a {
 
 /* Espcificidad 013 */
 body > p > a:hover {
-    color: #0000ff;
+    color: #0000AD;
     /* backgroud-color heredado de body */
 }
 
-/* Especificidad 011 */
-a:hover {
-    color: #eb950c;
+/* Especificidad 012 */
+nav a:hover {
+    color: #F9C97B;
     /* backgroud-color heredado de la regla header, menu */
 }
 
 /* Especificidad 010 */
 .active {
-    color: #F9AED5;
+    color: #F9C2DE;
     /* backgroud-color heredado de la regla header, menu */
 }
 
@@ -150,7 +150,7 @@ button {
     padding: 0.5em 1em;
     font-size: 1em;
     background-color: #1F3B4D;
-    color: #fff;
+    color: #FFFFFF;
     cursor: pointer;
 }
 
@@ -175,17 +175,6 @@ footer {
     background-color: #0A1A2E;
     color: #FFFFFF;
     text-align: center;
-}
-
-/* Especificidad 002 */
-footer button {
-    padding: 0.5em 1em;
-    background-color: #0000ff; 
-    color: #FFFFFF;
-    border: none;
-    border-radius: 0.5em;
-    cursor: pointer;
-    margin: 0.5em;
 }
 
 /* Especificidad 002 */
@@ -226,7 +215,7 @@ li {
 
 /* Especificidad 002 */
 li a {
-    color: #8F0000;
+    color: #570000;
     /* background-color heredado de li */
 }
 
@@ -252,7 +241,7 @@ table {
     width: 90%;
     font-family: Arial, sans-serif;
     margin: 2em auto;
-    background-color: #fff;
+    background-color: #FFFFFF;
     /* color heredado de body */
     box-shadow: 0 0.22em 0.5em #0000001a; 
 }
@@ -264,7 +253,7 @@ table caption {
     margin-right: 0.4em;
     font-size: 1.5em;
     text-decoration: underline;
-    color: #333;
+    color: #333333;
     /* background-color heredado de table */
 }
 
@@ -276,8 +265,8 @@ th, td {
 
 /* Especificidad 001 */
 th {
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: #F4F4F4;
+    color: #333333;
     font-weight: bold;
 }
 
@@ -319,7 +308,7 @@ body > button+dialog {
     max-height: 60%;
     margin-top: 10em;
     padding: 1.5em;
-    background-color: #fff;
+    background-color: #FFFFFF;
     /* color heredado de body */
     z-index: 1000;
     resize: both;
@@ -331,7 +320,7 @@ body > button+dialog h2, body > button+dialog h3 {
     font-size: 1.5em;
     margin-top: 1em;
     margin-bottom: 0.5em;
-    color: #555;
+    color: #383838;
     /* background-color heredado de dialog */
 }
 
@@ -339,7 +328,7 @@ body > button+dialog h2, body > button+dialog h3 {
 body > button+dialog p {
     font-size: 1.2em;
     margin-bottom: 0.5em;
-    color: #666;
+    color: #424242;
     /* background-color heredado de dialog */
 }
 
@@ -353,8 +342,6 @@ body > button+dialog ul {
 body > button+dialog ul li {
     font-size: 1.2em;
     margin-bottom: 0.5em;
-    color: #777;
-    /* background-color heredado de ul */
 }
 
 /* Especificidad 004 */
@@ -496,7 +483,7 @@ form {
     flex-direction: column;  
     background-color: #f9f9f9;
     /* color heredado de body */
-    border: 0.5em solid #ddd;
+    border: 0.5em solid #dddddd;
     border-radius: 0.5em;
     padding: 2em;
     box-sizing: border-box; 
@@ -524,7 +511,7 @@ form input[type="file"]:hover {
 /* Especificidad: 002 */
 form button {
     background-color: #1F3B4D;
-    color: #fff;
+    color: #FFFFFF;
     padding: 1em 2em;
     cursor: pointer;
     width: 100%;  
@@ -605,7 +592,7 @@ svg {
 main > section a {
     display: block ;
     text-align: left;
-    color: #8F0000;
+    color: #6B0000;
     /* background-color heredado de body */
     text-decoration: none;
     font-weight: bold;
@@ -631,7 +618,7 @@ main section blockquote {
     padding: 1em;
     background-color: #f9f9f9;
     font-style: italic;
-    color: #555;
+    color: #3B3B3B;
 }
 
 /* ###################### Estilo para Carrusel (viajes.php) ###################### */

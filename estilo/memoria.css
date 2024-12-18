@@ -45,7 +45,7 @@ main > section article {
 
 /* Especificidad 004 */
 main > section article h3 {
-    color: #000;
+    color: #000000;
     /* background-color heredado del article */
     position: absolute;
     text-align: center;

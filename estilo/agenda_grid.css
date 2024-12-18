@@ -76,8 +76,8 @@ main > section article:hover {
 main > section article header, main > section article footer {
     justify-content: center;
     align-items: center;
-    background-color: #bea055;
-    color: #333;
+    background-color: #645326;
+    color: #FFFFFF;
     margin-bottom: 0.5em;
     padding: 0.5em;
 }

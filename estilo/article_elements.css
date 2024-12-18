@@ -39,7 +39,7 @@ article {
 
 /* Espesificidad: 002 */
 article img {
-    background-color: #3674f0eb;
+    background-color: #0B3A99EB;
     /* color heredado de article */
     border-radius: 1em;
 }
@@ -53,8 +53,8 @@ article:hover {
 article header, article footer {
     justify-content: center;
     align-items: center;
-    background-color: #bea055;
-    color: #333;
+    background-color: #645326;
+    color: #FFFFFF;
     margin-bottom: 0.5em;
     padding: 0.5em;
 }
