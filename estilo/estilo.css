@@ -581,7 +581,16 @@ main > div {
 
 /* Especiicidad 002 */
 main > img {
-    margin-bottom: 2.5em; 
+    margin: 2.5em auto;
+}
+
+@media (max-width: 768px) {
+    /* Especificidad 002 */
+    main > img {
+        /* Redefinir el tamaño de la imagen es necesario para que no se desborde del contenedor */
+        width: 100%;
+        height: auto;
+    }
 }
 
 /* Especificidad 001 */

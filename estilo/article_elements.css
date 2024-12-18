@@ -39,9 +39,10 @@ article {
 
 /* Espesificidad: 002 */
 article img {
-    background-color: #0B3A99EB;
+    background-color: #0cbdd0;
     /* color heredado de article */
     border-radius: 1em;
+    border: 0.2em solid #000000;
 }
 
 /* Especificidad: 011 */
