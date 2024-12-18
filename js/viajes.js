@@ -106,8 +106,9 @@ class Viajes {
     
         const map = new google.maps.Map(divDynamic, {
             center: { lat: this.latitude, lng: this.longitude },
-            zoom: 14,
-            mapId: "c1b1b1b1b1b1b1b1"
+            zoom: 12,
+            mapId: 'f1b7b3b3b1b3b1b3',
+            mapTypeId: google.maps.MapTypeId.ROADMAP
         });
     
         new google.maps.marker.AdvancedMarkerElement({

@@ -13,7 +13,7 @@ class Noticias {
             }, 4000);     
         }
 
-        document.querySelector('main > h2').setAttribute('hidden', '');
+        document.querySelector('main > h3').setAttribute('hidden', '');
 
         document.querySelector('input[type="file"]')
             .addEventListener('change', (event) => this.readInputFile(event));
@@ -38,7 +38,7 @@ class Noticias {
     }
 
     displayNoticias(contents) {
-        document.querySelector('main > h2').removeAttribute('hidden');
+        document.querySelector('main > h3').removeAttribute('hidden');
 
         const lines = contents.split('\n');
         lines.forEach(line => {
@@ -58,15 +58,15 @@ class Noticias {
             footer.appendChild(p2);
             noticiaHtml.appendChild(footer);
 
-            const h2UltimasNoticias = document.querySelector('main h2');
+            const h3UltimasNoticias = document.querySelector('main h3');
             const main = document.querySelector('main');
-            main.insertBefore(noticiaHtml, h2UltimasNoticias.nextSibling);
+            main.insertBefore(noticiaHtml, h3UltimasNoticias.nextSibling);
         });
     }
 
     addNoticia(event) {
         event.preventDefault();
-        document.querySelector('main > h2').removeAttribute('hidden');
+        document.querySelector('main > h3').removeAttribute('hidden');
 
         const titular = document.querySelector('input[placeholder="Titular"]').value;
         const entradilla = document.querySelector('textarea[placeholder="Contenido"]').value;
@@ -78,9 +78,9 @@ class Noticias {
 
         const noticiaHtml = document.createElement('article');
         const header = document.createElement('header');
-        const h2 = document.createElement('h2');
-        h2.textContent = titular;
-        header.appendChild(h2);
+        const h3 = document.createElement('h3');
+        h3.textContent = titular;
+        header.appendChild(h3);
         noticiaHtml.appendChild(header);
         const p = document.createElement('p');
         p.textContent = entradilla;
@@ -91,9 +91,9 @@ class Noticias {
         footer.appendChild(p2);
         noticiaHtml.appendChild(footer);
 
-        const h2UltimasNoticias = document.querySelector('main h2');
+        const h3UltimasNoticias = document.querySelector('main h3');
         const main = document.querySelector('main');
-        main.insertBefore(noticiaHtml, h2UltimasNoticias.nextSibling);
+        main.insertBefore(noticiaHtml, h3UltimasNoticias.nextSibling);
 
         // Limpiar los campos del formulario después de añadir la noticia
         const inputs = document.querySelectorAll('input[type="text"]');

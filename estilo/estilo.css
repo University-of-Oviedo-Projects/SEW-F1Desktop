@@ -128,6 +128,7 @@ main {
 /* Especificidad 001 */
 h2 {
     text-align: center;
+    margin: auto;
 }
 
 /* Especificidad 001 en cada selector */

@@ -11,7 +11,7 @@ main {
 }
 
 /* Especificidad: 002 */
-main h2 {
+main h3 {
     flex: 1 1 100%;  
     text-decoration: none;
     text-align: center;
@@ -61,7 +61,7 @@ article header, article footer {
 }
 
 /* Especificidad: 002 */
-article h2 {
+article h3 {
     font-size: 1.3em;  
     margin: 0;
 }
