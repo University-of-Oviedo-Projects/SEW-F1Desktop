@@ -42,8 +42,8 @@ h1 {
     white-space: nowrap; 
 }
 
-/* Especificidad 002 */
-nav a {
+/* Especificidad 002, 003 */
+nav a, menu li a {
     font-size: 1.5em;
 }
 
@@ -562,10 +562,6 @@ form p a {
 }
 
 /* ###################### Estilo para el menú de juegos ###################### */
-/* Especificidad 002 */
-menu li a {
-    font-size: 1.35em;
-}
 
 /* Especificidades 003, 001 */
 menu li a, a {
