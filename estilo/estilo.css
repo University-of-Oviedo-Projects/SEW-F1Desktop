@@ -30,7 +30,7 @@ header, menu {
     color: #FFFFFF;
 }
 
-/* Especificidad 001 */
+/* Especificidad 002 */
 header > h1 {
     color: #FFFFFF;
     /* backgroud-color heredado de header */
@@ -118,8 +118,8 @@ main > menu > li > a:hover {
     }
 }
 
-/* Especificidad 012, 013 */
-nav a:hover, menu li a:hover {
+/* Especificidad 012, 013, 013 */
+nav a:hover, menu li a:hover, header > h1 > a:hover {
     color: #F9C97B;
     /* backgroud-color heredado de la regla header, menu */
 }
@@ -233,7 +233,6 @@ ul {
 @media (max-width: 768px) {
     /* Especificidad 003 */
     main section > ul {
-        /* Redefinir el tamaño de la fuente es necesario para que el texto no se desborde */
         font-size: 1em;
     }
 }
