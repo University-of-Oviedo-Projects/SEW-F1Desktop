@@ -1,3 +1,9 @@
+<!--
+    Este documento da errores de validación en el W3C Validator debido 
+    a que se está utilizando la API de Google Maps,
+    la cual introduce elementos que no siguen el estándar
+-->
+
 <!DOCTYPE html>
 
 <html lang="es">
@@ -20,8 +26,8 @@
         <link rel="stylesheet" href="estilo/estilo.css"/>
 
         <!-- Añadir referencia al archivo google-maps.js -->
-        <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfmip4lu4OXDuJ-DSiuoXLYb26CCQQEGk">
+        <script defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfmip4lu4OXDuJ-DSiuoXLYb26CCQQEGk&loading=async">
         </script>
 
         <script src="js/circuito.js" defer></script>
@@ -44,7 +50,7 @@
                 <a href="piloto.html" target="_self" title="Información sobre los pilotos">Piloto</a>
                 <a href="noticias.html" target="_self" title="Últimas noticias y actualizaciones">Noticias</a>
                 <a href="meteorologia.html" target="_self" title="Pronóstico meteorológico y condiciones climáticas">Meteorologia</a>
-                <a href="viajes.html" target="_self" title="Información sobre viajes y destinos">Viajes</a>
+                <a href="viajes.php" target="_self" title="Información sobre viajes y destinos">Viajes</a>
                 <a href="calendario.html" target="_self" title="Calendario de eventos y actividades">Calendario</a>
                 <a class="active" href="circuitos.html" target="_self" title="Detalles sobre los circuitos y pistas">Circuitos</a>
                 <a href="juegos.html" target="_self" title="Juegos y actividades interactivas">Juegos</a>

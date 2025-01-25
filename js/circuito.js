@@ -78,15 +78,18 @@ class ProcesamientoCircuitos {
         if (referencias) {
             const ref1 = document.createElement("a");
             ref1.href = referencias.getAttribute('enlace1');
-            ref1.textContent = "Enlace 1";
+            ref1.title = "Enlace al circuito de Zandvoort";
+            ref1.textContent = "Circuito de Zandvoort";
             contenedor.appendChild(ref1);
             const ref2 = document.createElement("a");
             ref2.href = referencias.getAttribute('enlace2');
-            ref2.textContent = "Enlace 2";
+            ref2.title = "Enlace la pagina oficial de la Formula 1";
+            ref2.textContent = "Página oficial de la Formula 1";
             contenedor.appendChild(ref2);
             const ref3 = document.createElement("a");
             ref3.href = referencias.getAttribute('enlace3');
-            ref3.textContent = "Enlace 3";
+            ref3.title = "Enlace a la guía del circuito de Zandvoort";
+            ref3.textContent = "Guía del circuito de Zandvoort";
             contenedor.appendChild(ref3);
         }
 

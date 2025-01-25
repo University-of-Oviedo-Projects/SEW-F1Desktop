@@ -256,18 +256,23 @@
             return "Carrera '$nombre' registrada correctamente.";
         }
 
-        public function obtenerPilotos() {
-            $this->connectDB($this->db_name);;
-            $query = "SELECT nombre, apellido FROM Pilotos";
-            $result = $this->conn->query($query);
-            
-            if ($result->num_rows > 0) {
-                echo "<option value='' disabled selected>Seleccione una opción</option>";
-                while ($row = $result->fetch_assoc()) {
-                    echo "<option value='" . $row['nombre'] . " " . $row['apellido'] . "'>" . $row['nombre'] . " " . $row['apellido'] . "</option>";
+        public function obtenerPilotos() { 
+            try {
+                $this->connectDB($this->db_name);
+                $query = "SELECT nombre, apellido FROM Pilotos";
+                $result = $this->conn->query($query);
+        
+                if ($result->num_rows > 0) {
+                    echo "<option value='' disabled selected>Seleccione una opción</option>";
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<option value='" . $row['nombre'] . " " . $row['apellido'] . "'>" . $row['nombre'] . " " . $row['apellido'] . "</option>";
+                    }
                 }
+            } catch (Exception $e) {
+                echo "<option value='' disabled selected>Sin conexión a la base de datos</option>";
+            } finally {
+                $this->cerrarConexion();
             }
-            $this->cerrarConexion();
         }
 
         public function obtenerEscuderias() {
@@ -474,6 +479,13 @@
             $this->cerrarConexion();
             return "Circuito registrado correctamente.";
         }       
+    
+        public function isConnected() {
+            $this->connectDB($this->db_name);
+            $connected = $this->conn && $this->conn->ping();
+            $this->cerrarConexion();
+            return $connected;
+        }
     }
 ?>
 
@@ -545,16 +557,6 @@
                 } else if (isset($_POST['export_csv'])) {
                     $mensajes['export_csv'] = $controller->exportCSV();          
 
-                } else if (isset($_POST['registrar_carrera'])) {
-                    $mensajes['registrar_carrera'] = $controller->registrarCarrera($_POST['nombre_carrera'], $_POST['fecha_carrera'], $_POST['nombre_circuito_carrera']);
-                
-                } else if (isset($_POST['registrar_resultado'])) {
-                    $mensajes['registrar_resultado'] = $controller->registrarResultado(
-                        $_POST['piloto'],  
-                        $_POST['carrera'], 
-                        $_POST['posicion'],        
-                        $_POST['puntos']           
-                    );
                 } else if (isset($_POST['ver_resultados'])) {
                     $mensajes['ver_resultados'] = $controller->verResultadosPilotos();                
                 
@@ -564,12 +566,7 @@
                 } else if (isset($_POST['mejores_resultados'])) {
                     $mensajes['mejores_resultados'] = $controller->mejoresResultadosPorCarrera();                
                 
-                } else if (isset($_POST['registrar_piloto'])) {
-                    $mensajes['registrar_piloto'] = $controller->registrarPiloto($_POST['nombre_piloto'], $_POST['apellido_piloto'], $_POST['nacionalidad_piloto'], $_POST['escuderia_piloto']);
-                
-                } else if (isset($_POST['registrar_circuito'])) {
-                    $mensajes['registrar_circuito'] = $controller->registrarCircuito($_POST['nombre_circuito'], $_POST['pais_circuito'], $_POST['longitud_circuito']);                
-                }
+                } 
             }
         ?>
         
@@ -631,109 +628,6 @@
                 <button type="submit" name="mejores_resultados">Ver podiums</button>
                 <?php if (isset($mensajes['mejores_resultados'])): ?>
                     <p><?php echo $mensajes['mejores_resultados']; ?></p>
-                <?php endif; ?>
-            </form>
-
-            <!-- Formulario para registrar un nuevo piloto junto con su escudería -->
-            <form method="POST">
-                <h3>Registrar Nuevo Piloto</h3>
-                <label for="nombre_piloto">Nombre del Piloto: </label>
-                <input type="text" id="nombre_piloto" name="nombre_piloto" required/>
-                
-                <label for="apellido_piloto">Apellido del Piloto: </label>
-                <input type="text" id="apellido_piloto" name="apellido_piloto" required/>
-                
-                <label for="nacionalidad_piloto">Nacionalidad del Piloto: </label>
-                <input type="text" id="nacionalidad_piloto" name="nacionalidad_piloto" required/>
-                
-                <label for="escuderia_piloto">Nombre de la Escudería: </label>
-                <select id="escuderia_piloto" name="escuderia_piloto" required>
-                    <?php
-                        $controller = new Controller();
-                        $controller->obtenerEscuderias();                                              
-                    ?>
-                </select>
-                
-                <button type="submit" name="registrar_piloto">Registrar Piloto</button>
-                <?php if (isset($mensajes['registrar_piloto'])): ?>
-                    <p><?php echo $mensajes['registrar_piloto']; ?></p>
-                <?php endif; ?>
-            </form>
-
-            <!-- Formulario para registrar un nuevo circuito -->
-            <form method="POST">
-                <h3>Registrar Nuevo Circuito</h3>
-                <label for="nombre_circuito">Nombre del Circuito: </label>
-                <input type="text" id="nombre_circuito" name="nombre_circuito" required/>
-                
-                <label for="pais_circuito">País del Circuito: </label>
-                <input type="text" id="pais_circuito" name="pais_circuito" required/>
-                
-                <label for="longitud_circuito">Longitud del Circuito (km): </label>
-                <input type="number" id="longitud_circuito" name="longitud_circuito" required step="0.01"/>
-                
-                <button type="submit" name="registrar_circuito">Registrar Circuito</button>
-                <?php if (isset($mensajes['registrar_circuito'])): ?>
-                    <p><?php echo $mensajes['registrar_circuito']; ?></p>
-                <?php endif; ?>
-            </form>
-
-            <!-- Formulario para registrar una nueva carrera -->
-            <form method="POST">
-                <h3>Registrar Nueva Carrera</h3>
-                <label for="nombre_carrera">Nombre del Gran Premio: </label>
-                <input type="text" id="nombre_carrera" name="nombre_carrera" required/>
-                
-                <label for="fecha_carrera">Fecha del Gran Premio: </label>
-                <input type="date" id="fecha_carrera" name="fecha_carrera" required/>
-                
-                <label for="nombre_circuito_carrera">Circuito: </label>
-                <select id="nombre_circuito_carrera" name="nombre_circuito_carrera" required>
-                    <?php
-                        $controller = new Controller();
-                        $controller->obtenerCircuitos();                                              
-                    ?>
-                </select>
-                
-                <button type="submit" name="registrar_carrera">Registrar Carrera</button>
-                <?php if (isset($mensajes['registrar_carrera'])): ?>
-                    <p><?php echo $mensajes['registrar_carrera']; ?></p>
-                <?php endif; ?>
-            </form>
-
-            <!-- Formulario para registrar un resultado de un piloto en una carrera -->
-            <form method="POST">
-                <h3>Registrar Resultado de Piloto en una Carrera</h3>
-
-                <!-- Desplegable de Piloto -->
-                <label for="piloto">Piloto: </label>
-                <select id="piloto" name="piloto" required>
-                    <?php
-                        // Obtener los pilotos disponibles desde la base de datos
-                        $controller = new Controller();
-                        $controller->obtenerPilotos();
-                    ?>
-                </select>
-
-                <!-- Desplegable de Carrera -->
-                <label for="carrera">Carrera: </label>
-                <select id="carrera" name="carrera" required>
-                    <?php
-                        $controller = new Controller();
-                        $controller->obtenerCarreras();
-                    ?>
-                </select>
-
-                <!-- Campos de Posición y Puntos -->
-                <label for="posicion">Posición: </label>
-                <input type="number" id="posicion" name="posicion" required/>
-                <label for="puntos">Puntos: </label>
-                <input type="number" id="puntos" name="puntos" required/>
-
-                <button type="submit" name="registrar_resultado">Registrar Resultado</button>
-                
-                <?php if (isset($mensajes['registrar_resultado'])): ?>
-                    <p><?php echo $mensajes['registrar_resultado']; ?></p>
                 <?php endif; ?>
             </form>
         </main>
