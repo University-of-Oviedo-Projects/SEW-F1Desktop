@@ -43,6 +43,8 @@ F1Desktop was created as part of a university course to learn the fundamentals o
 
 This project is intended solely as an educational guide to the basics of web development and is not recommended for professional use.
 
+Mark obtained in this project: 7.5 over 10 points.
+
 ---
 
 Thank you for exploring F1Desktop! We hope you enjoy the website.
