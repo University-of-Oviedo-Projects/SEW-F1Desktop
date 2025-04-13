@@ -1,4 +1,5 @@
 # F1Desktop
+![F1-Desktop](https://github.com/user-attachments/assets/7db03810-66fa-4def-b772-d221b6c1cf22)
 
 ## Overview
 F1Desktop is a web application inspired by Formula 1, developed during the third year of the Software Engineering Bachelor program at the University of Oviedo. 
